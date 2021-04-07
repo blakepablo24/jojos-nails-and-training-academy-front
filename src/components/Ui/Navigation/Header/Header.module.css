@@ -1,0 +1,6 @@
+.Header {
+    grid-area: header;
+    width: 100%;
+    padding: 1% 35%;
+    place-items: center center;
+}

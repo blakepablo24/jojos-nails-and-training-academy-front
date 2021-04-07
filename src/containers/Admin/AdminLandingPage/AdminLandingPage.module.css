@@ -1,0 +1,69 @@
+.AdminLandingPage {
+    grid-area: header/latest/main;
+    padding: 1vh 0 2.5vh 0;
+    width: 100%;
+    display: grid;
+    place-items: center center;
+    background: var(--main-bg);
+    z-index: 2;
+}
+
+.allStatsContainer {
+    width: 95%;
+    display: grid;
+    place-items: center center;
+    grid: 20vh 20vh / 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.singleStatContainer {
+    height: 95%;
+    width: 95%;
+    background: var(--second-bg);
+    border-radius: 2.5px;
+    display: grid;
+    place-items: center center;
+    grid-template-rows: 6fr 4fr;
+    grid-column: span 2;
+}
+
+.singleStatContainer:last-child:nth-child(3n - 1) {
+    grid-column-end: -2;
+}
+
+.singleStatContainer:nth-last-child(2):nth-child(3n + 1) {
+    grid-column-end: 4;
+}
+
+.singleStatContainer:last-child:nth-child(3n - 2) {
+    grid-column-end: 5;
+}
+
+.statNumber {
+    font-size: 2rem;
+    background: var(--main-bg);
+    width: 50%;
+    border-radius: 25px;
+}
+
+.newServicesContainer {
+    width: 95%;
+    display: grid;
+    place-items: center center;
+    grid: 8.5vh 8.5vh / 1fr;
+}
+
+.newService {
+    width: 85%;
+    height: 80%;
+    background: var(--main-txt);
+    color: var(--second-bg);
+    border-radius: 2.5px;
+    font-size: 1.5rem;
+    display: grid;
+    place-items: center center;
+    grid-auto-flow: column;
+}
+
+.newService svg {
+    font-size: 2.5rem;
+}

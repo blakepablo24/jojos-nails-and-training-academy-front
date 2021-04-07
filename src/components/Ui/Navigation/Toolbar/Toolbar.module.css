@@ -1,0 +1,23 @@
+.Toolbar, .toolBarWithUser {
+    grid-area: toolbar;
+    background: var(--second-bg);
+    position: fixed;
+    width: 100%;
+    display: grid;
+    place-items: center end;
+    box-shadow: 0 1px 1px black;
+    z-index: 5;
+}
+
+.Toolbar svg, .toolBarWithUser {
+    font-size: 2rem;
+}
+
+.toolBarWithUser {
+    grid-template-columns: 8fr 2fr;
+}
+
+.toolBarWithUser a {
+    display: grid;
+    place-items: center center;
+}

@@ -1,0 +1,103 @@
+:root {
+  --main-bg: whitesmoke;
+  --second-bg: #fbc1bc;
+  --main-txt: #315b96;
+  --err-bg: rgba(97, 55, 55, 0.25);
+  --scs-bg: rgb(0, 128, 0, 0.65);
+  --error-txt: #e81c20;
+  --yes-txt: green;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  text-align: center;
+  background: var(--main-bg);
+  color: var(--main-txt);
+}
+
+body {
+  height: 100%;
+  font-family: 'Poiret One', cursive;
+}
+
+a {
+  text-decoration: none;
+  font-family: 'Poiret One', cursive;
+  color: var(--main-txt);
+}
+
+p {
+  font-family: 'Nunito', sans-serif;
+}
+
+button {
+  background: var(--main-txt);
+  color: var(--second-bg);
+  border: none;
+  width: 75%;
+  padding: 3vh 0;
+  margin: 2vh 0;
+  font-size: 1.5rem;
+  border-radius: 7.5px;
+  box-shadow: 2px 2px 2.5px black;
+}
+
+/* Input styling */
+
+input, textarea, select {
+  text-align: center;
+  width: 80%;
+  padding: 10px 0;
+  font-size: 1.25rem;
+  border: none;
+  border-radius: 3.75px;
+  box-shadow: 0px 1px 1px black;
+  margin-top: 10px;
+}
+
+textarea {
+  height: 15vh;
+  resize: none;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline-color: var(--second-bg);
+}
+
+/* Error and success message styling */
+.error, .success {
+  color: var(--error-txt);
+  margin: 5px 0;
+  padding: 10px 5px;
+  width: 100%;
+  display: grid;
+  place-items: center center;
+  border-radius: 5px;
+}
+
+.success {
+  color: var(--main-bg);
+  background: var(--scs-bg);
+}
+
+.delete {
+  color: var(--error-txt);
+}
+
+.edit {
+  color: orange;
+}
+
+.admin-buttons {
+  display: grid;
+  place-items: center center;
+  grid-auto-flow: column;
+  width: 100%;
+  font-size: 2.5rem;
+}

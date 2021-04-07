@@ -1,0 +1,21 @@
+.SideDrawer {
+    position: fixed;
+    width: 55%;
+    height: 92.5vh;
+    left: 0;
+    top: 7.5vh;
+    background: var(--second-bg);
+    z-index: 10;
+    box-sizing: border-box;
+    transition: transform 0.75s ease-out;
+    display: grid;
+    place-items: start center;
+}
+
+.Open {
+    transform: translateX(0);
+}
+
+.Close {
+    transform: translateX(-100%);
+}

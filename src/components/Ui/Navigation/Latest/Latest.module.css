@@ -1,0 +1,6 @@
+.Latest {
+    grid-area: latest;
+    background: var(--second-bg);
+    display: grid;
+    place-items: center center;
+}

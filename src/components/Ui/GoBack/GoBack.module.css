@@ -1,0 +1,30 @@
+.GoBack, .Snippet {
+    place-self: start start;
+    height: 3vh;
+    width: 25%;
+    margin: 0.5vh 0 2vh 5px;
+    display: grid;
+    place-items: center center;
+    grid-auto-flow: column;
+    color: var(--menu-txt);
+    background: var(--menu-bg);
+    border-radius: 3.75px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.Snippet {
+    grid-column: 1 / 3;
+}
+
+@media(min-width: 1199px){
+    .GoBack {
+        width: 12.5%;
+    }
+}
+
+@media(min-width: 1999px){
+    .GoBack {
+        width: 10%;
+    }
+}

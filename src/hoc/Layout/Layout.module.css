@@ -1,0 +1,13 @@
+.Layout {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid:
+        'toolbar toolbar toolbar toolbar toolbar toolbar' 7.5vh
+        'header header header header header header' 15vh
+        'latest latest latest latest latest latest' 5vh
+        'main main main main main main' minmax(62.5vh, auto)
+        'footer footer footer footer footer footer' 10vh
+        / 1fr 1fr 1fr 1fr 1fr 1fr
+        ;
+}

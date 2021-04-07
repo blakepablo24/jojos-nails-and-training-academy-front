@@ -1,0 +1,66 @@
+.AddCurriculum {
+    grid-area: header/latest/main;
+    padding: 1vh 0 2.5vh 0;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center center;
+    grid-template-rows: auto auto 6fr 2fr;
+    background: var(--main-bg);
+    z-index: 2;
+}
+
+.addedCurriculumItemContainer {
+    display: grid;
+    place-items: center center;
+    width: 97.5%;
+    grid-template-columns: 1fr 8fr 1fr;
+    font-size: 1.5rem;
+    height: 7.5vh;
+    margin-top: 2.5vh;;
+}
+
+.addedCurriculumItemContainer input {
+    margin: 0;
+}
+
+.addedCurriculumItemContainer input {
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    height: 7.5vh;
+}
+
+.newCurriculumItemContainer {
+    width: 100%;
+    display: grid;
+    place-items: center center;
+}
+
+.newCurriculumItem {
+    display: grid;
+    place-items: center center;
+    grid-auto-flow: column;
+    width: 60%;
+    font-size: 2rem;
+    margin-top: 50px;
+}
+
+.addedCurriculumItemNumber, .addedCurriculumItemRemove {
+    display: grid;
+    place-items: center center;
+    width: 100%;
+    height: 100%;
+    background: white;
+}
+
+.addedCurriculumItemNumber {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.addedCurriculumItemRemove {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    color: var(--error-txt);
+}

@@ -1,0 +1,16 @@
+.Snippet {
+    width: 95%;
+    height: 25vh;
+    display: grid;
+    grid: 7fr 3fr / 1fr;
+    border: solid 1px var(--main-txt);
+    border-radius: 2.5px;
+    display: grid;
+    place-items: center center;
+}
+
+.Snippet img {
+    width: 80px;
+    height: 80px;
+    border-radius: 2.5px;
+}

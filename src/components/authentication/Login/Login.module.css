@@ -1,0 +1,23 @@
+.Login {
+    padding: 15vh 0;
+    grid-area: header/latest/main;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center center;
+    z-index: 2;
+    background: var(--main-bg);
+}
+
+.Login a {
+    text-decoration: none;
+    color: var(--menu-bg);
+    font-weight: bold;
+}
+
+
+@media(min-width: 699px){
+    .Login a, .Login p {
+        font-size: 2rem;
+    }
+  }

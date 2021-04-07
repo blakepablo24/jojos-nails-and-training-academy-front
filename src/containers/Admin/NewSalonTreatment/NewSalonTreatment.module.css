@@ -1,0 +1,9 @@
+.NewSalonTreatment {
+    grid-area: header/latest/main;
+    padding: 1vh 0 2.5vh 0;
+    width: 100%;
+    display: grid;
+    place-items: center center;
+    background: var(--main-bg);
+    z-index: 2;
+}

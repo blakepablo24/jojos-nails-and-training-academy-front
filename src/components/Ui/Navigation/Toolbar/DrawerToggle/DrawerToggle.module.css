@@ -1,0 +1,10 @@
+.DrawerToggle {
+    height: 100%;
+    display: grid;
+    place-items: center end;
+    padding: 0 2.5%;
+}
+
+.DrawerToggle svg {
+    font-size: 3rem;
+}
