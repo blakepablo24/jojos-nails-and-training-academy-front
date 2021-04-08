@@ -22,17 +22,6 @@ class LandingPage extends Component {
             this.setState({
                 images: prePopulatedImages
             })
-        }).catch(err => {
-            if (err.response) {
-                console.log("first error");
-                console.log(err.response);
-              // client received an error response (5xx, 4xx)
-            } else if (err.request) {
-                console.log(err.response);
-              // client never received a response, or request never left
-            } else {
-              // anything else
-            }
         })
     }
 

@@ -175,7 +175,7 @@ class SingleTrainingCourse extends Component {
                 showSuccessMsg(message);
             }
         }
-
+        
         return(
             <Aux>
                 <Latest message={this.state.title}/>

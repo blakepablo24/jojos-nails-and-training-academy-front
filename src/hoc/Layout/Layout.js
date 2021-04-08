@@ -19,6 +19,7 @@ import NewTrainingCourse from '../../containers/Admin/NewTrainingCourse/NewTrain
 import AddCurriculum from '../../containers/Admin/AddCurriculum/AddCurriculum';
 import EditSalonTreatment from '../../containers/Admin/EditSalonTreatment/EditSalonTreatment';
 import EditTrainingCourse from '../../containers/Admin/EditTrainingCourse/EditTrainingCourse';
+import FrontLandingPage from '../../containers/Admin/FrontLandingPage/FrontLandingPage';
 
 class Layout extends Component {
 
@@ -83,6 +84,7 @@ class Layout extends Component {
                     <ProtectedRoute path="/admin/add-curriculum/:id" exact component={AddCurriculum} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/edit-salon-treatment/:id" exact component={EditSalonTreatment} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/edit-training-course/:id" exact component={EditTrainingCourse} auth={isAuthenticated} />
+                    <ProtectedRoute path="/admin/front-landing-page" exact component={FrontLandingPage} auth={isAuthenticated} />
                 </Switch>
                 <Footer />
             </div>
