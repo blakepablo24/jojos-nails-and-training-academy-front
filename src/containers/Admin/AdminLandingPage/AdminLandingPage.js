@@ -13,7 +13,8 @@ class AdminLandingPage extends Component {
         trainingCourseEnquiries: 18,
         giftVoucherPurchases: 12,
         trainingCourses: "",
-        salonTreatments: ""
+        salonTreatments: "",
+        frontPageImages: ""
     }
 
     componentDidMount(){
@@ -21,7 +22,8 @@ class AdminLandingPage extends Component {
         axios.get(CONST.BASE_URL + '/api/admin-landing-page/').then(response => {
             this.setState({
                 trainingCourses: response.data.courses,
-                salonTreatments: response.data.treatments
+                salonTreatments: response.data.treatments,
+                frontPageImages: response.data.frontPageImages
             })
         })
     }
@@ -62,6 +64,10 @@ class AdminLandingPage extends Component {
                     <div className={classes.singleStatContainer}>
                         <p>Gift Voucher Purchases</p>
                         <p className={classes.statNumber}>{this.state.giftVoucherPurchases}</p>
+                    </div>
+                    <div className={classes.singleStatContainer}>
+                        <p>Front Page Images</p>
+                        <p className={classes.statNumber}>{this.state.frontPageImages}</p>
                     </div>
                     <Link to="/training-courses" className={classes.singleStatContainer}>
                         <p>Training Courses</p>
