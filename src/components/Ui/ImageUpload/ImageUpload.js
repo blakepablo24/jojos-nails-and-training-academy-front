@@ -4,7 +4,8 @@ import { BiImageAdd } from "react-icons/bi";
 
 class imageUpload extends Component {
     state = {
-        file: '',imagePreviewUrl: ''
+        file: '',
+        imagePreviewUrl: ''
     }
   
     handleImageChange(e) {

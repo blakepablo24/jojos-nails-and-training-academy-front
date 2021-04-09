@@ -4,24 +4,64 @@ import CONST from '../../../constants/constants';
 import axios from 'axios';
 import { BiXCircle, BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import ImageUpload from '../../../components/Ui/ImageUpload/ImageUpload';
+import ConfirmDelete from '../../../components/Ui/ConfirmDelete/ConfirmDelete';
+import FlashMessage from 'react-flash-message';
 
 class FrontLandingPage extends Component {
     
     state = {
         images: [],
         image: 0,
-        imageFile: ""
+        imageFile: "",
+        confirmDelete: "",
+        open: false,
+        imageChangedMessage: "",
+        addedImage: false
     }
-
 
     componentDidMount(){
         let prePopulatedImages = [];
         axios.get(CONST.BASE_URL + '/api/get-front-page-images').then(response => {
             response.data.db_images.forEach(db_image => {
-                prePopulatedImages.push({ url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
+                prePopulatedImages.push({ id: db_image.id, url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
             });
             this.setState({
                 images: prePopulatedImages
+            })
+        })
+    }
+
+    removeConfirmDeleteHandler = () => {
+        this.setState({
+            confirmDelete: "",
+            open: false
+        })
+    }
+
+    confirmDeleteHandler = () => {
+        this.setState({
+            open: true,
+            confirmDelete: <ConfirmDelete delete={this.deleteImageHandler} clicked={this.removeConfirmDeleteHandler} />
+        })
+    }
+
+    deleteImageHandler = () => {
+        axios.defaults.withCredentials = true;
+        axios.delete(CONST.BASE_URL + '/api/delete-front-page-image/' + this.state.images[this.state.image].id).then(response => {
+            let prePopulatedImages = [];
+            axios.defaults.withCredentials = true;
+            axios.get(CONST.BASE_URL + '/api/get-front-page-images').then(response => {
+                response.data.db_images.forEach(db_image => {
+                    prePopulatedImages.push({ id: db_image.id, url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
+                });
+                this.setState({
+                    images: prePopulatedImages,
+                    confirmDelete: "",
+                    open: false,
+                    imageChangedMessage: "Image Successfully Deleted",
+                    imageFile: "",
+                    image: 0
+                })
             })
         }).catch(err => {
             if (err.response) {
@@ -34,6 +74,31 @@ class FrontLandingPage extends Component {
             } else {
               // anything else
             }
+        })
+    }
+
+    addImageHandler = (event) => {
+        event.preventDefault();
+        let fd = new FormData();    
+        fd.append('newImage', this.state.imageFile, this.state.imageFile.name);
+        axios.defaults.withCredentials = true;
+        axios.post(CONST.BASE_URL + '/api/add-new-front-page-image', fd).then(response => {
+            let prePopulatedImages = [];
+            axios.defaults.withCredentials = true;
+            axios.get(CONST.BASE_URL + '/api/get-front-page-images').then(response => {
+                response.data.db_images.forEach(db_image => {
+                    prePopulatedImages.push({ id: db_image.id, url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
+                });
+                this.setState({
+                    images: prePopulatedImages,
+                    confirmDelete: "",
+                    open: false,
+                    imageFile: "",
+                    imageChangedMessage: "Image Successfully Added",
+                    image: prePopulatedImages.length - 1,
+                    addedImage: true
+                })
+            })
         })
     }
 
@@ -68,7 +133,9 @@ class FrontLandingPage extends Component {
         })
     }
     
-    render(){let imageSlideShow = "";
+    render(){
+    
+    let imageSlideShow = "";
 
     if(this.state.images.length > 0) {
         imageSlideShow = <img src={this.state.images[this.state.image].url} alt="" className={classes.landingPageImage}/>;
@@ -87,9 +154,34 @@ class FrontLandingPage extends Component {
         leftArrow = <BiLeftArrow className={classes.notSelectable} />;
     }
 
+    let imageChangedMessage = "";
+
+        if(this.state.imageChangedMessage){
+            imageChangedMessage = 
+                <FlashMessage duration={5000}>
+                    <div className="load-msg">
+                    <h3 className="success">{this.state.imageChangedMessage}</h3>
+                    </div>
+                </FlashMessage>
+        }
+
+    let finishAddingImageButton = "";
+
+    if(this.state.imageFile){
+        finishAddingImageButton = <button className="main-button" onClick={this.addImageHandler}>Finish</button>
+    }
+
+    let imageUploadControl = <ImageUpload wording="Add Image?" sendData={this.getData} />
+
+    if(this.state.addedImage) {
+        imageUploadControl = <ImageUpload wording="Add Image?" flushData={true} sendData={this.getData} />;
+    }
+
     return(
             <div className={classes.FrontLandingPage}>
-                <BiXCircle className={"delete " + classes.deleteImageButton} />
+                {this.state.confirmDelete}
+                {imageChangedMessage}
+                <BiXCircle className={"delete " + classes.deleteImageButton} onClick={this.confirmDeleteHandler} />
                 <div className={classes.imageAndControlsContainer}>
                     {leftArrow}
                     <div className={classes.imageContainer}>
@@ -97,7 +189,8 @@ class FrontLandingPage extends Component {
                     </div>
                     {rightArrow}
                 </div>
-                <ImageUpload wording="Add Image?" sendData={this.getData} />           
+                {imageUploadControl}
+                {finishAddingImageButton}           
             </div>
     )
 }
