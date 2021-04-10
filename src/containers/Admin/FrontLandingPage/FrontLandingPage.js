@@ -60,20 +60,9 @@ class FrontLandingPage extends Component {
                     open: false,
                     imageChangedMessage: "Image Successfully Deleted",
                     imageFile: "",
-                    image: 0
+                    image: prePopulatedImages.length - 1
                 })
             })
-        }).catch(err => {
-            if (err.response) {
-                console.log("first error");
-                console.log(err.response);
-              // client received an error response (5xx, 4xx)
-            } else if (err.request) {
-                console.log(err.response);
-              // client never received a response, or request never left
-            } else {
-              // anything else
-            }
         })
     }
 
@@ -96,7 +85,7 @@ class FrontLandingPage extends Component {
                     imageFile: "",
                     imageChangedMessage: "Image Successfully Added",
                     image: prePopulatedImages.length - 1,
-                    addedImage: true
+                    addedImage: false
                 })
             })
         })
@@ -129,12 +118,13 @@ class FrontLandingPage extends Component {
 
     getData = (val) => {
         this.setState({
-            imageFile: val
+            imageFile: val,
+            addedImage: true
         })
     }
     
     render(){
-    
+
     let imageSlideShow = "";
 
     if(this.state.images.length > 0) {
@@ -171,17 +161,14 @@ class FrontLandingPage extends Component {
         finishAddingImageButton = <button className="main-button" onClick={this.addImageHandler}>Finish</button>
     }
 
-    let imageUploadControl = <ImageUpload wording="Add Image?" sendData={this.getData} />
-
-    if(this.state.addedImage) {
-        imageUploadControl = <ImageUpload wording="Add Image?" flushData={true} sendData={this.getData} />;
-    }
+    let imageUploadControl = <ImageUpload wording="Add Image?" sendData={this.getData} flushData={this.state.addedImage}/>
 
     return(
             <div className={classes.FrontLandingPage}>
                 {this.state.confirmDelete}
                 {imageChangedMessage}
                 <BiXCircle className={"delete " + classes.deleteImageButton} onClick={this.confirmDeleteHandler} />
+                <h2>{this.state.image + 1} of {this.state.images.length}</h2>
                 <div className={classes.imageAndControlsContainer}>
                     {leftArrow}
                     <div className={classes.imageContainer}>

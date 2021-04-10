@@ -3,16 +3,28 @@ import classes from './ImageUpload.module.css';
 import { BiImageAdd } from "react-icons/bi";
 
 class imageUpload extends Component {
+
     state = {
         file: '',
-        imagePreviewUrl: ''
+        imagePreviewUrl: '',
+        flushData: false
     }
-  
+
+    shouldComponentUpdate = (prevProps) => {
+      if (this.props.flushData !== prevProps.flushData) {
+        this.setState({
+          file: "",
+          imagePreviewUrl: ""
+        });
+      }
+      return true;
+    }
+
     handleImageChange(e) {
       e.preventDefault();
       let reader = new FileReader();
       let file = e.target.files[0];
-  
+      
       reader.onloadend = () => {
         this.setState({
           file: file,
@@ -28,8 +40,10 @@ class imageUpload extends Component {
     }
   
     render() {
+
       let {imagePreviewUrl} = this.state;
       let $imagePreview = null;
+
       if (imagePreviewUrl) {
         $imagePreview = <div className={classes.imagePreview} onClick={() => this.fileInput.click()} ><img src={imagePreviewUrl} alt=""/><p>Change Image?</p></div>
       } else {
