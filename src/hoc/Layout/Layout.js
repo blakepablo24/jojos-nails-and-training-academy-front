@@ -20,13 +20,15 @@ import AddCurriculum from '../../containers/Admin/AddCurriculum/AddCurriculum';
 import EditSalonTreatment from '../../containers/Admin/EditSalonTreatment/EditSalonTreatment';
 import EditTrainingCourse from '../../containers/Admin/EditTrainingCourse/EditTrainingCourse';
 import FrontLandingPage from '../../containers/Admin/FrontLandingPage/FrontLandingPage';
+import Basket from '../../components/Ui/Basket/Basket';
 
 class Layout extends Component {
 
     state = {
         showSideDrawer: false,
         menu: true,
-        isAuthenticated: false
+        isAuthenticated: false,
+        showBasket: false
     }
 
     sideDrawerToggleHandler = () => {
@@ -49,6 +51,12 @@ class Layout extends Component {
         }
     }
 
+    basketToggleHandler = () => {
+        this.setState({
+            showBasket: !this.state.showBasket
+        })
+    }
+
     render() {
         
         let isAuthenticated = this.state.isAuthenticated;
@@ -67,8 +75,9 @@ class Layout extends Component {
 
         return(
             <div className={classes.Layout}>
-                <Toolbar menu={this.state.menu} clicked={this.sideDrawerToggleHandler} auth={isAuthenticated} />
-                {sideDrawer}        
+                <Toolbar toggleBasket={this.basketToggleHandler} menu={this.state.menu} clicked={this.sideDrawerToggleHandler} auth={isAuthenticated} />
+                {sideDrawer}
+                <Basket toggleBasket={this.basketToggleHandler} showBasket={this.state.showBasket}/>        
                 <Header />
                 <Switch>
                     <Route path="/" exact component={LandingPage} />

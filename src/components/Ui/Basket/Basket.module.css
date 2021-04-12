@@ -1,0 +1,21 @@
+.Basket {
+    position: fixed;
+    width: 90%;
+    height: 60vh;
+    left: 5%;
+    top: 20vh;
+    background: var(--second-bg);
+    z-index: 9;
+    box-sizing: border-box;
+    transition: transform 0.75s ease-out;
+    display: grid;
+    place-items: start center;
+}
+
+.Show {
+    transform: translateY(0);
+}
+
+.Hide {
+    transform: translateY(-150%);
+}

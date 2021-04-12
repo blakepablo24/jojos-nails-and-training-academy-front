@@ -1,4 +1,4 @@
-.Toolbar, .toolBarWithUser {
+.Toolbar {
     grid-area: toolbar;
     background: var(--second-bg);
     position: fixed;
@@ -8,17 +8,12 @@
     box-shadow: 0 1px 1px black;
     z-index: 5;
     height: 7.5vh;
-}
-
-.Toolbar svg, .toolBarWithUser {
+    padding-left: 50vw;
+    grid-auto-flow: column;
     font-size: 2rem;
 }
 
-.toolBarWithUser {
-    grid-template-columns: 8fr 2fr;
-}
-
-.toolBarWithUser a {
+.Toolbar a {
     display: grid;
     place-items: center center;
 }

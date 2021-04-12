@@ -3,19 +3,22 @@ import classes from './Toolbar.module.css';
 import DrawerToggle from './DrawerToggle/DrawerToggle';
 import { BiUser } from "react-icons/bi";
 import { Link } from 'react-router-dom';
+import { TiShoppingCart } from "react-icons/ti";
 
 const toolbar = (props) => {
 
     let userIcon = "";
-    let styles = classes.Toolbar;
-
+    let basketIcon = "";
+    
     if(JSON.parse(localStorage.getItem("user"))){
         userIcon = <Link to="/admin"><BiUser /></Link>;
-        styles = classes.toolBarWithUser;
     }
 
+    basketIcon = <TiShoppingCart onClick={props.toggleBasket} />
+
     return(
-        <div className={styles}>
+        <div className={classes.Toolbar}>
+            {basketIcon}
             {userIcon}
             <DrawerToggle menu={props.menu} clicked={props.clicked}/>
         </div>
