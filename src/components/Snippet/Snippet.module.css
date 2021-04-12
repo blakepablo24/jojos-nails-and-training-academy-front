@@ -2,11 +2,15 @@
     width: 95%;
     height: 30vh;
     display: grid;
-    grid: 7fr 3fr / 1fr;
     border: solid 1px var(--main-txt);
     border-radius: 2.5px;
     display: grid;
     place-items: center center;
+}
+
+.SnippetWithBasket {
+    width: 95%;
+    grid: 8fr 2fr / 1fr;
 }
 
 .Snippet img {
@@ -16,5 +20,17 @@
 }
 
 .basketButtonContainer {
-    width: 80%;
+    height: 100%;
+    width: 90%;
+    display: grid;
+    place-items: center center;
+    grid-auto-flow: column;
+    font-size: 1.2rem;
+    border-top: solid 1px var(--main-txt);;
+}
+
+.SnippetLink {
+    display: grid;
+    place-items: center center;
+    height: 100%;
 }

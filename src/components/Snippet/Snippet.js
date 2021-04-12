@@ -7,6 +7,7 @@ const snippet = (props) => {
 
     let snippetLink = '/single-training-course/'; 
     let shoppingControlContainer = "";
+    let snippetStyle = classes.SnippetLink;
 
     if(props.salonTreatment) {
         snippetLink = '/category/' + props.title.replace(/\s+/g, '-').replace(/,/g,"").toLowerCase() + '/';
@@ -14,18 +15,21 @@ const snippet = (props) => {
 
     if(props.salonTreatmentSubCat) {
         snippetLink = '/treatment/' + props.title.replace(/\s+/g, '-').replace(/,/g,"").toLowerCase() + '/';
+        snippetStyle = classes.SnippetWithBasket;
         shoppingControlContainer = 
         <div className={classes.basketButtonContainer}>
-            <TiShoppingCart />
+            <TiShoppingCart />Add to Basket
         </div>
     }
 
     return (
-        <Link to={snippetLink + props.id} className={classes.Snippet}>
-            <img src={props.image} alt="" />
-            <h3>{props.title}</h3>
+        <div className={classes.Snippet}>
+            <Link to={snippetLink + props.id} className={snippetStyle} >
+                <img src={props.image} alt="" />
+                <h3>{props.title}</h3>
+            </Link>
             {shoppingControlContainer}
-        </Link>
+        </div>
     )
 }
 
