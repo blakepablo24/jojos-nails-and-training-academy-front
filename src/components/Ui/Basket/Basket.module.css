@@ -4,12 +4,13 @@
     height: 60vh;
     left: 5%;
     top: 20vh;
-    background: var(--second-bg);
+    background: var(--main-bg);
     z-index: 9;
     box-sizing: border-box;
     transition: transform 0.75s ease-out;
     display: grid;
     place-items: start center;
+    grid-template-rows: 8fr 2fr;
 }
 
 .Show {
@@ -18,4 +19,23 @@
 
 .Hide {
     transform: translateY(-150%);
+}
+
+.basketControlsContainer {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center center;
+    grid-template-columns: 1fr 1fr;
+}
+
+.bookTreatmentsButton {
+    width: 80%;
+    font-size: 0.9rem;
+    padding: 0;
+    height: 75%;
+    margin: 0;
+    display: grid;
+    place-items: center center;
+    grid-auto-flow: column;
 }
