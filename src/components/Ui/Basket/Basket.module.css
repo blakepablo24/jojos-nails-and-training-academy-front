@@ -21,6 +21,19 @@
     transform: translateY(-150%);
 }
 
+.basketContainer {
+    padding-top: 5vh;
+    display: grid;
+    place-items: start center;
+    grid-row-gap: 2vh;
+}
+
+.basketItemsContainer {
+    display: grid;
+    place-items: center center;
+    grid-template-columns: 6fr 2fr 2fr;
+}
+
 .basketControlsContainer {
     height: 100%;
     width: 100%;

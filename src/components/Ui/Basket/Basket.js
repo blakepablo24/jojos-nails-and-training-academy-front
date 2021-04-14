@@ -15,11 +15,16 @@ const basket = (props) => {
         <Aux>
             <Backdrop full={props.showBasket} clicked={props.toggleBasket} showBasket={props.showBasket} />
             <div className={attachedClasses.join(' ')}>
-                <div className={props.basketItemsContainer}>
-
+                <div className={classes.basketContainer}>
+                    <h3>Your Basket</h3>
+                    <div className={classes.basketItemsContainer}>
+                        <p className={classes.basketItemTitle}>Nails - Full Set</p>
+                        <p className={classes.basketItemTitle}>£25</p>
+                        <p className="error">remove</p>
+                    </div>
                 </div>
                 <div className={classes.basketControlsContainer}>
-                <button className={classes.bookTreatmentsButton}>Continue Shopping</button>
+                    <button className={classes.bookTreatmentsButton}>Continue Shopping</button>
                     <button className={classes.bookTreatmentsButton}>Book treatments</button>
                 </div>
             </div>

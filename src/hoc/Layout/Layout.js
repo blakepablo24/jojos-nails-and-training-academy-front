@@ -28,7 +28,7 @@ class Layout extends Component {
         showSideDrawer: false,
         menu: true,
         isAuthenticated: false,
-        showBasket: true
+        showBasket: false
     }
 
     sideDrawerToggleHandler = () => {
