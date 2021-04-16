@@ -37,9 +37,11 @@ class SalonTreatmentsSubCat extends Component {
                             subCategoryTitle={this.state.subCategoryTitle}
                             salonTreatmentSubCat={true} 
                             title={salonTreatmentSubCat.title}
+                            price={salonTreatmentSubCat.price}
                             image={salonTreatmentSubCat.image ? CONST.BASE_URL + "/storage/images/salon-treatment-images/single-salon-treatment-images/" + salonTreatmentSubCat.image : logoImage}
                             id={salonTreatmentSubCat.id}
                             key={salonTreatmentSubCat.id}
+                            addToShoppingBasket={this.props.addToShoppingBasket}
                         />
                     )}
                 </div>

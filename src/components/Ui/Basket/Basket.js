@@ -2,10 +2,28 @@ import React from 'react';
 import classes from './Basket.module.css';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Backdrop from '../Backdrop/Backdrop';
-import { BiSend } from "react-icons/bi";
+import BasketItem from './BasketItem/BasketItem';
 
 const basket = (props) => {
     let attachedClasses = [classes.Basket, classes.Hide];
+
+    let currentBasketItems = "There are currently no items in your basket";
+
+    if(props.itemsInBasket.length > 0){
+        currentBasketItems =
+        props.itemsInBasket.map(item =>
+            <BasketItem
+                id={item.id}
+                key={item.id}
+                title={item.title}
+                price={item.price}
+                quantity={item.quantity}
+                remove={props.remove}
+                minus={props.minus}
+                plus={props.plus}
+            />
+        )
+    }
 
     if (props.showBasket) {
         attachedClasses = [classes.Basket, classes.Show];
@@ -15,13 +33,9 @@ const basket = (props) => {
         <Aux>
             <Backdrop full={props.showBasket} clicked={props.toggleBasket} showBasket={props.showBasket} />
             <div className={attachedClasses.join(' ')}>
+            <h3 className={classes.title}>Your Basket</h3>
                 <div className={classes.basketContainer}>
-                    <h3>Your Basket</h3>
-                    <div className={classes.basketItemsContainer}>
-                        <p className={classes.basketItemTitle}>Nails - Full Set</p>
-                        <p className={classes.basketItemTitle}>£25</p>
-                        <p className="error">remove</p>
-                    </div>
+                    {currentBasketItems}
                 </div>
                 <div className={classes.basketControlsContainer}>
                     <button className={classes.bookTreatmentsButton}>Continue Shopping</button>
@@ -32,4 +46,4 @@ const basket = (props) => {
     )
 }
 
-export default basket
+export default basket;

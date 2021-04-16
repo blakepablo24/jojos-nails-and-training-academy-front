@@ -17,3 +17,13 @@
     display: grid;
     place-items: center center;
 }
+
+.basketIconContainer {
+    display: grid;
+    place-items: center center;
+    grid-auto-flow: column;
+}
+
+.basketIconContainer p {
+    font-size: 1.5rem;
+}

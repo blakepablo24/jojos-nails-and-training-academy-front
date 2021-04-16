@@ -131,7 +131,7 @@ class SingleSalonTreatment extends Component {
                         </div>
                     </div>
                     <h3 className={classes.description}>{this.state.description}</h3>
-                    <MainButton name="Add to Basket" />
+                    <MainButton action={this.props.addToShoppingBasket.bind(this, this.props.match.params.id, this.state.title, this.state.price)} name="Add to Basket" />
                     <GuildLogo />
                     {this.state.adminButtons}
                 </div>

@@ -14,7 +14,7 @@ const toolbar = (props) => {
         userIcon = <Link to="/admin"><BiUser /></Link>;
     }
 
-    basketIcon = <TiShoppingCart onClick={props.toggleBasket} />
+    basketIcon = <div className={classes.basketIconContainer} onClick={props.toggleBasket}><TiShoppingCart/><p>({props.numberOfItemsInBasket})</p></div>
 
     return(
         <div className={classes.Toolbar}>

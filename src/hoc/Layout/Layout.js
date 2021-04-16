@@ -22,13 +22,19 @@ import EditTrainingCourse from '../../containers/Admin/EditTrainingCourse/EditTr
 import FrontLandingPage from '../../containers/Admin/FrontLandingPage/FrontLandingPage';
 import Basket from '../../components/Ui/Basket/Basket';
 
+let initialBasket = [];
+if(JSON.parse(localStorage.getItem("basketItems"))) {
+    initialBasket = JSON.parse(localStorage.getItem("basketItems"))
+}
+
 class Layout extends Component {
 
     state = {
         showSideDrawer: false,
         menu: true,
         isAuthenticated: false,
-        showBasket: false
+        showBasket: false,
+        itemsInBasket: initialBasket
     }
 
     sideDrawerToggleHandler = () => {
@@ -57,8 +63,70 @@ class Layout extends Component {
         })
     }
 
+    addToShoppingBasketHandler = (id, title, price) => {
+        let basketItems = [];
+        let storedBasketitems = JSON.parse(localStorage.getItem("basketItems"));
+        let basketItem = "";
+        if(storedBasketitems !== null) {
+            basketItems = storedBasketitems;
+            basketItem = basketItems.findIndex(result => result.id === id)
+            if(basketItem >= 0) {
+                basketItems[basketItem].quantity = basketItems[basketItem].quantity + 1;
+            } else {
+                basketItems.push({
+                    id: id,
+                    title: title,
+                    price: price,
+                    quantity: 1
+                })
+            }
+        } else {
+            basketItems.push({
+                id: id,
+                title: title,
+                price: price,
+                quantity: 1
+            })
+        }
+        localStorage.setItem('basketItems', JSON.stringify(basketItems));
+        this.setState({
+            itemsInBasket: basketItems
+        })
+    }
+
+    removeItemfromBasketHandler = (id) => {
+        let basketItems = JSON.parse(localStorage.getItem("basketItems"));
+        let basketItem = basketItems.findIndex(result => result.id === id);
+        basketItems.splice(basketItem, 1);
+        localStorage.setItem('basketItems', JSON.stringify(basketItems));
+        if(basketItems.length < 1){
+            localStorage.clear();
+            this.setState({
+                itemsInBasket: basketItems
+            })
+        } else {
+            localStorage.setItem('basketItems', JSON.stringify(basketItems));
+            this.setState({
+                itemsInBasket: basketItems
+            })
+        }
+    }
+
+    minusShoppingBasketHandler = (id) => {
+        let basketItems = JSON.parse(localStorage.getItem("basketItems"));
+        let basketItem = basketItems.findIndex(result => result.id === id);
+        if(basketItems[basketItem].quantity === 1) {
+            this.removeItemfromBasketHandler(id);
+        } else {
+            basketItems[basketItem].quantity = basketItems[basketItem].quantity - 1;
+            localStorage.setItem('basketItems', JSON.stringify(basketItems));
+            this.setState({
+                itemsInBasket: basketItems
+            })
+        }
+    }
+
     render() {
-        
         let isAuthenticated = this.state.isAuthenticated;
         let sideDrawer = <SideDrawer open={this.state.showSideDrawer} clicked={this.sideDrawerToggleHandler} auth={this.state.isAuthenticated} sendData={this.getData} />;
 
@@ -75,17 +143,24 @@ class Layout extends Component {
 
         return(
             <div className={classes.Layout}>
-                <Toolbar toggleBasket={this.basketToggleHandler} menu={this.state.menu} clicked={this.sideDrawerToggleHandler} auth={isAuthenticated} />
+                <Toolbar numberOfItemsInBasket={this.state.itemsInBasket.length} toggleBasket={this.basketToggleHandler} menu={this.state.menu} clicked={this.sideDrawerToggleHandler} auth={isAuthenticated} />
                 {sideDrawer}
-                <Basket toggleBasket={this.basketToggleHandler} showBasket={this.state.showBasket}/>        
+                <Basket
+                    itemsInBasket={this.state.itemsInBasket}
+                    toggleBasket={this.basketToggleHandler} 
+                    showBasket={this.state.showBasket}
+                    remove={this.removeItemfromBasketHandler}
+                    plus={this.addToShoppingBasketHandler}
+                    minus={this.minusShoppingBasketHandler}
+                />        
                 <Header />
                 <Switch>
                     <Route path="/" exact component={LandingPage} />
                     <Route path="/training-courses" exact component={TrainingCourses}/>
                     <Route path="/single-training-course/:id" exact render={(props) => <SingleTrainingCourse {...props} auth={isAuthenticated} />} />
                     <Route path="/salon-treatments" exact component={SalonTreatments} />
-                    <Route path="/category/:salonSubCategory/:id" exact component={SalonTreatmentsSubCat} />
-                    <Route path="/treatment/:treatmentName/:id" exact render={(props) => <SingleSalonTreatment {...props} auth={isAuthenticated} />}/>
+                    <Route path="/category/:salonSubCategory/:id" exact render={(props) => <SalonTreatmentsSubCat {...props} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />} />
+                    <Route path="/treatment/:treatmentName/:id" exact render={(props) => <SingleSalonTreatment {...props} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />}/>
                     <Route path="/staff-login" exact render={(props) => <Login {...props} auth={this.state.isAuthenticated} sendData={this.getData} />}/>
                     <ProtectedRoute path="/admin" exact component={AdminLandingPage} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/new-salon-treatment" exact component={NewSalonTreatment} auth={isAuthenticated} />

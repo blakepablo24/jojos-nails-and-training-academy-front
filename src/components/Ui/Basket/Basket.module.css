@@ -10,7 +10,7 @@
     transition: transform 0.75s ease-out;
     display: grid;
     place-items: start center;
-    grid-template-rows: 8fr 2fr;
+    grid-template-rows: 1fr 7fr 2fr;
 }
 
 .Show {
@@ -21,17 +21,16 @@
     transform: translateY(-150%);
 }
 
-.basketContainer {
-    padding-top: 5vh;
-    display: grid;
-    place-items: start center;
-    grid-row-gap: 2vh;
+.title {
+    place-self: center center;
 }
 
-.basketItemsContainer {
+.basketContainer {
     display: grid;
-    place-items: center center;
-    grid-template-columns: 6fr 2fr 2fr;
+    place-items: start center;
+    width: 95%;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .basketControlsContainer {

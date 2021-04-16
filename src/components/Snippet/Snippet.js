@@ -17,7 +17,7 @@ const snippet = (props) => {
         snippetLink = '/treatment/' + props.title.replace(/\s+/g, '-').replace(/,/g,"").toLowerCase() + '/';
         snippetStyle = classes.SnippetWithBasket;
         shoppingControlContainer = 
-        <div className={classes.basketButtonContainer}>
+        <div onClick={props.addToShoppingBasket.bind(this, props.id, props.title, props.price)} className={classes.basketButtonContainer}>
             <TiShoppingCart />Add to Basket
         </div>
     }

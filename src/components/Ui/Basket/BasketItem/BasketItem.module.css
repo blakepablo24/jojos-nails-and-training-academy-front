@@ -1,0 +1,21 @@
+.basketItem {
+    display: grid;
+    place-items: center center;
+    text-align: left;
+    grid-template-columns: 6fr 2fr 1.5fr 0.5fr;
+    font-size: 0.65rem;
+    width: 100%;
+    padding-left: 5%;
+    margin-top: 2vh;
+}
+
+.basketItemTitle {
+    place-self: center start;
+}
+
+.quantityContainer {
+    display: grid;
+    place-items: center center;
+    grid-auto-flow: column;
+    width: 100%;
+}

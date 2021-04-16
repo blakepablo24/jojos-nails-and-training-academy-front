@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './MainButton.module.css';
 
 const mainButton = (props) => (
-    <button className={classes.MainButton}>
+    <button onClick={props.action} className={classes.MainButton}>
         {props.name}
     </button>
 )
