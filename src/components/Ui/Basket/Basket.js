@@ -6,9 +6,9 @@ import BasketItem from './BasketItem/BasketItem';
 
 const basket = (props) => {
     let attachedClasses = [classes.Basket, classes.Hide];
-
+    let totalCost = 0;
     let currentBasketItems = "There are currently no items in your basket";
-
+    
     if(props.itemsInBasket.length > 0){
         currentBasketItems =
         props.itemsInBasket.map(item =>
@@ -36,6 +36,9 @@ const basket = (props) => {
             <h3 className={classes.title}>Your Basket</h3>
                 <div className={classes.basketContainer}>
                     {currentBasketItems}
+                </div>
+                <div className={classes.totalPrice}>
+                    <p>Total: £ {totalCost}</p>
                 </div>
                 <div className={classes.basketControlsContainer}>
                     <button className={classes.bookTreatmentsButton}>Continue Shopping</button>
