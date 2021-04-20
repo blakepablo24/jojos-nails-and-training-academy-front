@@ -1,9 +1,9 @@
 .Basket {
     position: fixed;
     width: 90%;
-    height: 60vh;
+    height: 70vh;
     left: 5%;
-    top: 20vh;
+    top: 15vh;
     background: var(--main-bg);
     z-index: 9;
     box-sizing: border-box;
@@ -11,6 +11,7 @@
     display: grid;
     place-items: start center;
     grid-template-rows: 1fr 6fr 1fr 2fr;
+    border-radius: 5px;
 }
 
 .Show {
@@ -31,6 +32,12 @@
     width: 95%;
     height: 100%;
     overflow-y: scroll;
+    border-top: solid 1px var(--main-txt);
+}
+
+.noItemsInBasket {
+    place-self: center center;
+    font-weight: 300;
 }
 
 .basketControlsContainer {
@@ -47,15 +54,15 @@
     display: grid;
     place-items: center center;
     font-size: 1.5rem;
+    border-top: solid 1px var(--main-txt);
 }
 
 .bookTreatmentsButton {
-    width: 80%;
+    width: 90%;
     font-size: 0.9rem;
     padding: 0;
-    height: 75%;
+    height: 65%;
     margin: 0;
     display: grid;
     place-items: center center;
-    grid-auto-flow: column;
 }
