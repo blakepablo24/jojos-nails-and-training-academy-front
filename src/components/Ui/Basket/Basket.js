@@ -20,7 +20,7 @@ const basket = (props) => {
         });
 
         totalCost = priceArray.reduce(function(pv, cv) { return pv + cv; });
-        
+
         currentBasketItems =
         props.itemsInBasket.map(item =>
             <BasketItem
@@ -40,11 +40,9 @@ const basket = (props) => {
         attachedClasses = [classes.Basket, classes.Show];
     }
 
-    return(
-        <Aux>
-            <Backdrop full={props.showBasket} clicked={props.toggleBasket} showBasket={props.showBasket} />
+    let shownBasketInfo = 
             <div className={attachedClasses.join(' ')}>
-            <h3 className={classes.title}>Your Basket</h3>
+                <h3 className={classes.title}>Your Basket</h3>
                 <div className={classes.basketContainer}>
                     {currentBasketItems}
                 </div>
@@ -53,9 +51,47 @@ const basket = (props) => {
                 </div>
                 <div className={classes.basketControlsContainer}>
                     <button className={classes.bookTreatmentsButton} onClick={props.toggleBasket}>Continue Shopping</button>
-                    <button className={classes.bookTreatmentsButton}>Book treatments</button>
+                    <button className={classes.bookTreatmentsButton} onClick={props.toggleCheckout}>Book treatments</button>
                 </div>
             </div>
+    
+    if(props.itemsInBasket.length === 0){
+        shownBasketInfo = 
+            <div className={attachedClasses.join(' ')}>
+                <h3 className={classes.title}>Your Basket</h3>
+                <div className={classes.basketContainer}>
+                    {currentBasketItems}
+                </div>
+                <div className={classes.totalPrice}>
+                    <p>Total: £ {totalCost}</p>
+                </div>
+                <div className={classes.basketControlsContainer}>
+                    <button className={classes.bookTreatmentsButton} onClick={props.toggleBasket}>Continue Shopping</button>
+                </div>
+            </div>
+    }
+
+    if(props.checkout){
+        shownBasketInfo = 
+            <div className={attachedClasses.join(' ')}>
+                <h3 className={classes.title}>Treatment Booking form</h3>
+                <div className={classes.basketContainer}>
+                    {currentBasketItems}
+                </div>
+                <div className={classes.totalPrice}>
+                    <p>Total: £ {totalCost}</p>
+                </div>
+                <div className={classes.basketControlsContainer}>
+                    <button className={classes.bookTreatmentsButton} onClick={props.toggleCheckout}>Back to Basket</button>
+                    <button className={classes.bookTreatmentsButton} >Book treatments</button>
+                </div>
+            </div>
+    }
+
+    return(
+        <Aux>
+            <Backdrop full={props.showBasket} clicked={props.toggleBasket} showBasket={props.showBasket} toggleCheckout={props.toggleCheckout}/>
+            {shownBasketInfo}
         </Aux>
     )
 }

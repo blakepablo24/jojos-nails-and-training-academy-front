@@ -34,7 +34,8 @@ class Layout extends Component {
         menu: true,
         isAuthenticated: false,
         showBasket: false,
-        itemsInBasket: initialBasket
+        itemsInBasket: initialBasket,
+        checkout: false
     }
 
     sideDrawerToggleHandler = () => {
@@ -58,6 +59,10 @@ class Layout extends Component {
     }
 
     basketToggleHandler = () => {
+        if(this.state.checkout){
+            this.toggleCheckout();
+        }
+
         this.setState({
             showBasket: !this.state.showBasket
         })
@@ -126,6 +131,12 @@ class Layout extends Component {
         }
     }
 
+    toggleCheckout = () => {
+        this.setState({
+            checkout: !this.state.checkout
+        })
+    }
+
     render() {
         let isAuthenticated = this.state.isAuthenticated;
         let sideDrawer = <SideDrawer open={this.state.showSideDrawer} clicked={this.sideDrawerToggleHandler} auth={this.state.isAuthenticated} sendData={this.getData} />;
@@ -152,6 +163,8 @@ class Layout extends Component {
                     remove={this.removeItemfromBasketHandler}
                     plus={this.addToShoppingBasketHandler}
                     minus={this.minusShoppingBasketHandler}
+                    checkout={this.state.checkout}
+                    toggleCheckout={this.toggleCheckout}
                 />        
                 <Header />
                 <Switch>
