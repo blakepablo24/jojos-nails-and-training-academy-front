@@ -3,6 +3,7 @@ import classes from './Basket.module.css';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Backdrop from '../Backdrop/Backdrop';
 import BasketItem from './BasketItem/BasketItem';
+import Calendar from 'react-calendar';
 
 const basket = (props) => {
     let attachedClasses = [classes.Basket, classes.Hide];
@@ -77,6 +78,13 @@ const basket = (props) => {
                 <h3 className={classes.title}>Treatment Booking form</h3>
                 <div className={classes.basketContainer}>
                     {currentBasketItems}
+                    <h3 >Please enter the following information:</h3>
+                    <input type="text" placeholder="First Name" />
+                    <input type="text" placeholder="Surname" />
+                    <input type="text" placeholder="Email Address?" />
+                    <input type="number" placeholder="Contact Number" />
+                    <input type="text" placeholder="Your Name?" />
+                    <Calendar />
                 </div>
                 <div className={classes.totalPrice}>
                     <p>Total: £ {totalCost}</p>

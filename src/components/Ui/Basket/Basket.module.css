@@ -1,9 +1,9 @@
 .Basket {
     position: fixed;
     width: 90%;
-    height: 70vh;
+    height: 80vh;
     left: 5%;
-    top: 15vh;
+    top: 10vh;
     background: var(--main-bg);
     z-index: 9;
     box-sizing: border-box;
@@ -45,7 +45,7 @@
     width: 100%;
     display: grid;
     place-items: center center;
-    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: column;
 }
 
 .totalPrice {
