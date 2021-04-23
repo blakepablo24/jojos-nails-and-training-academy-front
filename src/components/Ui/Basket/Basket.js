@@ -77,14 +77,10 @@ const basket = (props) => {
             <div className={attachedClasses.join(' ')}>
                 <h3 className={classes.title}>Treatment Booking form</h3>
                 <div className={classes.basketContainer}>
-                    {currentBasketItems}
                     <h3 >Please enter the following information:</h3>
-                    <input type="text" placeholder="First Name" />
-                    <input type="text" placeholder="Surname" />
-                    <input type="text" placeholder="Email Address?" />
+                    <input type="text" placeholder="Full Name" />
+                    <input type="text" placeholder="Email Address" />
                     <input type="number" placeholder="Contact Number" />
-                    <input type="text" placeholder="Your Name?" />
-                    <Calendar />
                 </div>
                 <div className={classes.totalPrice}>
                     <p>Total: £ {totalCost}</p>

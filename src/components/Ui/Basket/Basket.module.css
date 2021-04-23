@@ -10,7 +10,7 @@
     transition: transform 0.75s ease-out;
     display: grid;
     place-items: start center;
-    grid-template-rows: 1fr 6fr 1fr 2fr;
+    grid-template-rows: 0.5fr 7.5fr 0.5fr 1.5fr;
     border-radius: 5px;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .totalPrice {
-    width: 100%;
+    width: 95%;
     height: 100%;
     display: grid;
     place-items: center center;
