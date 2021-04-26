@@ -33,6 +33,7 @@ const basket = (props) => {
                 remove={props.remove}
                 minus={props.minus}
                 plus={props.plus}
+                subCategoryTitle={props.subCategoryTitle}
             />
         )
     }
@@ -91,7 +92,7 @@ const basket = (props) => {
                 </div>
             </div>
     }
-
+    
     return(
         <Aux>
             <Backdrop full={props.showBasket} clicked={props.toggleBasket} showBasket={props.showBasket} toggleCheckout={props.toggleCheckout}/>

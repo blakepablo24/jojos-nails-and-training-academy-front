@@ -68,7 +68,7 @@ class Layout extends Component {
         })
     }
 
-    addToShoppingBasketHandler = (id, title, price) => {
+    addToShoppingBasketHandler = (id, title, price, subCategoryTitle) => {
         let basketItems = [];
         let storedBasketitems = JSON.parse(localStorage.getItem("basketItems"));
         let basketItem = "";
@@ -82,6 +82,7 @@ class Layout extends Component {
                     id: id,
                     title: title,
                     price: price,
+                    subCategoryTitle: subCategoryTitle,
                     quantity: 1
                 })
             }
@@ -90,6 +91,7 @@ class Layout extends Component {
                 id: id,
                 title: title,
                 price: price,
+                subCategoryTitle: subCategoryTitle,
                 quantity: 1
             })
         }

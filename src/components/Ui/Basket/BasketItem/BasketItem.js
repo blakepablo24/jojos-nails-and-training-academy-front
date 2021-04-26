@@ -4,10 +4,13 @@ import { TiDeleteOutline } from 'react-icons/ti';
 import classes from './BasketItem.module.css';
 
 const basketItem = (props) => {
-
+    console.log(props);
     return(
         <div className={classes.basketItem}>
-            <p className={classes.basketItemTitle}>{props.title}</p>
+            <div >
+                <p>{props.subCategoryTitle}</p>
+                <p>{props.title}</p>
+            </div>
             <div className={classes.quantityContainer}>
                 <BiMinusCircle onClick={props.minus.bind(this, props.id)} />
                 <p>{props.quantity}</p>
