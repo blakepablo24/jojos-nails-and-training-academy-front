@@ -110,6 +110,8 @@ class SingleSalonTreatment extends Component {
             }
         }
 
+        console.log(this.state.subCategoryTitle);
+
         return(
             <Aux>
                 <Latest message={this.state.subCategoryTitle} />

@@ -4,11 +4,11 @@ import { TiDeleteOutline } from 'react-icons/ti';
 import classes from './BasketItem.module.css';
 
 const basketItem = (props) => {
-    console.log(props);
+
     return(
         <div className={classes.basketItem}>
-            <div >
-                <p>{props.subCategoryTitle}</p>
+            <div className={classes.basketItemTitleContainer}>
+                <p>{props.subCategoryTitle}:</p>
                 <p>{props.title}</p>
             </div>
             <div className={classes.quantityContainer}>

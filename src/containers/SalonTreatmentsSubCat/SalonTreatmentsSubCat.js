@@ -27,6 +27,7 @@ class SalonTreatmentsSubCat extends Component {
     };
 
     render(){
+        
         return(
             <Aux>
                 <Latest message={this.state.subCategoryTitle} />

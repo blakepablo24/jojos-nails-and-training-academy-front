@@ -35,7 +35,9 @@ class Layout extends Component {
         isAuthenticated: false,
         showBasket: false,
         itemsInBasket: initialBasket,
-        checkout: false
+        checkout: false,
+        startDate: new Date(),
+        setStartDate: new Date()
     }
 
     sideDrawerToggleHandler = () => {
@@ -140,6 +142,7 @@ class Layout extends Component {
     }
 
     render() {
+        
         let isAuthenticated = this.state.isAuthenticated;
         let sideDrawer = <SideDrawer open={this.state.showSideDrawer} clicked={this.sideDrawerToggleHandler} auth={this.state.isAuthenticated} sendData={this.getData} />;
 
@@ -167,6 +170,8 @@ class Layout extends Component {
                     minus={this.minusShoppingBasketHandler}
                     checkout={this.state.checkout}
                     toggleCheckout={this.toggleCheckout}
+                    startDate={this.state.startDate}
+                    setStartDate={this.state.setStartDate}
                 />        
                 <Header />
                 <Switch>

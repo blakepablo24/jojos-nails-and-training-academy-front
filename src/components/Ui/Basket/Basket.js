@@ -3,9 +3,10 @@ import classes from './Basket.module.css';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Backdrop from '../Backdrop/Backdrop';
 import BasketItem from './BasketItem/BasketItem';
-import Calendar from 'react-calendar';
+import DatePicker from "react-datepicker";
 
 const basket = (props) => {
+    
     let attachedClasses = [classes.Basket, classes.Hide];
     let totalCost = 0;
     let currentBasketItems = <h2 className={classes.noItemsInBasket}>There are currently no items in your basket</h2>;
@@ -33,7 +34,7 @@ const basket = (props) => {
                 remove={props.remove}
                 minus={props.minus}
                 plus={props.plus}
-                subCategoryTitle={props.subCategoryTitle}
+                subCategoryTitle={item.subCategoryTitle}
             />
         )
     }
@@ -82,6 +83,7 @@ const basket = (props) => {
                     <input type="text" placeholder="Full Name" />
                     <input type="text" placeholder="Email Address" />
                     <input type="number" placeholder="Contact Number" />
+                    <DatePicker selected={props.startDate} onChange={props.datePickerClicked}/>
                 </div>
                 <div className={classes.totalPrice}>
                     <p>Total: £ {totalCost}</p>

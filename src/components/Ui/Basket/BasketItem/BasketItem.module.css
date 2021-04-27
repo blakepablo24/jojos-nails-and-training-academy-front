@@ -9,7 +9,7 @@
     margin-top: 2.5vh;
 }
 
-.basketItemTitle {
+.basketItemTitleContainer {
     place-self: center start;
     font-size: 0.85rem;
 }
