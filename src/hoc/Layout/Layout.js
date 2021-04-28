@@ -36,8 +36,7 @@ class Layout extends Component {
         showBasket: false,
         itemsInBasket: initialBasket,
         checkout: false,
-        startDate: new Date(),
-        setStartDate: new Date()
+        startDate: new Date()
     }
 
     sideDrawerToggleHandler = () => {
@@ -138,6 +137,12 @@ class Layout extends Component {
     toggleCheckout = () => {
         this.setState({
             checkout: !this.state.checkout
+        })
+    }
+
+    setStartDate = (selectedDate) => {
+        this.setState({
+            startDate: selectedDate
         })
     }
 

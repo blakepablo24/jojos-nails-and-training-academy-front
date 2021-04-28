@@ -4,6 +4,7 @@ import Aux from '../../../hoc/Auxilary/Auxilary';
 import Backdrop from '../Backdrop/Backdrop';
 import BasketItem from './BasketItem/BasketItem';
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const basket = (props) => {
     
@@ -83,7 +84,7 @@ const basket = (props) => {
                     <input type="text" placeholder="Full Name" />
                     <input type="text" placeholder="Email Address" />
                     <input type="number" placeholder="Contact Number" />
-                    <DatePicker selected={props.startDate} onChange={props.datePickerClicked}/>
+                    <DatePicker  dateFormat={'dd/MM/yyyy'} selected={props.startDate} />
                 </div>
                 <div className={classes.totalPrice}>
                     <p>Total: £ {totalCost}</p>
