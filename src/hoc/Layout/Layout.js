@@ -35,8 +35,7 @@ class Layout extends Component {
         isAuthenticated: false,
         showBasket: false,
         itemsInBasket: initialBasket,
-        checkout: false,
-        startDate: new Date()
+        checkout: false
     }
 
     sideDrawerToggleHandler = () => {
@@ -140,10 +139,8 @@ class Layout extends Component {
         })
     }
 
-    setStartDate = (selectedDate) => {
-        this.setState({
-            startDate: selectedDate
-        })
+    dateChangehandler = (date) => {
+        console.log(date);
     }
 
     render() {
@@ -175,8 +172,7 @@ class Layout extends Component {
                     minus={this.minusShoppingBasketHandler}
                     checkout={this.state.checkout}
                     toggleCheckout={this.toggleCheckout}
-                    startDate={this.state.startDate}
-                    setStartDate={this.state.setStartDate}
+                    dateChangehandler={this.dateChangehandler}
                 />        
                 <Header />
                 <Switch>

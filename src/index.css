@@ -36,7 +36,7 @@ p {
   font-family: 'Nunito', sans-serif;
 }
 
-button {
+.customButton {
   background: var(--main-txt);
   color: var(--second-bg);
   border: none;

@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './Basket.module.css';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Backdrop from '../Backdrop/Backdrop';
 import BasketItem from './BasketItem/BasketItem';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import addDays from 'date-fns/addDays';
 
-const basket = (props) => {
+const Basket = (props) => {
+
+    const [startDate, setStartDate] = useState(new Date());
     
+    function onChange(date) {
+        setStartDate(date);
+        props.dateChangehandler(date);
+    }
+
     let attachedClasses = [classes.Basket, classes.Hide];
     let totalCost = 0;
     let currentBasketItems = <h2 className={classes.noItemsInBasket}>There are currently no items in your basket</h2>;
@@ -84,7 +92,13 @@ const basket = (props) => {
                     <input type="text" placeholder="Full Name" />
                     <input type="text" placeholder="Email Address" />
                     <input type="number" placeholder="Contact Number" />
-                    <DatePicker  dateFormat={'dd/MM/yyyy'} selected={props.startDate} />
+                    <DatePicker
+                        dateFormat={'dd/MM/yyyy'}
+                        selected={startDate} 
+                        onChange={onChange}
+                        minDate={new Date()}
+                        maxDate={addDays(new Date(), 330)}
+                    />
                 </div>
                 <div className={classes.totalPrice}>
                     <p>Total: £ {totalCost}</p>
@@ -95,7 +109,7 @@ const basket = (props) => {
                 </div>
             </div>
     }
-    
+
     return(
         <Aux>
             <Backdrop full={props.showBasket} clicked={props.toggleBasket} showBasket={props.showBasket} toggleCheckout={props.toggleCheckout}/>
@@ -104,4 +118,4 @@ const basket = (props) => {
     )
 }
 
-export default basket;
+export default Basket;
