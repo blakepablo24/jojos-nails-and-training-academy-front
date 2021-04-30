@@ -7,7 +7,7 @@ import LandingPage from '../../containers/LandingPage/LandingPage';
 import TrainingCourses from '../../containers/TrainingCourses/TrainingCourses';
 import SingleTrainingCourse from '../../containers/SingleTrainingCourse/SingleTrainingCourse';
 import Footer from '../../components/Ui/Navigation/Footer/Footer';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import SalonTreatments from '../../containers/SalonTreatments/SalonTreatments';
 import SalonTreatmentsSubCat from '../../containers/SalonTreatmentsSubCat/SalonTreatmentsSubCat';
 import SingleSalonTreatment from '../../containers/SingleSalonTreatment/SingleSalonTreatment';
@@ -21,6 +21,9 @@ import EditSalonTreatment from '../../containers/Admin/EditSalonTreatment/EditSa
 import EditTrainingCourse from '../../containers/Admin/EditTrainingCourse/EditTrainingCourse';
 import FrontLandingPage from '../../containers/Admin/FrontLandingPage/FrontLandingPage';
 import Basket from '../../components/Ui/Basket/Basket';
+import axios from 'axios';
+import CONST from '../../constants/constants';
+import EmailValidator from 'email-validator';
 
 let initialBasket = [];
 if(JSON.parse(localStorage.getItem("basketItems"))) {
@@ -35,7 +38,16 @@ class Layout extends Component {
         isAuthenticated: false,
         showBasket: false,
         itemsInBasket: initialBasket,
-        checkout: false
+        checkout: false,
+        bookingRequestDate: "",
+        bookingRequestName: "",
+        bookingRequestEmail: "",
+        bookingRequestNumber: "",
+        bookingRequestTime: "",
+        bookingRequestNameError: "",
+        bookingRequestEmailError: "",
+        bookingRequestNumberError: "",
+        bookingRequestTimeError: ""
     }
 
     sideDrawerToggleHandler = () => {
@@ -140,11 +152,100 @@ class Layout extends Component {
     }
 
     dateChangehandler = (date) => {
-        console.log(date);
+        this.setState({
+            bookingRequestDate: date,
+            bookingRequestDateError: ""
+        })
+    }
+
+    changeHandler = (event) => {
+
+        const target = event.target;
+        const name = target.name;
+        const value = target.value;
+
+        this.setState({
+            [name]: value,
+            [name + "Error"]: ""
+        });
+    }
+
+    finishHandler = (event) => {
+        event.preventDefault();
+
+        let bookingRequestNameError = "";
+        let bookingRequestEmailError = "";
+        let bookingRequestNumberError = "";
+        let bookingRequestTimeError = "";
+        let bookingRequestDateError = "";
+
+        if(this.state.bookingRequestName === ""){
+            bookingRequestNameError = <h4 className="error">Please Enter your name!</h4>;
+        } else if(this.state.bookingRequestName.length < 5){
+            bookingRequestNameError = <h4 className="error">Name must be longer 5 characters</h4>;
+        }
+
+        if (/[^a-zA-Z -']/.test(this.state.bookingRequestName)) {
+            bookingRequestNameError = <h4 className="error">Please enter a valid name!</h4>;
+        }
+        if(!EmailValidator.validate(this.state.bookingRequestEmail)){
+            bookingRequestEmailError = <h4 className="error">Please enter a valid email address!</h4>
+        }
+
+        if (/[^0-9]/.test(this.state.bookingRequestNumber)) {
+            bookingRequestNumberError = <h4 className="error">Please a valid number!</h4>;
+        } else if (this.state.bookingRequestNumber.length != 11){
+            bookingRequestNumberError = <h4 className="error">Number is not correct length</h4>;
+        }
+
+        if(this.state.bookingRequestTime === "select" || this.state.bookingRequestTime === ""){
+            bookingRequestTimeError = <h4 className="error">Please choose your preferred time</h4>;
+        }
+
+        if(this.state.bookingRequestDate === ""){
+            bookingRequestDateError = <h4 className="error">Please select a date</h4>;
+        }
+
+        if(!bookingRequestNameError && !bookingRequestEmailError && !bookingRequestNumberError && !bookingRequestTimeError){
+            console.log("All Good");
+            console.log(this.state.bookingRequestName);
+            console.log(this.state.bookingRequestEmail);
+            console.log(this.state.bookingRequestNumber);
+            console.log(this.state.bookingRequestDate);
+            console.log(this.state.bookingRequestTime);
+            // let fd = new FormData();
+            // fd.append('category', this.state.category);
+            // fd.append('title', this.state.title);
+            // fd.append('price', this.state.price);
+            // fd.append('duration', this.state.duration);
+            // fd.append('description', this.state.description);
+
+            // if(this.state.imageFile){
+            //     fd.append('newImage', this.state.imageFile, this.state.imageFile.name);
+            // }
+            // axios.defaults.withCredentials = true;
+            // axios.post(CONST.BASE_URL + '/api/new-salon-treatment', fd).then(response => {
+            //     this.setState({
+            //         redirectOnSuccess: <Redirect to={{
+            //             pathname: '/treatment/' + response.data.newSalonTreatment.title.replace(/\s+/g, '-').replace(/,/g,"").toLowerCase() + '/' + response.data.newSalonTreatment.id,
+            //             state: { fromRedirect: "New Salon Treatment Successfully Created" }
+            //             }}                  
+            //         />
+            //     })
+            // })
+        } else {
+            console.log(this.state.bookingRequestTime);
+            this.setState({
+                bookingRequestNameError: bookingRequestNameError,
+                bookingRequestEmailError: bookingRequestEmailError,
+                bookingRequestNumberError: bookingRequestNumberError,
+                bookingRequestTimeError: bookingRequestTimeError,
+                bookingRequestDateError: bookingRequestDateError
+            })
+        }
     }
 
     render() {
-        
         let isAuthenticated = this.state.isAuthenticated;
         let sideDrawer = <SideDrawer open={this.state.showSideDrawer} clicked={this.sideDrawerToggleHandler} auth={this.state.isAuthenticated} sendData={this.getData} />;
 
@@ -164,6 +265,16 @@ class Layout extends Component {
                 <Toolbar numberOfItemsInBasket={this.state.itemsInBasket.length} toggleBasket={this.basketToggleHandler} menu={this.state.menu} clicked={this.sideDrawerToggleHandler} auth={isAuthenticated} />
                 {sideDrawer}
                 <Basket
+                    bookingRequestDate={this.state.bookingRequestDate}
+                    bookingRequestName={this.state.bookingRequestName}
+                    bookingRequestEmail={this.state.bookingRequestEmail}
+                    bookingRequestNumber={this.state.bookingRequestNumber}
+                    bookingRequestTime={this.state.bookingRequestTime}
+                    bookingRequestNameError={this.state.bookingRequestNameError}
+                    bookingRequestEmailError={this.state.bookingRequestEmailError}
+                    bookingRequestNumberError={this.state.bookingRequestNumberError}
+                    bookingRequestTimeError={this.state.bookingRequestTimeError}
+                    bookingRequestDateError={this.state.bookingRequestDateError}
                     itemsInBasket={this.state.itemsInBasket}
                     toggleBasket={this.basketToggleHandler} 
                     showBasket={this.state.showBasket}
@@ -173,6 +284,8 @@ class Layout extends Component {
                     checkout={this.state.checkout}
                     toggleCheckout={this.toggleCheckout}
                     dateChangehandler={this.dateChangehandler}
+                    changeHandler={this.changeHandler}
+                    finishHandler={this.finishHandler}
                 />        
                 <Header />
                 <Switch>

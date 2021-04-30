@@ -66,3 +66,13 @@
     display: grid;
     place-items: center center;
 }
+
+.calanderContainer {
+    margin-top: 2.5vh;
+    background: white;
+    width: 80%;
+    display: grid;
+    place-items: center center;
+    grid-template-columns: 2fr 8fr;
+    font-size: 2rem;
+}
