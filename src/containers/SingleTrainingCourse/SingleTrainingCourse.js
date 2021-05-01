@@ -4,7 +4,6 @@ import { Link, Redirect, withRouter } from 'react-router-dom';
 import classes from './SingleTrainingCourse.module.css';
 import CONST from '../../constants/constants';
 import GoBack from '../../components/Ui/GoBack/GoBack';
-import MainButton from '../../components/Ui/MainButton/MainButton';
 import GuildLogo from '../../components/Ui/GuildLogo/GuildLogo';
 import CurriculumItem from '../../components/CurriculumItem/CurriculumItem';
 import { BiXCircle, BiEdit, BiFolderPlus } from "react-icons/bi";
@@ -175,6 +174,29 @@ class SingleTrainingCourse extends Component {
                 showSuccessMsg(message);
             }
         }
+
+        function checkBasket(id) {
+            let alreadyInBasket = false;
+            let basketItems = JSON.parse(localStorage.getItem("basketItems"));
+            basketItems.forEach(basketItem => {
+                if (basketItem.id === id) {
+                    alreadyInBasket = true;
+                }
+            });
+            return alreadyInBasket;
+        }
+
+        let shownButton = <button onClick={this.props.addToShoppingBasket.bind(this, this.props.match.params.id, this.state.title, this.state.price, "Training Courses")}>Add to Basket</button>;
+
+        if(JSON.parse(localStorage.getItem("basketItems"))){
+            if(checkBasket(Number(this.props.match.params.id))){
+                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, "Training Courses")}>In Basket</button>;
+            } else {
+                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, "Training Courses")}>Add to Basket</button>;
+            }
+        } else {
+            shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, "Training Courses")}>Add to Basket</button>;
+        }
         
         return(
             <Aux>
@@ -203,7 +225,7 @@ class SingleTrainingCourse extends Component {
                     </div>
                     {curriculum}
                     {extras}
-                    <MainButton name="Book This Course" />
+                    {shownButton}
                     <GuildLogo />
                     {this.state.adminButtons}
                 </div>

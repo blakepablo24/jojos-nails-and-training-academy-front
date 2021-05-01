@@ -3,6 +3,7 @@ import classes from './Basket.module.css';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import { format } from 'date-fns';
 import { FcCalendar } from "react-icons/fc";
+import { BiLeftArrowAlt } from "react-icons/bi";
 import Backdrop from '../Backdrop/Backdrop';
 import BasketItem from './BasketItem/BasketItem';
 import enGb from 'date-fns/locale/en-GB';
@@ -14,15 +15,35 @@ registerLocale('en-gb', enGb);
 
 const Basket = (props) => {
 
-    const [startDate, setStartDate] = useState(new Date());
+    const [trainingCourseStartDate, setTrainingCourseStartDate] = useState(new Date());
+    const [treatmentStartDate, settreatmentStartDate] = useState(new Date());
     const isWeekday = date => {
         const day = getDay(date);
         return day !== 0;
       };
-    function onChange(date) {
-        setStartDate(date);
-        props.dateChangehandler(format(date, 'dd/MM/yyyy'));
+
+      function checkBasket(id) {
+        let alreadyInBasket = false;
+        let basketItems = JSON.parse(localStorage.getItem("basketItems"));
+        basketItems.forEach(basketItem => {
+            if (basketItem.subCategoryTitle === id) {
+                alreadyInBasket = true;
+            }
+        });
+        return alreadyInBasket;
     }
+    
+    function onTrainingCourseStartDateChange(date) {
+        setTrainingCourseStartDate(date);
+        props.trainingCourseStartdateChangehandler(format(date, 'dd/MM/yyyy'));
+        props.checkoutView("book-salon-treatments");
+    }
+
+    function onTreatmentStartDateChange(date) {
+        settreatmentStartDate(date);
+        props.treatmentsStartdateChangehandler(format(date, 'dd/MM/yyyy'));
+    }
+
 
     let attachedClasses = [classes.Basket, classes.Hide];
     let totalCost = 0;
@@ -56,6 +77,14 @@ const Basket = (props) => {
         )
     }
 
+    let buttonFunction = "book-salon-treatments";
+
+    if(JSON.parse(localStorage.getItem("basketItems"))){
+        if(checkBasket("Training Courses")){
+            buttonFunction = "book-training-courses"
+        }
+    }
+
     if (props.showBasket) {
         attachedClasses = [classes.Basket, classes.Show];
     }
@@ -70,8 +99,8 @@ const Basket = (props) => {
                     <p>Total: £ {totalCost}</p>
                 </div>
                 <div className={classes.basketControlsContainer}>
-                    <button className={classes.bookTreatmentsButton} onClick={props.toggleBasket}>Continue Shopping</button>
-                    <button className={classes.bookTreatmentsButton} onClick={props.toggleCheckout}>Book treatments</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.toggleBasket}>Continue Shopping</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, buttonFunction)}>Checkout</button>
                 </div>
             </div>
     
@@ -86,17 +115,106 @@ const Basket = (props) => {
                     <p>Total: £ {totalCost}</p>
                 </div>
                 <div className={classes.basketControlsContainer}>
-                    <button className={classes.bookTreatmentsButton} onClick={props.toggleBasket}>Continue Shopping</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.toggleBasket}>Continue Shopping</button>
                 </div>
             </div>
     }
 
-    if(props.checkout){
+    if(props.checkout === "book-training-courses"){
+        let shownDateChoice = <h3>Select Preferred Training Course Start Date</h3>;
+        let today = new Date();
+        if(format(trainingCourseStartDate, 'dd/MM/yyyy') != format(today, 'dd/MM/yyyy')){
+            shownDateChoice = format(trainingCourseStartDate, 'dd/MM/yyyy')
+        }
         shownBasketInfo = 
             <div className={attachedClasses.join(' ')}>
-                <h3 className={classes.title}>Treatment Booking form</h3>
+                <h3 className={classes.title}>Treatment Course Booking</h3>
                 <div className={classes.basketContainer}>
-                    <h3 >Please enter the following information:</h3>
+                    <div className={classes.calanderContainer}>
+                        <DatePicker
+                            locale="en-gb"
+                            dateFormat={'dd/MM/yyyy'}
+                            // selected={startDate}
+                            placeholderText="Please select a date"
+                            onChange={onTrainingCourseStartDateChange}
+                            minDate={new Date()}
+                            maxDate={addDays(new Date(), 330)}
+                            customInput={
+                                <div className={classes.calanderImagecontainer}>
+                                    <FcCalendar />
+                                    {shownDateChoice}
+                                </div>
+                            }
+                            filterDate={isWeekday}
+                        />
+                    </div>
+                    {props.bookingRequestDateError}
+                </div>
+                <div className={classes.totalPrice}>
+                    <p>Total: £ {totalCost}</p>
+                </div>
+                <div className={classes.basketControlsContainer}>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
+                </div>
+            </div>
+    }
+
+    if(props.checkout === "book-salon-treatments"){
+        let shownDateChoice = <h3>Select Preferred Salon Treatments Date</h3>;
+        let today = new Date();
+        if(format(treatmentStartDate, 'dd/MM/yyyy') != format(today, 'dd/MM/yyyy')){
+            shownDateChoice = format(treatmentStartDate, 'dd/MM/yyyy')
+        }
+        shownBasketInfo = 
+            <div className={attachedClasses.join(' ')}>
+                <h3 className={classes.title}>Your Salon Treatments</h3>
+                <div className={classes.basketContainer}>
+                    <div className={classes.calanderContainer}>
+                        <DatePicker
+                            locale="en-gb"
+                            dateFormat={'dd/MM/yyyy'}
+                            // selected={startDate}
+                            placeholderText="Please select a date"
+                            onChange={onTreatmentStartDateChange}
+                            minDate={new Date()}
+                            maxDate={addDays(new Date(), 330)}
+                            customInput={
+                                <div className={classes.calanderImagecontainer}>
+                                    <FcCalendar />
+                                    {shownDateChoice}
+                                </div>
+                            }
+                            filterDate={isWeekday}
+                        />
+                    </div>
+                    {props.treatmentsStartdateError}
+                    <select
+                            name="bookingRequestTime"
+                            value={props.bookingRequestTime}
+                            onChange={props.changeHandler}
+                        >
+                        <option value="select">Select preferred Time</option>
+                        <option value="morning">Morning</option>
+                        <option value="afternoon">Afternoon</option>
+                        <option value="evening">Evening</option>
+                    </select>
+                    {props.bookingRequestTimeError}
+                </div>
+                <div className={classes.totalPrice}>
+                    <p>Total: £ {totalCost}</p>
+                </div>
+                <div className={classes.basketControlsContainer}>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.treatmentErrorCheckHandler}>Next</button>
+                </div>
+            </div>
+    }
+
+    if(props.checkout === "customer-details"){
+        shownBasketInfo = 
+            <div className={attachedClasses.join(' ')}>
+                <h3 className={classes.title}>Your Information</h3>
+                <div className={classes.basketContainer}>
                     <input 
                         type="text" 
                         placeholder="Full Name"
@@ -124,39 +242,13 @@ const Basket = (props) => {
                         onChange={props.changeHandler}
                     />
                     {props.bookingRequestNumberError}
-                    <div className={classes.calanderContainer}>
-                        <DatePicker
-                            locale="en-gb"
-                            dateFormat={'dd/MM/yyyy'}
-                            // selected={startDate}
-                            placeholderText="Please select a date"
-                            onChange={onChange}
-                            minDate={new Date()}
-                            maxDate={addDays(new Date(), 330)}
-                            customInput={<p><FcCalendar /></p>}
-                            filterDate={isWeekday}
-                        />
-                        <p>{props.bookingRequestDate}</p>
-                    </div>
-                    {props.bookingRequestDateError}
-                <select
-                    name="bookingRequestTime"
-                    value={props.bookingRequestTime}
-                    onChange={props.changeHandler}
-                >
-                    <option value="select">Select Time</option>
-                    <option value="morning">Morning</option>
-                    <option value="afternoon">Afternoon</option>
-                    <option value="evening">Evening</option>
-                </select>
-                {props.bookingRequestTimeError}
                 </div>
                 <div className={classes.totalPrice}>
                     <p>Total: £ {totalCost}</p>
                 </div>
                 <div className={classes.basketControlsContainer}>
-                    <button className={classes.bookTreatmentsButton} onClick={props.toggleCheckout}>Back to Basket</button>
-                    <button className={classes.bookTreatmentsButton} onClick={props.finishHandler}>Finish</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.finishHandler}>Finish</button>
                 </div>
             </div>
     }

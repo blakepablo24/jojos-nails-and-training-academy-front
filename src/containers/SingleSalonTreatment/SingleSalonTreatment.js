@@ -4,7 +4,6 @@ import Axios from 'axios';
 import { Link, Redirect, withRouter } from 'react-router-dom';
 import CONST from '../../constants/constants';
 import GoBack from '../../components/Ui/GoBack/GoBack';
-import MainButton from '../../components/Ui/MainButton/MainButton';
 import GuildLogo from '../../components/Ui/GuildLogo/GuildLogo';
 import { MdTimer } from "react-icons/md";
 import { BiXCircle, BiEdit } from "react-icons/bi";
@@ -110,7 +109,28 @@ class SingleSalonTreatment extends Component {
             }
         }
 
-        console.log(this.state.subCategoryTitle);
+        function checkBasket(id) {
+            let alreadyInBasket = false;
+            let basketItems = JSON.parse(localStorage.getItem("basketItems"));
+            basketItems.forEach(basketItem => {
+                if (basketItem.id === id) {
+                    alreadyInBasket = true;
+                }
+            });
+            return alreadyInBasket;
+        }
+
+        let shownButton = <button onClick={this.props.addToShoppingBasket.bind(this, this.props.match.params.id, this.state.title, this.state.price, this.state.subCategoryTitle)}>Add to Basket</button>;
+
+        if(JSON.parse(localStorage.getItem("basketItems"))){
+            if(checkBasket(Number(this.props.match.params.id))){
+                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, this.state.subCategoryTitle)}>In Basket</button>;
+            } else {
+                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, this.state.subCategoryTitle)}>Add to Basket</button>;
+            }
+        } else {
+            shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, this.state.subCategoryTitle)}>Add to Basket</button>;
+        }
 
         return(
             <Aux>
@@ -133,7 +153,7 @@ class SingleSalonTreatment extends Component {
                         </div>
                     </div>
                     <h3 className={classes.description}>{this.state.description}</h3>
-                    <MainButton action={this.props.addToShoppingBasket.bind(this, this.props.match.params.id, this.state.title, this.state.price, this.state.subCategoryTitle)} name="Add to Basket" />
+                    {shownButton}
                     <GuildLogo />
                     {this.state.adminButtons}
                 </div>

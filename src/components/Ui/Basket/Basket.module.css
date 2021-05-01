@@ -73,6 +73,21 @@
     width: 80%;
     display: grid;
     place-items: center center;
+}
+
+.calanderContainer h4 {
+    display: grid;
+    place-items: center center;
+    grid-auto-flow: column;
+    width: 100%;
+}
+
+.calanderImagecontainer {
+    display: grid;
+    place-items: center center;
     grid-template-columns: 2fr 8fr;
-    font-size: 2rem;
+}
+
+.calanderImagecontainer svg {
+    font-size: 1.75rem;
 }

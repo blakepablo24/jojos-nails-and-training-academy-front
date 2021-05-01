@@ -39,6 +39,8 @@ class Layout extends Component {
         showBasket: false,
         itemsInBasket: initialBasket,
         checkout: false,
+        treatmentsStartdate: "",
+        trainingCourseStartdate: "",
         bookingRequestDate: "",
         bookingRequestName: "",
         bookingRequestEmail: "",
@@ -47,7 +49,9 @@ class Layout extends Component {
         bookingRequestNameError: "",
         bookingRequestEmailError: "",
         bookingRequestNumberError: "",
-        bookingRequestTimeError: ""
+        bookingRequestTimeError: "",
+        treatmentsStartdateError: "",
+        trainingCourseStartdateError: ""
     }
 
     sideDrawerToggleHandler = () => {
@@ -71,10 +75,6 @@ class Layout extends Component {
     }
 
     basketToggleHandler = () => {
-        if(this.state.checkout){
-            this.toggleCheckout();
-        }
-
         this.setState({
             showBasket: !this.state.showBasket
         })
@@ -145,17 +145,47 @@ class Layout extends Component {
         }
     }
 
-    toggleCheckout = () => {
+    checkoutView = (view) => {
         this.setState({
-            checkout: !this.state.checkout
+            checkout: view
         })
     }
 
-    dateChangehandler = (date) => {
+    trainingCourseStartdateChangehandler = (date) => {
         this.setState({
-            bookingRequestDate: date,
-            bookingRequestDateError: ""
+            trainingCourseStartdate: date,
+            trainingCourseStartdateError: ""
         })
+    }
+
+    treatmentsStartdateChangehandler = (date) => {
+        this.setState({
+            treatmentsStartdate: date,
+            treatmentsStartdateError: ""
+        })
+    }
+
+    treatmentErrorCheckHandler = (event) => {
+        event.preventDefault();
+        let bookingRequestTimeError = "";
+        let treatmentsStartdateError = "";
+
+        if(this.state.bookingRequestTime === "select" || this.state.bookingRequestTime === ""){
+            bookingRequestTimeError = <h4 className="error">Please choose your preferred time</h4>;
+        }
+
+        if(this.state.treatmentsStartdate === ""){
+            treatmentsStartdateError = <h4 className="error">Please select your preferred date</h4>;
+        }
+        
+        if(!bookingRequestTimeError && !treatmentsStartdateError){
+            this.checkoutView("customer-details");
+        } else {
+            this.setState({
+                bookingRequestTimeError: bookingRequestTimeError,
+                treatmentsStartdateError: treatmentsStartdateError
+            })
+        }
     }
 
     changeHandler = (event) => {
@@ -176,8 +206,6 @@ class Layout extends Component {
         let bookingRequestNameError = "";
         let bookingRequestEmailError = "";
         let bookingRequestNumberError = "";
-        let bookingRequestTimeError = "";
-        let bookingRequestDateError = "";
 
         if(this.state.bookingRequestName === ""){
             bookingRequestNameError = <h4 className="error">Please Enter your name!</h4>;
@@ -198,31 +226,9 @@ class Layout extends Component {
             bookingRequestNumberError = <h4 className="error">Number is not correct length</h4>;
         }
 
-        if(this.state.bookingRequestTime === "select" || this.state.bookingRequestTime === ""){
-            bookingRequestTimeError = <h4 className="error">Please choose your preferred time</h4>;
-        }
-
-        if(this.state.bookingRequestDate === ""){
-            bookingRequestDateError = <h4 className="error">Please select a date</h4>;
-        }
-
-        if(!bookingRequestNameError && !bookingRequestEmailError && !bookingRequestNumberError && !bookingRequestTimeError){
+        if(!bookingRequestNameError && !bookingRequestEmailError && !bookingRequestNumberError){
             console.log("All Good");
-            console.log(this.state.bookingRequestName);
-            console.log(this.state.bookingRequestEmail);
-            console.log(this.state.bookingRequestNumber);
-            console.log(this.state.bookingRequestDate);
-            console.log(this.state.bookingRequestTime);
-            // let fd = new FormData();
-            // fd.append('category', this.state.category);
-            // fd.append('title', this.state.title);
-            // fd.append('price', this.state.price);
-            // fd.append('duration', this.state.duration);
-            // fd.append('description', this.state.description);
-
-            // if(this.state.imageFile){
-            //     fd.append('newImage', this.state.imageFile, this.state.imageFile.name);
-            // }
+            localStorage.clear('basketItems');
             // axios.defaults.withCredentials = true;
             // axios.post(CONST.BASE_URL + '/api/new-salon-treatment', fd).then(response => {
             //     this.setState({
@@ -234,13 +240,10 @@ class Layout extends Component {
             //     })
             // })
         } else {
-            console.log(this.state.bookingRequestTime);
             this.setState({
                 bookingRequestNameError: bookingRequestNameError,
                 bookingRequestEmailError: bookingRequestEmailError,
                 bookingRequestNumberError: bookingRequestNumberError,
-                bookingRequestTimeError: bookingRequestTimeError,
-                bookingRequestDateError: bookingRequestDateError
             })
         }
     }
@@ -254,7 +257,7 @@ class Layout extends Component {
         }
 
         // Prevent scrolling if menu open
-        if(this.state.showSideDrawer){
+        if(this.state.showSideDrawer || this.state.showBasket){
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'visible';
@@ -265,7 +268,8 @@ class Layout extends Component {
                 <Toolbar numberOfItemsInBasket={this.state.itemsInBasket.length} toggleBasket={this.basketToggleHandler} menu={this.state.menu} clicked={this.sideDrawerToggleHandler} auth={isAuthenticated} />
                 {sideDrawer}
                 <Basket
-                    bookingRequestDate={this.state.bookingRequestDate}
+                    trainingCourseStartdate={this.state.trainingCourseStartdate}
+                    treatmentsStartdate={this.state.treatmentsStartdate}
                     bookingRequestName={this.state.bookingRequestName}
                     bookingRequestEmail={this.state.bookingRequestEmail}
                     bookingRequestNumber={this.state.bookingRequestNumber}
@@ -274,7 +278,8 @@ class Layout extends Component {
                     bookingRequestEmailError={this.state.bookingRequestEmailError}
                     bookingRequestNumberError={this.state.bookingRequestNumberError}
                     bookingRequestTimeError={this.state.bookingRequestTimeError}
-                    bookingRequestDateError={this.state.bookingRequestDateError}
+                    treatmentsStartdateError={this.state.treatmentsStartdateError}
+                    trainingCourseStartdateError={this.state.trainingCourseStartdateError}
                     itemsInBasket={this.state.itemsInBasket}
                     toggleBasket={this.basketToggleHandler} 
                     showBasket={this.state.showBasket}
@@ -282,8 +287,10 @@ class Layout extends Component {
                     plus={this.addToShoppingBasketHandler}
                     minus={this.minusShoppingBasketHandler}
                     checkout={this.state.checkout}
-                    toggleCheckout={this.toggleCheckout}
-                    dateChangehandler={this.dateChangehandler}
+                    checkoutView={this.checkoutView}
+                    trainingCourseStartdateChangehandler={this.trainingCourseStartdateChangehandler}
+                    treatmentsStartdateChangehandler={this.treatmentsStartdateChangehandler}
+                    treatmentErrorCheckHandler={this.treatmentErrorCheckHandler}
                     changeHandler={this.changeHandler}
                     finishHandler={this.finishHandler}
                 />        
@@ -291,7 +298,7 @@ class Layout extends Component {
                 <Switch>
                     <Route path="/" exact component={LandingPage} />
                     <Route path="/training-courses" exact component={TrainingCourses}/>
-                    <Route path="/single-training-course/:id" exact render={(props) => <SingleTrainingCourse {...props} auth={isAuthenticated} />} />
+                    <Route path="/single-training-course/:id" exact render={(props) => <SingleTrainingCourse {...props} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />} />
                     <Route path="/salon-treatments" exact component={SalonTreatments} />
                     <Route path="/category/:salonSubCategory/:id" exact render={(props) => <SalonTreatmentsSubCat {...props} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />} />
                     <Route path="/treatment/:treatmentName/:id" exact render={(props) => <SingleSalonTreatment {...props} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />}/>
