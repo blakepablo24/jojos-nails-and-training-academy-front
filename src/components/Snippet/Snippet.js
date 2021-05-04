@@ -30,18 +30,18 @@ const snippet = (props) => {
         if(JSON.parse(localStorage.getItem("basketItems"))){
             if(checkBasket(props.id)){
                 shoppingControlContainer = 
-                    <div onClick={props.addToShoppingBasket.bind(this, props.id, props.title, props.price, props.subCategoryTitle)} className={classes.basketButtonContainer + " " + classes.inBasketButtonContainer}>
+                    <div onClick={props.addToShoppingBasket.bind(this, props.id, props.title, props.price, props.subCategoryTitle, "st")} className={classes.basketButtonContainer + " " + classes.inBasketButtonContainer}>
                         <TiShoppingCart />In Basket
                     </div>
             } else {
                 shoppingControlContainer = 
-                    <div onClick={props.addToShoppingBasket.bind(this, props.id, props.title, props.price, props.subCategoryTitle)} className={classes.basketButtonContainer}>
+                    <div onClick={props.addToShoppingBasket.bind(this, props.id, props.title, props.price, props.subCategoryTitle, "st")} className={classes.basketButtonContainer}>
                         <TiShoppingCart />Add to Basket
                     </div>
             }
         } else {
             shoppingControlContainer = 
-                <div onClick={props.addToShoppingBasket.bind(this, props.id, props.title, props.price, props.subCategoryTitle)} className={classes.basketButtonContainer}>
+                <div onClick={props.addToShoppingBasket.bind(this, props.id, props.title, props.price, props.subCategoryTitle, "st")} className={classes.basketButtonContainer}>
                     <TiShoppingCart />Add to Basket
                 </div>
         }

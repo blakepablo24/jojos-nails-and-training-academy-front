@@ -120,16 +120,16 @@ class SingleSalonTreatment extends Component {
             return alreadyInBasket;
         }
 
-        let shownButton = <button onClick={this.props.addToShoppingBasket.bind(this, this.props.match.params.id, this.state.title, this.state.price, this.state.subCategoryTitle)}>Add to Basket</button>;
+        let shownButton = <button onClick={this.props.addToShoppingBasket.bind(this, this.props.match.params.id, this.state.title, this.state.price, this.state.subCategoryTitle, "st")}>Add to Basket</button>;
 
         if(JSON.parse(localStorage.getItem("basketItems"))){
             if(checkBasket(Number(this.props.match.params.id))){
-                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, this.state.subCategoryTitle)}>In Basket</button>;
+                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, this.state.subCategoryTitle, "st")}>In Basket</button>;
             } else {
-                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, this.state.subCategoryTitle)}>Add to Basket</button>;
+                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, this.state.subCategoryTitle, "st")}>Add to Basket</button>;
             }
         } else {
-            shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, this.state.subCategoryTitle)}>Add to Basket</button>;
+            shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, this.state.subCategoryTitle, "st")}>Add to Basket</button>;
         }
 
         return(

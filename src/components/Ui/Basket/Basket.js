@@ -26,7 +26,7 @@ const Basket = (props) => {
         let alreadyInBasket = false;
         let basketItems = JSON.parse(localStorage.getItem("basketItems"));
         basketItems.forEach(basketItem => {
-            if (basketItem.subCategoryTitle === id) {
+            if (basketItem.type === id) {
                 alreadyInBasket = true;
             }
         });
@@ -36,7 +36,14 @@ const Basket = (props) => {
     function onTrainingCourseStartDateChange(date) {
         setTrainingCourseStartDate(date);
         props.trainingCourseStartdateChangehandler(format(date, 'dd/MM/yyyy'));
-        props.checkoutView("book-salon-treatments");
+        if(JSON.parse(localStorage.getItem("basketItems"))){
+            if(checkBasket("st")){
+                props.checkoutView("book-salon-treatments");
+            } else {
+                props.checkoutView("customer-details");
+            }
+        }
+        
     }
 
     function onTreatmentStartDateChange(date) {
@@ -77,11 +84,11 @@ const Basket = (props) => {
         )
     }
 
-    let buttonFunction = "book-salon-treatments";
+    let checkoutButtonFunction = "book-salon-treatments";
 
     if(JSON.parse(localStorage.getItem("basketItems"))){
-        if(checkBasket("Training Courses")){
-            buttonFunction = "book-training-courses"
+        if(checkBasket("tc")){
+            checkoutButtonFunction = "book-training-courses"
         }
     }
 
@@ -100,7 +107,7 @@ const Basket = (props) => {
                 </div>
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.toggleBasket}>Continue Shopping</button>
-                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, buttonFunction)}>Checkout</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, checkoutButtonFunction)}>Checkout</button>
                 </div>
             </div>
     

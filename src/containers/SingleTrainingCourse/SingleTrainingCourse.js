@@ -186,16 +186,16 @@ class SingleTrainingCourse extends Component {
             return alreadyInBasket;
         }
 
-        let shownButton = <button onClick={this.props.addToShoppingBasket.bind(this, this.props.match.params.id, this.state.title, this.state.price, "Training Courses")}>Add to Basket</button>;
+        let shownButton = <button onClick={this.props.addToShoppingBasket.bind(this, this.props.match.params.id, this.state.title, this.state.price, "Traning Courses", "tc")}>Add to Basket</button>;
 
         if(JSON.parse(localStorage.getItem("basketItems"))){
             if(checkBasket(Number(this.props.match.params.id))){
-                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, "Training Courses")}>In Basket</button>;
+                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, "Traning Courses", "tc")}>In Basket</button>;
             } else {
-                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, "Training Courses")}>Add to Basket</button>;
+                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, "Traning Courses", "tc")}>Add to Basket</button>;
             }
         } else {
-            shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, "Training Courses")}>Add to Basket</button>;
+            shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id), this.state.title, this.state.price, "Traning Courses", "tc")}>Add to Basket</button>;
         }
         
         return(
