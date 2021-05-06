@@ -91,3 +91,19 @@
 .calanderImagecontainer svg {
     font-size: 1.75rem;
 }
+
+.completed {
+    grid-row: 1 / 5;
+    place-self: center center;
+    width: 90%;
+    height: 90%;
+    display: grid;
+    place-items: center center;
+    grid-template-rows: 2fr 6fr 2fr;
+}
+
+.logo {
+    width: 70%;
+    display: grid;
+    place-items: center center;
+}

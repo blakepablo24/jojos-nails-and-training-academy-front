@@ -39,7 +39,7 @@ class SalonTreatmentsSubCat extends Component {
                             salonTreatmentSubCat={true} 
                             title={salonTreatmentSubCat.title}
                             price={salonTreatmentSubCat.price}
-                            type={"st"}
+                            type={CONST.ST}
                             image={salonTreatmentSubCat.image ? CONST.BASE_URL + "/storage/images/salon-treatment-images/single-salon-treatment-images/" + salonTreatmentSubCat.image : logoImage}
                             id={salonTreatmentSubCat.id}
                             key={salonTreatmentSubCat.id}

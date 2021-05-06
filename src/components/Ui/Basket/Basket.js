@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import classes from './Basket.module.css';
 import Aux from '../../../hoc/Auxilary/Auxilary';
+import CONST from '../../../constants/constants';
+import Logo from '../../../components/Ui/Navigation/Header/Logo/Logo';
 import { format } from 'date-fns';
 import { FcCalendar } from "react-icons/fc";
-import { BiLeftArrowAlt } from "react-icons/bi";
 import Backdrop from '../Backdrop/Backdrop';
 import BasketItem from './BasketItem/BasketItem';
 import enGb from 'date-fns/locale/en-GB';
@@ -37,7 +38,7 @@ const Basket = (props) => {
         setTrainingCourseStartDate(date);
         props.trainingCourseStartdateChangehandler(format(date, 'dd/MM/yyyy'));
         if(JSON.parse(localStorage.getItem("basketItems"))){
-            if(checkBasket("st")){
+            if(checkBasket(CONST.ST)){
                 props.checkoutView("book-salon-treatments");
             } else {
                 props.checkoutView("customer-details");
@@ -49,6 +50,11 @@ const Basket = (props) => {
     function onTreatmentStartDateChange(date) {
         settreatmentStartDate(date);
         props.treatmentsStartdateChangehandler(format(date, 'dd/MM/yyyy'));
+    }
+
+    function enquirySentButton() {
+        props.toggleBasket();
+        props.checkoutView(false);
     }
 
 
@@ -75,6 +81,7 @@ const Basket = (props) => {
                 key={item.id}
                 title={item.title}
                 price={item.price * item.quantity}
+                type={item.type}
                 quantity={item.quantity}
                 remove={props.remove}
                 minus={props.minus}
@@ -87,7 +94,7 @@ const Basket = (props) => {
     let checkoutButtonFunction = "book-salon-treatments";
 
     if(JSON.parse(localStorage.getItem("basketItems"))){
-        if(checkBasket("tc")){
+        if(checkBasket(CONST.TC)){
             checkoutButtonFunction = "book-training-courses"
         }
     }
@@ -256,6 +263,21 @@ const Basket = (props) => {
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.finishHandler}>Finish</button>
+                </div>
+            </div>
+    }
+
+    if(props.checkout === "completed"){
+        shownBasketInfo = 
+            <div className={attachedClasses.join(' ')}>
+                <div className={classes.completed}>
+                    <div className={classes.logo}>
+                        <Logo />
+                    </div>
+                    <h3 className="success">
+                        Thank you for your enquiry. JOJOS will get back to you as soon as possible with availability
+                    </h3>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={enquirySentButton}>Close</button>
                 </div>
             </div>
     }

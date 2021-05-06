@@ -41,7 +41,6 @@ class Layout extends Component {
         checkout: false,
         treatmentsStartdate: "",
         trainingCourseStartdate: "",
-        bookingRequestDate: "",
         bookingRequestName: "",
         bookingRequestEmail: "",
         bookingRequestNumber: "",
@@ -229,18 +228,34 @@ class Layout extends Component {
         }
 
         if(!bookingRequestNameError && !bookingRequestEmailError && !bookingRequestNumberError){
-            console.log("All Good");
-            localStorage.clear('basketItems');
-            // axios.defaults.withCredentials = true;
-            // axios.post(CONST.BASE_URL + '/api/new-salon-treatment', fd).then(response => {
-            //     this.setState({
-            //         redirectOnSuccess: <Redirect to={{
-            //             pathname: '/treatment/' + response.data.newSalonTreatment.title.replace(/\s+/g, '-').replace(/,/g,"").toLowerCase() + '/' + response.data.newSalonTreatment.id,
-            //             state: { fromRedirect: "New Salon Treatment Successfully Created" }
-            //             }}                  
-            //         />
-            //     })
-            // })
+            axios.defaults.withCredentials = true;
+            axios.post(CONST.BASE_URL + '/api/new-booking-enquiry', {
+                itemsinBasket: this.state.itemsInBasket,
+                treatmentsStartdate: this.state.treatmentsStartdate,
+                trainingCourseStartdate: this.state.trainingCourseStartdate,
+                name: this.state.bookingRequestName,
+                email: this.state.bookingRequestEmail,
+                number: this.state.bookingRequestNumber,
+                time: this.state.bookingRequestTime,
+                
+            }).then(response => {
+                console.log(response);
+                // localStorage.clear('basketItems');
+                // this.setState({
+                //     itemsInBasket: initialBasket
+                // })
+                // this.checkoutView("completed");
+            }).catch(err => {
+                if (err.response) {
+                    console.log(err.response);
+                  // client received an error response (5xx, 4xx)
+                } else if (err.request) {
+                    console.log(err.request);
+                  // client never received a response, or request never left
+                } else {
+                  // anything else
+                }
+            })
         } else {
             this.setState({
                 bookingRequestNameError: bookingRequestNameError,

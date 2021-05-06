@@ -14,7 +14,7 @@ const basketItem = (props) => {
             <div className={classes.quantityContainer}>
                 <BiMinusCircle onClick={props.minus.bind(this, props.id)} />
                 <p>{props.quantity}</p>
-                <BiPlusCircle onClick={props.plus.bind(this, props.id, props.title, props.price)}/>
+                <BiPlusCircle onClick={props.plus.bind(this, props.id, props.title, props.price, props.subCategoryTitle, props.type)}/>
             </div>
             <p>£ {props.price}</p>
             <TiDeleteOutline color="red" onClick={props.remove.bind(this, props.id)} />
