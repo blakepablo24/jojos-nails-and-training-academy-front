@@ -38,6 +38,8 @@ class Layout extends Component {
         isAuthenticated: false,
         showBasket: false,
         itemsInBasket: initialBasket,
+        basketItemST: false,
+        basketItemTC: false,
         checkout: false,
         treatmentsStartdate: "",
         trainingCourseStartdate: "",
@@ -79,6 +81,17 @@ class Layout extends Component {
         })
     }
 
+    checkBasket = (id) => {
+        let alreadyInBasket = false;
+        let basketItems = JSON.parse(localStorage.getItem("basketItems"));
+        basketItems.forEach(basketItem => {
+            if (basketItem.type === id) {
+                alreadyInBasket = true;
+            }
+        });
+        return alreadyInBasket;
+    }
+
     addToShoppingBasketHandler = (id, title, price, subCategoryTitle, type) => {
         let basketItems = [];
         let storedBasketitems = JSON.parse(localStorage.getItem("basketItems"));
@@ -108,9 +121,12 @@ class Layout extends Component {
                 type: type
             })
         }
+
         localStorage.setItem('basketItems', JSON.stringify(basketItems));
         this.setState({
-            itemsInBasket: basketItems
+            itemsInBasket: basketItems,
+            basketItemST: this.checkBasket("ST"),
+            basketItemTC: this.checkBasket("TC")
         })
     }
 
@@ -122,12 +138,16 @@ class Layout extends Component {
         if(basketItems.length < 1){
             localStorage.clear();
             this.setState({
-                itemsInBasket: basketItems
+                itemsInBasket: basketItems,
+                basketItemST: false,
+                basketItemTC: false
             })
         } else {
             localStorage.setItem('basketItems', JSON.stringify(basketItems));
             this.setState({
-                itemsInBasket: basketItems
+                itemsInBasket: basketItems,
+                basketItemST: this.checkBasket("ST"),
+                basketItemTC: this.checkBasket("TC")
             })
         }
     }
@@ -141,7 +161,9 @@ class Layout extends Component {
             basketItems[basketItem].quantity = basketItems[basketItem].quantity - 1;
             localStorage.setItem('basketItems', JSON.stringify(basketItems));
             this.setState({
-                itemsInBasket: basketItems
+                itemsInBasket: basketItems,
+                basketItemST: this.checkBasket("ST"),
+                basketItemTC: this.checkBasket("TC")
             })
         }
     }
@@ -201,7 +223,7 @@ class Layout extends Component {
         });
     }
 
-    finishHandler = (event) => {
+    finishHandler = (event, totalCost) => {
         event.preventDefault();
 
         let bookingRequestNameError = "";
@@ -230,14 +252,16 @@ class Layout extends Component {
         if(!bookingRequestNameError && !bookingRequestEmailError && !bookingRequestNumberError){
             axios.defaults.withCredentials = true;
             axios.post(CONST.BASE_URL + '/api/new-booking-enquiry', {
-                itemsinBasket: this.state.itemsInBasket,
+                itemsInBasket: this.state.itemsInBasket,
                 treatmentsStartdate: this.state.treatmentsStartdate,
                 trainingCourseStartdate: this.state.trainingCourseStartdate,
                 name: this.state.bookingRequestName,
                 email: this.state.bookingRequestEmail,
                 number: this.state.bookingRequestNumber,
                 time: this.state.bookingRequestTime,
-                
+                TC: this.state.basketItemTC,
+                ST: this.state.basketItemST,
+                totalCost: totalCost       
             }).then(response => {
                 console.log(response);
                 // localStorage.clear('basketItems');

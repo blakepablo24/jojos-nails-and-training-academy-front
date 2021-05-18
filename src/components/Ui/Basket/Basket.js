@@ -262,7 +262,7 @@ const Basket = (props) => {
                 </div>
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
-                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.finishHandler}>Finish</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={(event) => props.finishHandler(event, totalCost)}>Finish</button>
                 </div>
             </div>
     }
