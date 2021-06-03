@@ -11,6 +11,7 @@ import FlashMessage from 'react-flash-message';
 import ConfirmDelete from '../../components/Ui/ConfirmDelete/ConfirmDelete';
 import Aux from '../../hoc/Auxilary/Auxilary';
 import Latest from '../../components/Ui/Navigation/Latest/Latest';
+import { TiShoppingCart } from "react-icons/ti";
 
 class SingleSalonTreatment extends Component {
 
@@ -124,7 +125,7 @@ class SingleSalonTreatment extends Component {
 
         if(JSON.parse(localStorage.getItem("basketItems"))){
             if(checkBasket(Number(this.props.match.params.id) + CONST.ST)){
-                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.ST, this.state.title, this.state.price, this.state.subCategoryTitle, CONST.ST)}>In Basket</button>;
+                shownButton = <button className="customButton" onClick={this.props.toggleBasket}><TiShoppingCart />Continue to Basket</button>;
             } else {
                 shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.ST, this.state.title, this.state.price, this.state.subCategoryTitle, CONST.ST)}>Add to Basket</button>;
             }

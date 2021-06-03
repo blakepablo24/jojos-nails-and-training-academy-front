@@ -22,7 +22,7 @@ class LandingPage extends Component {
             this.setState({
                 images: prePopulatedImages
             })
-        })
+        });
     }
 
     nextImage = () => {

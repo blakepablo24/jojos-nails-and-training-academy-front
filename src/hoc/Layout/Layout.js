@@ -55,6 +55,17 @@ class Layout extends Component {
         trainingCourseStartdateError: ""
     }
 
+    checkBasket = (id) => {
+        let alreadyInBasket = false;
+        let basketItems = JSON.parse(localStorage.getItem("basketItems"));
+        basketItems.forEach(basketItem => {
+            if (basketItem.type === id) {
+                alreadyInBasket = true;
+            }
+        });
+        return alreadyInBasket;
+    }
+
     sideDrawerToggleHandler = () => {
         this.setState({
             showSideDrawer: !this.state.showSideDrawer,
@@ -211,6 +222,27 @@ class Layout extends Component {
         }
     }
 
+    trainingCourseErrorCheckHandler = (event) => {
+        event.preventDefault();
+        let trainingCourseStartdateError = "";
+
+        if(this.state.trainingCourseStartdate === ""){
+            trainingCourseStartdateError = <h4 className="error">Please select your preferred date</h4>;
+        }
+        
+        if(!trainingCourseStartdateError){
+            if(this.checkBasket(CONST.ST)){
+                this.checkoutView("book-salon-treatments");
+            } else {
+                this.checkoutView("customer-details");
+            }
+        } else {
+            this.setState({
+                trainingCourseStartdateError: trainingCourseStartdateError
+            })
+        }
+    }
+
     changeHandler = (event) => {
 
         const target = event.target;
@@ -264,11 +296,11 @@ class Layout extends Component {
                 totalCost: totalCost       
             }).then(response => {
                 console.log(response);
-                // localStorage.clear('basketItems');
-                // this.setState({
-                //     itemsInBasket: initialBasket
-                // })
-                // this.checkoutView("completed");
+                localStorage.clear();
+                this.setState({
+                    itemsInBasket: []
+                })
+                this.checkoutView("completed");
             }).catch(err => {
                 if (err.response) {
                     console.log(err.response);
@@ -284,7 +316,7 @@ class Layout extends Component {
             this.setState({
                 bookingRequestNameError: bookingRequestNameError,
                 bookingRequestEmailError: bookingRequestEmailError,
-                bookingRequestNumberError: bookingRequestNumberError,
+                bookingRequestNumberError: bookingRequestNumberError
             })
         }
     }
@@ -332,6 +364,7 @@ class Layout extends Component {
                     trainingCourseStartdateChangehandler={this.trainingCourseStartdateChangehandler}
                     treatmentsStartdateChangehandler={this.treatmentsStartdateChangehandler}
                     treatmentErrorCheckHandler={this.treatmentErrorCheckHandler}
+                    trainingCourseErrorCheckHandler={this.trainingCourseErrorCheckHandler}
                     changeHandler={this.changeHandler}
                     finishHandler={this.finishHandler}
                 />        
@@ -339,10 +372,10 @@ class Layout extends Component {
                 <Switch>
                     <Route path="/" exact component={LandingPage} />
                     <Route path="/training-courses" exact component={TrainingCourses}/>
-                    <Route path="/single-training-course/:id" exact render={(props) => <SingleTrainingCourse {...props} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />} />
+                    <Route path="/single-training-course/:id" exact render={(props) => <SingleTrainingCourse {...props} toggleBasket={this.basketToggleHandler} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />} />
                     <Route path="/salon-treatments" exact component={SalonTreatments} />
-                    <Route path="/category/:salonSubCategory/:id" exact render={(props) => <SalonTreatmentsSubCat {...props} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />} />
-                    <Route path="/treatment/:treatmentName/:id" exact render={(props) => <SingleSalonTreatment {...props} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />}/>
+                    <Route path="/category/:salonSubCategory/:id" exact render={(props) => <SalonTreatmentsSubCat {...props} toggleBasket={this.basketToggleHandler} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />} />
+                    <Route path="/treatment/:treatmentName/:id" exact render={(props) => <SingleSalonTreatment {...props} toggleBasket={this.basketToggleHandler} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />}/>
                     <Route path="/staff-login" exact render={(props) => <Login {...props} auth={this.state.isAuthenticated} sendData={this.getData} />}/>
                     <ProtectedRoute path="/admin" exact component={AdminLandingPage} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/new-salon-treatment" exact component={NewSalonTreatment} auth={isAuthenticated} />

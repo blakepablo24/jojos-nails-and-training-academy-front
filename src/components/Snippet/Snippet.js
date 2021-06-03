@@ -30,8 +30,8 @@ const snippet = (props) => {
         if(JSON.parse(localStorage.getItem("basketItems"))){
             if(checkBasket(props.id + props.type)){
                 shoppingControlContainer = 
-                    <div onClick={props.addToShoppingBasket.bind(this, props.id + props.type, props.title, props.price, props.subCategoryTitle, props.type)} className={classes.basketButtonContainer + " " + classes.inBasketButtonContainer}>
-                        <TiShoppingCart />In Basket
+                    <div onClick={props.toggleBasket} className={classes.basketButtonContainer + " " + classes.inBasketButtonContainer}>
+                        <TiShoppingCart />Continue to Basket
                     </div>
             } else {
                 shoppingControlContainer = 

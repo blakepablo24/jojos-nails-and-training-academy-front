@@ -35,6 +35,7 @@ class SalonTreatmentsSubCat extends Component {
                 <GoBack snippet={true} back={() => this.props.history.goBack()} />
                     {this.state.salonTreatmentsSubCat.map(salonTreatmentSubCat =>
                         <Snippet
+                            toggleBasket={this.props.toggleBasket}
                             subCategoryTitle={this.state.subCategoryTitle}
                             salonTreatmentSubCat={true} 
                             title={salonTreatmentSubCat.title}

@@ -37,6 +37,9 @@ p {
 }
 
 .customButton {
+  display: grid;
+  place-items: center center;
+  grid-auto-flow: column;
   background: var(--main-txt);
   color: var(--second-bg);
   border: none;

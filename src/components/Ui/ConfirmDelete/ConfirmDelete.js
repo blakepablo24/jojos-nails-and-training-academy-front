@@ -17,8 +17,8 @@ const confirmDelete = (props) => {
                 <h1>ARE YOU SURE?</h1>
                 <h4>This cannot be reversed!</h4>
                 <div className={styles.choice}>
-                    <button className={'main-button ' + styles.yes} onClick={props.delete}>Yes</button>
-                    <button className={'main-button ' + styles.no} onClick={props.clicked}>No</button>
+                    <button className={'customButton ' + styles.yes} onClick={props.delete}>Yes</button>
+                    <button className={'customButton ' + styles.no} onClick={props.clicked}>No</button>
                 </div>
             </div>
             </div>

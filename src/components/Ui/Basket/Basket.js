@@ -37,14 +37,6 @@ const Basket = (props) => {
     function onTrainingCourseStartDateChange(date) {
         setTrainingCourseStartDate(date);
         props.trainingCourseStartdateChangehandler(format(date, 'dd/MM/yyyy'));
-        if(JSON.parse(localStorage.getItem("basketItems"))){
-            if(checkBasket(CONST.ST)){
-                props.checkoutView("book-salon-treatments");
-            } else {
-                props.checkoutView("customer-details");
-            }
-        }
-        
     }
 
     function onTreatmentStartDateChange(date) {
@@ -135,10 +127,16 @@ const Basket = (props) => {
     }
 
     if(props.checkout === "book-training-courses"){
-        let shownDateChoice = <h3>Select Preferred Training Course Start Date</h3>;
         let today = new Date();
+        let shownDateChoiceMessage = <h3>Select Preferred Training Course Start Date</h3>;
+        let shownDateChoice = "";
         if(format(trainingCourseStartDate, 'dd/MM/yyyy') != format(today, 'dd/MM/yyyy')){
-            shownDateChoice = format(trainingCourseStartDate, 'dd/MM/yyyy')
+            shownDateChoiceMessage = <h3>Your Selected Training Course Date is:</h3>;
+            shownDateChoice =   <div>
+                                    <h2>{format(trainingCourseStartDate, 'dd/MM/yyyy')}</h2>
+                                    <br></br>
+                                    <h4>(Tap Calander to change)</h4>
+                                </div>;
         }
         shownBasketInfo = 
             <div className={attachedClasses.join(' ')}>
@@ -156,28 +154,36 @@ const Basket = (props) => {
                             customInput={
                                 <div className={classes.calanderImagecontainer}>
                                     <FcCalendar />
+                                    {shownDateChoiceMessage}
                                     {shownDateChoice}
                                 </div>
                             }
                             filterDate={isWeekday}
                         />
                     </div>
-                    {props.bookingRequestDateError}
+                    {props.trainingCourseStartdateError}
                 </div>
                 <div className={classes.totalPrice}>
                     <p>Total: £ {totalCost}</p>
                 </div>
                 <div className={classes.basketControlsContainer}>
-                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
+                <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.trainingCourseErrorCheckHandler}>Next</button>
                 </div>
             </div>
     }
 
     if(props.checkout === "book-salon-treatments"){
-        let shownDateChoice = <h3>Select Preferred Salon Treatments Date</h3>;
         let today = new Date();
+        let shownDateChoiceMessage = <h3>Select Preferred Salon Tretments Date</h3>;
+        let shownDateChoice = "";
         if(format(treatmentStartDate, 'dd/MM/yyyy') != format(today, 'dd/MM/yyyy')){
-            shownDateChoice = format(treatmentStartDate, 'dd/MM/yyyy')
+            shownDateChoiceMessage = <h3>Your Selected Salon Treatments Date is:</h3>;
+            shownDateChoice =   <div>
+                                    <h2>{format(treatmentStartDate, 'dd/MM/yyyy')}</h2>
+                                    <br></br>
+                                    <h4>(Tap Calander to change)</h4>
+                                </div>;
         }
         shownBasketInfo = 
             <div className={attachedClasses.join(' ')}>
@@ -195,6 +201,7 @@ const Basket = (props) => {
                             customInput={
                                 <div className={classes.calanderImagecontainer}>
                                     <FcCalendar />
+                                    {shownDateChoiceMessage}
                                     {shownDateChoice}
                                 </div>
                             }
