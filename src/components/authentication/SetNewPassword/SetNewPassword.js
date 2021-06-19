@@ -96,7 +96,7 @@ class Register extends Component {
                 <input type="password" name="password" placeholder="New Password" onChange={this.passwordChangeHandler}/>
                 <input type="password" name="confirm_password" placeholder="Confirm New Password" onChange={this.confirmPasswordChangeHandler}/>
                 {this.state.passwordErrorMessage}
-                <button className="main-button" onClick={this.submitHandler}>Submit</button>
+                <button className="customButton" onClick={this.submitHandler}>Submit</button>
             </form>
         )
     }

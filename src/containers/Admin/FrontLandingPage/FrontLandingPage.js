@@ -158,7 +158,7 @@ class FrontLandingPage extends Component {
     let finishAddingImageButton = "";
 
     if(this.state.imageFile){
-        finishAddingImageButton = <button className="main-button" onClick={this.addImageHandler}>Finish</button>
+        finishAddingImageButton = <button className="customButton" onClick={this.addImageHandler}>Finish</button>
     }
 
     let imageUploadControl = <ImageUpload wording="Add Image?" sendData={this.getData} flushData={this.state.addedImage}/>

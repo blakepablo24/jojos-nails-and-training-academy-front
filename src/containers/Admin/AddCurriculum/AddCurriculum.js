@@ -79,7 +79,7 @@ class AddCurriculum extends Component {
               {this.createUI()}
               <div className={classes.newCurriculumItem} onClick={this.addClick.bind(this)}><BiFolderPlus /> <h3>Add New</h3></div>
             </div>
-            <button onClick={this.handleSubmit}>Finish</button>
+            <button className="customButton" onClick={this.handleSubmit}>Finish</button>
         </div>
       );
     }

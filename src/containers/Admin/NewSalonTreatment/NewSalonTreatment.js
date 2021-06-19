@@ -192,7 +192,7 @@ class NewSalonTreatment extends Component {
                     placeholder="Description"
                 />
                 {this.state.descriptionError}
-                <button className="main-button" onClick={this.finishHandler}>Finish</button>
+                <button className="customButton" onClick={this.finishHandler}>Finish</button>
             </div>
         )
     }

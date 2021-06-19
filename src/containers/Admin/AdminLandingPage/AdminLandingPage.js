@@ -9,9 +9,9 @@ import FlashMessage from 'react-flash-message';
 class AdminLandingPage extends Component {
     
     state = {
-        salonTreatmentEnquiries: 23,
-        trainingCourseEnquiries: 18,
-        giftVoucherPurchases: 12,
+        salonTreatmentEnquiries: "",
+        trainingCourseEnquiries: "",
+        giftVoucherPurchases: "",
         trainingCourses: "",
         salonTreatments: "",
         frontPageImages: ""
@@ -23,8 +23,21 @@ class AdminLandingPage extends Component {
             this.setState({
                 trainingCourses: response.data.courses,
                 salonTreatments: response.data.treatments,
-                frontPageImages: response.data.frontPageImages
+                frontPageImages: response.data.frontPageImages,
+                salonTreatmentEnquiries: response.data.STEnquires,
+                trainingCourseEnquiries: response.data.TCEnquires,
+                giftVoucherPurchases: response.data.vouchers
             })
+        }).catch(err => {
+            if (err.response) {
+                console.log(err.response);
+              // client received an error response (5xx, 4xx)
+            } else if (err.request) {
+                console.log(err.request);
+              // client never received a response, or request never left
+            } else {
+              // anything else
+            }
         })
     }
 

@@ -62,7 +62,7 @@ class EmailVerification extends Component {
                                         value={this.state.email}
                                         onChange={this.onChangeHandler}
                                     />
-                                    <button className="main-button" onClick={this.onClickHandler}>Submit</button>
+                                    <button className="customButton" onClick={this.onClickHandler}>Submit</button>
                                     {this.state.emailErrorMessage}
                                 </div>;
 

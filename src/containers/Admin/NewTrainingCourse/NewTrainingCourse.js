@@ -181,7 +181,7 @@ class NewTrainingCourse extends Component {
                     placeholder="Any Extra information here"
                 />
                 {this.state.extrasError}
-                <button className="main-button" onClick={this.finishHandler}>Finish</button>
+                <button className="customButton" onClick={this.finishHandler}>Finish</button>
             </div>
         )
     }

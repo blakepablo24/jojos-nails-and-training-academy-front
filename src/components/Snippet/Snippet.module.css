@@ -1,7 +1,6 @@
-.Snippet {
+.Snippet, .SnippetWithBasket {
     width: 95%;
     height: 30vh;
-    display: grid;
     border: solid 1px var(--main-txt);
     border-radius: 2.5px;
     display: grid;
@@ -9,11 +8,10 @@
 }
 
 .SnippetWithBasket {
-    width: 95%;
     grid: 8fr 2fr / 1fr;
 }
 
-.Snippet img {
+.SnippetLink img {
     width: 80px;
     height: 80px;
     border-radius: 2.5px;
@@ -37,4 +35,9 @@
     display: grid;
     place-items: center center;
     height: 100%;
+    grid-template-rows: 6fr 4fr;
+}
+
+.title {
+    font-size: 100%;
 }

@@ -2,23 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import classes from './Snippet.module.css';
 import { TiShoppingCart } from "react-icons/ti";
+import FUNCTIONS from '../../functions/functions';
 
 const snippet = (props) => {
 
     let snippetLink = '/single-training-course/'; 
     let shoppingControlContainer = "";
-    let snippetStyle = classes.SnippetLink;
-
-    function checkBasket(id) {
-        let alreadyInBasket = false;
-        let basketItems = JSON.parse(localStorage.getItem("basketItems"));
-        basketItems.forEach(basketItem => {
-            if (basketItem.id === id) {
-                alreadyInBasket = true;
-            }
-        });
-        return alreadyInBasket;
-    }
+    let snippetStyle = classes.Snippet;
 
     if(props.salonTreatment) {
         snippetLink = '/category/' + props.title.replace(/\s+/g, '-').replace(/,/g,"").toLowerCase() + '/';
@@ -28,7 +18,7 @@ const snippet = (props) => {
         snippetLink = '/treatment/' + props.title.replace(/\s+/g, '-').replace(/,/g,"").toLowerCase() + '/';
         snippetStyle = classes.SnippetWithBasket;
         if(JSON.parse(localStorage.getItem("basketItems"))){
-            if(checkBasket(props.id + props.type)){
+            if(FUNCTIONS.checkBasket(props.id + props.type)){
                 shoppingControlContainer = 
                     <div onClick={props.toggleBasket} className={classes.basketButtonContainer + " " + classes.inBasketButtonContainer}>
                         <TiShoppingCart />Continue to Basket
@@ -48,10 +38,10 @@ const snippet = (props) => {
     }
 
     return (
-        <div className={classes.Snippet}>
-            <Link to={snippetLink + props.id} className={snippetStyle} >
+        <div className={snippetStyle}>
+            <Link to={snippetLink + props.id} className={classes.SnippetLink}>
                 <img src={props.image} alt="" />
-                <h3>{props.title}</h3>
+                <h3 className={classes.title}>{props.title}</h3>
             </Link>
             {shoppingControlContainer}
         </div>

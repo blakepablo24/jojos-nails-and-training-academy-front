@@ -12,6 +12,7 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import addDays from 'date-fns/addDays';
 import getDay from 'date-fns/getDay';
+import FUNCTIONS from '../../../functions/functions';
 registerLocale('en-gb', enGb);
 
 const Basket = (props) => {
@@ -22,17 +23,6 @@ const Basket = (props) => {
         const day = getDay(date);
         return day !== 0;
       };
-
-      function checkBasket(id) {
-        let alreadyInBasket = false;
-        let basketItems = JSON.parse(localStorage.getItem("basketItems"));
-        basketItems.forEach(basketItem => {
-            if (basketItem.type === id) {
-                alreadyInBasket = true;
-            }
-        });
-        return alreadyInBasket;
-    }
     
     function onTrainingCourseStartDateChange(date) {
         setTrainingCourseStartDate(date);
@@ -86,7 +76,7 @@ const Basket = (props) => {
     let checkoutButtonFunction = "book-salon-treatments";
 
     if(JSON.parse(localStorage.getItem("basketItems"))){
-        if(checkBasket(CONST.TC)){
+        if(FUNCTIONS.checkBasket(CONST.TC)){
             checkoutButtonFunction = "book-training-courses"
         }
     }
@@ -193,7 +183,6 @@ const Basket = (props) => {
                         <DatePicker
                             locale="en-gb"
                             dateFormat={'dd/MM/yyyy'}
-                            // selected={startDate}
                             placeholderText="Please select a date"
                             onChange={onTreatmentStartDateChange}
                             minDate={new Date()}

@@ -60,9 +60,7 @@ class NavigationItems extends Component {
                     <NavigationItem clicked={this.props.clicked} link="/training-courses" linkName="Training Courses"/>
                     <NavigationItem clicked={this.props.clicked} link="/salon-treatments" linkName="Salon Treatments"/>
                     <NavigationItem clicked={this.props.clicked} link="/gift-vouchers" linkName="Gift Vouchers"/>
-                    <NavigationItem clicked={this.props.clicked} link="/reviews" linkName="Reviews"/>
                     <NavigationItem clicked={this.props.clicked} link="/find-us" linkName="Find Us"/>
-                    <NavigationItem clicked={this.props.clicked} link="/about" linkName="About"/>
                 </div>
                 <div className={classes.topNavItemsContainer}>
                     {loggedInIcon}

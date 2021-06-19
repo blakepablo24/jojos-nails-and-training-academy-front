@@ -8,13 +8,15 @@ import { TiShoppingCart } from "react-icons/ti";
 const toolbar = (props) => {
 
     let userIcon = "";
-    let basketIcon = "";
+    let basketIcon = <div className={classes.basketIconContainer} onClick={props.toggleBasket}><TiShoppingCart/><p>({props.numberOfItemsInBasket})</p></div>;
     
     if(JSON.parse(localStorage.getItem("user"))){
         userIcon = <Link to="/admin"><BiUser /></Link>;
     }
 
-    basketIcon = <div className={classes.basketIconContainer} onClick={props.toggleBasket}><TiShoppingCart/><p>({props.numberOfItemsInBasket})</p></div>
+    if(props.showSideDrawer){
+        basketIcon = <div className={classes.basketIconContainer}><TiShoppingCart/><p>({props.numberOfItemsInBasket})</p></div>;
+    }
 
     return(
         <div className={classes.Toolbar}>

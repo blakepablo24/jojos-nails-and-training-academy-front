@@ -83,7 +83,7 @@ class Login extends Component {
                 <input type="email" name="email" placeholder="Email" onChange={this.emailChangeHandler}/>
                 <input type="password" name="password" placeholder="Password" onChange={this.passwordChangeHandler} />
                 {this.state.errorMessage}
-                <button className="main-button" onClick={this.loginHandler}>Login</button>
+                <button className="customButton" onClick={this.loginHandler}>Login</button>
                 <p>Forgot Your Password <Link to="/forgot-password-email">Reset here</Link></p>
             </form>
         )
