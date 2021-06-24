@@ -26,6 +26,7 @@ import CONST from '../../constants/constants';
 import EmailValidator from 'email-validator';
 import FUNCTIONS from '../../functions/functions';
 import FindUs from '../../containers/FindUs/FindUs';
+import GiftVouchers from "../../containers/GiftVouchers/GiftVouchers";
 
 let initialBasket = [];
 if(JSON.parse(localStorage.getItem("basketItems"))) {
@@ -371,6 +372,7 @@ class Layout extends Component {
                     <Route path="/category/:salonSubCategory/:id" exact render={(props) => <SalonTreatmentsSubCat {...props} toggleBasket={this.basketToggleHandler} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />} />
                     <Route path="/treatment/:treatmentName/:id" exact render={(props) => <SingleSalonTreatment {...props} toggleBasket={this.basketToggleHandler} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />}/>
                     <Route path="/find-us" exact component={FindUs}/>
+                    <Route path="/gift-vouchers" exact component={GiftVouchers}/>
                     <Route path="/staff-login" exact render={(props) => <Login {...props} auth={this.state.isAuthenticated} sendData={this.getData} />}/>
                     <ProtectedRoute path="/admin" exact component={AdminLandingPage} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/new-salon-treatment" exact component={NewSalonTreatment} auth={isAuthenticated} />

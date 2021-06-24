@@ -1,0 +1,15 @@
+.GiftVouchers {
+    grid-area: main;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center center;
+}
+
+.voucherWizardContainer {
+    width: 95%;
+}
+
+.rangeSlider {
+    width: 95%;
+}
