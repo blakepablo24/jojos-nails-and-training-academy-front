@@ -1,5 +1,5 @@
 .map {
-  width: 95%;
+  width: 90%;
 }
 .map-h2 {
     text-transform: uppercase;
@@ -10,8 +10,9 @@
   }
   
   .googleMap {
+    margin-top: 25px;
     width: 100%;
-    height: 60vh;
+    height: 40vh;
   }
   
   .pin {
@@ -27,4 +28,8 @@
   
   .pinText {
     font-size: 1.5em;
+  }
+
+  .contact {
+    margin-top: 2.5px;
   }

@@ -57,6 +57,26 @@ class Layout extends Component {
         trainingCourseStartdateError: ""
     }
 
+    // componentDidMount(){
+    //     axios.get("https://graph.facebook.com/v11.0/{295851493901352}/ratings?access_token=EAADZAxRz1m5gBAD29aH0Nbna5I8iCuP4m19sUj3B4nh9Dqx8jcKjwMkwh4Y5tjlYPabGyT6qbVGVqOOuS1CNAJ3Ub5kQoNbGJdAR2weXZBDDduvpmr3ahK1fsZCnQ68QbZBBuIDusKfdpvNTJMp89X1U4FNGh7oz3ZBCs2ZAHBhCzPfSvmxitPZAIvNAtDIKW7CpZBIqa6grA9H8cLEMnj60XZCB0P09uRNMvBD4Ep1qZCQ91EVhEmYYAn").then(response => {
+    //         console.log(response);
+    //     }).catch(function (error) {
+    //         if (error.response) {
+    //           // Request made and server responded
+    //           console.log(error.response.data);
+    //           console.log(error.response.status);
+    //           console.log(error.response.headers);
+    //         } else if (error.request) {
+    //           // The request was made but no response was received
+    //           console.log(error.request);
+    //         } else {
+    //           // Something happened in setting up the request that triggered an Error
+    //           console.log('Error', error.message);
+    //         }
+        
+    //       });
+    // }
+
     sideDrawerToggleHandler = () => {
         this.setState({
             showSideDrawer: !this.state.showSideDrawer,
@@ -298,7 +318,7 @@ class Layout extends Component {
     render() {
         let isAuthenticated = this.state.isAuthenticated;
         let sideDrawer = <SideDrawer open={this.state.showSideDrawer} clicked={this.sideDrawerToggleHandler} auth={this.state.isAuthenticated} sendData={this.getData} />;
-
+        
         if(JSON.parse(localStorage.getItem("user"))){
             isAuthenticated = true;
         }

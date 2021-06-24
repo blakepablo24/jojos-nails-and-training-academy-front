@@ -12,7 +12,11 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 
   const Map = ({ location, zoomLevel }) => (
     <div className={classes.map}>
-      <h2>Come Visit The Salon</h2>
+
+      <p>16 Allfoxton Road</p>
+      <p>Horfield, Bristol BS7 9NJ</p>
+      <p className={classes.contact}>07772 155850</p>
+      <p className={classes.contact}>info@jojosnailsbeautyandtrainingacademy.co.uk</p>
   
       <div className={classes.googleMap}>
         <GoogleMapReact
