@@ -6,6 +6,8 @@ import { BiXCircle, BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import ImageUpload from '../../../components/Ui/ImageUpload/ImageUpload';
 import ConfirmDelete from '../../../components/Ui/ConfirmDelete/ConfirmDelete';
 import FlashMessage from 'react-flash-message';
+import Loading from '../../../components/Ui/Loading/Loading';
+import Aux from '../../../hoc/Auxilary/Auxilary';
 
 class FrontLandingPage extends Component {
     
@@ -16,7 +18,8 @@ class FrontLandingPage extends Component {
         confirmDelete: "",
         open: false,
         imageChangedMessage: "",
-        addedImage: false
+        addedImage: false,
+        loading: ""
     }
 
     componentDidMount(){
@@ -46,6 +49,10 @@ class FrontLandingPage extends Component {
     }
 
     deleteImageHandler = () => {
+        this.setState({
+            confirmDelete: "",
+            loading: <Loading />
+        })
         axios.defaults.withCredentials = true;
         axios.delete(CONST.BASE_URL + '/api/delete-front-page-image/' + this.state.images[this.state.image].id).then(response => {
             let prePopulatedImages = [];
@@ -55,8 +62,8 @@ class FrontLandingPage extends Component {
                     prePopulatedImages.push({ id: db_image.id, url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
                 });
                 this.setState({
+                    loading: "",
                     images: prePopulatedImages,
-                    confirmDelete: "",
                     open: false,
                     imageChangedMessage: "Image Successfully Deleted",
                     imageFile: "",
@@ -68,6 +75,9 @@ class FrontLandingPage extends Component {
 
     addImageHandler = (event) => {
         event.preventDefault();
+        this.setState({
+            loading: <Loading />
+        })
         let fd = new FormData();    
         fd.append('newImage', this.state.imageFile, this.state.imageFile.name);
         axios.defaults.withCredentials = true;
@@ -79,6 +89,7 @@ class FrontLandingPage extends Component {
                     prePopulatedImages.push({ id: db_image.id, url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
                 });
                 this.setState({
+                    loading: "",
                     images: prePopulatedImages,
                     confirmDelete: "",
                     open: false,
@@ -164,8 +175,10 @@ class FrontLandingPage extends Component {
     let imageUploadControl = <ImageUpload wording="Add Image?" sendData={this.getData} flushData={this.state.addedImage}/>
 
     return(
+        <Aux>
+            {this.state.loading}
+            {this.state.confirmDelete}
             <div className={classes.FrontLandingPage}>
-                {this.state.confirmDelete}
                 {imageChangedMessage}
                 <BiXCircle className={"delete " + classes.deleteImageButton} onClick={this.confirmDeleteHandler} />
                 <h2>{this.state.image + 1} of {this.state.images.length}</h2>
@@ -179,6 +192,7 @@ class FrontLandingPage extends Component {
                 {imageUploadControl}
                 {finishAddingImageButton}           
             </div>
+        </Aux>
     )
 }
 }

@@ -8,6 +8,8 @@ import GoBack from '../../../components/Ui/GoBack/GoBack';
 import { BiXCircle } from "react-icons/bi";
 import ConfirmDelete from '../../../components/Ui/ConfirmDelete/ConfirmDelete';
 import FlashMessage from 'react-flash-message';
+import Loading from '../../../components/Ui/Loading/Loading';
+import Aux from '../../../hoc/Auxilary/Auxilary';
 
 class EditSalonTreatment extends Component {
 
@@ -30,7 +32,8 @@ class EditSalonTreatment extends Component {
         descriptionError: "",
         confirmDelete: "",
         open: false,
-        imageChangedMessage: ""
+        imageChangedMessage: "",
+        loading: ""
     }
 
     componentDidMount() {
@@ -63,6 +66,9 @@ class EditSalonTreatment extends Component {
     }
 
     deleteImageHandler = () => {
+        this.setState({
+            loading: <Loading />
+        })
         axios.delete(CONST.BASE_URL + '/api/delete-salon-treatment-image/' + this.props.match.params.id).then(response => {
             axios.defaults.withCredentials = true;
             axios.get(CONST.BASE_URL + '/api/get-salon-treatment-to-edit/' + this.props.match.params.id).then(response => {
@@ -151,7 +157,9 @@ class EditSalonTreatment extends Component {
         }
 
         if(!categoryError && !titleError && !imageError && !priceError && !durationError && !descriptionError){
-            
+            this.setState({
+                loading: <Loading />
+            })
             let fd = new FormData();
             fd.append('id', this.props.match.params.id);
             fd.append('category', this.state.category);
@@ -216,62 +224,66 @@ class EditSalonTreatment extends Component {
         }
         
         return(
-            <div className={classes.EditSalonTreatment}>
-                {this.state.redirectOnSuccess}
+            <Aux>
+                {this.state.loading}
                 {this.state.confirmDelete}
-                <GoBack back={() => this.props.history.goBack()} />
-                <h2>Edit This Salon Treatment</h2>
-                <select
-                    name="category"
-                    value={this.state.category}
-                    onChange={this.changeHandler}
-                >
-                    <option value="select">Select Category</option>
-                    {this.state.categories.map(category =>
-                        <option key={category.id} name={category.title} value={category.id}>{category.title}</option>
-                    )}
-                </select>
-                {this.state.categoryError}
-                <input
-                    type="text"
-                    name="title"
-                    autoComplete="off"
-                    value={this.state.title}
-                    onChange={this.changeHandler}
-                    placeholder="Title"
-                />
-                {this.state.titleError}
-                {imageChangedMessage}
-                {currentImage}
-                <input
-                    type="number"
-                    name="price"
-                    autoComplete="off"
-                    value={this.state.price}
-                    onChange={this.changeHandler}
-                    placeholder="Price"
-                />
-                {this.state.priceError}
-                <input
-                    type="number"
-                    name="duration"
-                    autoComplete="off"
-                    value={this.state.duration}
-                    onChange={this.changeHandler}
-                    placeholder="Duration in minutes"
-                />
-                {this.state.durationError}
-                <textarea
-                    type="text"
-                    name="description"
-                    autoComplete="off"
-                    value={this.state.description}
-                    onChange={this.changeHandler}
-                    placeholder="Description"
-                />
-                {this.state.descriptionError}
-                <button className="customButton" onClick={this.finishHandler}>Finish</button>
-            </div>
+                <div className={classes.EditSalonTreatment}>
+                    {this.state.redirectOnSuccess}
+                    
+                    <GoBack back={() => this.props.history.goBack()} />
+                    <h2>Edit This Salon Treatment</h2>
+                    <select
+                        name="category"
+                        value={this.state.category}
+                        onChange={this.changeHandler}
+                    >
+                        <option value="select">Select Category</option>
+                        {this.state.categories.map(category =>
+                            <option key={category.id} name={category.title} value={category.id}>{category.title}</option>
+                        )}
+                    </select>
+                    {this.state.categoryError}
+                    <input
+                        type="text"
+                        name="title"
+                        autoComplete="off"
+                        value={this.state.title}
+                        onChange={this.changeHandler}
+                        placeholder="Title"
+                    />
+                    {this.state.titleError}
+                    {imageChangedMessage}
+                    {currentImage}
+                    <input
+                        type="number"
+                        name="price"
+                        autoComplete="off"
+                        value={this.state.price}
+                        onChange={this.changeHandler}
+                        placeholder="Price"
+                    />
+                    {this.state.priceError}
+                    <input
+                        type="number"
+                        name="duration"
+                        autoComplete="off"
+                        value={this.state.duration}
+                        onChange={this.changeHandler}
+                        placeholder="Duration in minutes"
+                    />
+                    {this.state.durationError}
+                    <textarea
+                        type="text"
+                        name="description"
+                        autoComplete="off"
+                        value={this.state.description}
+                        onChange={this.changeHandler}
+                        placeholder="Description"
+                    />
+                    {this.state.descriptionError}
+                    <button className="customButton" onClick={this.finishHandler}>Finish</button>
+                </div>
+            </Aux>
         )
     }
 }

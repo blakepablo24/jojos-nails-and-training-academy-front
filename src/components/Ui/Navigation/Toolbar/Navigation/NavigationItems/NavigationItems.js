@@ -62,7 +62,7 @@ class NavigationItems extends Component {
                     <NavigationItem clicked={this.props.clicked} link="/gift-vouchers" linkName="Gift Vouchers"/>
                     <NavigationItem clicked={this.props.clicked} link="/find-us" linkName="Find Us"/>
                 </div>
-                <div className={classes.topNavItemsContainer}>
+                <div className={classes.bottomNavItemsContainer}>
                     {loggedInIcon}
                 </div>
             </div>           

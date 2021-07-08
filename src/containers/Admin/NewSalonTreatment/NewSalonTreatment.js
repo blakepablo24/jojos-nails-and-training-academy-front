@@ -5,6 +5,8 @@ import axios from 'axios';
 import CONST from '../../../constants/constants';
 import { Redirect } from 'react-router';
 import GoBack from '../../../components/Ui/GoBack/GoBack';
+import Loading from '../../../components/Ui/Loading/Loading';
+import Aux from '../../../hoc/Auxilary/Auxilary';
 
 class NewSalonTreatment extends Component {
 
@@ -23,7 +25,8 @@ class NewSalonTreatment extends Component {
         imageError: "",
         priceError: "",
         durationError: "",
-        descriptionError: ""
+        descriptionError: "",
+        loading: ""
     }
 
     componentDidMount() {
@@ -104,7 +107,9 @@ class NewSalonTreatment extends Component {
         }
 
         if(!categoryError && !titleError && !imageError && !priceError && !durationError && !descriptionError){
-            
+            this.setState({
+                loading: <Loading />
+            })
             let fd = new FormData();
             fd.append('category', this.state.category);
             fd.append('title', this.state.title);
@@ -139,61 +144,65 @@ class NewSalonTreatment extends Component {
     render(){
 
         return(
-            <div className={classes.NewSalonTreatment}>
-                {this.state.redirectOnSuccess}
-                <GoBack back={() => this.props.history.goBack()} />
-                <h2>New Salon Treatment</h2>
-                <select
-                    name="category"
-                    value={this.state.category}
-                    onChange={this.changeHandler}
-                >
-                    <option value="select">Select Category</option>
-                    {this.state.categories.map(category =>
-                        <option key={category.id} name={category.title} value={category.id}>{category.title}</option>
-                    )}
-                </select>
-                {this.state.categoryError}
-                <input
-                    type="text"
-                    name="title"
-                    autoComplete="off"
-                    value={this.state.title}
-                    onChange={this.changeHandler}
-                    placeholder="Title"
-                />
-                {this.state.titleError}
-                <ImageUpload wording="Add Image?" sendData={this.getData} />
-                {this.state.imageError}
-                <input
-                    type="number"
-                    name="price"
-                    autoComplete="off"
-                    value={this.state.price}
-                    onChange={this.changeHandler}
-                    placeholder="Price"
-                />
-                {this.state.priceError}
-                <input
-                    type="number"
-                    name="duration"
-                    autoComplete="off"
-                    value={this.state.duration}
-                    onChange={this.changeHandler}
-                    placeholder="Duration in minutes"
-                />
-                {this.state.durationError}
-                <textarea
-                    type="text"
-                    name="description"
-                    autoComplete="off"
-                    value={this.state.description}
-                    onChange={this.changeHandler}
-                    placeholder="Description"
-                />
-                {this.state.descriptionError}
-                <button className="customButton" onClick={this.finishHandler}>Finish</button>
-            </div>
+            <Aux>
+                {this.state.loading}
+                <div className={classes.NewSalonTreatment}>
+                    
+                    {this.state.redirectOnSuccess}
+                    <GoBack back={() => this.props.history.goBack()} />
+                    <h2>New Salon Treatment</h2>
+                    <select
+                        name="category"
+                        value={this.state.category}
+                        onChange={this.changeHandler}
+                    >
+                        <option value="select">Select Category</option>
+                        {this.state.categories.map(category =>
+                            <option key={category.id} name={category.title} value={category.id}>{category.title}</option>
+                        )}
+                    </select>
+                    {this.state.categoryError}
+                    <input
+                        type="text"
+                        name="title"
+                        autoComplete="off"
+                        value={this.state.title}
+                        onChange={this.changeHandler}
+                        placeholder="Title"
+                    />
+                    {this.state.titleError}
+                    <ImageUpload wording="Add Image?" sendData={this.getData} />
+                    {this.state.imageError}
+                    <input
+                        type="number"
+                        name="price"
+                        autoComplete="off"
+                        value={this.state.price}
+                        onChange={this.changeHandler}
+                        placeholder="Price"
+                    />
+                    {this.state.priceError}
+                    <input
+                        type="number"
+                        name="duration"
+                        autoComplete="off"
+                        value={this.state.duration}
+                        onChange={this.changeHandler}
+                        placeholder="Duration in minutes"
+                    />
+                    {this.state.durationError}
+                    <textarea
+                        type="text"
+                        name="description"
+                        autoComplete="off"
+                        value={this.state.description}
+                        onChange={this.changeHandler}
+                        placeholder="Description"
+                    />
+                    {this.state.descriptionError}
+                    <button className="customButton" onClick={this.finishHandler}>Finish</button>
+                </div>
+            </Aux>
         )
     }
 }

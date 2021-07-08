@@ -3,17 +3,18 @@
     height: 100%;
     display: grid;
     place-items: center center;
-    grid-template-rows: 2fr 7fr 1fr;
+    grid-template-rows: 2fr 6fr 2fr;
 }
 
 .topNavItemsContainer, .bottomNavItemsContainer {
     place-self: start center;
     width: 100%;
-    height: 65%;
+    height: 85%;
     display: grid;
     place-items: center center;
 }
 
 .bottomNavItemsContainer {
+    place-items: start center;
     height: 100%;
 }

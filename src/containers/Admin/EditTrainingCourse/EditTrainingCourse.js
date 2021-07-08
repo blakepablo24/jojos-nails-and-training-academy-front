@@ -8,6 +8,8 @@ import GoBack from '../../../components/Ui/GoBack/GoBack';
 import { BiXCircle } from "react-icons/bi";
 import ConfirmDelete from '../../../components/Ui/ConfirmDelete/ConfirmDelete';
 import FlashMessage from 'react-flash-message';
+import Loading from '../../../components/Ui/Loading/Loading';
+import Aux from '../../../hoc/Auxilary/Auxilary';
 
 class EditTrainingCourse extends Component {
 
@@ -28,7 +30,8 @@ class EditTrainingCourse extends Component {
         image: "",
         confirmDelete: "",
         open: false,
-        imageChangedMessage: ""
+        imageChangedMessage: "",
+        loading: ""
     }
 
     componentDidMount(){
@@ -60,6 +63,9 @@ class EditTrainingCourse extends Component {
     }
 
     deleteImageHandler = () => {
+        this.setState({
+            loading: <Loading />
+        })
         axios.delete(CONST.BASE_URL + '/api/delete-training-course-image/' + this.props.match.params.id).then(response => {
                 axios.defaults.withCredentials = true;
                 axios.get(CONST.BASE_URL + '/api/get-training-course-to-edit/' + this.props.match.params.id).then(response => {
@@ -136,6 +142,9 @@ class EditTrainingCourse extends Component {
         }
 
         if(!durationError && !titleError && !teacherStudentRatioError && !priceError && !extrasError){
+            this.setState({
+                loading: <Loading />
+            })
             let fd = new FormData();
             fd.append('id', this.props.match.params.id);
             fd.append('title', this.state.title);
@@ -200,67 +209,70 @@ class EditTrainingCourse extends Component {
         }
 
         return(
-            <div className={classes.EditTrainingCourse}>
-                {this.state.redirectOnSuccess}
+            <Aux>
+                {this.state.loading}
                 {this.state.confirmDelete}
-                <GoBack back={() => this.props.history.goBack()} />
-                <h2>New Training Course</h2>
-                <input
-                    type="text"
-                    name="title"
-                    autoComplete="off"
-                    value={this.state.title}
-                    onChange={this.changeHandler}
-                    placeholder="Title"
-                />
-                {this.state.titleError}
-                {imageChangedMessage}
-                {currentImage}
-                <input
-                    type="number"
-                    name="price"
-                    autoComplete="off"
-                    value={this.state.price}
-                    onChange={this.changeHandler}
-                    placeholder="Price"
-                />
-                {this.state.priceError}
-                <select
-                    name="duration"
-                    value={this.state.duration}
-                    onChange={this.changeHandler}
-                >
-                    <option value="select">Select Duration</option>
-                    <option value="Half Day">Half Day</option>
-                    <option value="1 Day">1 Day</option>
-                    <option value="2 Days">2 Days</option>
-                    <option value="3 Days">3 Days</option>
-                    <option value="4 Days">4 Days</option>
-                    <option value="5 Days">5 Days</option>
-                </select>
-                {this.state.durationError}
-                <select
-                    name="teacherStudentRatio"
-                    value={this.state.teacherStudentRatio}
-                    onChange={this.changeHandler}
-                >
-                    <option value="select">Select Ratio</option>
-                    <option value="One-to-One">One-to-One</option>
-                    <option value="upto One-to-Two">Upto-One-to-Two</option>
-                    <option value="upto One-to-Three">Upto-One-to-Three</option>
-                </select>
-                {this.state.teacherStudentRatioError}
-                <textarea
-                    type="text"
-                    name="extras"
-                    autoComplete="off"
-                    value={this.state.extras}
-                    onChange={this.changeHandler}
-                    placeholder="Any Extra information here"
-                />
-                {this.state.extrasError}
-                <button className="customButton" onClick={this.finishHandler}>Finish</button>
-            </div>
+                <div className={classes.EditTrainingCourse}>
+                    {this.state.redirectOnSuccess}
+                    <GoBack back={() => this.props.history.goBack()} />
+                    <h2>New Training Course</h2>
+                    <input
+                        type="text"
+                        name="title"
+                        autoComplete="off"
+                        value={this.state.title}
+                        onChange={this.changeHandler}
+                        placeholder="Title"
+                    />
+                    {this.state.titleError}
+                    {imageChangedMessage}
+                    {currentImage}
+                    <input
+                        type="number"
+                        name="price"
+                        autoComplete="off"
+                        value={this.state.price}
+                        onChange={this.changeHandler}
+                        placeholder="Price"
+                    />
+                    {this.state.priceError}
+                    <select
+                        name="duration"
+                        value={this.state.duration}
+                        onChange={this.changeHandler}
+                    >
+                        <option value="select">Select Duration</option>
+                        <option value="Half Day">Half Day</option>
+                        <option value="1 Day">1 Day</option>
+                        <option value="2 Days">2 Days</option>
+                        <option value="3 Days">3 Days</option>
+                        <option value="4 Days">4 Days</option>
+                        <option value="5 Days">5 Days</option>
+                    </select>
+                    {this.state.durationError}
+                    <select
+                        name="teacherStudentRatio"
+                        value={this.state.teacherStudentRatio}
+                        onChange={this.changeHandler}
+                    >
+                        <option value="select">Select Ratio</option>
+                        <option value="One-to-One">One-to-One</option>
+                        <option value="upto One-to-Two">Upto-One-to-Two</option>
+                        <option value="upto One-to-Three">Upto-One-to-Three</option>
+                    </select>
+                    {this.state.teacherStudentRatioError}
+                    <textarea
+                        type="text"
+                        name="extras"
+                        autoComplete="off"
+                        value={this.state.extras}
+                        onChange={this.changeHandler}
+                        placeholder="Any Extra information here"
+                    />
+                    {this.state.extrasError}
+                    <button className="customButton" onClick={this.finishHandler}>Finish</button>
+                </div>
+            </Aux>
         )
     }
 }
