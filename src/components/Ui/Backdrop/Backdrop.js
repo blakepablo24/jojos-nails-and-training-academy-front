@@ -9,6 +9,10 @@ const backdrop = (props) => {
         showBackdrop = classes.full;
     }
 
+    if(props.loading) {
+        showBackdrop = classes.loading;
+    }
+
     if(props.open){
         showBackdrop = classes.show;
     }

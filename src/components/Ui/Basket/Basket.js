@@ -73,11 +73,27 @@ const Basket = (props) => {
         )
     }
 
-    let checkoutButtonFunction = "book-salon-treatments";
+    function checkIfGiftVouchersInBasket() {
+        if (FUNCTIONS.checkBasket("gift_voucher")){
+            props.checkoutView("complete-gift-voucher");
+        } else {
+            checkIfTrainingCoursesInBasket();
+        }
+    }
 
-    if(JSON.parse(localStorage.getItem("basketItems"))){
+    function checkIfTrainingCoursesInBasket() {
         if(FUNCTIONS.checkBasket(CONST.TC)){
-            checkoutButtonFunction = "book-training-courses"
+            props.checkoutView("book-training-courses");
+        } else {
+            checkIfSalonTreatmentsInBasket();
+        }
+    }
+
+    function checkIfSalonTreatmentsInBasket() {
+        if(FUNCTIONS.checkBasket(CONST.ST)){
+            props.checkoutView("book-salon-treatments");
+        } else {
+            props.checkoutView("customer-details");
         }
     }
 
@@ -96,7 +112,7 @@ const Basket = (props) => {
                 </div>
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.toggleBasket}>Continue Shopping</button>
-                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, checkoutButtonFunction)}>Checkout</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={checkIfGiftVouchersInBasket}>Checkout</button>
                 </div>
             </div>
     
@@ -165,7 +181,7 @@ const Basket = (props) => {
 
     if(props.checkout === "book-salon-treatments"){
         let today = new Date();
-        let shownDateChoiceMessage = <h3>Select Preferred Salon Tretments Date</h3>;
+        let shownDateChoiceMessage = <h3>Select Preferred Salon Treatments Date</h3>;
         let shownDateChoice = "";
         if(format(treatmentStartDate, 'dd/MM/yyyy') != format(today, 'dd/MM/yyyy')){
             shownDateChoiceMessage = <h3>Your Selected Salon Treatments Date is:</h3>;
@@ -216,6 +232,27 @@ const Basket = (props) => {
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.treatmentErrorCheckHandler}>Next</button>
+                </div>
+            </div>
+    }
+
+    if(props.checkout === "complete-gift-voucher"){
+        shownBasketInfo = 
+            <div className={attachedClasses.join(' ')}>
+                <h3 className={classes.title}>Your Gift Voucher</h3>
+                <div className={classes.basketContainer}>
+                    <div className={classes.calanderContainer}>
+                        <p>Vouchers are to be paid via bank transfer</p>
+                        <p>You will receive account details via email from Jojo's once you have completed your enquiry</p>
+                        <p>You will then receive Your E-Voucher through email</p>
+                    </div>
+                </div>
+                <div className={classes.totalPrice}>
+                    <p>Total: £ {totalCost}</p>
+                </div>
+                <div className={classes.basketControlsContainer}>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={checkIfTrainingCoursesInBasket}>Next</button>
                 </div>
             </div>
     }

@@ -27,6 +27,7 @@ import EmailValidator from 'email-validator';
 import FUNCTIONS from '../../functions/functions';
 import FindUs from '../../containers/FindUs/FindUs';
 import GiftVouchers from "../../containers/GiftVouchers/GiftVouchers";
+import Loading from '../../components/Ui/Loading/Loading';
 
 let initialBasket = [];
 if(JSON.parse(localStorage.getItem("basketItems"))) {
@@ -43,6 +44,7 @@ class Layout extends Component {
         itemsInBasket: initialBasket,
         basketItemST: false,
         basketItemTC: false,
+        basketItemVoucher: false,
         checkout: false,
         treatmentsStartdate: "",
         trainingCourseStartdate: "",
@@ -55,28 +57,9 @@ class Layout extends Component {
         bookingRequestNumberError: "",
         bookingRequestTimeError: "",
         treatmentsStartdateError: "",
-        trainingCourseStartdateError: ""
+        trainingCourseStartdateError: "",
+        loading: ""
     }
-
-    // componentDidMount(){
-    //     axios.get("https://graph.facebook.com/v11.0/{295851493901352}/ratings?access_token=EAADZAxRz1m5gBAD29aH0Nbna5I8iCuP4m19sUj3B4nh9Dqx8jcKjwMkwh4Y5tjlYPabGyT6qbVGVqOOuS1CNAJ3Ub5kQoNbGJdAR2weXZBDDduvpmr3ahK1fsZCnQ68QbZBBuIDusKfdpvNTJMp89X1U4FNGh7oz3ZBCs2ZAHBhCzPfSvmxitPZAIvNAtDIKW7CpZBIqa6grA9H8cLEMnj60XZCB0P09uRNMvBD4Ep1qZCQ91EVhEmYYAn").then(response => {
-    //         console.log(response);
-    //     }).catch(function (error) {
-    //         if (error.response) {
-    //           // Request made and server responded
-    //           console.log(error.response.data);
-    //           console.log(error.response.status);
-    //           console.log(error.response.headers);
-    //         } else if (error.request) {
-    //           // The request was made but no response was received
-    //           console.log(error.request);
-    //         } else {
-    //           // Something happened in setting up the request that triggered an Error
-    //           console.log('Error', error.message);
-    //         }
-        
-    //       });
-    // }
 
     sideDrawerToggleHandler = () => {
         this.setState({
@@ -108,6 +91,15 @@ class Layout extends Component {
         let basketItems = [];
         let storedBasketitems = JSON.parse(localStorage.getItem("basketItems"));
         let basketItem = "";
+
+        if(id === "voucher"){
+            let time = new Date()
+            let hours = time.getHours();
+            let minutes = time.getMinutes();
+            let seconds = time.getSeconds();
+            id = "voucher" + hours + minutes + seconds;
+        }
+
         if(storedBasketitems !== null) {
             basketItems = storedBasketitems;
             basketItem = basketItems.findIndex(result => result.id === id)
@@ -138,7 +130,8 @@ class Layout extends Component {
         this.setState({
             itemsInBasket: basketItems,
             basketItemST: FUNCTIONS.checkBasket("ST"),
-            basketItemTC: FUNCTIONS.checkBasket("TC")
+            basketItemTC: FUNCTIONS.checkBasket("TC"),
+            basketItemVoucher: FUNCTIONS.checkBasket("gift_voucher")
         })
     }
 
@@ -152,14 +145,16 @@ class Layout extends Component {
             this.setState({
                 itemsInBasket: basketItems,
                 basketItemST: false,
-                basketItemTC: false
+                basketItemTC: false,
+                basketItemVoucher: false,
             })
         } else {
             localStorage.setItem('basketItems', JSON.stringify(basketItems));
             this.setState({
                 itemsInBasket: basketItems,
                 basketItemST: FUNCTIONS.checkBasket("ST"),
-                basketItemTC: FUNCTIONS.checkBasket("TC")
+                basketItemTC: FUNCTIONS.checkBasket("TC"),
+                basketItemVoucher: FUNCTIONS.checkBasket("gift_voucher")
             })
         }
     }
@@ -283,6 +278,10 @@ class Layout extends Component {
         }
 
         if(!bookingRequestNameError && !bookingRequestEmailError && !bookingRequestNumberError){
+            this.setState({
+                loading: <Loading />
+            })
+            axios.defaults.withCredentials = true;
             axios.post(CONST.BASE_URL + '/api/new-booking-enquiry', {
                 itemsInBasket: this.state.itemsInBasket,
                 treatmentsStartdate: this.state.treatmentsStartdate,
@@ -293,6 +292,7 @@ class Layout extends Component {
                 time: this.state.bookingRequestTime,
                 TC: this.state.basketItemTC,
                 ST: this.state.basketItemST,
+                gift_voucher: this.state.basketItemVoucher,
                 totalCost: totalCost       
             }).then(response => {
                 localStorage.clear();
@@ -304,9 +304,24 @@ class Layout extends Component {
                     bookingRequestEmail: "",
                     bookingRequestNumber: "",
                     bookingRequestTime: "",
+                    loading: ""
                 })
                 this.checkoutView("completed");
-            })
+            }).catch(function (error) {
+                if (error.response) {
+                  // Request made and server responded
+                  console.log(error.response.data);
+                  console.log(error.response.status);
+                  console.log(error.response.headers);
+                } else if (error.request) {
+                  // The request was made but no response was received
+                  console.log(error.request);
+                } else {
+                  // Something happened in setting up the request that triggered an Error
+                  console.log('Error', error.message);
+                }
+            
+              });
         } else {
             this.setState({
                 bookingRequestNameError: bookingRequestNameError,
@@ -333,6 +348,7 @@ class Layout extends Component {
 
         return(
             <div className={classes.Layout}>
+                {this.state.loading}
                 <Toolbar showSideDrawer={this.state.showSideDrawer} numberOfItemsInBasket={this.state.itemsInBasket.length} toggleBasket={this.basketToggleHandler} menu={this.state.menu} clicked={this.sideDrawerToggleHandler} auth={isAuthenticated} />
                 {sideDrawer}
                 <Basket
@@ -372,7 +388,7 @@ class Layout extends Component {
                     <Route path="/category/:salonSubCategory/:id" exact render={(props) => <SalonTreatmentsSubCat {...props} toggleBasket={this.basketToggleHandler} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />} />
                     <Route path="/treatment/:treatmentName/:id" exact render={(props) => <SingleSalonTreatment {...props} toggleBasket={this.basketToggleHandler} addToShoppingBasket={this.addToShoppingBasketHandler} auth={isAuthenticated} />}/>
                     <Route path="/find-us" exact component={FindUs}/>
-                    <Route path="/gift-vouchers" exact component={GiftVouchers}/>
+                    <Route path="/gift-vouchers" exact render={(props) => <GiftVouchers {...props} addToShoppingBasket={this.addToShoppingBasketHandler} />}/>
                     <Route path="/staff-login" exact render={(props) => <Login {...props} auth={this.state.isAuthenticated} sendData={this.getData} />}/>
                     <ProtectedRoute path="/admin" exact component={AdminLandingPage} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/new-salon-treatment" exact component={NewSalonTreatment} auth={isAuthenticated} />

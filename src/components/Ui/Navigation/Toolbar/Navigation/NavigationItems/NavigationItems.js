@@ -47,9 +47,9 @@ class NavigationItems extends Component {
         let loggedInIcon = "";
 
         if(JSON.parse(localStorage.getItem("user"))){
-            loggedInIcon = <NavigationItem clicked={this.logoutHandler} link="" linkName="Logout"/>
+            loggedInIcon = <NavigationItem logInOrOut={true} clicked={this.logoutHandler} link="" linkName="Logout"/>
         } else {
-            loggedInIcon = <NavigationItem clicked={this.props.clicked} link="/staff-login" linkName="Staff Login"/>
+            loggedInIcon = <NavigationItem logInOrOut={true} clicked={this.props.clicked} link="/staff-login" linkName="Staff Login"/>
         }
 
         return(
@@ -61,8 +61,6 @@ class NavigationItems extends Component {
                     <NavigationItem clicked={this.props.clicked} link="/salon-treatments" linkName="Salon Treatments"/>
                     <NavigationItem clicked={this.props.clicked} link="/gift-vouchers" linkName="Gift Vouchers"/>
                     <NavigationItem clicked={this.props.clicked} link="/find-us" linkName="Find Us"/>
-                </div>
-                <div className={classes.bottomNavItemsContainer}>
                     {loggedInIcon}
                 </div>
             </div>           

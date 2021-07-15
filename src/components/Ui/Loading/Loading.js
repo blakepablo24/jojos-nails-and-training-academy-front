@@ -6,7 +6,7 @@ import Aux from '../../../hoc/Auxilary/Auxilary';
 const Loading = (props) => {
     return (
         <Aux>
-            <Backdrop full={true} />
+            <Backdrop loading ={true} full={true} />
             <div className={classes.loadingContainer}>
                 <div className={classes.loading}>
                     <h3>Please Wait</h3>

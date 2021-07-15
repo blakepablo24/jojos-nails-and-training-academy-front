@@ -3,7 +3,7 @@
     height: 100%;
     display: grid;
     place-items: center center;
-    grid-template-rows: 2fr 6fr 2fr;
+    grid-template-rows: 2fr 6fr;
 }
 
 .topNavItemsContainer, .bottomNavItemsContainer {
@@ -12,9 +12,4 @@
     height: 85%;
     display: grid;
     place-items: center center;
-}
-
-.bottomNavItemsContainer {
-    place-items: start center;
-    height: 100%;
 }

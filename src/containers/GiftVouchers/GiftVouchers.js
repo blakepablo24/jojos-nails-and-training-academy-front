@@ -3,6 +3,7 @@ import classes from "./GiftVouchers.module.css";
 import Latest from '../../components/Ui/Navigation/Latest/Latest';
 import Aux from '../../hoc/Auxilary/Auxilary';
 import Logo from "../../components/Ui/Navigation/Header/Logo/Logo";
+import FlashMessage from 'react-flash-message';
 
 class GiftVouchers extends Component {
 
@@ -10,7 +11,9 @@ class GiftVouchers extends Component {
         value: 25,
         to: "",
         from: "",
-        stage: 1
+        stage: 1,
+        message: false,
+        giftVoucherMessage: ""
     }
 
     onChangeHandler = (event) => {
@@ -31,8 +34,26 @@ class GiftVouchers extends Component {
         })
     }
 
-    render(){
+    resetStateHandler = () => {
+        this.setState({
+            message: false
+        })
+    }
 
+    addVoucherToBasketHandler = (id, title, price, subCategoryTitle, type) => {
+        this.props.addToShoppingBasket(id, title, price, subCategoryTitle, type);
+        this.setState({
+            value: 25,
+            to: "",
+            from: "",
+            giftVoucherMessage: "",
+            message: true
+        })
+        this.changeToPreviewHandler(1);
+        setTimeout(() => {this.setState({message: false})}, 5000)
+    }
+
+    render(){
         let instructions = <p className={classes.instructions}>&#129044; Use this slider to select your voucher value</p>;
 
         if(this.state.value !== 25){
@@ -73,6 +94,14 @@ class GiftVouchers extends Component {
                                         onChange={this.onChangeHandler}
                                         className={classes.voucherNameInput}
                                     />
+                                    <input
+                                        type="text"
+                                        value={this.state.giftVoucherMessage}
+                                        name="giftVoucherMessage" 
+                                        placeholder="Enter Personalized Message?" 
+                                        onChange={this.onChangeHandler}
+                                        className={classes.voucherNameInput}
+                                    />
                                 </div>
                             </div>
 
@@ -85,9 +114,15 @@ class GiftVouchers extends Component {
         if(this.state.stage === 2) {
             button =    <div className={classes.buttonContainer}>
                             <button className="customButton" onClick={this.changeToPreviewHandler.bind(this, 1)}>Back</button>
-                            <button className="customButton" onClick={this.changeToPreviewHandler.bind(this, 3)}>Buy Now</button>
+                            <button className="customButton" onClick={this.addVoucherToBasketHandler.bind(this, "voucher", "From " + this.state.from + " to " + this.state.to + " message " + this.state.giftVoucherMessage, this.state.value, "Gift Voucher", "gift_voucher")}>Add To Basket</button>
                         </div>
         }             
+
+        let giftVoucherMessage = <h4>A Gift for you</h4>
+
+        if(this.state.giftVoucherMessage){
+            giftVoucherMessage = this.state.giftVoucherMessage;
+        }
 
         if(this.state.stage === 2){
             voucherGui =   <div className={classes.voucherExample}>
@@ -99,8 +134,22 @@ class GiftVouchers extends Component {
                                 <h3 className={classes.voucherName}>{this.state.to}</h3>
                                 <h3>from</h3>
                                 <h3 className={classes.voucherName}>{this.state.from}</h3>
+                                <h3 className={classes.voucherMessage}>{giftVoucherMessage}</h3>
                                 <p className={classes.voucherCode}>Code: XXXX-XXXX-XXXX</p>
+                                <p className={classes.voucherCode}>This is an example Voucher</p>
                             </div>
+        }
+
+        let successMsg = "";
+
+        if(this.state.message){
+            successMsg = (
+                <FlashMessage duration={5000}>
+                    <div className="load-msg">
+                        <h3 className="success">Voucher added to basket. Add another?</h3>
+                    </div>
+                </FlashMessage>
+            );
         }
 
         return(
@@ -109,6 +158,7 @@ class GiftVouchers extends Component {
                 <div className={classes.GiftVouchers}>
                     {voucherGui}
                     {button}
+                    {successMsg}
                 </div>
             </Aux>
         )

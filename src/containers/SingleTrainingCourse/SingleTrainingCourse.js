@@ -177,16 +177,16 @@ class SingleTrainingCourse extends Component {
             }
         }
 
-        let shownButton = <button onClick={this.props.addToShoppingBasket.bind(this, this.props.match.params.id + CONST.TC, this.state.title, this.state.price, "Training Courses", CONST.TC)}>Add to Basket</button>;
+        let shownButton = "";
 
         if(JSON.parse(localStorage.getItem("basketItems"))){
             if(FUNCTIONS.checkBasket(Number(this.props.match.params.id) + CONST.TC, "id")){
-                shownButton = <button className="customButton" onClick={this.props.toggleBasket}><TiShoppingCart />Continue to Basket</button>;
+                shownButton = <button className={classes.floatButton + " customButton"} onClick={this.props.toggleBasket}><TiShoppingCart />Continue to Basket</button>;
             } else {
-                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.TC, this.state.title, this.state.price, "Training Courses", CONST.TC)}>Add to Basket</button>;
+                shownButton = <button className={classes.floatButton + " customButton"} onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.TC, this.state.title, this.state.price, "Training Courses", CONST.TC)}>Add to Basket</button>;
             }
         } else {
-            shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.TC, this.state.title, this.state.price, "Training Courses", CONST.TC)}>Add to Basket</button>;
+            shownButton = <button className={classes.floatButton + " customButton"} onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.TC, this.state.title, this.state.price, "Training Courses", CONST.TC)}>Add to Basket</button>;
         }
         
         return(

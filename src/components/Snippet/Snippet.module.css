@@ -5,7 +5,20 @@
     border-radius: 2.5px;
     display: grid;
     place-items: center center;
+    grid-column: span 2;
 }
+
+/* .Snippet:last-child:nth-child(2n - 1), .SnippetWithBasket:last-child:nth-child(2n - 1) {
+    grid-column-end: -2;
+}
+
+.Snippet:nth-last-child(2):nth-child(2n + 1), .SnippetWithBasket:nth-last-child(2):nth-child(2n + 1) {
+    grid-column-end: 4;
+}
+
+.Snippet:last-child:nth-child(3n - 2), .SnippetWithBasket:last-child:nth-child(3n - 2) {
+    grid-column-end: 5;
+} */
 
 .SnippetWithBasket {
     grid: 8fr 2fr / 1fr;

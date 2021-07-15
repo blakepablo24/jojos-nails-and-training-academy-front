@@ -1,4 +1,4 @@
-.Backdrop, .show, .full {
+.Backdrop, .show, .full, .loading {
     position: fixed;
     top: 0;
     left: 0;
@@ -7,6 +7,12 @@
     margin-top: 7.5vh;
     z-index: 9;
     background: rgb(0, 0, 0, 0.5);
+}
+
+.loading {
+    width: 100%;
+    margin-top: 0;
+    z-index: 10;
 }
 
 .show {
