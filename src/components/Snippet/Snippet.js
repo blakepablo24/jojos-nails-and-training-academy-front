@@ -25,13 +25,13 @@ const snippet = (props) => {
                     </div>
             } else {
                 shoppingControlContainer = 
-                    <div onClick={props.addToShoppingBasket.bind(this, props.id + props.type, props.title, props.price, props.subCategoryTitle, props.type)} className={classes.basketButtonContainer}>
+                    <div onClick={props.addToShoppingBasket.bind(this, props.id + props.type, "", "", props.title, props.price, props.subCategoryTitle, props.type)} className={classes.basketButtonContainer}>
                         <TiShoppingCart />Add to Basket
                     </div>
             }
         } else {
             shoppingControlContainer = 
-                <div onClick={props.addToShoppingBasket.bind(this, props.id + props.type, props.title, props.price, props.subCategoryTitle, props.type)} className={classes.basketButtonContainer}>
+                <div onClick={props.addToShoppingBasket.bind(this, props.id + props.type, "", "", props.title, props.price, props.subCategoryTitle, props.type)} className={classes.basketButtonContainer}>
                     <TiShoppingCart />Add to Basket
                 </div>
         }

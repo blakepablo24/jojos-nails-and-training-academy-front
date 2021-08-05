@@ -5,6 +5,7 @@
     display: grid;
     place-items: center center;
     grid-template-rows: 7fr 3fr;
+    padding-top: 1vh;
 }
 
 .voucherWizardContainer {
@@ -39,6 +40,7 @@
 .rangeSlider::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
+    margin-left: 1px;
     width: 40px; /* Set a specific slider handle width */
     height: 40px; /* Slider handle height */
     border-radius: 25%;

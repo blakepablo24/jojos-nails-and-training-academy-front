@@ -40,8 +40,8 @@ class GiftVouchers extends Component {
         })
     }
 
-    addVoucherToBasketHandler = (id, title, price, subCategoryTitle, type) => {
-        this.props.addToShoppingBasket(id, title, price, subCategoryTitle, type);
+    addVoucherToBasketHandler = (id, to, from, title, price, subCategoryTitle, type) => {
+        this.props.addToShoppingBasket(id, to, from, title, price, subCategoryTitle, type);
         this.setState({
             value: 25,
             to: "",
@@ -114,7 +114,7 @@ class GiftVouchers extends Component {
         if(this.state.stage === 2) {
             button =    <div className={classes.buttonContainer}>
                             <button className="customButton" onClick={this.changeToPreviewHandler.bind(this, 1)}>Back</button>
-                            <button className="customButton" onClick={this.addVoucherToBasketHandler.bind(this, "voucher", "From " + this.state.from + " to " + this.state.to + " message " + this.state.giftVoucherMessage, this.state.value, "Gift Voucher", "gift_voucher")}>Add To Basket</button>
+                            <button className="customButton" onClick={this.addVoucherToBasketHandler.bind(this, "voucher", this.state.to, this.state.from, this.state.giftVoucherMessage, this.state.value, "Gift Voucher", "gift_voucher")}>Add To Basket</button>
                         </div>
         }             
 

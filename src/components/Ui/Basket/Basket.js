@@ -61,6 +61,8 @@ const Basket = (props) => {
             <BasketItem
                 id={item.id}
                 key={item.id}
+                to={item.to}
+                from={item.from}
                 title={item.title}
                 price={item.price * item.quantity}
                 type={item.type}

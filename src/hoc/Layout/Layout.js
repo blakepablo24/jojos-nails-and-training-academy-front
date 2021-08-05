@@ -87,7 +87,7 @@ class Layout extends Component {
         })
     }
 
-    addToShoppingBasketHandler = (id, title, price, subCategoryTitle, type) => {
+    addToShoppingBasketHandler = (id, to, from, title, price, subCategoryTitle, type) => {
         let basketItems = [];
         let storedBasketitems = JSON.parse(localStorage.getItem("basketItems"));
         let basketItem = "";
@@ -108,6 +108,8 @@ class Layout extends Component {
             } else {
                 basketItems.push({
                     id: id,
+                    to: to,
+                    from: from,
                     title: title,
                     price: price,
                     subCategoryTitle: subCategoryTitle,
@@ -118,6 +120,8 @@ class Layout extends Component {
         } else {
             basketItems.push({
                 id: id,
+                to: to,
+                from: from,
                 title: title,
                 price: price,
                 subCategoryTitle: subCategoryTitle,
@@ -295,6 +299,7 @@ class Layout extends Component {
                 gift_voucher: this.state.basketItemVoucher,
                 totalCost: totalCost       
             }).then(response => {
+                console.log(response);
                 localStorage.clear();
                 this.setState({
                     itemsInBasket: [],

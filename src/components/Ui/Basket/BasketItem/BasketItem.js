@@ -17,11 +17,21 @@ const basketItem = (props) => {
                     </div>
     }
 
+    let description = <p>{props.title}</p>;
+
+    if(props.to && props.from) {
+        description =   <div>
+                            <p>from: {props.from}</p>
+                            <p>to: {props.to}</p>
+                            <p>message: {props.title}</p>
+                        </div>
+    }
+
     return(
         <div className={classes.basketItem}>
             <div className={classes.basketItemTitleContainer}>
                 <p>{props.subCategoryTitle}:</p>
-                <p>{props.title}</p>
+                {description}
             </div>
             {addMinus}
             <p>£ {props.price}</p>
