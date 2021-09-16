@@ -142,7 +142,6 @@ class AddEditSalonTreatmentCategories extends Component {
     deleteHandler = (id) => {
         axios.defaults.withCredentials = true;
         axios.delete(CONST.BASE_URL + '/api/delete-salon-treatment-category/' + id).then(response => {
-            console.log(response);
             this.setState({
                 updatedMessage: "Successfully updated Categories!",
                 confirmDelete: "",
@@ -162,13 +161,26 @@ class AddEditSalonTreatmentCategories extends Component {
     handleSubmit(event) {
       event.preventDefault();
       axios.defaults.withCredentials = true;
-      axios.post(CONST.BASE_URL + '/api/add-edit-salon-treatment/', {categoryItems: this.state.values}).then(response => {
+      axios.post(CONST.BASE_URL + '/api/add-edit-salon-treatment-category/', {categoryItems: this.state.values}).then(response => {
         window.scrollTo(0, 0);
         this.startingValues();
         this.setState({
             updatedMessage: "Successfully updated Categories!"
         })
-      })
+      }).catch(function (error) {
+        if (error.response) {
+          // Request made and server responded
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
+        }
+      });
     }
   
     render() {
