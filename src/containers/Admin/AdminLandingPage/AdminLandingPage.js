@@ -14,7 +14,10 @@ class AdminLandingPage extends Component {
         giftVoucherPurchases: "",
         trainingCourses: "",
         salonTreatments: "",
-        frontPageImages: ""
+        frontPageImages: "",
+        mostPopularTreatment: "",
+        mostPopularCourse: "",
+        mostPopularTreatmentCategory: ""
     }
 
     componentDidMount(){
@@ -26,18 +29,11 @@ class AdminLandingPage extends Component {
                 frontPageImages: response.data.frontPageImages,
                 salonTreatmentEnquiries: response.data.STEnquires,
                 trainingCourseEnquiries: response.data.TCEnquires,
-                giftVoucherPurchases: response.data.vouchers
+                giftVoucherPurchases: response.data.vouchers,
+                mostPopularTreatmentCategory: response.data.mostPopularTreatment.category.title,
+                mostPopularTreatment: response.data.mostPopularTreatment,
+                mostPopularCourse: response.data.mostPopularCourse
             })
-        }).catch(err => {
-            if (err.response) {
-                console.log(err.response);
-              // client received an error response (5xx, 4xx)
-            } else if (err.request) {
-                console.log(err.request);
-              // client never received a response, or request never left
-            } else {
-              // anything else
-            }
         })
     }
 
@@ -65,6 +61,10 @@ class AdminLandingPage extends Component {
         return(
             <div className={classes.AdminLandingPage}>
                 {successMsg}
+                <h3>Current Top Course</h3>
+                <p>{this.state.mostPopularCourse.title} - {this.state.mostPopularCourse.enquires}</p>
+                <h3>Current Top Treatment</h3>
+                <p>{this.state.mostPopularTreatmentCategory} - {this.state.mostPopularTreatment.title} - {this.state.mostPopularTreatment.enquires}</p>
                 <div className={classes.allStatsContainer}>
                     <div className={classes.singleStatContainer}>
                         <p>Training Course Enquiries</p>
@@ -95,6 +95,10 @@ class AdminLandingPage extends Component {
                     <Link to="/admin/new-salon-treatment" className={classes.newService}>
                         <BiPlus />
                         <h4>New Salon Treatment</h4>
+                    </Link>
+                    <Link to="/admin/add-edit-salon-treatment" className={classes.newSubService}>
+                        <BiPlus />
+                        <h4>Add / Edit Salon Treatment Category</h4>
                     </Link>
                     <Link to="/admin/new-training-course" className={classes.newService}>
                         <BiPlus />

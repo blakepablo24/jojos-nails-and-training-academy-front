@@ -21,7 +21,7 @@
     background: var(--second-bg);
     border-radius: 2.5px;
     display: grid;
-    place-items: center center;
+    place-items: start center;
     grid-template-rows: 6fr 4fr;
     grid-column: span 2;
 }
@@ -49,12 +49,10 @@
     width: 95%;
     display: grid;
     place-items: center center;
-    grid: 8.5vh 8.5vh / 1fr;
 }
 
-.newService {
+.newService, .newSubService {
     width: 85%;
-    height: 80%;
     background: var(--main-txt);
     color: var(--second-bg);
     border-radius: 2.5px;
@@ -62,6 +60,18 @@
     display: grid;
     place-items: center center;
     grid-auto-flow: column;
+    margin-top: 2vh;
+    height: 6vh;
+}
+
+.newSubService {
+    place-self: center end;
+    width: 65%;
+    font-size: 0.75rem;
+    margin-right: 7.5%;
+    color: var(--main-txt);
+    background: var(--second-bg);
+    height: 4vh;
 }
 
 .newService svg {

@@ -28,6 +28,7 @@ import FUNCTIONS from '../../functions/functions';
 import FindUs from '../../containers/FindUs/FindUs';
 import GiftVouchers from "../../containers/GiftVouchers/GiftVouchers";
 import Loading from '../../components/Ui/Loading/Loading';
+import AddEditSalonTreatmentCategories from '../../containers/Admin/AddEditSalonTreatmentCategories/AddEditSalonTreatmentCategories';
 
 let initialBasket = [];
 if(JSON.parse(localStorage.getItem("basketItems"))) {
@@ -299,7 +300,6 @@ class Layout extends Component {
                 gift_voucher: this.state.basketItemVoucher,
                 totalCost: totalCost       
             }).then(response => {
-                console.log(response);
                 localStorage.clear();
                 this.setState({
                     itemsInBasket: [],
@@ -312,21 +312,7 @@ class Layout extends Component {
                     loading: ""
                 })
                 this.checkoutView("completed");
-            }).catch(function (error) {
-                if (error.response) {
-                  // Request made and server responded
-                  console.log(error.response.data);
-                  console.log(error.response.status);
-                  console.log(error.response.headers);
-                } else if (error.request) {
-                  // The request was made but no response was received
-                  console.log(error.request);
-                } else {
-                  // Something happened in setting up the request that triggered an Error
-                  console.log('Error', error.message);
-                }
-            
-              });
+            })
         } else {
             this.setState({
                 bookingRequestNameError: bookingRequestNameError,
@@ -397,6 +383,7 @@ class Layout extends Component {
                     <Route path="/staff-login" exact render={(props) => <Login {...props} auth={this.state.isAuthenticated} sendData={this.getData} />}/>
                     <ProtectedRoute path="/admin" exact component={AdminLandingPage} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/new-salon-treatment" exact component={NewSalonTreatment} auth={isAuthenticated} />
+                    <ProtectedRoute path="/admin/add-edit-salon-treatment" exact component={AddEditSalonTreatmentCategories} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/new-training-course" exact component={NewTrainingCourse} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/add-curriculum/:id" exact component={AddCurriculum} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/edit-salon-treatment/:id" exact component={EditSalonTreatment} auth={isAuthenticated} />

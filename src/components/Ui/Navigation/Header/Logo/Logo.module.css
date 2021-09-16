@@ -9,6 +9,7 @@
     background: var(--main-bg);
     padding: 10px;
     border-radius: 30%;
+    border: solid 2.5px var(--main-txt);
 }
 
 .Logo img, .menuLogo img {
