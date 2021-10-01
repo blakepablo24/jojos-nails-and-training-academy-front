@@ -29,6 +29,7 @@ import FindUs from '../../containers/FindUs/FindUs';
 import GiftVouchers from "../../containers/GiftVouchers/GiftVouchers";
 import Loading from '../../components/Ui/Loading/Loading';
 import AddEditSalonTreatmentCategories from '../../containers/Admin/AddEditSalonTreatmentCategories/AddEditSalonTreatmentCategories';
+import GiftVouchersPending from '../../containers/Admin/GiftVouchers/GiftVouchersPending';
 
 let initialBasket = [];
 if(JSON.parse(localStorage.getItem("basketItems"))) {
@@ -384,6 +385,7 @@ class Layout extends Component {
                     <ProtectedRoute path="/admin" exact component={AdminLandingPage} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/new-salon-treatment" exact component={NewSalonTreatment} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/add-edit-salon-treatment" exact component={AddEditSalonTreatmentCategories} auth={isAuthenticated} />
+                    <ProtectedRoute path="/admin/gift-vouchers-pending" exact component={GiftVouchersPending} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/new-training-course" exact component={NewTrainingCourse} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/add-curriculum/:id" exact component={AddCurriculum} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/edit-salon-treatment/:id" exact component={EditSalonTreatment} auth={isAuthenticated} />

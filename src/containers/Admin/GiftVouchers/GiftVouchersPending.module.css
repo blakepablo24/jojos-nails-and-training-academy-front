@@ -1,0 +1,24 @@
+.GiftVouchersPending {
+    grid-area: main;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: start center;
+}
+
+.GiftVoucherHeader {
+    display: grid;
+    grid-auto-flow: column;
+    place-items: center center;
+    width: 100%;
+}
+
+.voucherType, .selectedVoucherType {
+    background: var(--second-bg);
+    width: 97.5%;
+}
+
+.selectedVoucherType {
+    background: var(--main-txt);
+    color: var(--second-bg);
+}

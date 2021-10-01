@@ -88,10 +88,10 @@ class AdminLandingPage extends Component {
                         <p>Salon Treatment Enquiries</p>
                         <p className={classes.statNumber}>{this.state.salonTreatmentEnquiries}</p>
                     </div>
-                    <div className={classes.singleStatContainer}>
-                        <p>Gift Voucher Purchases</p>
+                    <Link to="/admin/gift-vouchers-pending" className={classes.singleStatContainer}>
+                        <p>Gift Vouchers Pending</p>
                         <p className={classes.statNumber}>{this.state.giftVoucherPurchases}</p>
-                    </div>
+                    </Link>
                     <Link to="/admin/front-landing-page" className={classes.singleStatContainer}>
                         <p>Front Page Images</p>
                         <p className={classes.statNumber}>{this.state.frontPageImages}</p>
