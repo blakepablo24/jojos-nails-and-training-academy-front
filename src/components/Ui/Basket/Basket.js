@@ -138,7 +138,7 @@ const Basket = (props) => {
         let today = new Date();
         let shownDateChoiceMessage = <h3>Select Preferred Training Course Start Date</h3>;
         let shownDateChoice = "";
-        if(format(trainingCourseStartDate, 'dd/MM/yyyy') != format(today, 'dd/MM/yyyy')){
+        if(format(trainingCourseStartDate, 'dd/MM/yyyy') !== format(today, 'dd/MM/yyyy')){
             shownDateChoiceMessage = <h3>Your Selected Training Course Date is:</h3>;
             shownDateChoice =   <div>
                                     <h2>{format(trainingCourseStartDate, 'dd/MM/yyyy')}</h2>
@@ -185,7 +185,7 @@ const Basket = (props) => {
         let today = new Date();
         let shownDateChoiceMessage = <h3>Select Preferred Salon Treatments Date</h3>;
         let shownDateChoice = "";
-        if(format(treatmentStartDate, 'dd/MM/yyyy') != format(today, 'dd/MM/yyyy')){
+        if(format(treatmentStartDate, 'dd/MM/yyyy') !== format(today, 'dd/MM/yyyy')){
             shownDateChoiceMessage = <h3>Your Selected Salon Treatments Date is:</h3>;
             shownDateChoice =   <div>
                                     <h2>{format(treatmentStartDate, 'dd/MM/yyyy')}</h2>

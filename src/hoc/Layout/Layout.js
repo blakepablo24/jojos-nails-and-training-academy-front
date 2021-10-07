@@ -7,7 +7,7 @@ import LandingPage from '../../containers/LandingPage/LandingPage';
 import TrainingCourses from '../../containers/TrainingCourses/TrainingCourses';
 import SingleTrainingCourse from '../../containers/SingleTrainingCourse/SingleTrainingCourse';
 import Footer from '../../components/Ui/Navigation/Footer/Footer';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import SalonTreatments from '../../containers/SalonTreatments/SalonTreatments';
 import SalonTreatmentsSubCat from '../../containers/SalonTreatmentsSubCat/SalonTreatmentsSubCat';
 import SingleSalonTreatment from '../../containers/SingleSalonTreatment/SingleSalonTreatment';
@@ -279,7 +279,7 @@ class Layout extends Component {
 
         if (/[^0-9]/.test(this.state.bookingRequestNumber)) {
             bookingRequestNumberError = <h4 className="error">Please a valid number!</h4>;
-        } else if (this.state.bookingRequestNumber.length != 11){
+        } else if (this.state.bookingRequestNumber.length !== 11){
             bookingRequestNumberError = <h4 className="error">Number is not correct length</h4>;
         }
 

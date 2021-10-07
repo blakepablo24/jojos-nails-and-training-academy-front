@@ -98,7 +98,7 @@ class AddEditSalonTreatmentCategories extends Component {
                     id={el.id}
                 />
               <input type="text" placeholder="Enter New Category" value={el.title||''} onChange={this.handleChange.bind(this, i)} />
-              {el.image != "default"
+              {el.image !== "default"
                 ? <img src={CONST.BASE_URL + "/storage/images/salon-treatment-images/" + el.image} onClick={() => this.fileInput.click()} alt="" /> 
                 :
                 (el.id 

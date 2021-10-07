@@ -26,7 +26,7 @@
     grid-auto-flow: column;
 }
 
-.yes, .no {
+.yes, .no, .approve {
     border: none;
     width: 80%;
     color: var(--main-bg);
@@ -34,4 +34,8 @@
 
 .yes {
     background: var(--error-txt);
+}
+
+.approve {
+    background: var(--scs-bg);
 }

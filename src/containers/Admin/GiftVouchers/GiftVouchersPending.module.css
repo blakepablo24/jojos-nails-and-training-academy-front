@@ -1,9 +1,11 @@
 .GiftVouchersPending {
-    grid-area: main;
+    grid-area: header/latest/main;
     width: 100%;
     height: 100%;
     display: grid;
     place-items: start center;
+    background: var(--main-bg);
+    grid-template-rows: 5vh;
 }
 
 .GiftVoucherHeader {
@@ -11,14 +13,45 @@
     grid-auto-flow: column;
     place-items: center center;
     width: 100%;
+    
 }
 
 .voucherType, .selectedVoucherType {
     background: var(--second-bg);
     width: 97.5%;
+    height: 100%;
 }
 
 .selectedVoucherType {
     background: var(--main-txt);
     color: var(--second-bg);
+}
+
+.allVouchersContainer {
+    width: 100%;
+    display: grid;
+    place-items: center center;
+}
+
+.customerVoucherContainer {
+    width: 97.5%;
+    display: grid;
+    place-items: center start;
+    grid-template-columns: 3fr 7fr;
+    background: white;
+    margin-top: 2.5vh;
+    padding: 5px;
+    text-align: left;
+}
+
+.customerVoucherContainer p {
+    margin-top: 5px;
+}
+
+.controlsContainer {
+    grid-column: 1 / 3;
+    width:95%;
+    display: grid;
+    place-self: center center;
+    grid-template-columns: 1fr 1fr;
 }
