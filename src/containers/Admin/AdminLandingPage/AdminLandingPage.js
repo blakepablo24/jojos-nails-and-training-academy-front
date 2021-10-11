@@ -5,6 +5,7 @@ import CONST from '../../../constants/constants';
 import { Link } from 'react-router-dom';
 import { BiPlus } from "react-icons/bi";
 import FlashMessage from 'react-flash-message';
+import ChangePassword from '../../../components/Ui/ChangePassword/ChangePassword';
 
 class AdminLandingPage extends Component {
     
@@ -17,7 +18,11 @@ class AdminLandingPage extends Component {
         frontPageImages: "",
         mostPopularTreatment: "",
         mostPopularCourse: "",
-        mostPopularTreatmentCategory: ""
+        mostPopularTreatmentCategory: "",
+        changePassword: "",
+        currentPassword: "",
+        newPasswordOriginal: "",
+        newPasswordConfirm: ""
     }
 
     componentDidMount(){
@@ -34,21 +39,46 @@ class AdminLandingPage extends Component {
                 mostPopularTreatment: response.data.mostPopularTreatment,
                 mostPopularCourse: response.data.mostPopularCourse
             })
-        }).catch(function (error) {
-            if (error.response) {
-              // Request made and server responded
-              console.log(error.response.data);
-              console.log(error.response.status);
-              console.log(error.response.headers);
-            } else if (error.request) {
-              // The request was made but no response was received
-              console.log(error.request);
-            } else {
-              // Something happened in setting up the request that triggered an Error
-              console.log('Error', error.message);
-            }
-        
-          });
+        })
+    }
+
+    removeChangePasswordHandler = () => {
+        this.setState({
+            changePassword: ""
+        })
+    }
+
+    changePasswordHandler = () => {
+        console.log("password will be changed");
+    }
+
+    changePasswordPopUpHandler = () => {
+        this.setState({
+            changePassword: <ChangePassword 
+                                changePassword={this.changePasswordHandler} 
+                                remove={this.removeChangePasswordHandler}
+                                currentPassword={this.state.currentPassword}
+                                newPasswordOriginal={this.state.newPasswordOriginal}
+                                newPasswordConfirm={this.state.newPasswordConfirm}
+                                changeHandler={this.changeHandler}
+                            />
+        })
+    }
+
+    changeHandler = (event) => {
+        const target = event.target;
+        const name = target.name;
+        const value = target.value;
+
+        this.setState({
+            [name]: value,
+            // errorErrorMessage: "",
+            // intentionErrorMessage: "",
+            // makerErrorMessage: "",
+            // contextErrorMessage: ""
+        }, () => {
+            console.log(this.state.currentPassword);
+        });
     }
 
     render(){
@@ -74,6 +104,7 @@ class AdminLandingPage extends Component {
 
         return(
             <div className={classes.AdminLandingPage}>
+                {this.state.changePassword}
                 {successMsg}
                 <h3>Current Top Course</h3>
                 <p>{this.state.mostPopularCourse.title} - {this.state.mostPopularCourse.enquires}</p>
@@ -118,11 +149,11 @@ class AdminLandingPage extends Component {
                         <BiPlus />
                         <h4>New Training Course</h4>
                     </Link>
+                    <button onClick={this.changePasswordPopUpHandler} className={classes.changePassword+" customButton"}>change password</button>
                 </div>
             </div>
         )
     }
-
 }
 
 export default AdminLandingPage

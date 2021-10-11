@@ -6,6 +6,7 @@
   --scs-bg: rgb(0, 128, 0, 0.65);
   --error-txt: #e81c20;
   --yes-txt: green;
+  --amber-txt: orange;
 }
 
 * {
