@@ -2,3 +2,9 @@
     grid-area: footer;
     background: var(--second-bg);
 }
+
+.ReviewsContainer {
+    display: grid;
+    place-items: center center;
+    grid-template-columns: 1fr 8fr 1fr;
+}

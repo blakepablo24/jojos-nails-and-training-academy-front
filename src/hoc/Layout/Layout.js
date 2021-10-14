@@ -60,7 +60,31 @@ class Layout extends Component {
         bookingRequestTimeError: "",
         treatmentsStartdateError: "",
         trainingCourseStartdateError: "",
-        loading: ""
+        loading: "",
+        facebookInfo: "",
+        number: 0,
+        facebookReviews: [{review_text:"loading"}]
+    }
+    
+    componentDidMount = () => {
+        axios.get("https://graph.facebook.com/v12.0/me?fields=id%2Cname%2Coverall_star_rating%2Crating_count%2Cratings&access_token=EAAFcRxx4sPIBAAazve6aGYDCOYKwoHbUbC0AfkzR7qhaFKjwBOsZB3oczmMBmUA08fsdp8M1NOpAg1lZCMrWtvy9ZABG5WUx6prEMKAsQNIkw9Cz941NV2DaCwR3CMAlwshWExacl07bt0wy8lrfMgAOfR02A6ZCn8NkTyd4EIFTZBQbWmAulrPNkN4iUEUZCR6VmdaQVNBPKHnrbWe1QQ").then(response => {
+            this.setState({
+                facebookReviews: response.data.ratings.data,
+                facebookStarRating: response.data.ratings
+            })
+        })
+    }
+
+    next = () => {
+        this.setState({
+            number: this.state.number + 1
+        })
+    }
+
+    previous = () => {
+        this.setState({
+            number: this.state.number - 1
+        })
     }
 
     sideDrawerToggleHandler = () => {
@@ -392,7 +416,12 @@ class Layout extends Component {
                     <ProtectedRoute path="/admin/edit-training-course/:id" exact component={EditTrainingCourse} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/front-landing-page" exact component={FrontLandingPage} auth={isAuthenticated} />
                 </Switch>
-                <Footer />
+                <Footer 
+                    facebookReviews={this.state.facebookReviews}
+                    number={this.state.number}
+                    next={this.next} 
+                    previous={this.previous}
+                />
             </div>
         )
     }

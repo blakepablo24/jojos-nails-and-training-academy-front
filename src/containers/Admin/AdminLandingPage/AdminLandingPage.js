@@ -4,8 +4,9 @@ import classes from './AdminLandingPage.module.css';
 import CONST from '../../../constants/constants';
 import { Link } from 'react-router-dom';
 import { BiPlus } from "react-icons/bi";
-import FlashMessage from 'react-flash-message';
 import ChangePassword from '../../../components/Ui/ChangePassword/ChangePassword';
+import Loading from '../../../components/Ui/Loading/Loading';
+import { Redirect } from 'react-router';
 
 class AdminLandingPage extends Component {
     
@@ -19,10 +20,16 @@ class AdminLandingPage extends Component {
         mostPopularTreatment: "",
         mostPopularCourse: "",
         mostPopularTreatmentCategory: "",
-        changePassword: "",
-        currentPassword: "",
-        newPasswordOriginal: "",
-        newPasswordConfirm: ""
+        changePasswordModal: false,
+        current: "",
+        new: "",
+        confirmed: "",
+        currentErrorMesage: "",
+        newErrorMessage: "",
+        confirmedErrorMessage: "",
+        successMsg: "",
+        loading: "",
+        redirectOnSuccess: ""
     }
 
     componentDidMount(){
@@ -44,24 +51,73 @@ class AdminLandingPage extends Component {
 
     removeChangePasswordHandler = () => {
         this.setState({
-            changePassword: ""
+            changePasswordModal: false
         })
     }
 
     changePasswordHandler = () => {
-        console.log("password will be changed");
+        let newErrorMessage = "";
+        
+        if(this.state.new.length < 5){
+            newErrorMessage = <h4 className="error">Password must longer 5 characters</h4>;
+        } else if(this.state.new !== this.state.confirmed){
+            newErrorMessage = <h4 className="error">Passwords do not match</h4>;
+        }
+
+        if(!this.state.newError){
+        this.setState({
+            loading: <Loading />
+        })
+        axios.defaults.withCredentials = true;
+        axios.post(CONST.BASE_URL + '/api/admin-change-password',
+        {
+            current: this.state.current,
+            new: this.state.new,
+            id: JSON.parse(localStorage.getItem("user")).id
+        }
+        ).then(response => {
+            if(response.data) {
+                this.setState({
+                    changePasswordModal: false,
+                    current: "",
+                    new: "",
+                    confirmed: "",
+                    currentErrorMesage: "",
+                    newErrorMessage: "",
+                    confirmedErrorMessage: "",
+                    loading: "",
+                })
+                this.logoutHandler();
+            } else {
+                this.setState({
+                    currentErrorMessage: <h4 className="error">Current Password is incorrect</h4>,
+                    loading: ""
+                })
+            }
+        })
+        } else {
+            this.setState({
+                newErrorMessage: newErrorMessage
+            })
+        }
     }
 
     changePasswordPopUpHandler = () => {
         this.setState({
-            changePassword: <ChangePassword 
-                                changePassword={this.changePasswordHandler} 
-                                remove={this.removeChangePasswordHandler}
-                                currentPassword={this.state.currentPassword}
-                                newPasswordOriginal={this.state.newPasswordOriginal}
-                                newPasswordConfirm={this.state.newPasswordConfirm}
-                                changeHandler={this.changeHandler}
-                            />
+            changePasswordModal: true
+        })
+    }
+
+    logoutHandler = () => {
+        localStorage.clear();
+        axios.defaults.withCredentials = true;
+        axios.get(CONST.BASE_URL + '/api/logout');
+        this.setState({
+            redirectOnSuccess: <Redirect to={{
+                                    pathname: "/staff-login",
+                                    state: { fromRedirect: "You Password has now been changed, please login with the new password" }
+                                    }}                  
+                                />
         })
     }
 
@@ -72,40 +128,33 @@ class AdminLandingPage extends Component {
 
         this.setState({
             [name]: value,
-            // errorErrorMessage: "",
-            // intentionErrorMessage: "",
-            // makerErrorMessage: "",
-            // contextErrorMessage: ""
-        }, () => {
-            console.log(this.state.currentPassword);
+            newErrorMessage: "",
+            currentErrorMessage: ""
         });
     }
 
     render(){
 
-        let successMsg = "";
-        
-        let showSuccessMsg = (message) => {
-        successMsg = (
-            <FlashMessage duration={5000}>
-                <div className="load-msg">
-                <h3 className="success">{message}</h3>
-                </div>
-            </FlashMessage>
-        );
-        };
+        let changePassword = "";
 
-        if (this.props.location.state !== undefined) {
-            const message = this.props.location.state.fromRedirect;
-            if (message) {
-                showSuccessMsg(message);
-            }
+        if (this.state.changePasswordModal) {
+            changePassword = <ChangePassword
+                                clicked={this.removeChangePasswordHandler} 
+                                changePassword={this.changePasswordHandler} 
+                                current={this.state.current}
+                                new={this.state.new}
+                                confirmed={this.state.confirmed}
+                                changeHandler={this.changeHandler}
+                                newErrorMessage={this.state.newErrorMessage}
+                                currentErrorMessage={this.state.currentErrorMessage}
+                            />
         }
 
         return(
             <div className={classes.AdminLandingPage}>
-                {this.state.changePassword}
-                {successMsg}
+                {changePassword}
+                {this.state.loading}
+                {this.state.redirectOnSuccess}
                 <h3>Current Top Course</h3>
                 <p>{this.state.mostPopularCourse.title} - {this.state.mostPopularCourse.enquires}</p>
                 <h3>Current Top Treatment</h3>

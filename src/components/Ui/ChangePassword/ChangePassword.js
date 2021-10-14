@@ -8,7 +8,7 @@ const changePassword = (props) => {
 
     let confirm = "";
 
-    if(props.allPasswordsInput) {
+    if(props.current && props.new && props.confirmed) {
         confirm = <button className={'customButton ' + styles.yes} onClick={props.changePassword}>Confirm</button>;
     }
 
@@ -23,29 +23,31 @@ const changePassword = (props) => {
                     <div className={styles.passwordInputs}>
                         <input 
                             type="password"
-                            name="currentPassword"
+                            name="current"
                             placeholder="Current Password"
-                            value={props.currentPassword}
+                            value={props.current}
                             onChange={props.changeHandler}
                         />
+                        {props.currentErrorMessage}
                         <input 
                             type="password"
-                            name="newPasswordOriginal"
+                            name="new"
                             placeholder="New Password"
-                            value={props.newPasswordOriginal}
+                            value={props.new}
                             onChange={props.changeHandler}
                         />
                         <input 
                             type="password"
-                            name="newPasswordConfirm"
+                            name="confirmed"
                             placeholder="Repeat New Password"
-                            value={props.newPasswordConfirm}
+                            value={props.confirmed}
                             onChange={props.changeHandler}
                         />
+                        {props.newErrorMessage}
                     </div>
                     <div className={styles.choice}>
                         {confirm}                
-                        <h3 onClick={props.remove} className="error">Cancel</h3>
+                        <h3 onClick={props.clicked} className="error">Cancel</h3>
                     </div>
                 </div>
             </div>
