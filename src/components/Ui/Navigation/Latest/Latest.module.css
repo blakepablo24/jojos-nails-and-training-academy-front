@@ -5,4 +5,5 @@
     place-items: center center;
     position: sticky;
     top: 7.5vh;
+    z-index: 2;
 }

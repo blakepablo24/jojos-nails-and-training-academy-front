@@ -61,16 +61,18 @@ class Layout extends Component {
         treatmentsStartdateError: "",
         trainingCourseStartdateError: "",
         loading: "",
-        facebookInfo: "",
+        facebookInfo: {
+            overall_star_rating: 0,
+            rating_count: 0,
+            ratings: [{review_text:<Loading component={true}/>}]
+        },
         number: 0,
-        facebookReviews: [{review_text:"loading"}]
     }
     
     componentDidMount = () => {
-        axios.get("https://graph.facebook.com/v12.0/me?fields=id%2Cname%2Coverall_star_rating%2Crating_count%2Cratings&access_token=EAAFcRxx4sPIBAAazve6aGYDCOYKwoHbUbC0AfkzR7qhaFKjwBOsZB3oczmMBmUA08fsdp8M1NOpAg1lZCMrWtvy9ZABG5WUx6prEMKAsQNIkw9Cz941NV2DaCwR3CMAlwshWExacl07bt0wy8lrfMgAOfR02A6ZCn8NkTyd4EIFTZBQbWmAulrPNkN4iUEUZCR6VmdaQVNBPKHnrbWe1QQ").then(response => {
+        axios.get("https://graph.facebook.com/v12.0/me?fields=id%2Cname%2Coverall_star_rating%2Crating_count%2Cratings&access_token="+CONST.FB).then(response => {
             this.setState({
-                facebookReviews: response.data.ratings.data,
-                facebookStarRating: response.data.ratings
+                facebookInfo: {overall_star_rating: response.data.overall_star_rating, rating_count: response.data.rating_count, ratings: response.data.ratings.data.slice(0, 10)}
             })
         })
     }
@@ -417,7 +419,7 @@ class Layout extends Component {
                     <ProtectedRoute path="/admin/front-landing-page" exact component={FrontLandingPage} auth={isAuthenticated} />
                 </Switch>
                 <Footer 
-                    facebookReviews={this.state.facebookReviews}
+                    facebookInfo={this.state.facebookInfo}
                     number={this.state.number}
                     next={this.next} 
                     previous={this.previous}
