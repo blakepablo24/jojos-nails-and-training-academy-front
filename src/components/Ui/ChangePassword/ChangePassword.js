@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ChangePassword.module.css';
 import Backdrop from '../Backdrop/Backdrop';
 import Aux from '../../../hoc/Auxilary/Auxilary';
-import Logo from '../Navigation/Header/Header';
+import Logo from '../Navigation/Header/Logo/Logo';
 
 const changePassword = (props) => {
 
@@ -18,7 +18,7 @@ const changePassword = (props) => {
             <div className={styles.confirmDeleteContainer}>
                 <div className={styles.ConfirmDelete}>
                     <div className={styles.Logo}>
-                        <Logo/>
+                        <Logo menuLogo={true}/>
                     </div>
                     <div className={styles.passwordInputs}>
                         <input 

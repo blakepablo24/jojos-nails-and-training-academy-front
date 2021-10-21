@@ -4,6 +4,7 @@ import DrawerToggle from './DrawerToggle/DrawerToggle';
 import { BiUser } from "react-icons/bi";
 import { Link } from 'react-router-dom';
 import { TiShoppingCart } from "react-icons/ti";
+import NavigationItems from '../Toolbar/Navigation/NavigationItems/NavigationItems';
 
 const toolbar = (props) => {
 
@@ -20,6 +21,9 @@ const toolbar = (props) => {
 
     return(
         <div className={classes.Toolbar}>
+            <div className={classes.largeScreensOnly}>
+                <NavigationItems />
+            </div>
             {basketIcon}
             {userIcon}
             <DrawerToggle menu={props.menu} clicked={props.clicked}/>

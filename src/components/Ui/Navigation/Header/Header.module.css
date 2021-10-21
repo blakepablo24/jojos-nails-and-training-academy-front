@@ -4,3 +4,17 @@
     padding: 1% 35%;
     place-items: center center;
 }
+
+@media only screen and (min-width: 992px) {
+    .Header {
+        padding: 25px;
+        background: var(--main-bg);
+        position: fixed;
+        z-index: 5;
+        height: 21vh;
+        width: 15%;
+        box-shadow: none;
+        border-bottom-right-radius: 85%;
+        border-right: solid 3px var(--main-txt);
+    }
+}

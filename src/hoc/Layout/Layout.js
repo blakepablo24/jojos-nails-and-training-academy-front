@@ -70,7 +70,7 @@ class Layout extends Component {
     }
     
     componentDidMount = () => {
-        axios.get("https://graph.facebook.com/v12.0/me?fields=id%2Cname%2Coverall_star_rating%2Crating_count%2Cratings&access_token="+CONST.FB).then(response => {
+        axios.get(CONST.FB).then(response => {
             this.setState({
                 facebookInfo: {overall_star_rating: response.data.overall_star_rating, rating_count: response.data.rating_count, ratings: response.data.ratings.data.slice(0, 10)}
             })
@@ -98,15 +98,21 @@ class Layout extends Component {
 
     getData = (val) => {
         if(val === "logged_in"){
+            this.scrollToTop();
             this.setState({
                 isAuthenticated: true
             })
         }
         if(val === "not_logged_in"){
+            this.scrollToTop();
             this.setState({
                 isAuthenticated: false
             })
         }
+    }
+
+    scrollToTop = () => {
+        window.scrollTo(0, 0);
     }
 
     basketToggleHandler = () => {
@@ -423,6 +429,8 @@ class Layout extends Component {
                     number={this.state.number}
                     next={this.next} 
                     previous={this.previous}
+                    sendData={this.getData}
+                    scrollToTop={this.scrollToTop}
                 />
             </div>
         )

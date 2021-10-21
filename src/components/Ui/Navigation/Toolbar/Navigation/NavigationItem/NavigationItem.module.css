@@ -1,11 +1,3 @@
-.NavigationItem, .logInOrOut {
+.NavigationItem {
     font-size: 1.75rem;
-}
-
-.logInOrOut {
-    border: var(--main-txt) solid 1px;
-    background: var(--main-bg);
-    width: 75%;
-    border-radius: 5px;
-    padding: 5px 0;
 }

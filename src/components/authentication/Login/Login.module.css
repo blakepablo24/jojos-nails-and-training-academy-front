@@ -2,7 +2,8 @@
     padding: 15vh 0;
     grid-area: header/latest/main;
     height: 100%;
-    width: 100%;
+    width: 50%;
+    margin-left: 25%;
     display: grid;
     place-items: center center;
     z-index: 2;
@@ -15,9 +16,9 @@
     font-weight: bold;
 }
 
-
-@media(min-width: 699px){
-    .Login a, .Login p {
-        font-size: 2rem;
+@media only screen and (min-width: 992px) {
+    .Login, .Login input {
+        font-size: 1.5rem;
     }
-  }
+    
+}

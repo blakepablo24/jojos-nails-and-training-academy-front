@@ -26,7 +26,13 @@
     border-radius: 5px;
     padding: 2.5px;
     overflow-y: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
+
+.Review::-webkit-scrollbar {
+    display: none;
+  }
 
 .fbHeader, .fbStars {
     width: 100%;
@@ -39,4 +45,10 @@
 .fbStars {
     color: goldenrod;
     width: 85%;
+}
+
+.bottomFooterContainer{
+    width: 100%;
+    display: grid;
+    place-items: center center;
 }

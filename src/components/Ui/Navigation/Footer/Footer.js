@@ -1,40 +1,85 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classes from './Footer.module.css';
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import { ImFacebook2 } from "react-icons/im";
 import { FaStar } from "react-icons/fa";
+import axios from 'axios';
+import { Link, Redirect } from 'react-router-dom';
+import CONST from '../../../../constants/constants';
 
-const footer = (props) => {
+class Footer extends Component {
 
-    let rightArrow = <div className={classes.selectable} onClick={props.next}><BiRightArrow /></div>;
-    let leftArrow = <div className={classes.selectable} onClick={props.previous}><BiLeftArrow /></div>;
+    state = {
+        redirectOnSuccess: "" 
+    }
 
-    if(props.number === (props.facebookInfo.ratings.length - 1)) {
+    componentDidMount(){
+        if(JSON.parse(localStorage.getItem("user"))){
+            this.setState({
+                userLoggedIn: JSON.parse(localStorage.getItem("user"))
+            })   
+        }
+    }
+
+    getData = (val) => {
+        this.props.sendData(val);
+    }
+
+    logoutHandler = (event) => {
+        event.preventDefault();
+        localStorage.clear();
+        axios.defaults.withCredentials = true;
+        axios.get(CONST.BASE_URL + '/api/logout');
+        this.getData("not_logged_in");
+        this.setState({
+            redirectOnSuccess: <Redirect to={{
+                                    pathname: "/staff-login",
+                                    state: { fromRedirect: "You have been successfully logged out" }
+                                    }}                  
+                                />
+        })
+    }
+
+    render(){
+    let rightArrow = <div className={classes.selectable} onClick={this.props.next}><BiRightArrow /></div>;
+    let leftArrow = <div className={classes.selectable} onClick={this.props.previous}><BiLeftArrow /></div>;
+
+    if(this.props.number === (this.props.facebookInfo.ratings.length - 1)) {
         rightArrow = <div className={classes.notSelectable}><BiRightArrow /></div>;
     }
 
-    if(props.number === 0) {
+    if(this.props.number === 0) {
         leftArrow = <div className={classes.notSelectable}><BiLeftArrow /></div>;
     }
 
-    let stars = <div className={classes.fbStars}>{Array.from({length:props.facebookInfo.overall_star_rating}, (_, i) => <FaStar key={i}/>)}</div>
+    let stars = <div className={classes.fbStars}>{Array.from({length:this.props.facebookInfo.overall_star_rating}, (_, i) => <FaStar key={i}/>)}</div>
 
-    console.log(props.facebookInfo.ratings);
+    let loggedInIcon = "";
+
+        if(JSON.parse(localStorage.getItem("user"))){
+            loggedInIcon = <Link onClick={this.logoutHandler} to="">Logout</Link>
+        } else {
+            loggedInIcon = <Link onClick={this.props.scrollToTop} to="/staff-login">Staff Login</Link>
+        }
 
     return(
         <div className={classes.Footer}>
-            <div className={classes.fbHeader}><ImFacebook2 />{stars} from {props.facebookInfo.rating_count} Reviews</div>
+            {this.state.redirectOnSuccess}
+            <div className={classes.fbHeader}><ImFacebook2 />{stars} from {this.props.facebookInfo.rating_count} Reviews</div>
             <div className={classes.ReviewsContainer}>
                 {leftArrow}
                 <div className={classes.Review}>
-                    <p>{new Date(props.facebookInfo.ratings[props.number].created_time).toLocaleDateString()}</p>
-                    <p>{props.facebookInfo.ratings[props.number].review_text}</p>
+                    <p>{new Date(this.props.facebookInfo.ratings[this.props.number].created_time).toLocaleDateString()}</p>
+                    <div>{this.props.facebookInfo.ratings[this.props.number].review_text}</div>
                 </div>  
                 {rightArrow}
             </div>
-            {/* <p>I will either not be here or I will be replaced by facebook reviews</p> */}
+            <div className={classes.bottomFooterContainer}>
+                {loggedInIcon}
+            </div>
         </div>
     )
+    }
 }
 
-export default footer
+export default Footer

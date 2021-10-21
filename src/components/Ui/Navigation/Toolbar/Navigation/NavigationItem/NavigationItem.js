@@ -4,14 +4,8 @@ import classes from './NavigationItem.module.css';
 
 const navigationItem = (props) => {
     
-    let defaultClass = classes.NavigationItem;
-
-    if(props.logInOrOut){
-        defaultClass = classes.logInOrOut;
-    }
-
     return(
-        <Link className={defaultClass} onClick={props.clicked} to={props.link || '/'}>
+        <Link className={classes.NavigationItem} onClick={props.clicked} to={props.link || '/'}>
             <h5>{props.linkName}</h5>
         </Link>
     )

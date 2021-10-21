@@ -8,3 +8,9 @@
 .DrawerToggle svg {
     font-size: 3rem;
 }
+
+@media only screen and (min-width: 992px) {
+    .DrawerToggle {
+        display: none;
+    }
+}

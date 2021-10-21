@@ -1,5 +1,5 @@
 .AdminLandingPage {
-    grid-area: header/latest/main;
+    grid-area: header/latest/main/footer;
     padding: 1vh 0 2.5vh 0;
     width: 100%;
     display: grid;
@@ -66,12 +66,12 @@
 
 .newSubService {
     place-self: center end;
-    width: 65%;
     font-size: 0.75rem;
     margin-right: 7.5%;
     color: var(--main-txt);
     background: var(--second-bg);
     height: 4vh;
+    width: 65%;
 }
 
 .newService svg {
@@ -84,4 +84,27 @@
     width: 50%;
     padding: 2.5px 0;
     font-size: 1rem;
+}
+
+@media only screen and (min-width: 992px) {
+    .AdminLandingPage {
+        padding: 10vh 0 2.5vh 0;
+    }
+    .changePassword {
+        width: 25%;
+    }
+    .newService, .newSubService {
+        width: 40%;
+    }
+
+    .newSubService {
+        margin-right: 15%;
+    }
+
+    .topSellersContainer{
+        width: 100%;
+        display: grid;
+        place-items: center center;
+        grid-auto-flow: column;
+    }
 }

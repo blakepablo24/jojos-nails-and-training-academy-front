@@ -7,3 +7,18 @@
     top: 7.5vh;
     z-index: 2;
 }
+
+@media only screen and (min-width: 992px) {
+    .Latest {
+        grid-area: latest;
+        background: var(--second-bg);
+        display: grid;
+        place-items: center center;
+        position: fixed;
+        width: 100%;
+        top: 15vh;
+        z-index: 2;
+        height: 5vh;
+        box-shadow: 0 1px 1px black;
+    }
+}

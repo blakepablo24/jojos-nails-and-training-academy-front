@@ -27,3 +27,24 @@
 .basketIconContainer p {
     font-size: 1.5rem;
 }
+
+.largeScreensOnly {
+    display: none;
+}
+
+@media only screen and (min-width: 992px) {
+    .Toolbar {
+        padding-left: 0;
+        padding-right: 5px;
+        height: 15vh;
+        box-shadow: none;
+        grid-template-columns: 9fr 1fr;
+        place-items: center center;
+    }
+    .largeScreensOnly {
+        display: grid;
+        place-items: center center;
+        width: 100%;
+        padding-left: 15%;
+    }
+}

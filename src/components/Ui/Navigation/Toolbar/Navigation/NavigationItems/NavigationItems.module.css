@@ -13,3 +13,30 @@
     display: grid;
     place-items: center center;
 }
+
+.smallScreenOnly{
+    display: grid;
+    place-items: center center;
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (min-width: 992px) {
+    .NavigationItems {
+        grid-template-rows: 1fr;
+        grid-auto-flow: column;
+    }
+    
+    .topNavItemsContainer, .bottomNavItemsContainer {
+        place-self: start center;
+        width: 100%;
+        height: 85%;
+        display: grid;
+        place-items: center center;
+        grid-auto-flow: column;
+    }
+
+    .smallScreenOnly{
+        display: none;
+    }
+}

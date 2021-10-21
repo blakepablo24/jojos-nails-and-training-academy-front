@@ -155,10 +155,16 @@ class AdminLandingPage extends Component {
                 {changePassword}
                 {this.state.loading}
                 {this.state.redirectOnSuccess}
-                <h3>Current Top Course</h3>
-                <p>{this.state.mostPopularCourse.title} - {this.state.mostPopularCourse.enquires}</p>
-                <h3>Current Top Treatment</h3>
-                <p>{this.state.mostPopularTreatmentCategory} - {this.state.mostPopularTreatment.title} - {this.state.mostPopularTreatment.enquires}</p>
+                <div className={classes.topSellersContainer}>
+                    <div className={classes.topSeller}>
+                        <h3>Current Top Course</h3>
+                        <p>{this.state.mostPopularCourse.title} - {this.state.mostPopularCourse.enquires}</p>
+                    </div>
+                    <div className={classes.topSeller}>
+                        <h3>Current Top Treatment</h3>
+                        <p>{this.state.mostPopularTreatmentCategory} - {this.state.mostPopularTreatment.title} - {this.state.mostPopularTreatment.enquires}</p>
+                    </div>
+                </div>
                 <div className={classes.allStatsContainer}>
                     <div className={classes.singleStatContainer}>
                         <p>Training Course Enquiries</p>

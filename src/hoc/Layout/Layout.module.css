@@ -11,3 +11,15 @@
         / 1fr 1fr 1fr 1fr 1fr 1fr
         ;
 }
+
+@media only screen and (min-width: 992px) {
+    .Layout {
+        grid:
+            'header toolbar toolbar toolbar toolbar toolbar' 15vh
+            'latest latest latest latest latest latest' 5vh
+            'main main main main main main' minmax(80vh, auto)
+            'footer footer footer footer footer footer' 40vh
+            / 1fr 1fr 1fr 1fr 1fr 1fr
+        ;
+    }
+}
