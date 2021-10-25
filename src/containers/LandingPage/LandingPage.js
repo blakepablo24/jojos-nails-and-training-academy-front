@@ -10,19 +10,31 @@ class LandingPage extends Component {
     
     state = {
         images: [],
+        largeImages: [],
         image: 0
     }
 
     componentDidMount(){
         let prePopulatedImages = [];
+        let largePrePopulatedImages = [];
         axios.get(CONST.BASE_URL + '/api/get-front-page-images').then(response => {
             response.data.db_images.forEach(db_image => {
                 prePopulatedImages.push({ url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
             });
-            this.setState({
-                images: prePopulatedImages
-            })
-        });
+            response.data.large_db_images.forEach(large_db_image => {
+                largePrePopulatedImages.push({ url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + large_db_image.image});
+            });
+
+            if(window.innerWidth > window.innerHeight){
+                this.setState({
+                    images: largePrePopulatedImages
+                })
+            } else {
+                this.setState({
+                    images: prePopulatedImages,
+                })
+            }
+        })
     }
 
     nextImage = () => {
@@ -51,6 +63,13 @@ class LandingPage extends Component {
     }
 
     render(){
+        // function handleResize() {
+        //     if(window.innerWidth === 1024){
+        //         console.log("large screen");
+        //     }
+        // }
+              
+        // window.addEventListener('resize', handleResize)
         
         let imageSlideShow = "";
 
@@ -60,15 +79,15 @@ class LandingPage extends Component {
 
         window.addEventListener("keydown", this.keyDownHandler);
 
-        let leftArrow = <BiLeftArrow onClick={this.previousImage} className={classes.imageNav} />;
-        let rightArrow = <BiRightArrow onClick={this.nextImage} className={classes.imageNav} />;
+        let leftArrow = <div className={classes.imageNav +" "+ classes.prev}><BiLeftArrow onClick={this.previousImage} /></div>;
+        let rightArrow = <div className={classes.imageNav +" "+ classes.next}><BiRightArrow onClick={this.nextImage} /></div>;
 
         if(this.state.image === (this.state.images.length - 1)) {
-            rightArrow = <BiRightArrow className={classes.notSelectable} />;
+            rightArrow = <div className={classes.notSelectable +" "+ classes.next}><BiRightArrow /></div>;
         }
 
         if(this.state.image === 0) {
-            leftArrow = <BiLeftArrow className={classes.notSelectable} />;
+            leftArrow = <div className={classes.notSelectable +" "+ classes.prev}><BiLeftArrow /></div>;
         }
 
         return(
@@ -81,6 +100,7 @@ class LandingPage extends Component {
                     </div>
                     {rightArrow}
                 </div>
+
             </Aux>
         )
     }

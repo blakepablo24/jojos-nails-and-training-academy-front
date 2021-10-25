@@ -86,7 +86,7 @@
     font-size: 1rem;
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1024px) {
     .AdminLandingPage {
         padding: 10vh 0 2.5vh 0;
     }

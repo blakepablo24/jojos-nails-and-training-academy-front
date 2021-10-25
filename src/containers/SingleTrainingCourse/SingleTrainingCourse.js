@@ -133,6 +133,7 @@ class SingleTrainingCourse extends Component {
                         />
                     )}
                 </div>
+                {extras}
                 <Link to={"/admin/add-curriculum/" + this.props.match.params.id} className={classes.noCurriculumContainer}>
                     <div><BiFolderPlus /> <h3>Edit Curriculum</h3></div>
                 </Link>
@@ -155,6 +156,7 @@ class SingleTrainingCourse extends Component {
                         />
                     )}
                 </div>
+                {extras}
             </div>
         }
 
@@ -179,14 +181,16 @@ class SingleTrainingCourse extends Component {
 
         let shownButton = "";
 
-        if(JSON.parse(localStorage.getItem("basketItems"))){
-            if(FUNCTIONS.checkBasket(Number(this.props.match.params.id) + CONST.TC, "id")){
-                shownButton = <button className={classes.floatButton + " customButton"} onClick={this.props.toggleBasket}><TiShoppingCart />Continue to Basket</button>;
+        if(!this.props.auth){
+            if(JSON.parse(localStorage.getItem("basketItems"))){
+                if(FUNCTIONS.checkBasket(Number(this.props.match.params.id) + CONST.TC, "id")){
+                    shownButton = <button className={classes.floatButton + " customButton"} onClick={this.props.toggleBasket}><TiShoppingCart />Continue to Basket</button>;
+                } else {
+                    shownButton = <button className={classes.floatButton + " customButton"} onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.TC, "", "", this.state.title, this.state.price, "Training Courses", CONST.TC)}>Add to Basket</button>;
+                }
             } else {
                 shownButton = <button className={classes.floatButton + " customButton"} onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.TC, "", "", this.state.title, this.state.price, "Training Courses", CONST.TC)}>Add to Basket</button>;
             }
-        } else {
-            shownButton = <button className={classes.floatButton + " customButton"} onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.TC, "", "", this.state.title, this.state.price, "Training Courses", CONST.TC)}>Add to Basket</button>;
         }
         
         return(
@@ -215,9 +219,8 @@ class SingleTrainingCourse extends Component {
                         <h3>£{this.state.price}</h3>
                     </div>
                     {curriculum}
-                    {extras}
-                    {shownButton}
                     <GuildLogo />
+                    {shownButton}
                     {this.state.adminButtons}
                 </div>
             </Aux>

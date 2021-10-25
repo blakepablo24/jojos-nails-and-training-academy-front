@@ -5,17 +5,15 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
     BASE_URL: "http://localhost:8000",
     ST: "ST",
     TC: "TC",
-    FB: "https://graph.facebook.com/v12.0/me?fields=id%2Cname%2Coverall_star_rating%2Crating_count%2Cratings{created_time,review_text,rating,reviewer{id,first_name,profile_pic}}&access_token=EAAFcRxx4sPIBAOu0BBm8kIzag6abqdJznggEgHwYkbyBYmDumtAdMPTuBCH1JTSU6ZB992aFmudys5vj8YZCySMxpO42hXw8VUZCY6XpH3cfc5MaLZAHxp0FNXEE2ZB8vdeZCYE4ZBdZBWqXNvZBTL74HKZCk2cFGziTG3NfK2Lshq3NPWXPypgPTA"
+    FB: "https://graph.facebook.com/v12.0/me?fields=id%2Cname%2Coverall_star_rating%2Crating_count%2Cratings%7Bcreated_time%2Creview_text%2Crating%2Creviewer%7Bid%2Cfirst_name%2Cprofile_pic%7D%7D&access_token=EAAFcRxx4sPIBAM3JV6E05qHttc8OMCkIEYTiZBGZApMCwjTA2x2qgHLOU6dUIzbyhbcQQdnm8lGsD9URmyhAzZADGn5rmiZCILKt89rCqwT0MvuuM6hRqrPhbb9L0qIP95I8yZCwWFBAx01UtP8YT1mvIiqdBAX2zyn2z8HwZCy5aJbN1DNnqx"
   }
 } else {
   myConstClass = {
     BASE_URL: "http://jojosnailandbeautytrainingacademy.paulrobsondev.co.uk/back/public",
     ST: "ST",
     TC: "TC",
-    FB: "https://graph.facebook.com/v12.0/me?fields=id%2Cname%2Coverall_star_rating%2Crating_count%2Cratings{created_time,review_text,rating,reviewer{id,first_name,profile_pic}}&access_token=EAAFcRxx4sPIBAOu0BBm8kIzag6abqdJznggEgHwYkbyBYmDumtAdMPTuBCH1JTSU6ZB992aFmudys5vj8YZCySMxpO42hXw8VUZCY6XpH3cfc5MaLZAHxp0FNXEE2ZB8vdeZCYE4ZBdZBWqXNvZBTL74HKZCk2cFGziTG3NfK2Lshq3NPWXPypgPTA"
+    FB: "https://graph.facebook.com/v12.0/me?fields=id%2Cname%2Coverall_star_rating%2Crating_count%2Cratings%7Bcreated_time%2Creview_text%2Crating%2Creviewer%7Bid%2Cfirst_name%2Cprofile_pic%7D%7D&access_token=EAAFcRxx4sPIBAM3JV6E05qHttc8OMCkIEYTiZBGZApMCwjTA2x2qgHLOU6dUIzbyhbcQQdnm8lGsD9URmyhAzZADGn5rmiZCILKt89rCqwT0MvuuM6hRqrPhbb9L0qIP95I8yZCwWFBAx01UtP8YT1mvIiqdBAX2zyn2z8HwZCy5aJbN1DNnqx"
   }
 }
-
-
-
+ 
 export default myConstClass

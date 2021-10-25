@@ -21,7 +21,7 @@
     height: 100%;
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1024px) {
     .NavigationItems {
         grid-template-rows: 1fr;
         grid-auto-flow: column;

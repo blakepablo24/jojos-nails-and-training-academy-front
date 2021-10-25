@@ -5,10 +5,11 @@
     display: grid;
     place-items: center center;
     grid-template-columns: 1fr 8fr 1fr;
+    position: relative;
 }
 
 .imageContainer {
-    position: relative;
+    position: absolute;
     height: 100%;
     width: 100%;
     display: grid;
@@ -18,10 +19,25 @@
 
 .imageNav, .notSelectable {
     font-size: 1.5rem;
+    position: absolute;
+    z-index: 5;
+    height: 95%;
+    background: rgb(181, 205, 163, 0.25);
+    width: 5vw;
+    display: grid;
+    place-items: center center;
+}
+
+.next {
+    right: 0.5%;
+}
+
+.prev {
+   left: 0.5%;
 }
 
 .landingPageImage {
-    height: 60vh;
+    height: 79.5vh;
     width: 100%;
 }
 

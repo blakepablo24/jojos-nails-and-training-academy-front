@@ -8,8 +8,8 @@
 }
 
 .courseImage {
-    width: 240px;
-    height: 240px;
+    width: 40vh;
+    height: 40vh;
     margin-bottom: 1vh;
     border-radius: 2.5px;
 }
@@ -53,4 +53,17 @@
     display: grid;
     place-items: center center;
     grid-auto-flow: column;
+}
+
+@media only screen and (min-width: 1024px) {
+
+    .SingleTrainingCourse {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .courseImage {
+        grid-row: 2 / 7;
+        width: 60vh;
+        height: 60vh;
+    }
 }

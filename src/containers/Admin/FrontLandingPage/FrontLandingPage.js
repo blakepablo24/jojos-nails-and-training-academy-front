@@ -25,7 +25,7 @@ class FrontLandingPage extends Component {
     componentDidMount(){
         let prePopulatedImages = [];
         axios.get(CONST.BASE_URL + '/api/get-front-page-images').then(response => {
-            response.data.db_images.forEach(db_image => {
+            response.data.all_db_images.forEach(db_image => {
                 prePopulatedImages.push({ id: db_image.id, url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
             });
             this.setState({
@@ -58,7 +58,7 @@ class FrontLandingPage extends Component {
             let prePopulatedImages = [];
             axios.defaults.withCredentials = true;
             axios.get(CONST.BASE_URL + '/api/get-front-page-images').then(response => {
-                response.data.db_images.forEach(db_image => {
+                response.data.all_db_images.forEach(db_image => {
                     prePopulatedImages.push({ id: db_image.id, url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
                 });
                 this.setState({
@@ -85,7 +85,7 @@ class FrontLandingPage extends Component {
             let prePopulatedImages = [];
             axios.defaults.withCredentials = true;
             axios.get(CONST.BASE_URL + '/api/get-front-page-images').then(response => {
-                response.data.db_images.forEach(db_image => {
+                response.data.all_db_images.forEach(db_image => {
                     prePopulatedImages.push({ id: db_image.id, url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
                 });
                 this.setState({

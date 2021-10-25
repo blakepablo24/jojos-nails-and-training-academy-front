@@ -13,6 +13,7 @@ import Aux from '../../hoc/Auxilary/Auxilary';
 import Latest from '../../components/Ui/Navigation/Latest/Latest';
 import { TiShoppingCart } from "react-icons/ti";
 import FUNCTIONS from '../../functions/functions';
+import logoImage from '../../components/Ui/Navigation/Header/Logo/logo.png';
 
 class SingleSalonTreatment extends Component {
 
@@ -90,6 +91,8 @@ class SingleSalonTreatment extends Component {
 
         if(this.state.image) {
             courseImage = <img src={CONST.BASE_URL + "/storage/images/salon-treatment-images/single-salon-treatment-images/" + this.state.image} alt="" className={classes.treatmentImage} />;
+        } else {
+            courseImage = <img src={logoImage} alt="" className={classes.treatmentImage} />;
         }
 
         let successMsg = "";
@@ -111,16 +114,20 @@ class SingleSalonTreatment extends Component {
             }
         }
 
-        let shownButton = <button onClick={this.props.addToShoppingBasket.bind(this, this.props.match.params.id + CONST.ST, "", "", this.state.title, this.state.price, this.state.subCategoryTitle, CONST.ST)}>Add to Basket</button>;
+        let shownButton = "";
 
-        if(JSON.parse(localStorage.getItem("basketItems"))){
-            if(FUNCTIONS.checkBasket(Number(this.props.match.params.id) + CONST.ST)){
-                shownButton = <button className="customButton" onClick={this.props.toggleBasket}><TiShoppingCart />Continue to Basket</button>;
+        if(!this.props.auth){
+            shownButton = <button onClick={this.props.addToShoppingBasket.bind(this, this.props.match.params.id + CONST.ST, "", "", this.state.title, this.state.price, this.state.subCategoryTitle, CONST.ST)}>Add to Basket</button>;
+
+            if(JSON.parse(localStorage.getItem("basketItems"))){
+                if(FUNCTIONS.checkBasket(Number(this.props.match.params.id) + CONST.ST)){
+                    shownButton = <button className="customButton" onClick={this.props.toggleBasket}><TiShoppingCart />Continue to Basket</button>;
+                } else {
+                    shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.ST, "", "", this.state.title, this.state.price, this.state.subCategoryTitle, CONST.ST)}>Add to Basket</button>;
+                }
             } else {
                 shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.ST, "", "", this.state.title, this.state.price, this.state.subCategoryTitle, CONST.ST)}>Add to Basket</button>;
             }
-        } else {
-            shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.ST, "", "", this.state.title, this.state.price, this.state.subCategoryTitle, CONST.ST)}>Add to Basket</button>;
         }
 
         return(

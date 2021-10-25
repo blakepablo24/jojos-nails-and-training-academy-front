@@ -35,3 +35,21 @@
 .description {
     margin-top: 2.5vh;
 }
+
+@media only screen and (min-width: 1024px) {
+    .SingleSalonTreatment {
+        grid-template-columns: 1fr 1fr;
+    }
+    .treatmentImage {
+        grid-column: 1 / 2;
+        grid-row: 2 / 7;
+        width: 60vh;
+        height: 60vh;
+    }
+    .title {
+        grid-column: 2 / 3;
+    }
+    .description {
+        grid-column: 2 / 3;
+    }
+}

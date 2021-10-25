@@ -1,4 +1,5 @@
 .FrontLandingPage {
+    margin-top: 20vh;
     grid-area: header/latest/main;
     padding: 1vh 0 2.5vh 0;
     width: 100%;

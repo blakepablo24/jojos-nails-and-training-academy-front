@@ -12,7 +12,7 @@
         ;
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1024px) {
     .Layout {
         grid:
             'header toolbar toolbar toolbar toolbar toolbar' 15vh
