@@ -11,10 +11,10 @@
         background: var(--main-bg);
         position: fixed;
         z-index: 5;
-        height: 21vh;
+        height: 20vh;
         width: 15%;
         box-shadow: none;
-        border-bottom-right-radius: 85%;
-        border-right: solid 3px var(--main-txt);
+        border-top-right-radius: 75%;
+        border-right: solid 2px var(--main-txt);
     }
 }

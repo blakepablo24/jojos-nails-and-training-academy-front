@@ -1,0 +1,46 @@
+.Reviews {
+    margin-top: 2.5vh;
+}
+
+.ReviewsContainer {
+    display: grid;
+    place-items: center center;
+    grid-template-columns: 1fr 8fr 1fr;
+}
+
+.notSelectable {
+    position: relative;
+    color: lightgray;
+}
+
+.ReviewsContainer svg {
+    font-size: 1.5rem;
+}
+
+.Review {
+    margin: 2.5vh 0;
+    height: 30vh;
+    background: whitesmoke;
+    border-radius: 5px;
+    padding: 2.5px;
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.Review::-webkit-scrollbar {
+    display: none;
+  }
+
+.fbHeader, .fbStars {
+    width: 100%;
+    display: grid;
+    place-items: center center;
+    grid-auto-flow: column;
+    font-size: 1.5rem;
+}
+
+.fbStars {
+    color: goldenrod;
+    width: 85%;
+}

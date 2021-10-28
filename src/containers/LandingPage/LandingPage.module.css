@@ -4,43 +4,56 @@
     height: 100%;
     display: grid;
     place-items: center center;
-    grid-template-columns: 1fr 8fr 1fr;
-    position: relative;
 }
 
 .imageContainer {
-    position: absolute;
     height: 100%;
     width: 100%;
     display: grid;
     grid-auto-flow: column;
     place-items: center center;
+    position: relative;
 }
 
 .imageNav, .notSelectable {
     font-size: 1.5rem;
     position: absolute;
-    z-index: 5;
-    height: 95%;
-    background: rgb(181, 205, 163, 0.25);
-    width: 5vw;
+    z-index: 1;
+    height: 25%;
+    background: rgb(181, 205, 163, 0.75);
+    width: 10%;
     display: grid;
     place-items: center center;
+    border-radius: 2.5px;
+}
+
+.notSelectable {
+    display: none;
 }
 
 .next {
-    right: 0.5%;
+    right: 1%;
 }
 
 .prev {
-   left: 0.5%;
+   left: 1%;
 }
 
-.landingPageImage {
-    height: 79.5vh;
+.landingPageImage { 
     width: 100%;
+    height: 72.5vh;
 }
 
 .notSelectable {
     color: lightgray;
+}
+
+@media only screen and (min-width: 1024px) {
+    .landingPageImage { 
+        height: 80vh;
+    }
+
+    .imageNav, .notSelectable {
+        width: 5%;
+    }
 }

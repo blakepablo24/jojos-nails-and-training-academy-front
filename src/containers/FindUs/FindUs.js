@@ -3,6 +3,7 @@ import classes from './FindUs.module.css';
 import Latest from '../../components/Ui/Navigation/Latest/Latest';
 import Aux from '../../hoc/Auxilary/Auxilary';
 import Map from '../../components/Map/Map';
+import Reviews from '../../components/Ui/Reviews/Reviews';
 
 const location = {
     address: 'JoJos Nails, Beauty & Training Academy',
@@ -17,7 +18,7 @@ class FindUs extends Component {
                 <Latest message="Come and Visit the Salon" />
                 <div className={classes.FindUs}>
                     <Map location={location} zoomLevel={17}/>
-                    {/* <div className="elfsight-app-46f51913-5254-4ec0-b0c4-7ecafd184bf2"></div> */}
+                    <Reviews />
                 </div>
             </Aux>
         )

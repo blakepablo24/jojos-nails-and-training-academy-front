@@ -5,13 +5,16 @@ import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
 import Latest from '../../components/Ui/Navigation/Latest/Latest';
 import Aux from '../../hoc/Auxilary/Auxilary';
 import axios from 'axios';
+import Reviews from '../../components/Ui/Reviews/Reviews';
 
 class LandingPage extends Component {
     
     state = {
         images: [],
         largeImages: [],
-        image: 0
+        smallImages: [],
+        image: 0,
+        landscape: false
     }
 
     componentDidMount(){
@@ -25,16 +28,41 @@ class LandingPage extends Component {
                 largePrePopulatedImages.push({ url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + large_db_image.image});
             });
 
+            this.setState({
+                largeImages: largePrePopulatedImages,
+                smallImages: prePopulatedImages,
+            })
+
+            this.displayedImagesHandler();
+        })
+    }
+
+    displayedImagesHandler = () => {
+        if(!this.state.landscape){
             if(window.innerWidth > window.innerHeight){
                 this.setState({
-                    images: largePrePopulatedImages
+                    images: this.state.largeImages,
+                    landscape: true
                 })
             } else {
                 this.setState({
-                    images: prePopulatedImages,
+                    images: this.state.smallImages,
+                    landscape: false
                 })
             }
-        })
+        } else {
+            if(window.innerWidth < window.innerHeight){
+                this.setState({
+                    images: this.state.smallImages,
+                    landscape: false
+                })
+            } else {
+                this.setState({
+                    images: this.state.largeImages,
+                    landscape: true
+                })
+            }
+        }
     }
 
     nextImage = () => {
@@ -63,13 +91,8 @@ class LandingPage extends Component {
     }
 
     render(){
-        // function handleResize() {
-        //     if(window.innerWidth === 1024){
-        //         console.log("large screen");
-        //     }
-        // }
               
-        // window.addEventListener('resize', handleResize)
+        window.addEventListener('resize', this.displayedImagesHandler)
         
         let imageSlideShow = "";
 
@@ -79,8 +102,8 @@ class LandingPage extends Component {
 
         window.addEventListener("keydown", this.keyDownHandler);
 
-        let leftArrow = <div className={classes.imageNav +" "+ classes.prev}><BiLeftArrow onClick={this.previousImage} /></div>;
-        let rightArrow = <div className={classes.imageNav +" "+ classes.next}><BiRightArrow onClick={this.nextImage} /></div>;
+        let leftArrow = <div className={classes.imageNav +" "+ classes.prev} onClick={this.previousImage} ><BiLeftArrow /></div>;
+        let rightArrow = <div className={classes.imageNav +" "+ classes.next} onClick={this.nextImage} ><BiRightArrow /></div>;
 
         if(this.state.image === (this.state.images.length - 1)) {
             rightArrow = <div className={classes.notSelectable +" "+ classes.next}><BiRightArrow /></div>;
@@ -94,13 +117,13 @@ class LandingPage extends Component {
             <Aux>
                 <Latest message="Specializing in only the best training" />
                 <div className={classes.LandingPage}>
-                    {leftArrow}
                     <div className={classes.imageContainer}>
-                        {imageSlideShow}
+                        {leftArrow}
+                            {imageSlideShow}
+                        {rightArrow}
                     </div>
-                    {rightArrow}
+                    <Reviews />
                 </div>
-
             </Aux>
         )
     }

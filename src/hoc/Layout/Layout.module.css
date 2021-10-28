@@ -6,8 +6,8 @@
         'toolbar toolbar toolbar toolbar toolbar toolbar' 7.5vh
         'header header header header header header' 15vh
         'latest latest latest latest latest latest' 5vh
-        'main main main main main main' minmax(62.5vh, auto)
-        'footer footer footer footer footer footer' 40vh
+        'main main main main main main' minmax(72.5vh, auto)
+        'footer footer footer footer footer footer' minmax(20vh, auto)
         / 1fr 1fr 1fr 1fr 1fr 1fr
         ;
 }
@@ -18,7 +18,7 @@
             'header toolbar toolbar toolbar toolbar toolbar' 15vh
             'latest latest latest latest latest latest' 5vh
             'main main main main main main' minmax(80vh, auto)
-            'footer footer footer footer footer footer' 40vh
+            'footer footer footer footer footer footer' minmax(20vh, auto)
             / 1fr 1fr 1fr 1fr 1fr 1fr
         ;
     }

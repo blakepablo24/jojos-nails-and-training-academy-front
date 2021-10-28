@@ -59,34 +59,7 @@ class Layout extends Component {
         bookingRequestNumberError: "",
         bookingRequestTimeError: "",
         treatmentsStartdateError: "",
-        trainingCourseStartdateError: "",
-        loading: "",
-        facebookInfo: {
-            overall_star_rating: 0,
-            rating_count: 0,
-            ratings: [{review_text:<Loading component={true}/>}]
-        },
-        number: 0,
-    }
-    
-    componentDidMount = () => {
-        axios.get(CONST.FB).then(response => {
-            this.setState({
-                facebookInfo: {overall_star_rating: response.data.overall_star_rating, rating_count: response.data.rating_count, ratings: response.data.ratings.data.slice(0, 10)}
-            })
-        })
-    }
-
-    next = () => {
-        this.setState({
-            number: this.state.number + 1
-        })
-    }
-
-    previous = () => {
-        this.setState({
-            number: this.state.number - 1
-        })
+        trainingCourseStartdateError: ""
     }
 
     sideDrawerToggleHandler = () => {
@@ -424,14 +397,7 @@ class Layout extends Component {
                     <ProtectedRoute path="/admin/edit-training-course/:id" exact component={EditTrainingCourse} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/front-landing-page" exact component={FrontLandingPage} auth={isAuthenticated} />
                 </Switch>
-                <Footer 
-                    facebookInfo={this.state.facebookInfo}
-                    number={this.state.number}
-                    next={this.next} 
-                    previous={this.previous}
-                    sendData={this.getData}
-                    scrollToTop={this.scrollToTop}
-                />
+                <Footer sendData={this.getData} scrollToTop={this.scrollToTop} />
             </div>
         )
     }
