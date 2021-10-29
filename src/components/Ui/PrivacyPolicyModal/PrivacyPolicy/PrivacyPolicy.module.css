@@ -1,0 +1,19 @@
+.PrivacyPolicy {
+    position: fixed;
+    z-index: 6;
+    background: var(--main-bg);
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 5px;
+    display: grid;
+    place-items: center center;
+}
+
+.PrivacyPolicy h4 {
+    margin-top: 25px;
+}
+
+.logo {
+    width: 25%;
+}

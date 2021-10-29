@@ -1,9 +1,13 @@
 import React from 'react';
-import PrivacyPolicy from './PrivacyPolicy.module.css';
+import classes from './PrivacyPolicy.module.css';
+import Logo from '../../Navigation/Header/Logo/Logo';
 
-const privacyPolicy = () => (
+const privacyPolicy = (props) => (
 
-<div>
+<div className={classes.PrivacyPolicy}>
+    <div className={classes.logo}>
+        <Logo />
+    </div>
     <h3>PRIVACY POLICY</h3>
 
     <h4>PURPOSE</h4>
@@ -28,7 +32,7 @@ const privacyPolicy = () => (
     </ul>
 
     <h4>COOKIES</h4>
-    <p>Our website uses cookies to distinguish you from other users of our website. This helps us to provide you with a good experience when you browse our website and also allows us to improve our site. For detailed information on the cookies we use and the purposes for which we use them see our Cookie policy (http://www.jojosnailsandbeautyacademy.co.uk/cookie-policy).</p>
+    <p>Our website uses cookies to distinguish you from other users of our website. This helps us to provide you with a good experience when you browse our website and also allows us to improve our site. For detailed information on the cookies we use and the purposes for which we use them see our Cookie policy</p>
 
     <h4>USES MADE OF THE INFORMATION</h4>
     <p>We use information held about you in the following ways:</p>
@@ -81,6 +85,7 @@ const privacyPolicy = () => (
 
     <h4>CONTACT</h4>
     <p>Questions, comments and requests regarding this privacy policy are welcomed and should be addressed to JoJo's Nails and Beauty Academy, 16 Allfoxton Road, Horfield, Bristol, BS7 9NJ or info@jojosnailsandbeautyacademy.co.uk</p>
+    <button className="customButton">Close</button>
 </div>
 )
 

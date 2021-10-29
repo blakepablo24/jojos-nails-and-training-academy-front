@@ -331,7 +331,12 @@ class Layout extends Component {
     render() {
         let isAuthenticated = this.state.isAuthenticated;
         let sideDrawer = <SideDrawer open={this.state.showSideDrawer} clicked={this.sideDrawerToggleHandler} auth={this.state.isAuthenticated} sendData={this.getData} />;
+        let privayPolicy = "";
         
+        if(JSON.parse(localStorage.getItem("user"))){
+            isAuthenticated = true;
+        }
+
         if(JSON.parse(localStorage.getItem("user"))){
             isAuthenticated = true;
         }
@@ -345,6 +350,7 @@ class Layout extends Component {
 
         return(
             <div className={classes.Layout}>
+                {privayPolicy}
                 {this.state.loading}
                 <Toolbar showSideDrawer={this.state.showSideDrawer} numberOfItemsInBasket={this.state.itemsInBasket.length} toggleBasket={this.basketToggleHandler} menu={this.state.menu} clicked={this.sideDrawerToggleHandler} auth={isAuthenticated} />
                 {sideDrawer}
