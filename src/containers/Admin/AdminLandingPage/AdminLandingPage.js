@@ -7,6 +7,8 @@ import { BiPlus } from "react-icons/bi";
 import ChangePassword from '../../../components/Ui/ChangePassword/ChangePassword';
 import Loading from '../../../components/Ui/Loading/Loading';
 import { Redirect } from 'react-router';
+import Aux from '../../../hoc/Auxilary/Auxilary';
+import Latest from '../../../components/Ui/Navigation/Latest/Latest';
 
 class AdminLandingPage extends Component {
     
@@ -151,62 +153,65 @@ class AdminLandingPage extends Component {
         }
 
         return(
-            <div className={classes.AdminLandingPage}>
-                {changePassword}
-                {this.state.loading}
-                {this.state.redirectOnSuccess}
-                <div className={classes.topSellersContainer}>
-                    <div className={classes.topSeller}>
-                        <h3>Current Top Course</h3>
-                        <p>{this.state.mostPopularCourse.title} - {this.state.mostPopularCourse.enquires}</p>
+            <Aux>
+                <Latest message="Admin Dashboard"/>
+                <div className={classes.AdminLandingPage + " mainAdminSection"}>
+                    {changePassword}
+                    {this.state.loading}
+                    {this.state.redirectOnSuccess}
+                    <div className={classes.topSellersContainer}>
+                        <div className={classes.topSeller}>
+                            <h3>Current Top Course</h3>
+                            <p>{this.state.mostPopularCourse.title} - {this.state.mostPopularCourse.enquires}</p>
+                        </div>
+                        <div className={classes.topSeller}>
+                            <h3>Current Top Treatment</h3>
+                            <p>{this.state.mostPopularTreatmentCategory} - {this.state.mostPopularTreatment.title} - {this.state.mostPopularTreatment.enquires}</p>
+                        </div>
                     </div>
-                    <div className={classes.topSeller}>
-                        <h3>Current Top Treatment</h3>
-                        <p>{this.state.mostPopularTreatmentCategory} - {this.state.mostPopularTreatment.title} - {this.state.mostPopularTreatment.enquires}</p>
+                    <div className={classes.allStatsContainer}>
+                        <div className={classes.singleStatContainer}>
+                            <p>Training Course Enquiries</p>
+                            <p className={classes.statNumber}>{this.state.trainingCourseEnquiries}</p>
+                        </div>
+                        <div className={classes.singleStatContainer}>
+                            <p>Salon Treatment Enquiries</p>
+                            <p className={classes.statNumber}>{this.state.salonTreatmentEnquiries}</p>
+                        </div>
+                        <Link to="/admin/gift-vouchers-pending" className={classes.singleStatContainer}>
+                            <p>Gift Vouchers Pending</p>
+                            <p className={classes.statNumber}>{this.state.giftVoucherPurchases}</p>
+                        </Link>
+                        <Link to="/admin/front-landing-page" className={classes.singleStatContainer}>
+                            <p>Front Page Images</p>
+                            <p className={classes.statNumber}>{this.state.frontPageImages}</p>
+                        </Link>
+                        <Link to="/training-courses" className={classes.singleStatContainer}>
+                            <p>Training Courses</p>
+                            <p className={classes.statNumber}>{this.state.trainingCourses}</p>
+                        </Link>
+                        <Link to="/salon-treatments" className={classes.singleStatContainer}>
+                            <p>Salon Treatments</p>
+                            <p className={classes.statNumber}>{this.state.salonTreatments}</p>
+                        </Link>
+                    </div>
+                    <div className={classes.newServicesContainer}>
+                        <Link to="/admin/new-salon-treatment" className={classes.newService}>
+                            <BiPlus />
+                            <h4>New Salon Treatment</h4>
+                        </Link>
+                        <Link to="/admin/add-edit-salon-treatment" className={classes.newSubService}>
+                            <BiPlus />
+                            <h4>Add / Edit Salon Treatment Category</h4>
+                        </Link>
+                        <Link to="/admin/new-training-course" className={classes.newService}>
+                            <BiPlus />
+                            <h4>New Training Course</h4>
+                        </Link>
+                        <button onClick={this.changePasswordPopUpHandler} className={classes.changePassword+" customButton"}>change password</button>
                     </div>
                 </div>
-                <div className={classes.allStatsContainer}>
-                    <div className={classes.singleStatContainer}>
-                        <p>Training Course Enquiries</p>
-                        <p className={classes.statNumber}>{this.state.trainingCourseEnquiries}</p>
-                    </div>
-                    <div className={classes.singleStatContainer}>
-                        <p>Salon Treatment Enquiries</p>
-                        <p className={classes.statNumber}>{this.state.salonTreatmentEnquiries}</p>
-                    </div>
-                    <Link to="/admin/gift-vouchers-pending" className={classes.singleStatContainer}>
-                        <p>Gift Vouchers Pending</p>
-                        <p className={classes.statNumber}>{this.state.giftVoucherPurchases}</p>
-                    </Link>
-                    <Link to="/admin/front-landing-page" className={classes.singleStatContainer}>
-                        <p>Front Page Images</p>
-                        <p className={classes.statNumber}>{this.state.frontPageImages}</p>
-                    </Link>
-                    <Link to="/training-courses" className={classes.singleStatContainer}>
-                        <p>Training Courses</p>
-                        <p className={classes.statNumber}>{this.state.trainingCourses}</p>
-                    </Link>
-                    <Link to="/salon-treatments" className={classes.singleStatContainer}>
-                        <p>Salon Treatments</p>
-                        <p className={classes.statNumber}>{this.state.salonTreatments}</p>
-                    </Link>
-                </div>
-                <div className={classes.newServicesContainer}>
-                    <Link to="/admin/new-salon-treatment" className={classes.newService}>
-                        <BiPlus />
-                        <h4>New Salon Treatment</h4>
-                    </Link>
-                    <Link to="/admin/add-edit-salon-treatment" className={classes.newSubService}>
-                        <BiPlus />
-                        <h4>Add / Edit Salon Treatment Category</h4>
-                    </Link>
-                    <Link to="/admin/new-training-course" className={classes.newService}>
-                        <BiPlus />
-                        <h4>New Training Course</h4>
-                    </Link>
-                    <button onClick={this.changePasswordPopUpHandler} className={classes.changePassword+" customButton"}>change password</button>
-                </div>
-            </div>
+            </Aux>
         )
     }
 }

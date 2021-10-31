@@ -5,6 +5,8 @@ import CONST from '../../../constants/constants';
 import GoBack from '../../../components/Ui/GoBack/GoBack';
 import Loading from '../../../components/Ui/Loading/Loading';
 import ConfirmDelete from '../../../components/Ui/ConfirmDelete/ConfirmDelete';
+import Aux from '../../../hoc/Auxilary/Auxilary';
+import Latest from '../../../components/Ui/Navigation/Latest/Latest';
 
 class GiftVouchersPending extends Component {
 
@@ -101,57 +103,60 @@ class GiftVouchersPending extends Component {
 
     render(){
         return(
-            <div className={classes.GiftVouchersPending}>
-                {this.state.confirmDelete}
-                {this.state.loading}
-                <GoBack back={() => this.props.history.goBack()} />
-                <div className={classes.GiftVoucherHeader}>
-                {this.state.voucherOptions.map((voucherOption, key) =>
-                    <p className={voucherOption.title === this.state.shownVouchers 
-                        ? classes.selectedVoucherType : classes.voucherType
-                    } 
-                    key={key}
-                    onClick={this.headerClickHandler.bind(this, voucherOption.title)}
-                    >
-                        {voucherOption.title}
-                    </p>
-                )}
+            <Aux>
+                <Latest message={"Gift Vouchers Pending"}/>
+                <div className={classes.GiftVouchersPending}>
+                    {this.state.confirmDelete}
+                    {this.state.loading}
+                    <GoBack back={() => this.props.history.goBack()} />
+                    <div className={classes.GiftVoucherHeader}>
+                    {this.state.voucherOptions.map((voucherOption, key) =>
+                        <p className={voucherOption.title === this.state.shownVouchers 
+                            ? classes.selectedVoucherType : classes.voucherType
+                        } 
+                        key={key}
+                        onClick={this.headerClickHandler.bind(this, voucherOption.title)}
+                        >
+                            {voucherOption.title}
+                        </p>
+                    )}
+                    </div>
+                    <div className={classes.allVouchersContainer}>
+                        {
+                        this.state.shownVouchersArray.vouchers ?
+                        this.state.shownVouchersArray.vouchers.map((voucher, key) =>
+                            <div className={classes.customerVoucherContainer} key={key}>
+                                <p className={classes.left}>Name:</p>
+                                <p className={classes.right}>{voucher.name}</p>
+                                <p className={classes.left}>Number:</p>
+                                <p className={classes.right}>{voucher.number}</p>
+                                <p className={classes.left}>Email:</p>
+                                <p className={classes.right}>{voucher.email}</p>
+                                <p className={classes.left}>From:</p>
+                                <p className={classes.right}>{voucher.from}</p>
+                                <p className={classes.left}>To:</p>
+                                <p className={classes.right}>{voucher.to}</p>
+                                <p className={classes.left}>Message:</p>
+                                <p className={classes.right}>{voucher.message}</p>
+                                <p className={classes.right}>Value:</p>
+                                <p className={classes.right}>£{voucher.value}</p>
+                                <p className={classes.left}>Code:</p>
+                                <p className={classes.right}>{voucher.voucher_code}</p>
+                                <p className={classes.left}>Date:</p>
+                                <p className={classes.right}>{new Date(voucher.updated_at).toLocaleDateString()} - {new Date(voucher.updated_at).toLocaleTimeString()}</p>
+                                {voucher.pending ?
+                                <div className={classes.controlsContainer}>
+                                    <h4 className="success" onClick={this.confirmApproveHandler.bind(this, voucher.id)}>Approve</h4>
+                                    <h4 className="error" onClick={this.confirmDeleteHandler.bind(this, voucher.id)}>Remove</h4>
+                                </div>: ""
+                                }
+                            </div>
+                            )
+                        : "No Pending Vouchers" 
+                        }
+                    </div>
                 </div>
-                <div className={classes.allVouchersContainer}>
-                    {
-                       this.state.shownVouchersArray.vouchers ?
-                       this.state.shownVouchersArray.vouchers.map((voucher, key) =>
-                        <div className={classes.customerVoucherContainer} key={key}>
-                            <p className={classes.left}>Name:</p>
-                            <p className={classes.right}>{voucher.name}</p>
-                            <p className={classes.left}>Number:</p>
-                            <p className={classes.right}>{voucher.number}</p>
-                            <p className={classes.left}>Email:</p>
-                            <p className={classes.right}>{voucher.email}</p>
-                            <p className={classes.left}>From:</p>
-                            <p className={classes.right}>{voucher.from}</p>
-                            <p className={classes.left}>To:</p>
-                            <p className={classes.right}>{voucher.to}</p>
-                            <p className={classes.left}>Message:</p>
-                            <p className={classes.right}>{voucher.message}</p>
-                            <p className={classes.right}>Value:</p>
-                            <p className={classes.right}>£{voucher.value}</p>
-                            <p className={classes.left}>Code:</p>
-                            <p className={classes.right}>{voucher.voucher_code}</p>
-                            <p className={classes.left}>Date:</p>
-                            <p className={classes.right}>{new Date(voucher.updated_at).toLocaleDateString()} - {new Date(voucher.updated_at).toLocaleTimeString()}</p>
-                            {voucher.pending ?
-                            <div className={classes.controlsContainer}>
-                                <h4 className="success" onClick={this.confirmApproveHandler.bind(this, voucher.id)}>Approve</h4>
-                                <h4 className="error" onClick={this.confirmDeleteHandler.bind(this, voucher.id)}>Remove</h4>
-                            </div>: ""
-                            }
-                        </div>
-                        )
-                       : "No Pending Vouchers" 
-                    }
-                </div>
-            </div>
+            </Aux>
         )
     }
 }

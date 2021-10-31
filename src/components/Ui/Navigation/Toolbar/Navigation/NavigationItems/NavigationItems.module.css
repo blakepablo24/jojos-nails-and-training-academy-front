@@ -28,12 +28,8 @@
     }
     
     .topNavItemsContainer, .bottomNavItemsContainer {
-        place-self: start center;
-        width: 100%;
-        height: 85%;
-        display: grid;
-        place-items: center center;
         grid-auto-flow: column;
+        height: 100%;
     }
 
     .smallScreenOnly{

@@ -31,6 +31,7 @@ a {
   text-decoration: none;
   font-family: 'Poiret One', cursive;
   color: var(--main-txt);
+  cursor: pointer;
 }
 
 p {
@@ -190,5 +191,28 @@ input:focus, textarea:focus, select:focus {
 @media only screen and (min-width: 1024px) {
   html {
     font-size: 1.2rem;
+  }
+
+  .customButton {
+    width: 20%;
+  }
+
+  .customButton:hover {
+    background: var(--second-bg);
+    color: var(--main-txt);
+  }
+
+  .largeNavItem {
+    padding: 10% 5%;
+    border-radius: 5px;
+  }
+
+  .largeNavItem:hover {
+    background: var(--second-bg);
+    color: var(--main-txt);
+  }
+
+  .mainAdminSection {
+    margin-top: 25vh;
   }
 }

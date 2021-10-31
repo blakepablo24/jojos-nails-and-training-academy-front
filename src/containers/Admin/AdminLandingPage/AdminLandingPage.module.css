@@ -1,5 +1,5 @@
 .AdminLandingPage {
-    grid-area: header/latest/main/footer;
+    grid-area: main;
     padding: 1vh 0 2.5vh 0;
     width: 100%;
     display: grid;
@@ -88,8 +88,9 @@
 
 @media only screen and (min-width: 1024px) {
     .AdminLandingPage {
-        padding: 10vh 0 2.5vh 0;
+        grid-area: header/main;
     }
+
     .changePassword {
         width: 25%;
     }
@@ -101,10 +102,18 @@
         margin-right: 15%;
     }
 
+    .allStatsContainer {
+        grid: 20vh / 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+
     .topSellersContainer{
         width: 100%;
         display: grid;
         place-items: center center;
         grid-auto-flow: column;
+    }
+
+    .singleStatContainer {
+        grid-column: span 1;
     }
 }

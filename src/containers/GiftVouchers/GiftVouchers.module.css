@@ -101,3 +101,10 @@
     place-items: center center;
     grid-auto-flow: column;
 }
+
+@media only screen and (min-width: 1024px) {
+    .GiftVouchers {
+        width: 50%;
+        margin: 0 25%;
+    }
+}

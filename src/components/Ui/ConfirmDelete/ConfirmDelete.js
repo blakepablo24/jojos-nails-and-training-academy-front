@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ConfirmDelete.module.css';
 import Backdrop from '../Backdrop/Backdrop';
 import Aux from '../../../hoc/Auxilary/Auxilary';
-import Logo from '../Navigation/Header/Header';
+import Logo from '../Navigation/Header/Logo/Logo';
 
 const confirmDelete = (props) => {
 

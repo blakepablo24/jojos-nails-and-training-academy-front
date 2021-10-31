@@ -39,3 +39,20 @@
 .approve {
     background: var(--scs-bg);
 }
+
+.Logo {
+    width: 25%;
+}
+
+@media only screen and (min-width: 1024px) {
+    .confirmDeleteContainer {
+        top: 35%;
+        left: 25%;
+        height: 30%;
+        width: 50%;
+        position: fixed;
+        z-index: 10;
+        display: grid;
+        place-items: end center;
+    }
+}

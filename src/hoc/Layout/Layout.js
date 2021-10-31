@@ -66,11 +66,11 @@ class Layout extends Component {
     }
 
     componentDidMount = () => { 
-        if(!JSON.parse(localStorage.getItem("visitedBefore"))) {
+        if(!this.getCookie("visitedBefore")) {
+            console.log(this.getCookie("visitedBefore"));
             this.setState({
                 showPrivacyPolicyModal: true
             })
-            this.getCookie("visitedBefore");
         }
     }
 
@@ -351,9 +351,9 @@ class Layout extends Component {
     }
 
     showPrivacyPolicyToggleHandler = () => {
-        // this.setState({
-        //     showPrivacyPolicy: !this.state.showPrivacyPolicy
-        // })
+        this.setState({
+            showPrivacyPolicy: !this.state.showPrivacyPolicy
+        })
     }
 
     setCookie = (cname, cvalue, exdays) => {
@@ -364,7 +364,14 @@ class Layout extends Component {
     }
 
     getCookie = (cname) => {
-        console.log(document.cookie);
+        let allCookies = document.cookie.split(';');
+        let cookieExists = false;
+        allCookies.forEach(cookie => {
+            if(cookie === cname+"="+true){
+                cookieExists = true
+            }
+        });
+        return cookieExists;
     }
 
     render() {

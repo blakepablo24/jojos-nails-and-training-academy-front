@@ -7,6 +7,9 @@ import GoBack from '../../../components/Ui/GoBack/GoBack';
 import logoImage from '../../../components/Ui/Navigation/Header/Logo/logo.png';
 import FlashMessage from 'react-flash-message';
 import ConfirmDelete from '../../../components/Ui/ConfirmDelete/ConfirmDelete';
+import Aux from '../../../hoc/Auxilary/Auxilary';
+import Latest from '../../../components/Ui/Navigation/Latest/Latest';
+
 
 class AddEditSalonTreatmentCategories extends Component {
 
@@ -182,17 +185,19 @@ class AddEditSalonTreatmentCategories extends Component {
                 </FlashMessage>
         }
         return (
-            <div className={classes.AddCurriculum}>
-                <GoBack back={() => this.props.history.goBack()} />
-                <h2>{this.state.courseName} Salon Treatment Categories</h2>
-                <div className={classes.newCurriculumItemContainer}>
-                {this.state.confirmDelete}
-                {updatedMessage}
-                {this.createUI()}
-                <div className={classes.newCurriculumItem} onClick={this.addClick.bind(this)}><BiFolderPlus /> <h3>Add New</h3></div>
+            <Aux>
+                <Latest message={"Salon Treatment Categories"}/>
+                <div className={classes.AddCurriculum}>
+                    <GoBack back={() => this.props.history.goBack()} />
+                    <div className={classes.newCurriculumItemContainer}>
+                    {this.state.confirmDelete}
+                    {updatedMessage}
+                    {this.createUI()}
+                    <div className={classes.newCurriculumItem} onClick={this.addClick.bind(this)}><BiFolderPlus /> <h3>Add New</h3></div>
+                    </div>
+                    <button className={classes.newCurriculumItem + " customButton"} onClick={this.handleSubmit}>Finish</button>
                 </div>
-                <button className="customButton" onClick={this.handleSubmit}>Finish</button>
-            </div>
+            </Aux>
         );
         }
   }

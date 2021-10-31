@@ -5,7 +5,7 @@ import classes from './NavigationItem.module.css';
 const navigationItem = (props) => {
     
     return(
-        <Link className={classes.NavigationItem} onClick={props.clicked} to={props.link || '/'}>
+        <Link className={classes.NavigationItem+" largeNavItem"} onClick={props.clicked} to={props.link || '/'}>
             <h5>{props.linkName}</h5>
         </Link>
     )
