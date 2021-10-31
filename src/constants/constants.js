@@ -1,5 +1,5 @@
 let myConstClass = {}
-const fbAccessCode = "EAAFcRxx4sPIBAAIKUhZCXDAS8ShUcqdxPVt9yNZCfwZAWbRqnsxsbiXd67scBp4A0e7kavZBDBIFR1LHdrmbKHXchFuazKacaneD9RamYlvoXJlfFH1bv3w43XSvRPNc2qan6WCGbVXQ6ZBouhvdFDJbMkSd5PtV9i0jiD5xBtnx7iAGLPwTu";
+const fbAccessCode = "EAAFcRxx4sPIBAIpUymdsth7n8rg49QGN3GZCiFwjZCsRNw7YhCesmZA0ZB3ZCLNmWoYxWNqUtnEZAOvRPM7mHdiJZCN9H8rc9CZBhxD9ZBKH1OFlFkYFbZAvjq3uodTpmLkZBKvNOkF3Vx0fRDvya305xBhywaDRe6kPrrbZCd3wjzhF2KZAjYyHikULy";
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
   myConstClass = {

@@ -85,7 +85,7 @@ const privacyPolicy = (props) => (
 
     <h4>CONTACT</h4>
     <p>Questions, comments and requests regarding this privacy policy are welcomed and should be addressed to JoJo's Nails and Beauty Academy, 16 Allfoxton Road, Horfield, Bristol, BS7 9NJ or info@jojosnailsandbeautyacademy.co.uk</p>
-    <button className="customButton">Close</button>
+    <button className={classes.fixedButton + " customButton"} onClick={props.togglePrivacyPolicy}>Close</button>
 </div>
 )
 

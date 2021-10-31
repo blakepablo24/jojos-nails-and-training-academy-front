@@ -30,6 +30,7 @@ import GiftVouchers from "../../containers/GiftVouchers/GiftVouchers";
 import Loading from '../../components/Ui/Loading/Loading';
 import AddEditSalonTreatmentCategories from '../../containers/Admin/AddEditSalonTreatmentCategories/AddEditSalonTreatmentCategories';
 import GiftVouchersPending from '../../containers/Admin/GiftVouchers/GiftVouchersPending';
+import PrivacyPolicyModal from '../../components/Ui/PrivacyPolicyModal/PrivacyPolicyModal';
 
 let initialBasket = [];
 if(JSON.parse(localStorage.getItem("basketItems"))) {
@@ -59,7 +60,18 @@ class Layout extends Component {
         bookingRequestNumberError: "",
         bookingRequestTimeError: "",
         treatmentsStartdateError: "",
-        trainingCourseStartdateError: ""
+        trainingCourseStartdateError: "",
+        showPrivacyPolicyModal: false,
+        showPrivacyPolicy: false,
+    }
+
+    componentDidMount = () => { 
+        if(!JSON.parse(localStorage.getItem("visitedBefore"))) {
+            this.setState({
+                showPrivacyPolicyModal: true
+            })
+            this.getCookie("visitedBefore");
+        }
     }
 
     sideDrawerToggleHandler = () => {
@@ -328,10 +340,37 @@ class Layout extends Component {
         }
     }
 
+    showPrivacyPolicyModalToggleHandler = () => {
+        this.setState({
+            showPrivacyPolicyModal: !this.state.showPrivacyPolicyModal
+        })
+
+        if(!JSON.parse(localStorage.getItem("visitedBefore"))) {
+            this.setCookie("visitedBefore", true, 30)
+        }
+    }
+
+    showPrivacyPolicyToggleHandler = () => {
+        // this.setState({
+        //     showPrivacyPolicy: !this.state.showPrivacyPolicy
+        // })
+    }
+
+    setCookie = (cname, cvalue, exdays) => {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    getCookie = (cname) => {
+        console.log(document.cookie);
+    }
+
     render() {
         let isAuthenticated = this.state.isAuthenticated;
         let sideDrawer = <SideDrawer open={this.state.showSideDrawer} clicked={this.sideDrawerToggleHandler} auth={this.state.isAuthenticated} sendData={this.getData} />;
-        let privayPolicy = "";
+        let showPrivacyPolicyModal = "";
         
         if(JSON.parse(localStorage.getItem("user"))){
             isAuthenticated = true;
@@ -348,9 +387,14 @@ class Layout extends Component {
             document.body.style.overflow = 'visible';
         }
 
+        if(this.state.showPrivacyPolicyModal) {
+            showPrivacyPolicyModal = <PrivacyPolicyModal  
+            showPrivacyPolicy={this.state.showPrivacyPolicy} togglePrivacyPolicyModal={this.showPrivacyPolicyModalToggleHandler} togglePrivacyPolicy={this.showPrivacyPolicyToggleHandler} />;
+        }
+
         return(
             <div className={classes.Layout}>
-                {privayPolicy}
+                {showPrivacyPolicyModal}
                 {this.state.loading}
                 <Toolbar showSideDrawer={this.state.showSideDrawer} numberOfItemsInBasket={this.state.itemsInBasket.length} toggleBasket={this.basketToggleHandler} menu={this.state.menu} clicked={this.sideDrawerToggleHandler} auth={isAuthenticated} />
                 {sideDrawer}
