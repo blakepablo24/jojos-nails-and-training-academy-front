@@ -26,6 +26,9 @@
     overflow-y: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    display: grid;
+    place-items: center center;
+    grid-template-rows: 1fr 9fr;
 }
 
 .Review::-webkit-scrollbar {
@@ -43,4 +46,13 @@
 .fbStars {
     color: goldenrod;
     width: 85%;
+}
+
+@media only screen and (min-width: 1024px) {
+    .Reviews {
+        padding: 0 25%;
+    }
+    .Review {
+        font-size: 1.1rem;
+    }
 }
