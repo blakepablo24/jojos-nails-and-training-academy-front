@@ -7,6 +7,7 @@
     place-items: center center;
     background: var(--main-bg);
     z-index: 2;
+    grid-template-columns: 1fr;
 }
 
 .addedCurriculumItemContainer {

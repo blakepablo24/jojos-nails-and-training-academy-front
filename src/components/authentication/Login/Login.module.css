@@ -1,9 +1,7 @@
 .Login {
     padding: 15vh 0;
-    grid-area: header/latest/main;
+    grid-area: main;
     height: 100%;
-    width: 95%;
-    margin-left: 2.5%;
     display: grid;
     place-items: center center;
     z-index: 2;
@@ -19,8 +17,10 @@
 @media only screen and (min-width: 1024px) {
     .Login, .Login input {
         font-size: 1.5rem;
-        width: 50%;
-        margin: 0 25%;
     }
-    
+
+    .Login {
+        grid-area: main;
+        padding: 15vh 20vw;
+    }
 }

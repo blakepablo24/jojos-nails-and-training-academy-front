@@ -5,7 +5,7 @@
     place-items: center center;
     position: sticky;
     top: 7.5vh;
-    z-index: 2;
+    z-index: 4;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -17,7 +17,7 @@
         position: fixed;
         width: 100%;
         top: 15vh;
-        z-index: 2;
+        z-index: 4;
         height: 5vh;
         box-shadow: 0 1px 1px black;
     }

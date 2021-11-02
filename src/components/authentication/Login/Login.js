@@ -4,6 +4,8 @@ import { Link, Redirect } from 'react-router-dom';
 import styles from './Login.module.css';
 import CONST from '../../../constants/constants';
 import FlashMessage from 'react-flash-message';
+import Aux from '../../../hoc/Auxilary/Auxilary';
+import Latest from '../../Ui/Navigation/Latest/Latest';
 
 class Login extends Component {
 
@@ -76,16 +78,18 @@ class Login extends Component {
             }
 
         return(
-            <form className={styles.Login}>
-                {successMsg}
-                {this.state.redirectOnSuccess}
-                <h2>Staff Login</h2>
-                <input type="email" name="email" placeholder="Email" onChange={this.emailChangeHandler}/>
-                <input type="password" name="password" placeholder="Password" onChange={this.passwordChangeHandler} />
-                {this.state.errorMessage}
-                <button className="customButton" onClick={this.loginHandler}>Login</button>
-                {/* <p>Forgot Your Password <Link to="/forgot-password-email">Reset here</Link></p> */}
-            </form>
+            <Aux>
+                <Latest message={"Staff Login"}/>
+                <form className={styles.Login}>
+                    {successMsg}
+                    {this.state.redirectOnSuccess}
+                    <input type="email" name="email" placeholder="Email" onChange={this.emailChangeHandler}/>
+                    <input type="password" name="password" placeholder="Password" onChange={this.passwordChangeHandler} />
+                    {this.state.errorMessage}
+                    <button className="customButton" onClick={this.loginHandler}>Login</button>
+                    {/* <p>Forgot Your Password <Link to="/forgot-password-email">Reset here</Link></p> */}
+                </form>
+            </Aux>
         )
     }
 }

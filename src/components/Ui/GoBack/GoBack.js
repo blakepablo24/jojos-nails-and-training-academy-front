@@ -6,9 +6,9 @@ const goBack = (props) => {
 
     let style = classes.GoBack;
 
-    if(props.snippet){
-        style = classes.Snippet;
-    }
+    // if(props.snippet){
+    //     style = classes.Snippet;
+    // }
 
     return(
         <div className={style} onClick={props.back}><MdArrowBack /> <h4>Go back</h4></div>

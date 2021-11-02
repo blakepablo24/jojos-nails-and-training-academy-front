@@ -8,6 +8,7 @@ import ConfirmDelete from '../../../components/Ui/ConfirmDelete/ConfirmDelete';
 import FlashMessage from 'react-flash-message';
 import Loading from '../../../components/Ui/Loading/Loading';
 import Aux from '../../../hoc/Auxilary/Auxilary';
+import Latest from '../../../components/Ui/Navigation/Latest/Latest';
 
 class FrontLandingPage extends Component {
     
@@ -178,6 +179,7 @@ class FrontLandingPage extends Component {
         <Aux>
             {this.state.loading}
             {this.state.confirmDelete}
+            <Latest message={"Front Page Images"} />
             <div className={classes.FrontLandingPage}>
                 {imageChangedMessage}
                 <BiXCircle className={"delete " + classes.deleteImageButton} onClick={this.confirmDeleteHandler} />
