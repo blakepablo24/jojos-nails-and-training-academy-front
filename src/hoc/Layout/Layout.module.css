@@ -23,3 +23,14 @@
         ;
     }
 }
+
+@media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+    .Layout {
+        grid:
+            'toolbar toolbar toolbar toolbar toolbar toolbar' 12.5vh
+            'main main main main main main' minmax(80vh, auto)
+            'footer footer footer footer footer footer' minmax(20vh, auto)
+            / 1fr 1fr 1fr 1fr 1fr 1fr
+        ;
+    }
+}

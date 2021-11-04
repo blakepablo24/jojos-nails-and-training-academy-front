@@ -57,3 +57,25 @@
         width: 5%;
     }
 }
+
+@media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+    .LandingPage {
+        grid-area: main;
+    }
+
+    .landingPageImage { 
+        height: 87.5vh;
+    }
+
+    .imageNav, .notSelectable {
+        width: 7.5%;
+    }
+
+    .next {
+        right: 5%;
+    }
+    
+    .prev {
+       left: 5%;
+    }
+}

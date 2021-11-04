@@ -67,7 +67,6 @@ class Layout extends Component {
 
     componentDidMount = () => { 
         if(!this.getCookie("visitedBefore")) {
-            console.log(this.getCookie("visitedBefore"));
             this.setState({
                 showPrivacyPolicyModal: true
             })

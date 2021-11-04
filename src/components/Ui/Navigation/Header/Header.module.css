@@ -18,3 +18,15 @@
         border-right: solid 2px var(--main-txt);
     }
 }
+
+@media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+    .Header {
+        padding: 1px;
+        background: var(--main-bg);
+        position: fixed;
+        z-index: 5;
+        height: 12.5vh;
+        width: 10%;
+        box-shadow: 0 1px 0 black;
+    }
+}

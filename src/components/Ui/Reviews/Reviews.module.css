@@ -54,9 +54,25 @@
         height: 100%;
     }
     .largeScreenReviewsContainer {
-        height: 30vh;
+        height: 53vh;
         display: grid;
         place-items: center center;
         grid-auto-flow: column;
+    }
+}
+
+@media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+    .Review {
+        margin: 2.5vh 0;
+        height: 55vh;
+        background: whitesmoke;
+        border-radius: 5px;
+        padding: 2.5px;
+        overflow-y: auto;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+        display: grid;
+        place-items: center center;
+        grid-template-rows: 1fr 9fr;
     }
 }

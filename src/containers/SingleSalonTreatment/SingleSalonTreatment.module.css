@@ -53,3 +53,21 @@
         grid-column: 2 / 3;
     }
 }
+
+@media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+    .SingleSalonTreatment {
+        grid-template-columns: 1fr 1fr;
+    }
+    .treatmentImage {
+        grid-column: 1 / 2;
+        grid-row: 2 / 7;
+        width: 60vh;
+        height: 60vh;
+    }
+    .title {
+        grid-column: 2 / 3;
+    }
+    .description {
+        grid-column: 2 / 3;
+    }
+}

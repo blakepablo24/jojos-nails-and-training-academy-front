@@ -23,3 +23,19 @@
     width: 100%;
     margin-top: 0;
 }
+
+@media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+    .Backdrop, .show, .full, .loading {
+        height: 100%;
+        margin-top: 12.5vh;
+    }
+
+    .full {
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .show {
+        width: 100%;
+    }    
+}

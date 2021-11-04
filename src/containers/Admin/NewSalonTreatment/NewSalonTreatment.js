@@ -7,6 +7,7 @@ import { Redirect } from 'react-router';
 import GoBack from '../../../components/Ui/GoBack/GoBack';
 import Loading from '../../../components/Ui/Loading/Loading';
 import Aux from '../../../hoc/Auxilary/Auxilary';
+import Latest from '../../../components/Ui/Navigation/Latest/Latest';
 
 class NewSalonTreatment extends Component {
 
@@ -158,6 +159,7 @@ class NewSalonTreatment extends Component {
 
         return(
             <Aux>
+                <Latest message={"New Training Course"} />
                 {this.state.loading}
                 <div className={classes.NewSalonTreatment}>
                     

@@ -36,3 +36,19 @@
         display: none;
     }
 }
+
+@media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+    
+    .NavigationItems {
+        height: 90%;
+        grid-template-rows: 1fr;
+    }
+    
+    .smallScreenOnly{
+        display: none;
+    }
+
+    .topNavItemsContainer, .bottomNavItemsContainer {
+        height: 100%;
+    }  
+}

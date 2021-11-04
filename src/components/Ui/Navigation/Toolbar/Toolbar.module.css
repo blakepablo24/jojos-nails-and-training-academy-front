@@ -54,3 +54,28 @@
         padding-left: 15%;
     }
 }
+
+@media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+    .Toolbar {
+        padding-left: 0;
+        padding-right: 5px;
+        height: 12.5vh;
+        grid-template-columns: 1fr 1fr;
+        place-items: center center;
+        width: 25%;
+        left: 75%;
+        box-shadow: 0 1px 0 black;
+    }
+
+    .basketIconContainer {
+        display: grid;
+        place-items: center center;
+        grid-auto-flow: column;
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+
+    .basketIconContainer p {
+        font-size: 1.35rem;
+    }
+}

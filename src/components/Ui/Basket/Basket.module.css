@@ -107,3 +107,14 @@
     display: grid;
     place-items: center center;
 }
+
+@media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+    .Basket {
+        position: fixed;
+        width: 85%;
+        height: 80vh;
+        left: 7.5%;
+        top: 15vh;
+        font-size: 0.65rem;
+    }
+}

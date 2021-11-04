@@ -14,3 +14,14 @@
         display: none;
     }
 }
+
+@media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+    .DrawerToggle {
+        place-items: center center;
+        padding: 0;
+    }
+
+    .DrawerToggle svg {
+        font-size: 100%;
+    }
+}

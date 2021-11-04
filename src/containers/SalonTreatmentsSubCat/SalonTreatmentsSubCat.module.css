@@ -8,3 +8,9 @@
     place-items: start center;
     padding: 2.5vh 0;
 }
+
+@media only screen and (min-width: 1024px) {
+    .SalonTreatmentsSubCat {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+}

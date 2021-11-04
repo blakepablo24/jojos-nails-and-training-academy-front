@@ -22,3 +22,19 @@
         box-shadow: 0 1px 1px black;
     }
 }
+
+@media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+    .Latest {
+        grid-area: latest;
+        background: var(--second-bg);
+        display: grid;
+        place-items: center center;
+        position: fixed;
+        width: 65%;
+        top: 0;
+        z-index: 4;
+        height: 12.5vh;
+        box-shadow: 0 1px 0 black;
+        left: 10%;
+    }
+}
