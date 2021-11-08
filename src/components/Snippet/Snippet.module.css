@@ -74,8 +74,8 @@
 
 @media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
 
-    .SnippetWithBasket {
-        height: 35vh;
+    .Snippet, .SnippetWithBasket {
+        height: 30vh;
     }
 
     .SnippetWithBasket img {
@@ -91,10 +91,38 @@
     }
     
     .SnippetLink {
-        grid: 6fr 4fr / 6fr 4fr;
+        grid: 1fr / 1fr;
     }
     
     .title {
         grid-row: 1 / 3;
+    }
+}
+
+@media only screen and (min-width : 1500px) and (max-width : 1700px) and (orientation : portrait) {
+
+    .SnippetWithBasket {
+        height: 36vh;
+        grid: 30vh 6vh / 1fr;
+    }
+
+    .SnippetWithBasket img {
+        grid-row: 1 / 2;
+        width: 100%;
+        height: 100%;   
+    }
+    
+    .Snippet img {
+        grid-row: 1 / 2;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .SnippetLink {
+        grid: 24vh 6vh / 1fr;
+    }
+    
+    .title {
+        grid-row: 2 / 3;
     }
 }

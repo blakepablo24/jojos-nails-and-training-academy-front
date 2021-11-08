@@ -70,6 +70,13 @@ class AddCurriculum extends Component {
     }
   
     render() {
+
+      let buttonShown = "";
+
+      if(this.state.values.length > 1){
+        buttonShown = <button className="customButton" onClick={this.handleSubmit}>Finish</button>;
+      }
+
       return (
         <div className={classes.AddCurriculum}>
             {this.state.redirectOnSuccess}
@@ -79,7 +86,7 @@ class AddCurriculum extends Component {
               {this.createUI()}
               <div className={classes.newCurriculumItem} onClick={this.addClick.bind(this)}><BiFolderPlus /> <h3>Add New</h3></div>
             </div>
-            <button className="customButton" onClick={this.handleSubmit}>Finish</button>
+            {buttonShown}
         </div>
       );
     }

@@ -1,5 +1,5 @@
 .NewSalonTreatment {
-    grid-area: header/latest/main;
+    grid-area: main;
     padding: 1vh 0 2.5vh 0;
     width: 100%;
     display: grid;
