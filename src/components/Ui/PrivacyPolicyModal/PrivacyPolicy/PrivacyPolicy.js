@@ -19,7 +19,7 @@ const privacyPolicy = (props) => (
     <p>To outline the Company’s processes aligned to Data Protection and Privacy relating to you.</p>
 
     <h4>WHO DOES THIS POLICY APPLY TO?</h4>
-    <p>Any employee who works for the Company, as well as any other individuals working at or visiting the Company premises or engaged by the Company. It also applies to [apprentices signed up by Sleeping Beauty Salon Limited (and their parents/carers, where they are deemed to be young people or vulnerable adults), and] visitors to the Company, as well as agency workers, casual workers, contractors, consultants, interns, seconded staff, agents, suppliers and sponsors, or any other person associated with us (“associated persons”).</p>
+    <p>Any employee who works for the Company, as well as any other individuals working at or visiting the Company premises or engaged by the Company. It also applies to [apprentices signed up by JoJo's Nails and Beauty Academy (and their parents/carers, where they are deemed to be young people or vulnerable adults), and] visitors to the Company, as well as agency workers, casual workers, contractors, consultants, interns, seconded staff, agents, suppliers and sponsors, or any other person associated with us (“associated persons”).</p>
 
     <h4>INFORMATION WE MAY COLLECT ABOUT YOU</h4>
     <p>We may collect and process the following data about you:</p>
@@ -65,7 +65,7 @@ const privacyPolicy = (props) => (
     <ul>
         <li>In the event that we sell or buy any business or assets, in which case we may disclose your personal data to the prospective seller or buyer of such business or assets.</li>
         <li>If JoJo's Nails and Beauty Academy or substantially all of its assets are acquired by a third party, in which case personal data held by it about its customers will be one of the transferred assets.</li>
-        <li>If we are under a duty to disclose or share your personal data in order to comply with any legal obligation, or in order to enforce or apply our terms of and other agreements; or to protect the rights, property, or safety of Sleeping Beauty Salon Limited, our customers, or others. This includes exchanging information with other companies and organisations for the purposes of fraud protection and credit risk reduction.</li>
+        <li>If we are under a duty to disclose or share your personal data in order to comply with any legal obligation, or in order to enforce or apply our terms of and other agreements; or to protect the rights, property, or safety of JoJo's Nails and Beauty Academy, our customers, or others. This includes exchanging information with other companies and organisations for the purposes of fraud protection and credit risk reduction.</li>
     </ul>
 
     <h4>WHERE WE STORE YOUR PERSONAL DATA</h4>
@@ -74,7 +74,7 @@ const privacyPolicy = (props) => (
     <p>Unfortunately, the transmission of information via the internet is not completely secure. Although we will do our best to protect your personal data, we cannot guarantee the security of your data transmitted to our site; any transmission is at your own risk. Once we have received your information, we will use strict procedures and security features to try to prevent unauthorised access.</p>
 
     <h4>YOUR RIGHTS</h4>
-    <p>You have the right to ask us not to process your personal data for marketing purposes. We will usually inform you (before collecting your data) if we intend to use your data for such purposes or if we intend to disclose your information to any third party for such purposes. You can exercise your right to prevent such processing by checking certain boxes on the forms we use to collect your data.  You can also exercise the right at any time by contacting us at any of our locations or via info@sleepingbeautysalon.com .</p>
+    <p>You have the right to ask us not to process your personal data for marketing purposes. We will usually inform you (before collecting your data) if we intend to use your data for such purposes or if we intend to disclose your information to any third party for such purposes. You can exercise your right to prevent such processing by checking certain boxes on the forms we use to collect your data.  You can also exercise the right at any time by contacting us at any of our locations or via info@jojosnailsandbeautyacademy.co.uk .</p>
     <p>Our site may, from time to time, contain links to and from the websites of our partner networks, advertisers and affiliates.  If you follow a link to any of these websites, please note that these websites have their own privacy policies and that we do not accept any responsibility or liability for these policies.  Please check these policies before you submit any personal data to these websites.</p>
 
     <h4>ACCESS TO INFORMATION</h4>

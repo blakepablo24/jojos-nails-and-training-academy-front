@@ -44,6 +44,8 @@ class Reviews extends Component {
 
     render(){
 
+        console.log(this.state.facebookInfo.ratings);
+
         let rightArrow = <div className={classes.selectable} onClick={this.next}><BiRightArrow /></div>;
         let leftArrow = <div className={classes.selectable} onClick={this.previous}><BiLeftArrow /></div>;
 
@@ -56,6 +58,7 @@ class Reviews extends Component {
         }
 
         let stars = <div className={classes.fbStars}>{Array.from({length:this.state.facebookInfo.overall_star_rating}, (_, i) => <FaStar key={i}/>)}</div>
+
         let shownReviews =  <div className={classes.largeScreenReviewsContainer}>
                                 <div className={classes.Review}>
                                     <p>{new Date(this.state.facebookInfo.ratings[this.state.number].created_time).toLocaleDateString()}</p>

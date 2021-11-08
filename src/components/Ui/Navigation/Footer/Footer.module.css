@@ -4,10 +4,6 @@
     display: grid;
     place-items: center center;
     width: 100%;
-}
 
-.bottomFooterContainer{
-    width: 100%;
-    display: grid;
-    place-items: center center;
+    grid-auto-flow: column;
 }
