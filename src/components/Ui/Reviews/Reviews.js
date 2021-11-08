@@ -12,6 +12,7 @@ class Reviews extends Component {
     state = {
         loading: "",
         facebookInfo: {
+            picture: "",
             overall_star_rating: 0,
             rating_count: 0,
             ratings: [{review_text:<Loading component={true}/>}]
@@ -22,8 +23,9 @@ class Reviews extends Component {
 
     componentDidMount = () => {
         axios.get(CONST.FB).then(response => {
+
             this.setState({
-                facebookInfo: {overall_star_rating: response.data.overall_star_rating, rating_count: response.data.rating_count, ratings: response.data.ratings.data.slice(0, 12)}
+                facebookInfo: {picture: response.data.picture.data.url, overall_star_rating: response.data.overall_star_rating, rating_count: response.data.rating_count, ratings: response.data.ratings.data.slice(0, 12)}
             })
         })
     }
@@ -43,8 +45,6 @@ class Reviews extends Component {
     }
 
     render(){
-
-        console.log(this.state.facebookInfo.ratings);
 
         let rightArrow = <div className={classes.selectable} onClick={this.next}><BiRightArrow /></div>;
         let leftArrow = <div className={classes.selectable} onClick={this.previous}><BiLeftArrow /></div>;
@@ -82,7 +82,7 @@ class Reviews extends Component {
 
         return(
             <div className={classes.Reviews}>
-                <div className={classes.fbHeader}><ImFacebook2 />{stars} from {this.state.facebookInfo.rating_count} Reviews</div>
+                <div className={classes.fbHeader}><img src={this.state.facebookInfo.picture} alt="" />{stars} from {this.state.facebookInfo.rating_count}<ImFacebook2 /> Reviews</div>
                 <div className={classes.ReviewsContainer}>
                     {leftArrow}
                     {shownReviews}

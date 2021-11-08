@@ -5,11 +5,11 @@ import classes from './PrivacyPolicy.module.css';
 import GoBack from '../../components/Ui/GoBack/GoBack';
 import PrivacyPolicy from '../../components/Ui/PrivacyPolicyModal/PrivacyPolicy/PrivacyPolicy';
 
-const privacyPolicy = () => (
+const privacyPolicy = (props) => (
     <Aux>
         <Latest message="Privacy Policy" />
         <div className={classes.PrivacyPolicy}>
-            <GoBack back={() => this.props.history.goBack()} />
+            <GoBack back={() => props.history.goBack()} />
             <PrivacyPolicy url={true}/>
         </div>
     </Aux>
