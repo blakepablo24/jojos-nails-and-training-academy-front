@@ -1,4 +1,4 @@
-.PrivacyPolicy {
+.PrivacyPolicy, .url {
     position: fixed;
     z-index: 11;
     background: var(--main-bg);
@@ -11,8 +11,13 @@
     padding-bottom: 25%;
 }
 
-.PrivacyPolicy h4 {
-    margin-top: 25px;
+.PrivacyPolicy h4, .url h4 {
+    margin: 5vh 0;
+    text-decoration: underline;
+}
+
+.url {
+    position: static;
 }
 
 .logo {

@@ -3,8 +3,3 @@
     display: grid;
     place-items: center center;
 }
-
-.PrivacyPolicy h4 {
-    margin: 5vh 0;
-    text-decoration: underline;
-}
