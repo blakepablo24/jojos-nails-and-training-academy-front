@@ -20,6 +20,10 @@ myFunctionsClass = {
          }
 
         return alreadyInBasket;
+    },
+
+    scrollToTop() {
+        window.scrollTo(0, 0);
     }
 }
 

@@ -66,27 +66,12 @@ class AddEditSalonTreatmentCategories extends Component {
         fd.append('id', event.target.id);
 
         axios.post(CONST.BASE_URL+'/api/update-salon-treatment-category-image', fd).then(response => {
-            console.log(response);
             this.setState({
                 updatedMessage: "Successfully Category Image!"
             })
             window.scrollTo(0, 0);
             this.startingValues();
-        }).catch(function (error) {
-            if (error.response) {
-              // Request made and server responded
-              console.log(error.response.data);
-              console.log(error.response.status);
-              console.log(error.response.headers);
-            } else if (error.request) {
-              // The request was made but no response was received
-              console.log(error.request);
-            } else {
-              // Something happened in setting up the request that triggered an Error
-              console.log('Error', error.message);
-            }
-        
-          });
+        })
     }
 
     createUI(){

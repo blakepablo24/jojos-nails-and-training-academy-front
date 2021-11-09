@@ -78,7 +78,8 @@ class EditTrainingCourse extends Component {
                     teacherStudentRatio: response.data.trainingCourse.teacher_student_ratio,
                     image: response.data.trainingCourse.image,
                     extras: response.data.trainingCourse.extras,
-                    imageChangedMessage: "Image Successfully Deleted"
+                    imageChangedMessage: "Image Successfully Deleted",
+                    loading: ""
                 })
             })
         })
@@ -165,21 +166,7 @@ class EditTrainingCourse extends Component {
                         }}                  
                     />
                 })
-            }).catch(function (error) {
-                if (error.response) {
-                  // Request made and server responded
-                  console.log(error.response.data);
-                  console.log(error.response.status);
-                  console.log(error.response.headers);
-                } else if (error.request) {
-                  // The request was made but no response was received
-                  console.log(error.request);
-                } else {
-                  // Something happened in setting up the request that triggered an Error
-                  console.log('Error', error.message);
-                }
-            
-              });
+            })
         } else {
             this.setState({
                 titleError: titleError,

@@ -1,0 +1,12 @@
+.ErrorPopup {
+    position: fixed;
+    height: 50%;
+    width: 75%;
+    left:12.5%;
+    top: 25%;
+    z-index: 10;
+    background: var(--second-bg);
+    color: var(--error-txt);
+    display: grid;
+    place-items: center center;
+}

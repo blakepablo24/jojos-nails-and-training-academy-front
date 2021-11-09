@@ -18,10 +18,13 @@
 
 .url {
     position: static;
+    z-index: 0;
 }
 
 .logo {
     width: 25%;
+    z-index: 0;
+    overflow-y: none;
 }
 
 .fixedButton {

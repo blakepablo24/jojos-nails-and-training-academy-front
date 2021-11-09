@@ -10,6 +10,7 @@ import ConfirmDelete from '../../../components/Ui/ConfirmDelete/ConfirmDelete';
 import FlashMessage from 'react-flash-message';
 import Loading from '../../../components/Ui/Loading/Loading';
 import Aux from '../../../hoc/Auxilary/Auxilary';
+import ErrorPopup from '../../../components/Ui/ErrorPopup/ErrorPopup';
 
 class EditSalonTreatment extends Component {
 
@@ -33,7 +34,8 @@ class EditSalonTreatment extends Component {
         confirmDelete: "",
         open: false,
         imageChangedMessage: "",
-        loading: ""
+        loading: "",
+        errorPopup: ""
     }
 
     componentDidMount() {
@@ -82,7 +84,9 @@ class EditSalonTreatment extends Component {
                 description: response.data.salonTreatment.description,
                 category: response.data.salonTreatment.category,
                 image: response.data.salonTreatment.image,
-                imageChangedMessage: "Image Successfully Deleted"
+                imageChangedMessage: "Image Successfully Deleted",
+                loading: "",
+                errorScreen: ""
             })
         })
         })
@@ -180,7 +184,26 @@ class EditSalonTreatment extends Component {
                         }}                  
                     />
                 })
-            })
+            }).catch(error => {
+                console.log("Ooops Something went wrong");
+                this.setState({
+                    loading: "",
+                    errorPopup: <ErrorPopup />
+                })
+                if (error.response) {
+                  // Request made and server responded
+                  console.log(error.response.data);
+                  console.log(error.response.status);
+                  console.log(error.response.headers);
+                } else if (error.request) {
+                  // The request was made but no response was received
+                  console.log(error.request);
+                } else {
+                  // Something happened in setting up the request that triggered an Error
+                  console.log('Error', error.message);
+                }
+            
+              });
         } else {
             this.setState({
                 categoryError: categoryError,
@@ -227,9 +250,9 @@ class EditSalonTreatment extends Component {
             <Aux>
                 {this.state.loading}
                 {this.state.confirmDelete}
+                {this.state.errorPopup}
                 <div className={classes.EditSalonTreatment}>
                     {this.state.redirectOnSuccess}
-                    
                     <GoBack back={() => this.props.history.goBack()} />
                     <h2>Edit This Salon Treatment</h2>
                     <select

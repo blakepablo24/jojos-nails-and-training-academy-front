@@ -97,7 +97,7 @@ class Layout extends Component {
     }
 
     scrollToTop = () => {
-        window.scrollTo(0, 0);
+        FUNCTIONS.scrollToTop();
     }
 
     basketToggleHandler = () => {

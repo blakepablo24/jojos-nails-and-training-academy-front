@@ -3,6 +3,7 @@ import classes from './Footer.module.css';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import CONST from '../../../../constants/constants';
+import FUNCTIONS from '../../../../functions/functions';
 
 class Footer extends Component {
 
@@ -43,7 +44,7 @@ class Footer extends Component {
         <div className={classes.Footer}>
             {this.state.redirectOnSuccess}
             {loggedInIcon}
-            <Link onClick={this.props.scrollToTop} to="/privacy-policy">Privacy Policy</Link>
+            <Link onClick={FUNCTIONS.scrollToTop} to="/privacy-policy">Privacy Policy</Link>
         </div>
     )
     }
