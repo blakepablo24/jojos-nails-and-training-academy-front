@@ -1,5 +1,5 @@
 .Reviews {
-    margin-top: 2.5vh;
+    margin-top: 5vh;
 }
 
 .ReviewsContainer {
@@ -18,7 +18,7 @@
 }
 
 .Review {
-    margin: 2.5vh 0;
+    margin-bottom: 5vh;
     height: 30vh;
     background: whitesmoke;
     border-radius: 5px;

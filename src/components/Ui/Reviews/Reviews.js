@@ -10,22 +10,28 @@ import CONST from '../../../constants/constants';
 class Reviews extends Component {
 
     state = {
-        loading: "",
+        loading: <Loading component={true}/>,
         facebookInfo: {
             picture: "",
             overall_star_rating: 0,
             rating_count: 0,
-            ratings: [{review_text:<Loading component={true}/>}]
+            ratings: [{review_text:""}]
         },
         number: 0,
         largeScreenImage: 3
     }
 
     componentDidMount = () => {
-        axios.get(CONST.FB).then(response => {
-
+        axios.defaults.withCredentials = true;
+        axios.get(CONST.BASE_URL+"/api/get-fbk").then(response => {
             this.setState({
-                facebookInfo: {picture: response.data.picture.data.url, overall_star_rating: response.data.overall_star_rating, rating_count: response.data.rating_count, ratings: response.data.ratings.data.slice(0, 12)}
+                facebookInfo: {
+                    picture: response.data.picture.data.url,
+                    overall_star_rating: response.data.overall_star_rating,
+                    rating_count: response.data.rating_count, 
+                    ratings: response.data.ratings.data.slice(0, 12)
+                },
+                loading: ""
             })
         })
     }
@@ -82,6 +88,7 @@ class Reviews extends Component {
 
         return(
             <div className={classes.Reviews}>
+                {this.state.loading}
                 <div className={classes.fbHeader}><img src={this.state.facebookInfo.picture} alt="" />{stars} from {this.state.facebookInfo.rating_count}<ImFacebook2 /> Reviews</div>
                 <div className={classes.ReviewsContainer}>
                     {leftArrow}

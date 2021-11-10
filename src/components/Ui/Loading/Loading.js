@@ -6,8 +6,10 @@ import Aux from '../../../hoc/Auxilary/Auxilary';
 const Loading = (props) => {
 
     let backdrop = <Backdrop loading={true} full={true} />;
-    let standardUsage = classes.loadingContainer
+    let standardUsage = classes.loadingContainer;
+    let message = <h3>Please Wait</h3>;
     if(props.component){
+        message = "";
         backdrop = "";
         standardUsage = classes.componentContainer
     }
@@ -17,7 +19,7 @@ const Loading = (props) => {
             {backdrop}
             <div className={standardUsage}>
                 <div className={classes.loading}>
-                    <h3>Please Wait</h3>
+                    {message}
                     <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>  
                 </div>
             </div>

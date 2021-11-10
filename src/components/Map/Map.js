@@ -10,9 +10,8 @@ import { FaMapMarkerAlt } from "react-icons/fa";
     </div>
   )
 
-  const Map = ({ location, zoomLevel }) => (
+  const Map = (props) => (
     <div className={classes.map}>
-
       <p>16 Allfoxton Road</p>
       <p>Horfield, Bristol BS7 9NJ</p>
       <p className={classes.contact}>07772 155850</p>
@@ -20,14 +19,14 @@ import { FaMapMarkerAlt } from "react-icons/fa";
   
       <div className={classes.googleMap}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyAqfrZ23O7S0LRZeysy_LE3iB0gjUPbHzs' }}
-          defaultCenter={location}
-          defaultZoom={zoomLevel}
+          bootstrapURLKeys={{ key: props.gacKey }}
+          defaultCenter={props.location}
+          defaultZoom={props.zoomLevel}
         >
           <LocationPin
-            lat={location.lat}
-            lng={location.lng}
-            text={location.address}
+            lat={props.location.lat}
+            lng={props.location.lng}
+            text={props.location.address}
           />
         </GoogleMapReact>
       </div>
