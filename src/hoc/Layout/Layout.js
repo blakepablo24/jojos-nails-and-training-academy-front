@@ -83,7 +83,7 @@ class Layout extends Component {
 
     getData = (val) => {
         if(val === "logged_in"){
-            this.scrollToTop();
+            FUNCTIONS.scrollToTop();
             this.setState({
                 isAuthenticated: true
             })
