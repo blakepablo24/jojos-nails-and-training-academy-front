@@ -39,3 +39,12 @@
 .deleteImageButton {
     font-size: 2rem;
 }
+
+@media only screen and (min-width: 1024px) {
+    .imageAndControlsContainer {
+        display: grid;
+        place-items: center center;
+        grid-template-columns: 1fr 8fr 1fr;
+        width: 50%;
+    }
+}

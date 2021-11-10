@@ -6,6 +6,7 @@ import CONST from '../../constants/constants';
 import Aux from '../../hoc/Auxilary/Auxilary';
 import Latest from '../../components/Ui/Navigation/Latest/Latest';
 import GoBack from '../../components/Ui/GoBack/GoBack';
+import logoImage from '../../components/Ui/Navigation/Header/Logo/logo.png';
 
 class SalonTreatments extends Component {
 
@@ -28,13 +29,15 @@ class SalonTreatments extends Component {
                 <div className={classes.SalonTreatments}>
                 <GoBack snippet={true} back={() => this.props.history.goBack()} />
                     {this.state.salonTreatments.map(salonTreatment =>
+                        salonTreatment.single_salon_treatment.length > 0 ?
                         <Snippet
                             salonTreatment={true} 
                             title={salonTreatment.title}
-                            image={CONST.BASE_URL + "/storage/images/salon-treatment-images/" + salonTreatment.image}
+                            image={salonTreatment.image != "default" ? CONST.BASE_URL + "/storage/images/salon-treatment-images/" + salonTreatment.image : logoImage}
                             id={salonTreatment.id}
                             key={salonTreatment.id}
                         />
+                        : ""
                     )}
                 </div>
             </Aux>

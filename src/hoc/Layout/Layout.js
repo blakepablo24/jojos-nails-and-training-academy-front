@@ -89,15 +89,11 @@ class Layout extends Component {
             })
         }
         if(val === "not_logged_in"){
-            this.scrollToTop();
+            FUNCTIONS.scrollToTop();
             this.setState({
                 isAuthenticated: false
             })
         }
-    }
-
-    scrollToTop = () => {
-        FUNCTIONS.scrollToTop();
     }
 
     basketToggleHandler = () => {

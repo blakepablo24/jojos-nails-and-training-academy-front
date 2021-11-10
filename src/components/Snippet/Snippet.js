@@ -36,7 +36,7 @@ const snippet = (props) => {
                 </div>
         }
     }
-
+    
     return (
         <div className={snippetStyle}>
             <Link to={snippetLink + props.id} className={classes.SnippetLink}>

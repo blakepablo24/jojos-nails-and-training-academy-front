@@ -43,7 +43,7 @@ class SingleSalonTreatment extends Component {
                             </div>;
         }
         Axios.get(CONST.BASE_URL + '/api/single-salon-treatment/' + this.props.match.params.id).then(response => {
-            window.scrollTo(0, 0);
+            FUNCTIONS.scrollToTop();
             this.setState({
                 title: response.data.title,
                 duration: response.data.duration,

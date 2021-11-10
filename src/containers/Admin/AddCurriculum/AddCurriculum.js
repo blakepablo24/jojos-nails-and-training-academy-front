@@ -5,6 +5,8 @@ import axios from 'axios';
 import CONST from '../../../constants/constants';
 import GoBack from '../../../components/Ui/GoBack/GoBack';
 import { Redirect } from 'react-router';
+import Aux from '../../../hoc/Auxilary/Auxilary';
+import Latest from '../../../components/Ui/Navigation/Latest/Latest';
 
 class AddCurriculum extends Component {
 
@@ -78,16 +80,18 @@ class AddCurriculum extends Component {
       }
 
       return (
-        <div className={classes.AddCurriculum}>
-            {this.state.redirectOnSuccess}
-            <GoBack back={() => this.props.history.goBack()} />
-            <h2>{this.state.courseName} Curriculum</h2>
-            <div className={classes.newCurriculumItemContainer}>
-              {this.createUI()}
-              <div className={classes.newCurriculumItem} onClick={this.addClick.bind(this)}><BiFolderPlus /> <h3>Add New</h3></div>
-            </div>
-            {buttonShown}
-        </div>
+        <Aux>
+          <Latest message={this.state.courseName + " Curriculum"} />
+          <div className={classes.AddCurriculum}>
+              {this.state.redirectOnSuccess}
+              <GoBack back={() => this.props.history.goBack()} />
+              <div className={classes.newCurriculumItemContainer}>
+                {this.createUI()}
+                <div className={classes.newCurriculumItem + " selectable"} onClick={this.addClick.bind(this)}><BiFolderPlus /> <h3>Add New</h3></div>
+              </div>
+              {buttonShown}
+          </div>
+        </Aux>
       );
     }
   }

@@ -10,6 +10,8 @@ import ConfirmDelete from '../../../components/Ui/ConfirmDelete/ConfirmDelete';
 import FlashMessage from 'react-flash-message';
 import Loading from '../../../components/Ui/Loading/Loading';
 import Aux from '../../../hoc/Auxilary/Auxilary';
+import Latest from '../../../components/Ui/Navigation/Latest/Latest';
+import ErrorPopup from '../../../components/Ui/ErrorPopup/ErrorPopup';
 
 class EditTrainingCourse extends Component {
 
@@ -31,7 +33,8 @@ class EditTrainingCourse extends Component {
         confirmDelete: "",
         open: false,
         imageChangedMessage: "",
-        loading: ""
+        loading: "",
+        showErrorPopup: false
     }
 
     componentDidMount(){
@@ -166,7 +169,12 @@ class EditTrainingCourse extends Component {
                         }}                  
                     />
                 })
-            })
+            }).catch(error => {
+                this.setState({
+                    loading: "",
+                    showErrorPopup: true
+                })
+              })
         } else {
             this.setState({
                 titleError: titleError,
@@ -176,6 +184,12 @@ class EditTrainingCourse extends Component {
                 durationError: durationError
             })
         }
+    }
+
+    errorPopupHandler = () => {
+        this.setState({
+            showErrorPopup: !this.state.showErrorPopup
+        })
     }
 
     render(){
@@ -189,7 +203,7 @@ class EditTrainingCourse extends Component {
         if(this.state.image){
             currentImage = 
                 <div className={classes.currentImageContainer}>
-                    <BiXCircle className={"delete " + classes.deleteImageButton}
+                    <BiXCircle className={"delete selectable " + classes.deleteImageButton}
                         onClick={this.confirmDeleteHandler}
                     />
                     <img src={CONST.BASE_URL + "/storage/images/training-course-images/" + this.state.image} alt="" className={classes.currentImage} />
@@ -209,14 +223,21 @@ class EditTrainingCourse extends Component {
                 </FlashMessage>
         }
 
+        let errorPopup = "";
+
+        if(this.state.showErrorPopup){
+            errorPopup = <ErrorPopup shownErrorToggle={this.errorPopupHandler} message={"Edit Training Course " + this.props.match.params.id}/>;
+        }
+
         return(
             <Aux>
+                <Latest message="Edit This Training Course" />
                 {this.state.loading}
+                {errorPopup}
                 {this.state.confirmDelete}
                 <div className={classes.EditTrainingCourse}>
                     {this.state.redirectOnSuccess}
                     <GoBack back={() => this.props.history.goBack()} />
-                    <h2>New Training Course</h2>
                     <input
                         type="text"
                         name="title"

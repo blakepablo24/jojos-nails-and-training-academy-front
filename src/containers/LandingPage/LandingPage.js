@@ -102,8 +102,8 @@ class LandingPage extends Component {
 
         window.addEventListener("keydown", this.keyDownHandler);
 
-        let leftArrow = <div className={classes.imageNav +" "+ classes.prev} onClick={this.previousImage} ><BiLeftArrow /></div>;
-        let rightArrow = <div className={classes.imageNav +" "+ classes.next} onClick={this.nextImage} ><BiRightArrow /></div>;
+        let leftArrow = <div className={classes.imageNav + " selectable " + classes.prev} onClick={this.previousImage} ><BiLeftArrow /></div>;
+        let rightArrow = <div className={classes.imageNav + " selectable " + classes.next} onClick={this.nextImage} ><BiRightArrow /></div>;
 
         if(this.state.image === (this.state.images.length - 1)) {
             rightArrow = <div className={classes.notSelectable +" "+ classes.next}><BiRightArrow /></div>;

@@ -9,6 +9,7 @@ import FlashMessage from 'react-flash-message';
 import Loading from '../../../components/Ui/Loading/Loading';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Latest from '../../../components/Ui/Navigation/Latest/Latest';
+import GoBack from '../../../components/Ui/GoBack/GoBack';
 
 class FrontLandingPage extends Component {
     
@@ -181,8 +182,9 @@ class FrontLandingPage extends Component {
             {this.state.confirmDelete}
             <Latest message={"Front Page Images"} />
             <div className={classes.FrontLandingPage}>
+            <GoBack back={() => this.props.history.goBack()} />
                 {imageChangedMessage}
-                <BiXCircle className={"delete " + classes.deleteImageButton} onClick={this.confirmDeleteHandler} />
+                <BiXCircle className={"delete selectable " + classes.deleteImageButton} onClick={this.confirmDeleteHandler} />
                 <h2>{this.state.image + 1} of {this.state.images.length}</h2>
                 <div className={classes.imageAndControlsContainer}>
                     {leftArrow}

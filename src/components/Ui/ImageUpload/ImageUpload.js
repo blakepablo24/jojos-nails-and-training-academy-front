@@ -51,7 +51,7 @@ class imageUpload extends Component {
       }
       
       return (
-        <div className={classes.ImageUpload}>
+        <div className={classes.ImageUpload + " selectable"}>
             <input
                 style={{display: 'none'}}
                 type="file"

@@ -11,6 +11,7 @@ import FlashMessage from 'react-flash-message';
 import Loading from '../../../components/Ui/Loading/Loading';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import ErrorPopup from '../../../components/Ui/ErrorPopup/ErrorPopup';
+import Latest from '../../../components/Ui/Navigation/Latest/Latest';
 
 class EditSalonTreatment extends Component {
 
@@ -35,7 +36,7 @@ class EditSalonTreatment extends Component {
         open: false,
         imageChangedMessage: "",
         loading: "",
-        errorPopup: ""
+        showErrorPopup: false
     }
 
     componentDidMount() {
@@ -185,25 +186,11 @@ class EditSalonTreatment extends Component {
                     />
                 })
             }).catch(error => {
-                console.log("Ooops Something went wrong");
                 this.setState({
                     loading: "",
-                    errorPopup: <ErrorPopup />
+                    showErrorPopup: true
                 })
-                if (error.response) {
-                  // Request made and server responded
-                  console.log(error.response.data);
-                  console.log(error.response.status);
-                  console.log(error.response.headers);
-                } else if (error.request) {
-                  // The request was made but no response was received
-                  console.log(error.request);
-                } else {
-                  // Something happened in setting up the request that triggered an Error
-                  console.log('Error', error.message);
-                }
-            
-              });
+              })
         } else {
             this.setState({
                 categoryError: categoryError,
@@ -213,6 +200,12 @@ class EditSalonTreatment extends Component {
                 descriptionError: descriptionError
             })
         }
+    }
+
+    errorPopupHandler = () => {
+        this.setState({
+            showErrorPopup: !this.state.showErrorPopup
+        })
     }
 
     render(){
@@ -226,7 +219,7 @@ class EditSalonTreatment extends Component {
         if(this.state.image){
             currentImage = 
                 <div className={classes.currentImageContainer}>
-                    <BiXCircle className={"delete " + classes.deleteImageButton}
+                    <BiXCircle className={"delete selectable " + classes.deleteImageButton}
                         onClick={this.confirmDeleteHandler}
                     />
                     <img src={CONST.BASE_URL + "/storage/images/salon-treatment-images/single-salon-treatment-images/" + this.state.image} alt="" className={classes.currentImage} />
@@ -245,16 +238,22 @@ class EditSalonTreatment extends Component {
                     </div>
                 </FlashMessage>
         }
+
+        let errorPopup = "";
+
+        if(this.state.showErrorPopup){
+            errorPopup = <ErrorPopup shownErrorToggle={this.errorPopupHandler} message={"Edit Salon Treatment " + this.props.match.params.id}/>;
+        }
         
         return(
             <Aux>
+                <Latest message="Edit This Salon Treatment"/>
                 {this.state.loading}
                 {this.state.confirmDelete}
-                {this.state.errorPopup}
+                {errorPopup}
                 <div className={classes.EditSalonTreatment}>
                     {this.state.redirectOnSuccess}
                     <GoBack back={() => this.props.history.goBack()} />
-                    <h2>Edit This Salon Treatment</h2>
                     <select
                         name="category"
                         value={this.state.category}

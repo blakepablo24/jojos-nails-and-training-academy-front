@@ -5,8 +5,34 @@
     left:12.5%;
     top: 25%;
     z-index: 10;
-    background: var(--second-bg);
+    background: var(--main-bg);
     color: var(--error-txt);
     display: grid;
     place-items: center center;
+    border-radius: 15px;
+    padding: 0 10px;
+}
+
+.title {
+    font-size: 1.5rem;
+    border: solid 1px var(--error-txt);
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.closeButton {
+    padding: 0;
+    box-shadow: none;
+}
+
+@media only screen and (min-width: 1024px) {
+    .ErrorPopup {
+        width: 40%;
+        left:30%;
+        font-size: 2rem;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
 }

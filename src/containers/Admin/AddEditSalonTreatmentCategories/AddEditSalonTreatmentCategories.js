@@ -9,6 +9,7 @@ import FlashMessage from 'react-flash-message';
 import ConfirmDelete from '../../../components/Ui/ConfirmDelete/ConfirmDelete';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Latest from '../../../components/Ui/Navigation/Latest/Latest';
+import FUNCTIONS from '../../../functions/functions';
 
 
 class AddEditSalonTreatmentCategories extends Component {
@@ -69,7 +70,7 @@ class AddEditSalonTreatmentCategories extends Component {
             this.setState({
                 updatedMessage: "Successfully Category Image!"
             })
-            window.scrollTo(0, 0);
+            FUNCTIONS.scrollToTop();
             this.startingValues();
         })
     }
@@ -87,13 +88,13 @@ class AddEditSalonTreatmentCategories extends Component {
                 />
               <input type="text" placeholder="Enter New Category" value={el.title||''} onChange={this.handleChange.bind(this, i)} />
               {el.image !== "default"
-                ? <img src={CONST.BASE_URL + "/storage/images/salon-treatment-images/" + el.image} onClick={() => this.fileInput.click()} alt="" /> 
+                ? <img className="selectable" src={CONST.BASE_URL + "/storage/images/salon-treatment-images/" + el.image} onClick={() => this.fileInput.click()} alt="" /> 
                 :
                 (el.id 
                     ? 
-                    <img src={logoImage} onClick={() => this.fileInput.click()} alt="" /> 
+                    <img className="selectable" src={logoImage} onClick={() => this.fileInput.click()} alt="" /> 
                     : 
-                    <img src={logoImage} alt="" />
+                    <img className="selectable" src={logoImage} alt="" />
                 )
               }
               {el.numberOfTreatments
@@ -101,9 +102,9 @@ class AddEditSalonTreatmentCategories extends Component {
                 : 
                 (el.id 
                     ? 
-                    <div className={classes.addedCurriculumItemRemove} onClick={this.confirmDeleteHandler.bind(this, el.id)}><BiXCircle /></div> 
+                    <div className={classes.addedCurriculumItemRemove + " selectable"} onClick={this.confirmDeleteHandler.bind(this, el.id)}><BiXCircle /></div> 
                     : 
-                    <div className={classes.addedCurriculumItemRemove} onClick={this.removeClick.bind(this, i)}><BiXCircle /></div>
+                    <div className={classes.addedCurriculumItemRemove + " selectable"} onClick={this.removeClick.bind(this, i)}><BiXCircle /></div>
                 )
               }
            </div>          
@@ -135,7 +136,7 @@ class AddEditSalonTreatmentCategories extends Component {
                 confirmDelete: "",
                 open: false
             })
-            window.scrollTo(0, 0);
+            FUNCTIONS.scrollToTop();
             this.startingValues();
         })
     }
@@ -150,7 +151,7 @@ class AddEditSalonTreatmentCategories extends Component {
       event.preventDefault();
       axios.defaults.withCredentials = true;
       axios.post(CONST.BASE_URL + '/api/add-edit-salon-treatment-category/', {categoryItems: this.state.values}).then(response => {
-        window.scrollTo(0, 0);
+        FUNCTIONS.scrollToTop();
         this.startingValues();
         this.setState({
             updatedMessage: "Successfully updated Categories!"
@@ -178,7 +179,7 @@ class AddEditSalonTreatmentCategories extends Component {
                     {this.state.confirmDelete}
                     {updatedMessage}
                     {this.createUI()}
-                    <div className={classes.newCurriculumItem} onClick={this.addClick.bind(this)}><BiFolderPlus /> <h3>Add New</h3></div>
+                    <div className={classes.newCurriculumItem + " selectable"} onClick={this.addClick.bind(this)}><BiFolderPlus /> <h3>Add New</h3></div>
                     </div>
                     <button className={classes.newCurriculumItem + " customButton"} onClick={this.handleSubmit}>Finish</button>
                 </div>

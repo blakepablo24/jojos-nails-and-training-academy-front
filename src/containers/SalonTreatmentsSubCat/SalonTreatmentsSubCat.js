@@ -8,6 +8,7 @@ import GoBack from '../../components/Ui/GoBack/GoBack';
 import Aux from '../../hoc/Auxilary/Auxilary';
 import Latest from '../../components/Ui/Navigation/Latest/Latest';
 import logoImage from '../../components/Ui/Navigation/Header/Logo/logo.png';
+import FUNCTIONS from '../../functions/functions';
 
 class SalonTreatmentsSubCat extends Component {
 
@@ -17,7 +18,7 @@ class SalonTreatmentsSubCat extends Component {
     }
 
     componentDidMount() {
-        window.scrollTo(0, 0);
+        FUNCTIONS.scrollToTop();
         Axios.get(CONST.BASE_URL + '/api/salon-treatments-sub-cat/' + this.props.match.params.id).then(response => {
             this.setState({
                 salonTreatmentsSubCat: response.data.subCatSalonTreatments,

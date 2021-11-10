@@ -52,8 +52,8 @@ class Reviews extends Component {
 
     render(){
 
-        let rightArrow = <div className={classes.selectable} onClick={this.next}><BiRightArrow /></div>;
-        let leftArrow = <div className={classes.selectable} onClick={this.previous}><BiLeftArrow /></div>;
+        let rightArrow = <div className="selectable" onClick={this.next}><BiRightArrow /></div>;
+        let leftArrow = <div className="selectable" onClick={this.previous}><BiLeftArrow /></div>;
 
         if(this.state.number === (this.state.facebookInfo.ratings.length) || this.state.largeScreenImage === (this.state.facebookInfo.ratings.length + 2)) {
             rightArrow = <div className={classes.notSelectable}><BiRightArrow /></div>;

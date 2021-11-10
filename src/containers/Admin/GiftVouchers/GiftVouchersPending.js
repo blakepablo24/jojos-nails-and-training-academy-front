@@ -113,7 +113,7 @@ class GiftVouchersPending extends Component {
                     {this.state.voucherOptions.map((voucherOption, key) =>
                         <p className={voucherOption.title === this.state.shownVouchers 
                             ? classes.selectedVoucherType : classes.voucherType
-                        } 
+                        + " selectable"} 
                         key={key}
                         onClick={this.headerClickHandler.bind(this, voucherOption.title)}
                         >
@@ -146,8 +146,8 @@ class GiftVouchersPending extends Component {
                                 <p className={classes.right}>{new Date(voucher.updated_at).toLocaleDateString()} - {new Date(voucher.updated_at).toLocaleTimeString()}</p>
                                 {voucher.pending ?
                                 <div className={classes.controlsContainer}>
-                                    <h4 className="success" onClick={this.confirmApproveHandler.bind(this, voucher.id)}>Approve</h4>
-                                    <h4 className="error" onClick={this.confirmDeleteHandler.bind(this, voucher.id)}>Remove</h4>
+                                    <h4 className="success selectable" onClick={this.confirmApproveHandler.bind(this, voucher.id)}>Approve</h4>
+                                    <h4 className="error selectable" onClick={this.confirmDeleteHandler.bind(this, voucher.id)}>Remove</h4>
                                 </div>: ""
                                 }
                             </div>
