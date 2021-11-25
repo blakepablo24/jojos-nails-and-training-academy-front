@@ -3,6 +3,7 @@
     width: 100%;
     padding: 1% 35%;
     place-items: center center;
+    height: 15vh;
 }
 
 @media only screen and (min-width: 1024px) {

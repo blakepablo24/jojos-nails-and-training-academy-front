@@ -1,8 +1,8 @@
 .Basket {
     position: fixed;
-    width: 90%;
+    width: 95%;
     height: 80vh;
-    left: 5%;
+    left: 2.5%;
     top: 10vh;
     background: var(--main-bg);
     z-index: 9;
@@ -22,17 +22,14 @@
     transform: translateY(-150%);
 }
 
-.title {
-    place-self: center center;
-}
-
 .basketContainer {
     display: grid;
     place-items: start center;
-    width: 95%;
+    width: 97.5%;
     height: 100%;
     overflow-y: scroll;
     border-top: solid 1px var(--main-txt);
+    padding-bottom: 2.5vh;
 }
 
 .noItemsInBasket {
@@ -58,7 +55,6 @@
 }
 
 .bookTreatmentsButton {
-    width: 90%;
     font-size: 0.9rem;
     padding: 0;
     height: 65%;
@@ -108,13 +104,20 @@
     place-items: center center;
 }
 
+@media only screen and (min-width: 1024px) {
+    .Basket {
+        height: 90vh;
+        top: 5vh;
+        width: 50%;
+        left: 25%;
+    }
+}
+
 @media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
     .Basket {
-        position: fixed;
-        width: 85%;
-        height: 80vh;
-        left: 7.5%;
-        top: 15vh;
-        font-size: 0.65rem;
+        height: 90vh;
+        top: 5vh;
+        width: 75%;
+        left: 12.5%;
     }
 }

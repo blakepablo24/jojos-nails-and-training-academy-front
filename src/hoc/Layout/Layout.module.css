@@ -17,7 +17,7 @@
         grid:
             'header toolbar toolbar toolbar toolbar toolbar' 15vh
             'header latest latest latest latest latest' 5vh
-            'main main main main main main' minmax(80vh, auto)
+            'main main main main main main' minmax(60vh, auto)
             'footer footer footer footer footer footer' minmax(20vh, auto)
             / 1fr 1fr 1fr 1fr 1fr 1fr
         ;
@@ -28,7 +28,7 @@
     .Layout {
         grid:
             'toolbar toolbar toolbar toolbar toolbar toolbar' 12.5vh
-            'main main main main main main' minmax(80vh, auto)
+            'main main main main main main' minmax(87.5vh, auto)
             'footer footer footer footer footer footer' minmax(20vh, auto)
             / 1fr 1fr 1fr 1fr 1fr 1fr
         ;
@@ -40,7 +40,7 @@
         grid:
             'header toolbar toolbar toolbar toolbar toolbar' 7.5vh
             'header latest latest latest latest latest' 2.5vh
-            'main main main main main main' minmax(90vh, auto)
+            'main main main main main main' minmax(70vh, auto)
             'footer footer footer footer footer footer' minmax(20vh, auto)
             / 1fr 1fr 1fr 1fr 1fr 1fr
         ;

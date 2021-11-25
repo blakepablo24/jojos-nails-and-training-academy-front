@@ -50,7 +50,6 @@ p {
   margin: 2vh 0;
   font-size: 1.5rem;
   border-radius: 5px;
-  box-shadow: 2px 2px 2.5px black;
   cursor: pointer;
 }
 
@@ -199,7 +198,7 @@ input:focus, textarea:focus, select:focus {
   }
 
   .customButton {
-    width: 20%;
+    width: 40%;
   }
 
   .customButton:hover {
@@ -225,6 +224,10 @@ input:focus, textarea:focus, select:focus {
 @media only screen and (min-width : 1500px) and (max-width : 1700px) and (orientation : portrait) {
   html {
     font-size: 2.1rem;
+  }
+
+  .customButton {
+    width: 40%;
   }
 
   input, textarea, select {

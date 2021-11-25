@@ -155,17 +155,17 @@ class AdminLandingPage extends Component {
         return(
             <Aux>
                 <Latest message="Admin Dashboard"/>
+                {changePassword}
                 <div className={classes.AdminLandingPage + " mainAdminSection"}>
-                    {changePassword}
                     {this.state.loading}
                     {this.state.redirectOnSuccess}
                     <div className={classes.topSellersContainer}>
                         <div className={classes.topSeller}>
-                            <h3>Current Top Course</h3>
+                            <h4>Current Top Course</h4>
                             <p>{this.state.mostPopularCourse.title} - {this.state.mostPopularCourse.enquires}</p>
                         </div>
                         <div className={classes.topSeller}>
-                            <h3>Current Top Treatment</h3>
+                            <h4>Current Top Treatment</h4>
                             <p>{this.state.mostPopularTreatmentCategory} - {this.state.mostPopularTreatment.title} - {this.state.mostPopularTreatment.enquires}</p>
                         </div>
                     </div>
@@ -196,14 +196,16 @@ class AdminLandingPage extends Component {
                         </Link>
                     </div>
                     <div className={classes.newServicesContainer}>
-                        <Link to="/admin/new-salon-treatment" className={classes.newService}>
-                            <BiPlus />
-                            <h4>New Salon Treatment</h4>
-                        </Link>
-                        <Link to="/admin/add-edit-salon-treatment" className={classes.newSubService}>
-                            <BiPlus />
-                            <h4>Add / Edit Salon Treatment Category</h4>
-                        </Link>
+                        <div className={classes.newServiceWithSubContainer}>
+                            <Link to="/admin/new-salon-treatment" className={classes.newService}>
+                                <BiPlus />
+                                <h4>New Salon Treatment</h4>
+                            </Link>
+                            <Link to="/admin/add-edit-salon-treatment" className={classes.newSubService}>
+                                <BiPlus />
+                                <h4>Add / Edit Salon Treatment Category</h4>
+                            </Link>
+                        </div>
                         <Link to="/admin/new-training-course" className={classes.newService}>
                             <BiPlus />
                             <h4>New Training Course</h4>

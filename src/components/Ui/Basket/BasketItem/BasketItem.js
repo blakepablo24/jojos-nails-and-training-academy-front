@@ -29,13 +29,16 @@ const basketItem = (props) => {
 
     return(
         <div className={classes.basketItem}>
+            <div className={classes.basketItemImage}>
+                <img src={props.image} alt="" />
+            </div>
             <div className={classes.basketItemTitleContainer}>
                 <p>{props.subCategoryTitle}:</p>
                 {description}
             </div>
             {addMinus}
-            <p>£ {props.price}</p>
-            <TiDeleteOutline className="selectable" color="red" onClick={props.remove.bind(this, props.id)} />
+            <p className={classes.price}>£ {props.price}</p>
+            <TiDeleteOutline className={classes.delete + " selectable"} color="red" onClick={props.remove.bind(this, props.id)} />
         </div>
     )
 }

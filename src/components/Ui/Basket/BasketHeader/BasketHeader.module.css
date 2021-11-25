@@ -1,0 +1,23 @@
+.basketHeader {
+    display: grid;
+    place-items: center center;
+    grid-auto-flow: column;
+    width: 65%;
+    height: 100%;
+    grid-template-columns: 4fr 6fr;
+}
+
+@media only screen and (min-width: 1024px) {
+    .basketHeader {
+        width: 70%;
+        grid-template-columns: 1fr 9fr;
+        font-size: 1.5rem;
+    }
+}
+
+@media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+    .basketHeader {
+        width: 30%;
+        grid-template-columns: 3fr 7fr;
+    }
+}

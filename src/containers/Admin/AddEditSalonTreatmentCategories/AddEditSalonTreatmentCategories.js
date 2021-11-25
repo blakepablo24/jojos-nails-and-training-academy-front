@@ -173,10 +173,10 @@ class AddEditSalonTreatmentCategories extends Component {
         return (
             <Aux>
                 <Latest message={"Salon Treatment Categories"}/>
+                {this.state.confirmDelete}
                 <div className={classes.AddCurriculum}>
                     <GoBack back={() => this.props.history.goBack()} />
                     <div className={classes.newCurriculumItemContainer}>
-                    {this.state.confirmDelete}
                     {updatedMessage}
                     {this.createUI()}
                     <div className={classes.newCurriculumItem + " selectable"} onClick={this.addClick.bind(this)}><BiFolderPlus /> <h3>Add New</h3></div>

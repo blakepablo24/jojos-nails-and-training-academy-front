@@ -6,6 +6,7 @@ import Logo from '../../../components/Ui/Navigation/Header/Logo/Logo';
 import { format } from 'date-fns';
 import { FcCalendar } from "react-icons/fc";
 import Backdrop from '../Backdrop/Backdrop';
+import BasketHeader from './BasketHeader/BasketHeader';
 import BasketItem from './BasketItem/BasketItem';
 import enGb from 'date-fns/locale/en-GB';
 import DatePicker, { registerLocale } from 'react-datepicker';
@@ -65,6 +66,7 @@ const Basket = (props) => {
                 from={item.from}
                 title={item.title}
                 price={item.price * item.quantity}
+                image={item.image}
                 type={item.type}
                 quantity={item.quantity}
                 remove={props.remove}
@@ -105,7 +107,7 @@ const Basket = (props) => {
 
     let shownBasketInfo = 
             <div className={attachedClasses.join(' ')}>
-                <h3 className={classes.title}>Your Basket</h3>
+                <BasketHeader title="Your Basket" />
                 <div className={classes.basketContainer}>
                     {currentBasketItems}
                 </div>
@@ -121,7 +123,7 @@ const Basket = (props) => {
     if(props.itemsInBasket.length === 0){
         shownBasketInfo = 
             <div className={attachedClasses.join(' ')}>
-                <h3 className={classes.title}>Your Basket</h3>
+                <BasketHeader title="Your Basket" />
                 <div className={classes.basketContainer}>
                     {currentBasketItems}
                 </div>
@@ -148,7 +150,7 @@ const Basket = (props) => {
         }
         shownBasketInfo = 
             <div className={attachedClasses.join(' ')}>
-                <h3 className={classes.title}>Treatment Course Booking</h3>
+                <BasketHeader title="Training Course Booking" />
                 <div className={classes.basketContainer}>
                     <div className={classes.calanderContainer}>
                         <DatePicker
@@ -195,7 +197,7 @@ const Basket = (props) => {
         }
         shownBasketInfo = 
             <div className={attachedClasses.join(' ')}>
-                <h3 className={classes.title}>Your Salon Treatments</h3>
+                <BasketHeader title="Your Salon Treatments" />
                 <div className={classes.basketContainer}>
                     <div className={classes.calanderContainer}>
                         <DatePicker
@@ -241,7 +243,7 @@ const Basket = (props) => {
     if(props.checkout === "complete-gift-voucher"){
         shownBasketInfo = 
             <div className={attachedClasses.join(' ')}>
-                <h3 className={classes.title}>Your Gift Voucher</h3>
+                <BasketHeader title="Your Gift Voucher" />
                 <div className={classes.basketContainer}>
                     <div className={classes.calanderContainer}>
                         <p>Vouchers are to be paid via bank transfer</p>
@@ -262,7 +264,7 @@ const Basket = (props) => {
     if(props.checkout === "customer-details"){
         shownBasketInfo = 
             <div className={attachedClasses.join(' ')}>
-                <h3 className={classes.title}>Your Information</h3>
+                <BasketHeader title="Your Information" />
                 <div className={classes.basketContainer}>
                     <input 
                         type="text" 

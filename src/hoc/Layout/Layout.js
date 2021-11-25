@@ -102,7 +102,7 @@ class Layout extends Component {
         })
     }
 
-    addToShoppingBasketHandler = (id, to, from, title, price, subCategoryTitle, type) => {
+    addToShoppingBasketHandler = (id, to, from, title, price, subCategoryTitle, type, image) => {
         let basketItems = [];
         let storedBasketitems = JSON.parse(localStorage.getItem("basketItems"));
         let basketItem = "";
@@ -129,7 +129,8 @@ class Layout extends Component {
                     price: price,
                     subCategoryTitle: subCategoryTitle,
                     quantity: 1,
-                    type: type
+                    type: type,
+                    image: image
                 })
             }
         } else {
@@ -141,7 +142,8 @@ class Layout extends Component {
                 price: price,
                 subCategoryTitle: subCategoryTitle,
                 quantity: 1,
-                type: type
+                type: type,
+                image: image
             })
         }
 

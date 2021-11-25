@@ -87,13 +87,7 @@ class SingleSalonTreatment extends Component {
 
     render(){
 
-        let courseImage = this.state.image;
-
-        if(this.state.image) {
-            courseImage = <img src={CONST.BASE_URL + "/storage/images/salon-treatment-images/single-salon-treatment-images/" + this.state.image} alt="" className={classes.treatmentImage} />;
-        } else {
-            courseImage = <img src={logoImage} alt="" className={classes.treatmentImage} />;
-        }
+        let courseImage = this.state.image ? CONST.BASE_URL + "/storage/images/salon-treatment-images/single-salon-treatment-images/" + this.state.image : logoImage;
 
         let successMsg = "";
         
@@ -117,16 +111,16 @@ class SingleSalonTreatment extends Component {
         let shownButton = "";
 
         if(!this.props.auth){
-            shownButton = <button onClick={this.props.addToShoppingBasket.bind(this, this.props.match.params.id + CONST.ST, "", "", this.state.title, this.state.price, this.state.subCategoryTitle, CONST.ST)}>Add to Basket</button>;
+            shownButton = <button onClick={this.props.addToShoppingBasket.bind(this, this.props.match.params.id + CONST.ST, "", "", this.state.title, this.state.price, this.state.subCategoryTitle, CONST.ST, CONST.BASE_URL + "/storage/images/salon-treatment-images/single-salon-treatment-images/" + this.state.image)}>Add to Basket</button>;
 
             if(JSON.parse(localStorage.getItem("basketItems"))){
                 if(FUNCTIONS.checkBasket(Number(this.props.match.params.id) + CONST.ST)){
                     shownButton = <button className="customButton" onClick={this.props.toggleBasket}><TiShoppingCart />Continue to Basket</button>;
                 } else {
-                    shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.ST, "", "", this.state.title, this.state.price, this.state.subCategoryTitle, CONST.ST)}>Add to Basket</button>;
+                    shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.ST, "", "", this.state.title, this.state.price, this.state.subCategoryTitle, CONST.ST, courseImage)}>Add to Basket</button>;
                 }
             } else {
-                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.ST, "", "", this.state.title, this.state.price, this.state.subCategoryTitle, CONST.ST)}>Add to Basket</button>;
+                shownButton = <button className="customButton" onClick={this.props.addToShoppingBasket.bind(this, Number(this.props.match.params.id) + CONST.ST, "", "", this.state.title, this.state.price, this.state.subCategoryTitle, CONST.ST, courseImage)}>Add to Basket</button>;
             }
         }
 
@@ -139,7 +133,7 @@ class SingleSalonTreatment extends Component {
                     {this.state.confirmDelete}
                     <GoBack back={() => this.props.history.goBack()} />
                     <h3 className={classes.title}>{this.state.title}</h3>
-                    {courseImage}
+                    <img src={courseImage} alt="" className={classes.treatmentImage} />
                     <div className={classes.statsContainer}>
                         <div className={classes.stat}>
                             <MdTimer />

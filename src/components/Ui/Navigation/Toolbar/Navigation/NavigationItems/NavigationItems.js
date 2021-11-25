@@ -7,7 +7,7 @@ const navigationItems = (props) => {
         return(
             <div className={classes.NavigationItems}>
                 <div className={classes.smallScreenOnly}>
-                    <Logo menuLogo={true} clicked={props.clicked}  />
+                    <Logo nonClickable={true} clicked={props.clicked}  />
                 </div>
                 <div className={classes.topNavItemsContainer}>
                     <NavigationItem clicked={props.clicked} link="/training-courses" linkName="Training Courses"/>

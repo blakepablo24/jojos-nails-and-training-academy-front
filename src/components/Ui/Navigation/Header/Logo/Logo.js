@@ -4,17 +4,19 @@ import classes from './Logo.module.css';
 import logoImage from './logo.png';
 
 const logo = (props) => {
+    
+    let logoType =  <Link onClick={props.clicked} to="/">
+                        <img src={logoImage} alt=""/>
+                    </Link>
 
-    let logoSize = classes.Logo;
-
-    if(props.menuLogo) {
-        logoSize = classes.menuLogo;
+    if(props.nonClickable) {
+        logoType = <img src={logoImage} alt=""/>
     }
 
     return (
-        <Link onClick={props.clicked} to="/" className={logoSize}>
-            <img src={logoImage} alt=""/>
-        </Link>
+        <div className={classes.Logo}>
+            {logoType}
+        </div>
     )
 }
 

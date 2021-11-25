@@ -8,6 +8,23 @@
     z-index: 2;
 }
 
+.topSellersContainer{
+    width: 100%;
+    display: grid;
+    place-items: center center;
+    grid-auto-flow: column;
+}
+
+.topSeller {
+    border: var(--amber-txt) solid 2.5px;
+    height: 95%;
+    width: 95%;
+    display: grid;
+    place-items: center center;
+    font-size: 100%;
+    border-radius: 2.5px;
+}
+
 .allStatsContainer {
     width: 95%;
     display: grid;
@@ -35,6 +52,12 @@
 
 .newServicesContainer {
     width: 95%;
+    display: grid;
+    place-items: center center;
+}
+
+.newServiceWithSubContainer {
+    width: 100%;
     display: grid;
     place-items: center center;
 }
@@ -77,32 +100,51 @@
 @media only screen and (min-width: 1024px) {
     .AdminLandingPage {
         grid-area: header/main;
-    }
-
-    .changePassword {
-        width: 25%;
-    }
-    .newService, .newSubService {
-        width: 40%;
-    }
-
-    .newSubService {
-        margin-right: 15%;
+        grid: 1fr 1fr / 8fr 2fr;
     }
 
     .allStatsContainer {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
         grid: 20vh / 1fr 1fr 1fr 1fr 1fr 1fr;
     }
 
     .topSellersContainer{
-        width: 100%;
+        grid-column: 2 / 3;
+        grid-row: 1 / 3;
+        height: 100%;
+        grid-auto-flow: row;
+    }
+    
+    .topSeller {
+        border: var(--amber-txt) solid 2.5px;
+        height: 95%;
+        width: 95%;
         display: grid;
         place-items: center center;
-        grid-auto-flow: column;
+        font-size: 1.5rem;
+        border-radius: 2.5px;
     }
 
     .singleStatContainer {
         grid-column: span 1;
+    }
+
+    .newServicesContainer {
+        grid-auto-flow: column;
+        place-items: start center;
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+    }
+
+    .newService, .newSubService {
+        width: 60%;
+        font-size: 100%;
+    }
+
+    .changePassword {
+        height: 6vh;
+        box-shadow: none;
     }
 }
 
@@ -118,13 +160,6 @@
 
     .newSubService {
         margin-right: 15%;
-    }
-    
-    .topSellersContainer{
-        width: 100%;
-        display: grid;
-        place-items: center center;
-        grid-auto-flow: column;
     }
 
     .singleStatContainer {

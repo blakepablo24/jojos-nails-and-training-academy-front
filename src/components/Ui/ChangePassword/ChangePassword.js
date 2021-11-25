@@ -18,7 +18,7 @@ const changePassword = (props) => {
             <div className={styles.confirmDeleteContainer}>
                 <div className={styles.ConfirmDelete}>
                     <div className={styles.Logo}>
-                        <Logo menuLogo={true}/>
+                        <Logo nonClickable={true}/>
                     </div>
                     <div className={styles.passwordInputs}>
                         <input 
