@@ -4,6 +4,11 @@
     display: grid;
     place-items: center center;
     width: 100%;
-
     grid-auto-flow: column;
+}
+
+.policies {
+    display: grid;
+    place-items: center center;
+    height: 100%;
 }

@@ -9,7 +9,6 @@ const privacyPolicy = (props) => {
                     <Logo />
                 </div>
     let button = <button className={classes.fixedButton + " customButton"} onClick={props.togglePrivacyPolicy}>Close</button>
-
     let style = classes.PrivacyPolicy;
 
     if(props.url){
@@ -20,7 +19,7 @@ const privacyPolicy = (props) => {
 
     return(
         <div className={style}>
-            <h3>PRIVACY POLICY</h3>
+            <h3>{props.policy} POLICY</h3>
             {logo}
             <h4>PURPOSE</h4>
             <p>[JoJo's Nail and Beauty Academy] (referred to hereafter as the ‘We’ or the ‘Company’) are committed to protecting and respecting your privacy.</p>

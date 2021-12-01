@@ -170,10 +170,29 @@ class EditTrainingCourse extends Component {
                     />
                 })
             }).catch(error => {
-                this.setState({
-                    loading: "",
-                    showErrorPopup: true
-                })
+                if (error.response) {
+                    // console.log("Request made and server responded");
+                    this.setState({
+                        loading: "",
+                        imageError: <h4 className="error">{error.response.data.errors.newImage}</h4>
+                    })
+                    // console.log(error.response.status);
+                    // console.log(error.response.headers);
+                } else if (error.request) {
+                    this.setState({
+                        loading: "",
+                        showErrorPopup: true
+                    })
+                    // console.log("The request was made but no response was received");
+                    // console.log(error.request);
+                } else {
+                    this.setState({
+                        loading: "",
+                        showErrorPopup: true
+                    })
+                    // console.log("Something happened in setting up the request that triggered an Error");
+                    // console.log('Error', error.message);
+                }
               })
         } else {
             this.setState({

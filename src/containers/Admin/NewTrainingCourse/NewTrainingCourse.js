@@ -8,6 +8,7 @@ import GoBack from '../../../components/Ui/GoBack/GoBack';
 import Loading from '../../../components/Ui/Loading/Loading';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Latest from '../../../components/Ui/Navigation/Latest/Latest';
+import ErrorPopup from '../../../components/Ui/ErrorPopup/ErrorPopup';
 
 class NewTrainingCourse extends Component {
 
@@ -25,7 +26,8 @@ class NewTrainingCourse extends Component {
         durationError: "",
         teacherStudentRatioError: "",
         extrasError: "",
-        loading: ""
+        loading: "",
+        showErrorPopup: false,
     }
 
     changeHandler = (event) => {
@@ -109,13 +111,31 @@ class NewTrainingCourse extends Component {
                         }}                  
                     />
                 })
-            }).catch(err => {
-                if (err.response) {
+            }).catch(error => {
+                if (error.response) {
+                    // console.log("Request made and server responded");
                     this.setState({
-                        imageError: <h4 className="error">{err.response.data.errors.newImage}</h4>
+                        loading: "",
+                        imageError: <h4 className="error">{error.response.data.errors.newImage}</h4>
                     })
+                    // console.log(error.response.status);
+                    // console.log(error.response.headers);
+                } else if (error.request) {
+                    this.setState({
+                        loading: "",
+                        showErrorPopup: true
+                    })
+                    // console.log("The request was made but no response was received");
+                    // console.log(error.request);
+                } else {
+                    this.setState({
+                        loading: "",
+                        showErrorPopup: true
+                    })
+                    // console.log("Something happened in setting up the request that triggered an Error");
+                    // console.log('Error', error.message);
                 }
-            })
+              })
         } else {
             this.setState({
                 titleError: titleError,
@@ -129,10 +149,17 @@ class NewTrainingCourse extends Component {
 
     render(){
 
+        let errorPopup = "";
+
+        if(this.state.showErrorPopup){
+            errorPopup = <ErrorPopup shownErrorToggle={this.errorPopupHandler} message={"Edit Training Course " + this.props.match.params.id}/>;
+        }
+
         return(
             <Aux>
                 <Latest message={"New Training Course"} />
                 {this.state.loading}
+                {errorPopup}
                 <div className={classes.NewTrainingCourse}>
                     {this.state.redirectOnSuccess}
                     <GoBack back={() => this.props.history.goBack()} />

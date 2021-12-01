@@ -10,7 +10,7 @@ const privacyPolicy = (props) => (
         <Latest message="Privacy Policy" />
         <div className={classes.PrivacyPolicy}>
             <GoBack back={() => props.history.goBack()} />
-            <PrivacyPolicy url={true}/>
+            <PrivacyPolicy policy="PRIVACY" url={true}/>
         </div>
     </Aux>
 )

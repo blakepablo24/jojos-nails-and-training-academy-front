@@ -40,7 +40,6 @@ const Basket = (props) => {
         props.checkoutView(false);
     }
 
-
     let attachedClasses = [classes.Basket, classes.Hide];
     let totalCost = 0;
     let currentBasketItems = <h2 className={classes.noItemsInBasket}>There are currently no items in your basket</h2>;
@@ -105,15 +104,17 @@ const Basket = (props) => {
         attachedClasses = [classes.Basket, classes.Show];
     }
 
+    let totalPrice =    <div className={classes.totalPrice}>
+                            <p>Total: £ {totalCost}</p>
+                        </div>
+
     let shownBasketInfo = 
             <div className={attachedClasses.join(' ')}>
                 <BasketHeader title="Your Basket" />
                 <div className={classes.basketContainer}>
                     {currentBasketItems}
                 </div>
-                <div className={classes.totalPrice}>
-                    <p>Total: £ {totalCost}</p>
-                </div>
+                {totalPrice}
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.toggleBasket}>Continue Shopping</button>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={checkIfGiftVouchersInBasket}>Checkout</button>
@@ -127,9 +128,7 @@ const Basket = (props) => {
                 <div className={classes.basketContainer}>
                     {currentBasketItems}
                 </div>
-                <div className={classes.totalPrice}>
-                    <p>Total: £ {totalCost}</p>
-                </div>
+                {totalPrice}
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.toggleBasket}>Continue Shopping</button>
                 </div>
@@ -173,9 +172,7 @@ const Basket = (props) => {
                     </div>
                     {props.trainingCourseStartdateError}
                 </div>
-                <div className={classes.totalPrice}>
-                    <p>Total: £ {totalCost}</p>
-                </div>
+                {totalPrice}
                 <div className={classes.basketControlsContainer}>
                 <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.trainingCourseErrorCheckHandler}>Next</button>
@@ -230,9 +227,7 @@ const Basket = (props) => {
                     </select>
                     {props.bookingRequestTimeError}
                 </div>
-                <div className={classes.totalPrice}>
-                    <p>Total: £ {totalCost}</p>
-                </div>
+                {totalPrice}
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.treatmentErrorCheckHandler}>Next</button>
@@ -251,9 +246,7 @@ const Basket = (props) => {
                         <p>You will then receive Your E-Voucher through email</p>
                     </div>
                 </div>
-                <div className={classes.totalPrice}>
-                    <p>Total: £ {totalCost}</p>
-                </div>
+                {totalPrice}
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={checkIfTrainingCoursesInBasket}>Next</button>
@@ -294,9 +287,7 @@ const Basket = (props) => {
                     />
                     {props.bookingRequestNumberError}
                 </div>
-                <div className={classes.totalPrice}>
-                    <p>Total: £ {totalCost}</p>
-                </div>
+                {totalPrice}
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={(event) => props.finishHandler(event, totalCost)}>Finish</button>

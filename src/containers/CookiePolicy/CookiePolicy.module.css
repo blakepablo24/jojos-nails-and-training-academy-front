@@ -1,0 +1,5 @@
+.CookiePolicy {
+    grid-area: main;
+    display: grid;
+    place-items: center center;
+}

@@ -10,7 +10,7 @@ const privacyPolicyModal = (props) => {
     let privacyPolicy = "";
 
     if(props.showPrivacyPolicy){
-        privacyPolicy = <PrivacyPolicy togglePrivacyPolicy={props.togglePrivacyPolicy}/>
+        privacyPolicy = <PrivacyPolicy policy="PRIVACY" togglePrivacyPolicy={props.togglePrivacyPolicy}/>
     }
 
     return(

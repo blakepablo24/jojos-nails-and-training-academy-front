@@ -32,6 +32,7 @@ import AddEditSalonTreatmentCategories from '../../containers/Admin/AddEditSalon
 import GiftVouchersPending from '../../containers/Admin/GiftVouchers/GiftVouchersPending';
 import PrivacyPolicyModal from '../../components/Ui/PrivacyPolicyModal/PrivacyPolicyModal';
 import PrivacyPolicy from '../../containers/PrivacyPolicy/PrivacyPolicy';
+import CookiePolicy from '../../containers/CookiePolicy/CookiePolicy';
 
 let initialBasket = [];
 if(JSON.parse(localStorage.getItem("basketItems"))) {
@@ -443,6 +444,7 @@ class Layout extends Component {
                     <Route path="/gift-vouchers" exact render={(props) => <GiftVouchers {...props} addToShoppingBasket={this.addToShoppingBasketHandler} />}/>
                     <Route path="/staff-login" exact render={(props) => <Login {...props} auth={this.state.isAuthenticated} sendData={this.getData} />}/>
                     <Route path="/privacy-policy" exact component={PrivacyPolicy}/>
+                    <Route path="/cookie-policy" exact component={CookiePolicy}/>
                     <ProtectedRoute path="/admin" exact component={AdminLandingPage} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/new-salon-treatment" exact component={NewSalonTreatment} auth={isAuthenticated} />
                     <ProtectedRoute path="/admin/add-edit-salon-treatment" exact component={AddEditSalonTreatmentCategories} auth={isAuthenticated} />

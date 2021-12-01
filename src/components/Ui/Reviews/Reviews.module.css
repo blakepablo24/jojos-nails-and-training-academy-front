@@ -89,26 +89,6 @@
     }
 }
 
-@media only screen and (min-width : 1500px) and (max-width : 1700px) and (orientation : portrait) {
-    
-    .Reviews {
-        font-size: 1.5rem;
-    }
-    
-    .largeScreenReviewsContainer {
-        height: 25vh;
-        display: grid;
-        place-items: center center;
-        grid-auto-flow: column;
-    }
-    
-    .Review {
-        margin: 0;
-        height: 20vh;
-        grid-template-rows: 1fr 9fr;
-    }
-}
-
 @media only screen and (min-width : 2000px) and (max-width : 2500px) and (orientation : landscape) {
     
     .Reviews {

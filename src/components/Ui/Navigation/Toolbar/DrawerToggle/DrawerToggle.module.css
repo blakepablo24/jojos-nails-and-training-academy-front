@@ -5,10 +5,6 @@
     padding: 0 2.5%;
 }
 
-.DrawerToggle svg {
-    font-size: 3rem;
-}
-
 @media only screen and (min-width: 1024px) {
     .DrawerToggle {
         display: none;
@@ -19,9 +15,5 @@
     .DrawerToggle {
         place-items: center center;
         padding: 0;
-    }
-
-    .DrawerToggle svg {
-        font-size: 100%;
     }
 }

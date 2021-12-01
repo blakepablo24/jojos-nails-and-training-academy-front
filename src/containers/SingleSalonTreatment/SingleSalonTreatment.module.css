@@ -36,6 +36,13 @@
     margin-top: 2.5vh;
 }
 
+.floatButton {
+    position: sticky;
+    top: 12.75vh;
+    padding: 1vh;
+    width: 95%;
+}
+
 @media only screen and (min-width: 1024px) {
     .SingleSalonTreatment {
         grid-template-columns: 1fr 1fr;

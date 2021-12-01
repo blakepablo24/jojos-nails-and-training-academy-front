@@ -134,6 +134,7 @@ class SingleSalonTreatment extends Component {
                     <GoBack back={() => this.props.history.goBack()} />
                     <h3 className={classes.title}>{this.state.title}</h3>
                     <img src={courseImage} alt="" className={classes.treatmentImage} />
+                    {shownButton}
                     <div className={classes.statsContainer}>
                         <div className={classes.stat}>
                             <MdTimer />
@@ -145,7 +146,6 @@ class SingleSalonTreatment extends Component {
                         </div>
                     </div>
                     <h3 className={classes.description}>{this.state.description}</h3>
-                    {shownButton}
                     <GuildLogo />
                     {this.state.adminButtons}
                 </div>

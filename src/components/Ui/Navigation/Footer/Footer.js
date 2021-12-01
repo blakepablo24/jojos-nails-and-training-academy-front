@@ -44,7 +44,10 @@ class Footer extends Component {
         <div className={classes.Footer}>
             {this.state.redirectOnSuccess}
             {loggedInIcon}
-            <Link onClick={FUNCTIONS.scrollToTop} to="/privacy-policy">Privacy Policy</Link>
+            <div className={classes.policies}>
+                <Link onClick={FUNCTIONS.scrollToTop} to="/cookie-policy">Cookie Policy</Link>
+                <Link onClick={FUNCTIONS.scrollToTop} to="/privacy-policy">Privacy Policy</Link>
+            </div>
         </div>
     )
     }

@@ -54,6 +54,13 @@
     grid-auto-flow: column;
 }
 
+.floatButton {
+    position: sticky;
+    top: 12.75vh;
+    padding: 1vh;
+    width: 95%;
+}
+
 @media only screen and (min-width: 1024px) {
 
     .SingleTrainingCourse {
@@ -78,25 +85,5 @@
         width: 60vh;
         height: 60vh;
         place-self: start center;
-    }
-}
-
-@media only screen and (min-width : 1500px) and (max-width : 1700px) and (orientation : portrait) {
-
-    .SingleTrainingCourse {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .courseImage {
-        margin-top: 2.5vh;
-        width: 95%;
-        height: 60%;
-        place-self: start center;
-    }
-
-    .floatButton {
-        width: 75%;
-        padding: 0;
-        height: 75%;
     }
 }

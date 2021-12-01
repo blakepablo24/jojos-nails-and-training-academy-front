@@ -201,7 +201,8 @@ class SingleTrainingCourse extends Component {
                     {this.state.confirmDelete}
                     {this.state.redirectOnSuccess}
                     <GoBack back={() => this.props.history.goBack()} />
-                    {courseImage}    
+                    {courseImage}
+                    {shownButton}    
                     <div className={classes.stat}>
                         <h3>Duration:</h3>
                         <h3>{this.state.duration}</h3>
@@ -220,7 +221,6 @@ class SingleTrainingCourse extends Component {
                     </div>
                     {curriculum}
                     <GuildLogo />
-                    {shownButton}
                     {this.state.adminButtons}
                 </div>
             </Aux>
