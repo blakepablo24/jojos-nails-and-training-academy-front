@@ -10,6 +10,7 @@ import ConfirmDelete from '../../../components/Ui/ConfirmDelete/ConfirmDelete';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Latest from '../../../components/Ui/Navigation/Latest/Latest';
 import FUNCTIONS from '../../../functions/functions';
+import Loading from '../../../components/Ui/Loading/Loading';
 
 
 class AddEditSalonTreatmentCategories extends Component {
@@ -20,7 +21,8 @@ class AddEditSalonTreatmentCategories extends Component {
       redirectOnSuccess: "",
       updatedMessage: "",
       confirmDelete: "",
-      open: false
+      open: false,
+      loading: <Loading component={true} />
     };
     
     handleSubmit = this.handleSubmit.bind(this);
@@ -43,7 +45,7 @@ class AddEditSalonTreatmentCategories extends Component {
         })
     }
 
-    startingValues(){
+    startingValues(message){
         let startingValues = [];
         axios.get(CONST.BASE_URL + '/api/all-salon-treatments').then(response => {
             response.data.forEach(singleItem => {
@@ -55,8 +57,17 @@ class AddEditSalonTreatmentCategories extends Component {
                 });
             });
             this.setState({
-            values: startingValues,
-            courseName: response.data.title,
+                loading: "",
+                values: startingValues,
+                courseName: response.data.title,
+                updatedMessage: message ?   <div className={classes.updateMessageContainer}>
+                                                <FlashMessage duration={5000}>
+                                                    <div className="load-msg">
+                                                        <h3 className="success">{message}</h3>
+                                                    </div>
+                                                </FlashMessage>
+                                            </div>
+                                        : ""
             })
         })
     }
@@ -68,10 +79,11 @@ class AddEditSalonTreatmentCategories extends Component {
 
         axios.post(CONST.BASE_URL+'/api/update-salon-treatment-category-image', fd).then(response => {
             this.setState({
-                updatedMessage: "Successfully Category Image!"
+                loading: <Loading component={true} />,
+                updatedMessage: ""
             })
             FUNCTIONS.scrollToTop();
-            this.startingValues();
+            this.startingValues("Category Image Updated!");
         })
     }
 
@@ -131,13 +143,14 @@ class AddEditSalonTreatmentCategories extends Component {
     deleteHandler = (id) => {
         axios.defaults.withCredentials = true;
         axios.delete(CONST.BASE_URL + '/api/delete-salon-treatment-category/' + id).then(response => {
-            this.setState({
-                updatedMessage: "Successfully updated Categories!",
-                confirmDelete: "",
-                open: false
-            })
             FUNCTIONS.scrollToTop();
-            this.startingValues();
+            this.setState({
+                confirmDelete: "",
+                open: false,
+                loading: <Loading component={true} />,
+                updatedMessage: ""
+            })
+            this.startingValues("Category Successfully Removed");
         })
     }
 
@@ -150,26 +163,17 @@ class AddEditSalonTreatmentCategories extends Component {
     handleSubmit(event) {
       event.preventDefault();
       axios.defaults.withCredentials = true;
-      axios.post(CONST.BASE_URL + '/api/add-edit-salon-treatment-category/', {categoryItems: this.state.values}).then(response => {
+      axios.post(CONST.BASE_URL + '/api/add-edit-salon-treatment-category', {categoryItems: this.state.values}).then(response => {
         FUNCTIONS.scrollToTop();
-        this.startingValues();
         this.setState({
-            updatedMessage: "Successfully updated Categories!"
+            loading: <Loading component={true} />,
+            updatedMessage: ""
         })
+        this.startingValues("Successfully updated Categories!");
       })
     }
   
     render() {
-        let updatedMessage = "";
-        
-        if(this.state.updatedMessage){
-            updatedMessage = 
-                <FlashMessage duration={5000}>
-                    <div className="load-msg">
-                    <h3 className="success">{this.state.updatedMessage}</h3>
-                    </div>
-                </FlashMessage>
-        }
         return (
             <Aux>
                 <Latest message={"Salon Treatment Categories"}/>
@@ -177,7 +181,8 @@ class AddEditSalonTreatmentCategories extends Component {
                 <div className={classes.AddCurriculum}>
                     <GoBack back={() => this.props.history.goBack()} />
                     <div className={classes.newCurriculumItemContainer}>
-                    {updatedMessage}
+                    {this.state.updatedMessage}
+                    {this.state.loading}
                     {this.createUI()}
                     <div className={classes.newCurriculumItem + " selectable"} onClick={this.addClick.bind(this)}><BiFolderPlus /> <h3>Add New</h3></div>
                     </div>

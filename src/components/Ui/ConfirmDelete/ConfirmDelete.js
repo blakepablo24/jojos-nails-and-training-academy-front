@@ -3,6 +3,7 @@ import styles from './ConfirmDelete.module.css';
 import Backdrop from '../Backdrop/Backdrop';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Logo from '../Navigation/Header/Logo/Logo';
+import { BrowserRouter } from 'react-router-dom';
 
 const confirmDelete = (props) => {
 
@@ -20,7 +21,9 @@ const confirmDelete = (props) => {
             <div className={styles.confirmDeleteContainer}>
                 <div className={styles.ConfirmDelete}>
                     <div className={styles.Logo}>
-                        <Logo/>
+                        <BrowserRouter>
+                            <Logo/>
+                        </BrowserRouter>
                     </div>
                     <h1>ARE YOU SURE?</h1>
                     {message}

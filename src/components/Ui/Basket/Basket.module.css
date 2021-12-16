@@ -36,20 +36,19 @@
     place-self: center center;
     font-weight: 300;
 }
-
+.basketControlsContainer, .totalPrice, .bookTreatmentsButton, .calanderContainer, .calanderContainer h4, .calanderImagecontainer, .completed, .logo {
+    display: grid;
+    place-items: center center;
+}
 .basketControlsContainer {
     height: 100%;
     width: 100%;
-    display: grid;
-    place-items: center center;
     grid-auto-flow: column;
 }
 
 .totalPrice {
     width: 95%;
     height: 100%;
-    display: grid;
-    place-items: center center;
     font-size: 1.5rem;
     border-top: solid 1px var(--main-txt);
 }
@@ -59,28 +58,20 @@
     padding: 0;
     height: 65%;
     margin: 0;
-    display: grid;
-    place-items: center center;
 }
 
 .calanderContainer {
     background: white;
     width: 90%;
     height: 100%;
-    display: grid;
-    place-items: center center;
 }
 
 .calanderContainer h4 {
-    display: grid;
-    place-items: center center;
     grid-auto-flow: column;
     width: 100%;
 }
 
 .calanderImagecontainer {
-    display: grid;
-    place-items: center center;
     grid-row-gap: 20px;
 }
 
@@ -93,15 +84,11 @@
     place-self: center center;
     width: 90%;
     height: 90%;
-    display: grid;
-    place-items: center center;
     grid-template-rows: 2fr 6fr 2fr;
 }
 
 .logo {
     width: 70%;
-    display: grid;
-    place-items: center center;
 }
 
 @media only screen and (min-width: 1024px) {

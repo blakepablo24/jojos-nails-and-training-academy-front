@@ -10,10 +10,6 @@
 
 @media only screen and (min-width: 1024px) {
     .Latest {
-        grid-area: latest;
-        background: var(--second-bg);
-        display: grid;
-        place-items: center center;
         position: fixed;
         width: 100%;
         top: 15vh;
@@ -25,10 +21,6 @@
 
 @media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
     .Latest {
-        grid-area: latest;
-        background: var(--second-bg);
-        display: grid;
-        place-items: center center;
         position: fixed;
         width: 65%;
         top: 0;

@@ -17,6 +17,9 @@ const snippet = (props) => {
     if(props.salonTreatmentSubCat) {
         snippetLink = '/treatment/' + props.title.replace(/\s+/g, '-').replace(/,/g,"").toLowerCase() + '/';
         snippetStyle = classes.SnippetWithBasket;
+        let addToBasket =   <div onClick={props.addToShoppingBasket.bind(this, props.id + props.type, "", "", props.title, props.price, props.subCategoryTitle, props.type, props.image)} className={classes.basketButtonContainer}>
+                                <TiShoppingCart />Add to Basket
+                            </div>
         if(JSON.parse(localStorage.getItem("basketItems"))){
             if(FUNCTIONS.checkBasket(props.id + props.type)){
                 shoppingControlContainer = 
@@ -24,16 +27,10 @@ const snippet = (props) => {
                         <TiShoppingCart />Continue to Basket
                     </div>
             } else {
-                shoppingControlContainer = 
-                    <div onClick={props.addToShoppingBasket.bind(this, props.id + props.type, "", "", props.title, props.price, props.subCategoryTitle, props.type, props.image)} className={classes.basketButtonContainer}>
-                        <TiShoppingCart />Add to Basket
-                    </div>
+                shoppingControlContainer = addToBasket;
             }
         } else {
-            shoppingControlContainer = 
-                <div onClick={props.addToShoppingBasket.bind(this, props.id + props.type, "", "", props.title, props.price, props.subCategoryTitle, props.type, props.image)} className={classes.basketButtonContainer}>
-                    <TiShoppingCart />Add to Basket
-                </div>
+            shoppingControlContainer = addToBasket;
         }
     }
     

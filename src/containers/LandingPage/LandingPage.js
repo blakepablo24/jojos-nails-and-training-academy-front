@@ -6,6 +6,7 @@ import Latest from '../../components/Ui/Navigation/Latest/Latest';
 import Aux from '../../hoc/Auxilary/Auxilary';
 import axios from 'axios';
 import Reviews from '../../components/Ui/Reviews/Reviews';
+import Loading from '../../components/Ui/Loading/Loading';
 
 class LandingPage extends Component {
     
@@ -14,7 +15,8 @@ class LandingPage extends Component {
         largeImages: [],
         smallImages: [],
         image: 0,
-        landscape: false
+        landscape: false,
+        loading: <Loading component={true} />
     }
 
     componentDidMount(){
@@ -29,6 +31,7 @@ class LandingPage extends Component {
             });
 
             this.setState({
+                loading: "",
                 largeImages: largePrePopulatedImages,
                 smallImages: prePopulatedImages,
             })
@@ -95,15 +98,16 @@ class LandingPage extends Component {
         window.addEventListener('resize', this.displayedImagesHandler)
         
         let imageSlideShow = "";
+        let leftArrow = "";
+        let rightArrow = "";
 
         if(this.state.images.length > 0) {
             imageSlideShow = <img src={this.state.images[this.state.image].url} alt="" className={classes.landingPageImage}/>;
+            leftArrow = <div className={classes.imageNav + " selectable " + classes.prev} onClick={this.previousImage} ><BiLeftArrow /></div>;
+            rightArrow = <div className={classes.imageNav + " selectable " + classes.next} onClick={this.nextImage} ><BiRightArrow /></div>;
         }
 
         window.addEventListener("keydown", this.keyDownHandler);
-
-        let leftArrow = <div className={classes.imageNav + " selectable " + classes.prev} onClick={this.previousImage} ><BiLeftArrow /></div>;
-        let rightArrow = <div className={classes.imageNav + " selectable " + classes.next} onClick={this.nextImage} ><BiRightArrow /></div>;
 
         if(this.state.image === (this.state.images.length - 1)) {
             rightArrow = <div className={classes.notSelectable +" "+ classes.next}><BiRightArrow /></div>;
@@ -118,6 +122,7 @@ class LandingPage extends Component {
                 <Latest message="Specializing in only the best training" />
                 <div className={classes.LandingPage}>
                     <div className={classes.imageContainer}>
+                        {this.state.loading}
                         {leftArrow}
                             {imageSlideShow}
                         {rightArrow}

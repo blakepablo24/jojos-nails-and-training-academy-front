@@ -1,10 +1,13 @@
+.Toolbar, .Toolbar a, .basketIconContainer {
+    display: grid;
+    place-items: center center;
+}
+
 .Toolbar {
     grid-area: toolbar;
     background: var(--second-bg);
     position: fixed;
     width: 100%;
-    display: grid;
-    place-items: center center;
     box-shadow: 0 1px 1px black;
     z-index: 5;
     height: 7.5vh;
@@ -13,14 +16,7 @@
     font-size: 2.25rem;
 }
 
-.Toolbar a {
-    display: grid;
-    place-items: center center;
-}
-
 .basketIconContainer {
-    display: grid;
-    place-items: center center;
     grid-auto-flow: column;
     cursor: pointer;
 }
@@ -45,7 +41,6 @@
         height: 15vh;
         box-shadow: none;
         grid-template-columns: 9fr 1fr;
-        place-items: center center;
     }
     .largeScreensOnly {
         display: grid;
@@ -61,17 +56,12 @@
         padding-right: 5px;
         height: 12.5vh;
         grid-template-columns: 1fr 1fr;
-        place-items: center center;
         width: 25%;
         left: 75%;
         box-shadow: 0 1px 0 black;
     }
 
     .basketIconContainer {
-        display: grid;
-        place-items: center center;
-        grid-auto-flow: column;
-        cursor: pointer;
         font-size: 1.5rem;
     }
 

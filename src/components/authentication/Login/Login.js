@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import styles from './Login.module.css';
 import CONST from '../../../constants/constants';
 import FlashMessage from 'react-flash-message';
@@ -14,7 +14,6 @@ class Login extends Component {
         email: "",
         password: "",
         errorMessage: "",
-        authStatus: "Not Logged In",
         redirectOnSuccess: ""
     }
 
@@ -87,7 +86,6 @@ class Login extends Component {
                     <input type="password" name="password" placeholder="Password" onChange={this.passwordChangeHandler} />
                     {this.state.errorMessage}
                     <button className="customButton" onClick={this.loginHandler}>Login</button>
-                    {/* <p>Forgot Your Password <Link to="/forgot-password-email">Reset here</Link></p> */}
                 </form>
             </Aux>
         )

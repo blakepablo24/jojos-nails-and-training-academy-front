@@ -2,10 +2,13 @@
     margin-top: 5vh;
 }
 
-.ReviewsContainer {
+.ReviewsContainer, .Review, .fbHeader, .fbStars {
     display: grid;
     place-items: center center;
-    grid-template-columns: 1fr 8fr 1fr;
+}
+
+.ReviewsContainer {
+    grid-template-columns: 0.5fr 9fr 0.5fr;
 }
 
 .notSelectable {
@@ -18,16 +21,12 @@
 }
 
 .Review {
-    margin-bottom: 5vh;
-    height: 30vh;
     background: whitesmoke;
     border-radius: 5px;
     padding: 2.5px;
     overflow-y: auto;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-    display: grid;
-    place-items: center center;
     grid-template-rows: 1fr 9fr;
 }
 
@@ -37,8 +36,6 @@
 
 .fbHeader, .fbStars {
     width: 100%;
-    display: grid;
-    place-items: center center;
     grid-auto-flow: column;
 }
 
@@ -77,15 +74,7 @@
     .Review {
         margin: 2.5vh 0;
         height: 55vh;
-        background: whitesmoke;
         border-radius: 5px;
-        padding: 2.5px;
-        overflow-y: auto;
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
-        display: grid;
-        place-items: center center;
-        grid-template-rows: 1fr 9fr;
     }
 }
 

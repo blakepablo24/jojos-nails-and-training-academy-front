@@ -50,7 +50,6 @@ const Basket = (props) => {
         props.itemsInBasket.forEach(item => {
             price = item.price * item.quantity;
             priceArray.push(price);
-
             return priceArray
         });
 
@@ -77,27 +76,21 @@ const Basket = (props) => {
     }
 
     function checkIfGiftVouchersInBasket() {
-        if (FUNCTIONS.checkBasket("gift_voucher")){
-            props.checkoutView("complete-gift-voucher");
-        } else {
-            checkIfTrainingCoursesInBasket();
-        }
+        FUNCTIONS.checkBasket("gift_voucher")
+            ? props.checkoutView("complete-gift-voucher")
+            : checkIfTrainingCoursesInBasket();
     }
 
     function checkIfTrainingCoursesInBasket() {
-        if(FUNCTIONS.checkBasket(CONST.TC)){
-            props.checkoutView("book-training-courses");
-        } else {
-            checkIfSalonTreatmentsInBasket();
-        }
+        FUNCTIONS.checkBasket(CONST.TC)
+        ? props.checkoutView("book-training-courses")
+        : checkIfSalonTreatmentsInBasket();
     }
 
     function checkIfSalonTreatmentsInBasket() {
-        if(FUNCTIONS.checkBasket(CONST.ST)){
-            props.checkoutView("book-salon-treatments");
-        } else {
-            props.checkoutView("customer-details");
-        }
+        FUNCTIONS.checkBasket(CONST.ST)
+        ? props.checkoutView("book-salon-treatments")
+        : props.checkoutView("customer-details");
     }
 
     if (props.showBasket) {

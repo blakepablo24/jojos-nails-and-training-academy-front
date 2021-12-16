@@ -1,4 +1,4 @@
-.loadingContainer {
+.loadingContainer, .componentContainer {
     top: 35%;
     left: 25%;
     height: 30%;
@@ -9,7 +9,7 @@
     place-items: end center;
 }
 
-.loading {
+.loading, .component {
     background: var(--main-bg);
     width: 100%;
     height: 100%;
@@ -20,21 +20,7 @@
 }
 
 .componentContainer {
-    top: 35%;
-    left: 25%;
-    height: 30%;
-    width: 50%;
+    position: static;
     z-index: 10;
-    display: grid;
-    place-items: end center;
-}
-
-.component {
-    background: var(--main-bg);
-    width: 100%;
-    height: 100%;
-    display: grid;
-    place-items: center center;
-    z-index: 11;
-    border-radius: 3.75px;
+    grid-column: 1 / -1;
 }

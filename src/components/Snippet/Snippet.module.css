@@ -1,10 +1,13 @@
+.Snippet, .SnippetWithBasket, .basketButtonContainer, .SnippetLink{
+    display: grid;
+    place-items: center center;
+}
+
 .Snippet, .SnippetWithBasket {
     width: 95%;
     height: 30vh;
     border: solid 1px var(--main-txt);
     border-radius: 2.5px;
-    display: grid;
-    place-items: center center;
     grid-column: span 2;
     margin-top: 1.5vh;
 }
@@ -28,11 +31,10 @@
 .basketButtonContainer {
     height: 100%;
     width: 100%;
-    display: grid;
-    place-items: center center;
     grid-auto-flow: column;
     font-size: 1.2rem;
     border-top: solid 1px var(--main-txt);
+    cursor: pointer;
 }
 
 .inBasketButtonContainer {
@@ -41,8 +43,6 @@
 
 .SnippetLink {
     width: 100%;
-    display: grid;
-    place-items: center center;
     height: 100%;
     grid: 6fr 4fr / 1fr;
 }

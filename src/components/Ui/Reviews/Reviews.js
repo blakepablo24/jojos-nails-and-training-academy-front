@@ -73,7 +73,7 @@ class Reviews extends Component {
                             </div>
                             
         
-        if(window.innerWidth > window.innerHeight && window.innerWidth > 1023){
+        if(window.innerWidth > window.innerHeight && window.innerWidth > 1200){
             let threeReviews = this.state.facebookInfo.ratings.slice(this.state.number, this.state.largeScreenImage);
 
             shownReviews = <div className={classes.largeScreenReviewsContainer}>
