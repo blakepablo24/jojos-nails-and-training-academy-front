@@ -203,7 +203,7 @@ class AdminLandingPage extends Component {
                             </Link>
                             <Link to="/admin/add-edit-salon-treatment" className={classes.newSubService}>
                                 <BiPlus />
-                                <h4>Add / Edit Salon Treatment Category</h4>
+                                <h4>Edit Salon Treatment Category</h4>
                             </Link>
                         </div>
                         <Link to="/admin/new-training-course" className={classes.newService}>

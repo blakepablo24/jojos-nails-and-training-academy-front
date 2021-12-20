@@ -94,7 +94,7 @@ class GiftVouchers extends Component {
                                         onChange={this.onChangeHandler}
                                         className={classes.voucherNameInput}
                                     />
-                                    <input
+                                    <textarea
                                         type="text"
                                         value={this.state.giftVoucherMessage}
                                         name="giftVoucherMessage" 

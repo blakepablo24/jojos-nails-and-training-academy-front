@@ -22,7 +22,7 @@ class AddEditSalonTreatmentCategories extends Component {
       updatedMessage: "",
       confirmDelete: "",
       open: false,
-      loading: <Loading component={true} />
+      loading: <Loading />
     };
     
     handleSubmit = this.handleSubmit.bind(this);
@@ -73,15 +73,15 @@ class AddEditSalonTreatmentCategories extends Component {
     }
 
     imageChangeHandler = (event) => {
+        this.setState({
+            loading: <Loading />,
+            updatedMessage: ""
+        })
         let fd = new FormData();
         fd.append('newImage', event.target.files[0], event.target.files[0].name);
         fd.append('id', event.target.id);
 
         axios.post(CONST.BASE_URL+'/api/update-salon-treatment-category-image', fd).then(response => {
-            this.setState({
-                loading: <Loading component={true} />,
-                updatedMessage: ""
-            })
             FUNCTIONS.scrollToTop();
             this.startingValues("Category Image Updated!");
         })
@@ -147,7 +147,7 @@ class AddEditSalonTreatmentCategories extends Component {
             this.setState({
                 confirmDelete: "",
                 open: false,
-                loading: <Loading component={true} />,
+                loading: <Loading />,
                 updatedMessage: ""
             })
             this.startingValues("Category Successfully Removed");
@@ -166,7 +166,7 @@ class AddEditSalonTreatmentCategories extends Component {
       axios.post(CONST.BASE_URL + '/api/add-edit-salon-treatment-category', {categoryItems: this.state.values}).then(response => {
         FUNCTIONS.scrollToTop();
         this.setState({
-            loading: <Loading component={true} />,
+            loading: <Loading />,
             updatedMessage: ""
         })
         this.startingValues("Successfully updated Categories!");

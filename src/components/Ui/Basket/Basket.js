@@ -145,7 +145,7 @@ const Basket = (props) => {
                 <BasketHeader title="Training Course Booking" />
                 <div className={classes.basketContainer}>
                     <div className={classes.calanderContainer}>
-                        <DatePicker
+                <DatePicker
                             locale="en-gb"
                             dateFormat={'dd/MM/yyyy'}
                             // selected={startDate}

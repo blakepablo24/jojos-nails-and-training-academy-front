@@ -1,26 +1,24 @@
+.FrontLandingPage, .imageAndControlsContainer, .imageContainer {
+    display: grid;
+    place-items: center center;
+    width: 100%;
+}
+
 .FrontLandingPage {
     grid-area: main;
     padding: 1vh 0 2.5vh 0;
-    width: 100%;
-    display: grid;
-    place-items: center center;
     background: var(--main-bg);
     z-index: 2;
 }
 
 .imageAndControlsContainer {
-    display: grid;
-    place-items: center center;
     grid-template-columns: 1fr 8fr 1fr;
 }
 
 .imageContainer {
     position: relative;
     height: 100%;
-    width: 100%;
-    display: grid;
     grid-auto-flow: column;
-    place-items: center center;
 }
 
 .imageNav, .notSelectable {
@@ -29,7 +27,7 @@
 
 .landingPageImage {
     height: 60vh;
-    width: 100%;
+    max-width: 100%;
 }
 
 .notSelectable {
@@ -42,9 +40,6 @@
 
 @media only screen and (min-width: 1024px) {
     .imageAndControlsContainer {
-        display: grid;
-        place-items: center center;
-        grid-template-columns: 1fr 8fr 1fr;
         width: 50%;
     }
 }
