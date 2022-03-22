@@ -23,11 +23,12 @@ class LandingPage extends Component {
         let prePopulatedImages = [];
         let largePrePopulatedImages = [];
         axios.get(CONST.BASE_URL + '/api/get-front-page-images').then(response => {
-            response.data.db_images.forEach(db_image => {
-                prePopulatedImages.push({ url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
-            });
-            response.data.large_db_images.forEach(large_db_image => {
-                largePrePopulatedImages.push({ url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + large_db_image.image});
+            console.log(response);
+            response.data.fPImages.forEach(db_image => {
+                prePopulatedImages.push({ url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image});
+            })
+            response.data.largeFPImages.forEach(large_db_image => {
+                largePrePopulatedImages.push({ url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + large_db_image});
             });
 
             this.setState({
@@ -45,24 +46,28 @@ class LandingPage extends Component {
             if(window.innerWidth > window.innerHeight){
                 this.setState({
                     images: this.state.largeImages,
-                    landscape: true
+                    landscape: true,
+                    image: 0
                 })
             } else {
                 this.setState({
                     images: this.state.smallImages,
-                    landscape: false
+                    landscape: false,
+                    image: 0
                 })
             }
         } else {
             if(window.innerWidth < window.innerHeight){
                 this.setState({
                     images: this.state.smallImages,
-                    landscape: false
+                    landscape: false,
+                    image: 0
                 })
             } else {
                 this.setState({
                     images: this.state.largeImages,
-                    landscape: true
+                    landscape: true,
+                    image: 0
                 })
             }
         }
