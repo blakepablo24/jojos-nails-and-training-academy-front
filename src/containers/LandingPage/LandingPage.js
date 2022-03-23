@@ -23,7 +23,6 @@ class LandingPage extends Component {
         let prePopulatedImages = [];
         let largePrePopulatedImages = [];
         axios.get(CONST.BASE_URL + '/api/get-front-page-images').then(response => {
-            console.log(response);
             response.data.fPImages.forEach(db_image => {
                 prePopulatedImages.push({ url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image});
             })
