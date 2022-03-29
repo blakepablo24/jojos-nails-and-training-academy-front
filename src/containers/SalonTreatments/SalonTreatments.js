@@ -33,7 +33,7 @@ class SalonTreatments extends Component {
                         <Snippet
                             salonTreatment={true} 
                             title={salonTreatment.title}
-                            image={salonTreatment.image != "default" ? CONST.BASE_URL + "/storage/images/salon-treatment-images/" + salonTreatment.image : logoImage}
+                            image={salonTreatment.image != "default" ? CONST.BASE_URL + "/storage/images/salon-treatment-images/" + "small-" + salonTreatment.image : logoImage}
                             id={salonTreatment.id}
                             key={salonTreatment.id}
                         />

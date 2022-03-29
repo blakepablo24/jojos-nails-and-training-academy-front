@@ -84,7 +84,16 @@ class AddEditSalonTreatmentCategories extends Component {
         axios.post(CONST.BASE_URL+'/api/update-salon-treatment-category-image', fd).then(response => {
             FUNCTIONS.scrollToTop();
             this.startingValues("Category Image Updated!");
-        })
+        }).catch(error => {
+            if (error.response) {
+                console.log(error.response);
+                console.log(error.response);
+            } else if (error.request) {
+                console.log(error.request);
+            } else {
+                console.log('Error', error.message);
+            }
+          })
     }
 
     createUI(){
@@ -100,7 +109,7 @@ class AddEditSalonTreatmentCategories extends Component {
                 />
               <input type="text" placeholder="Enter New Category" value={el.title||''} onChange={this.handleChange.bind(this, i)} />
               {el.image !== "default"
-                ? <img className="selectable" src={CONST.BASE_URL + "/storage/images/salon-treatment-images/" + el.image} onClick={() => this.fileInput.click()} alt="" /> 
+                ? <img className="selectable" src={CONST.BASE_URL + "/storage/images/salon-treatment-images/" + "small-" + el.image} onClick={() => this.fileInput.click()} alt="" /> 
                 :
                 (el.id 
                     ? 

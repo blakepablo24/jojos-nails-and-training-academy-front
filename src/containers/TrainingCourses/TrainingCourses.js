@@ -30,7 +30,7 @@ class TrainingCourses extends Component {
                     {this.state.trainingCourses.map(trainingCourse =>
                         <Snippet 
                             title={trainingCourse.title}
-                            image={CONST.BASE_URL + "/storage/images/training-course-images/" + trainingCourse.image}
+                            image={CONST.BASE_URL + "/storage/images/training-course-images/" + "small-" + trainingCourse.image}
                             id={trainingCourse.id}
                             key={trainingCourse.id}
                         />
