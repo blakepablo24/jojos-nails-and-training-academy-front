@@ -23,8 +23,8 @@
 }
 
 .Snippet img {
-    width: 20vh;
-    height: 20vh;
+    width: 15vh;
+    height: 15vh;
     border-radius: 2.5px;
 }
 
@@ -44,11 +44,27 @@
 .SnippetLink {
     width: 100%;
     height: 100%;
+    grid: 5fr 3.5fr 1.5fr / 1fr;
+}
+
+.SnippetLinkNoPrice {
     grid: 6fr 4fr / 1fr;
 }
 
 .title {
+    display: grid;
+    place-items: center center;
+    height: 100%;
+    width: 100%;
     font-size: calc(100% + 1vw);
+}
+
+.price {
+    border-top: solid 1px var(--main-txt);
+    display: grid;
+    width: 100%;
+    height: 100%;
+    font-size: 0.90rem;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -70,11 +86,23 @@
     }
     
     .SnippetLink {
-        grid: 1fr 1fr / 3fr 7fr;
+        grid: 8fr 2fr / 3fr 7fr;
     }
     
     .title {
-        grid-row: 1 / 3;
+        grid-row: 1 / 2;
+        height: 100%;
+        width: 100%;
+        display: grid;
+        place-items: center center;
+    }
+
+    .price {
+        display: grid;
+        place-items: center end;
+        width: 100%;
+        font-size: 0.75rem;
+        padding-right: 10%;
     }
 }
 
@@ -97,11 +125,23 @@
     }
     
     .SnippetLink {
-        grid: 4fr 6fr / 3fr 7fr;
+        grid: 8fr 2fr / 3fr 7fr;
     }
     
     .title {
-        grid-row: 1 / 3;
+        grid-row: 1 / 2;
+        height: 100%;
+        width: 100%;
+        display: grid;
+        place-items: center center;
+    }
+
+    .price {
+        display: grid;
+        place-items: center end;
+        width: 100%;
+        padding-right: 10%;
+        font-size: 0.75rem;
     }
 }
 

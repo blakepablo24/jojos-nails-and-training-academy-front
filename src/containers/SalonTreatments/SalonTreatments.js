@@ -34,6 +34,7 @@ class SalonTreatments extends Component {
                             salonTreatment={true} 
                             title={salonTreatment.title}
                             image={salonTreatment.image != "default" ? CONST.BASE_URL + "/storage/images/salon-treatment-images/" + "small-" + salonTreatment.image : logoImage}
+                            price={salonTreatment.price}
                             id={salonTreatment.id}
                             key={salonTreatment.id}
                         />

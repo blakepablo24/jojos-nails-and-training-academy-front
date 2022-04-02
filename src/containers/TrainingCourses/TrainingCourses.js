@@ -33,6 +33,7 @@ class TrainingCourses extends Component {
                             image={CONST.BASE_URL + "/storage/images/training-course-images/" + "small-" + trainingCourse.image}
                             id={trainingCourse.id}
                             key={trainingCourse.id}
+                            price={trainingCourse.price}
                         />
                     )}
                 </div>

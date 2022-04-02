@@ -9,12 +9,18 @@ const snippet = (props) => {
     let snippetLink = '/single-training-course/'; 
     let shoppingControlContainer = "";
     let snippetStyle = classes.Snippet;
+    let snippetLinkStyle = classes.SnippetLink;
+    let price = <h4 className={classes.price}>£{props.price}</h4>;
 
     if(props.salonTreatment) {
+        snippetLinkStyle = classes.SnippetLinkNoPrice;
+        price = "";
         snippetLink = '/category/' + props.title.replace(/\s+/g, '-').replace(/,/g,"").toLowerCase() + '/';
     }
 
     if(props.salonTreatmentSubCat) {
+        price = "";
+        snippetLinkStyle = classes.SnippetLinkNoPrice;
         snippetLink = '/treatment/' + props.title.replace(/\s+/g, '-').replace(/,/g,"").toLowerCase() + '/';
         snippetStyle = classes.SnippetWithBasket;
         let addToBasket =   <div onClick={props.addToShoppingBasket.bind(this, props.id + props.type, "", "", props.title, props.price, props.subCategoryTitle, props.type, props.image)} className={classes.basketButtonContainer}>
@@ -36,9 +42,10 @@ const snippet = (props) => {
     
     return (
         <div className={snippetStyle}>
-            <Link to={snippetLink + props.id} className={classes.SnippetLink}>
+            <Link to={snippetLink + props.id} className={snippetLinkStyle}>
                 <img src={props.image} alt="" />
                 <h3 className={classes.title}>{props.title}</h3>
+                {price}
             </Link>
             {shoppingControlContainer}
         </div>
