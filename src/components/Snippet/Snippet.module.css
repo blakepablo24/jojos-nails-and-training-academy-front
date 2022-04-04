@@ -69,6 +69,11 @@
     width: 100%;
     height: 100%;
     font-size: 0.90rem;
+    place-self: center end;
+    width: 50%;
+    border-left: solid 1px var(--main-txt);
+    border-top-left-radius: 20px;
+    padding-left: 5px;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -90,7 +95,7 @@
     }
     
     .SnippetLink, .SnippetLinkNoPrice {
-        grid: 1fr / 3fr 7fr;
+        grid: 8fr 2fr / 3fr 7fr;
     }
     
     .title {
@@ -102,11 +107,8 @@
     }
 
     .price {
-        display: grid;
-        place-items: center end;
-        width: 100%;
+        width: 35%;
         font-size: 0.75rem;
-        padding-right: 10%;
     }
 }
 
@@ -129,7 +131,7 @@
     }
     
     .SnippetLink, .SnippetLinkNoPrice {
-        grid: 1fr / 3fr 7fr;
+        grid: 8fr 2fr / 3fr 7fr;
     }
     
     .title {
@@ -141,10 +143,7 @@
     }
 
     .price {
-        display: grid;
-        place-items: center end;
-        width: 100%;
-        padding-right: 10%;
+        width: 30%;
         font-size: 0.75rem;
     }
 }
