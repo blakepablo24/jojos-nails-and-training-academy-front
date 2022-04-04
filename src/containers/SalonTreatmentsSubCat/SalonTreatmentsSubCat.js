@@ -37,13 +37,15 @@ class SalonTreatmentsSubCat extends Component {
     };
 
     render(){
+
+        let treatments = this.state.salonTreatmentsSubCat.sort((a, b) => a.title.localeCompare(b.title));
         
         return(
             <Aux>
                 <Latest message={this.state.subCategoryTitle} />
                 <div className={classes.SalonTreatmentsSubCat}>
                 <GoBack snippet={true} back={() => this.props.history.goBack()} />
-                    {this.state.salonTreatmentsSubCat.map(salonTreatmentSubCat =>
+                    {treatments.map(salonTreatmentSubCat =>
                         <Snippet
                             toggleBasket={this.props.toggleBasket}
                             subCategoryTitle={this.state.subCategoryTitle}

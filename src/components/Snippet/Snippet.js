@@ -24,7 +24,7 @@ const snippet = (props) => {
         snippetLink = '/treatment/' + props.title.replace(/\s+/g, '-').replace(/,/g,"").toLowerCase() + '/';
         snippetStyle = classes.SnippetWithBasket;
         let addToBasket =   <div onClick={props.addToShoppingBasket.bind(this, props.id + props.type, "", "", props.title, props.price, props.subCategoryTitle, props.type, props.image)} className={classes.basketButtonContainer}>
-                                <TiShoppingCart />Add to Basket
+                                <TiShoppingCart /><h5>£{props.price}</h5>
                             </div>
         if(JSON.parse(localStorage.getItem("basketItems"))){
             if(FUNCTIONS.checkBasket(props.id + props.type)){

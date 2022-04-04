@@ -1,11 +1,11 @@
-.Snippet, .SnippetWithBasket, .basketButtonContainer, .SnippetLink{
+.Snippet, .SnippetWithBasket, .basketButtonContainer, .SnippetLink, .SnippetLinkNoPrice{
     display: grid;
     place-items: center center;
 }
 
 .Snippet, .SnippetWithBasket {
     width: 95%;
-    height: 30vh;
+    height: 35vh;
     border: solid 1px var(--main-txt);
     border-radius: 2.5px;
     grid-column: span 2;
@@ -14,6 +14,7 @@
 
 .SnippetWithBasket {
     grid: 8fr 2fr / 1fr;
+    height: 100%;
 }
 
 .SnippetWithBasket img {
@@ -48,6 +49,8 @@
 }
 
 .SnippetLinkNoPrice {
+    width: 100%;
+    height: 100%;
     grid: 6fr 4fr / 1fr;
 }
 
@@ -56,12 +59,13 @@
     place-items: center center;
     height: 100%;
     width: 100%;
-    font-size: calc(100% + 1vw);
+    font-size: calc(100% + 0.5vw);
 }
 
 .price {
     border-top: solid 1px var(--main-txt);
     display: grid;
+    place-items: center center;
     width: 100%;
     height: 100%;
     font-size: 0.90rem;
@@ -85,8 +89,8 @@
         height: 21.5vh;
     }
     
-    .SnippetLink {
-        grid: 8fr 2fr / 3fr 7fr;
+    .SnippetLink, .SnippetLinkNoPrice {
+        grid: 1fr / 3fr 7fr;
     }
     
     .title {
@@ -124,8 +128,8 @@
         height: 34vh;
     }
     
-    .SnippetLink {
-        grid: 8fr 2fr / 3fr 7fr;
+    .SnippetLink, .SnippetLinkNoPrice {
+        grid: 1fr / 3fr 7fr;
     }
     
     .title {

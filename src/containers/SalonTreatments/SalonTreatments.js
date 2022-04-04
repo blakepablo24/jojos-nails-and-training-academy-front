@@ -23,12 +23,15 @@ class SalonTreatments extends Component {
     };
 
     render(){
+
+        let categories = this.state.salonTreatments.sort((a, b) => a.title.localeCompare(b.title));
+
         return(
             <Aux>
                 <Latest message="Only The Best Salon Treatments" />
                 <div className={classes.SalonTreatments}>
                 <GoBack snippet={true} back={() => this.props.history.goBack()} />
-                    {this.state.salonTreatments.map(salonTreatment =>
+                    {categories.map(salonTreatment =>
                         salonTreatment.single_salon_treatment.length > 0 ?
                         <Snippet
                             salonTreatment={true} 

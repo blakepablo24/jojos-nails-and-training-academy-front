@@ -22,12 +22,15 @@ class TrainingCourses extends Component {
     };
 
     render(){
+
+        let trainingCourses = this.state.trainingCourses.sort((a, b) => a.title.localeCompare(b.title));
+
         return(
             <Aux>
                 <Latest message="Available Training Courses" />
                 <div className={classes.TrainingCourses}>
                     <GoBack snippet={true} back={() => this.props.history.goBack()} />
-                    {this.state.trainingCourses.map(trainingCourse =>
+                    {trainingCourses.map(trainingCourse =>
                         <Snippet 
                             title={trainingCourse.title}
                             image={CONST.BASE_URL + "/storage/images/training-course-images/" + "small-" + trainingCourse.image}
