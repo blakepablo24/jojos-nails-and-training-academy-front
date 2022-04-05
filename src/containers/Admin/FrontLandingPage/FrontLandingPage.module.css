@@ -12,6 +12,7 @@
 }
 
 .imageAndControlsContainer {
+    height: 60vh;
     grid-template-columns: 1fr 8fr 1fr;
 }
 
@@ -26,7 +27,7 @@
 }
 
 .landingPageImage {
-    height: 60vh;
+    max-height: 60vh;
     max-width: 100%;
 }
 

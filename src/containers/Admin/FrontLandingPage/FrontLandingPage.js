@@ -26,14 +26,24 @@ class FrontLandingPage extends Component {
 
     componentDidMount(){
         let prePopulatedImages = [];
-        axios.get(CONST.BASE_URL + '/api/get-front-page-images').then(response => {
+        axios.defaults.withCredentials = true;
+        axios.get(CONST.BASE_URL + '/api/get-all-front-page-images').then(response => {
             response.data.all_db_images.forEach(db_image => {
                 prePopulatedImages.push({ id: db_image.id, url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
             });
             this.setState({
                 images: prePopulatedImages
             })
-        })
+        }).catch(error => {
+            if (error.response) {
+                console.log(error.response);
+                console.log(error.response);
+            } else if (error.request) {
+                console.log(error.request);
+            } else {
+                console.log('Error', error.message);
+            }
+          })
     }
 
     removeConfirmDeleteHandler = () => {

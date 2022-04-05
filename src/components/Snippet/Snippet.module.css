@@ -59,7 +59,7 @@
     place-items: center center;
     height: 100%;
     width: 100%;
-    font-size: calc(100% + 0.5vw);
+    font-size: calc(100% + 0.75vw);
 }
 
 .price {
@@ -95,7 +95,7 @@
     }
     
     .SnippetLink, .SnippetLinkNoPrice {
-        grid: 8fr 2fr / 3fr 7fr;
+        grid: 1fr / 2.5fr 7.5fr;
     }
     
     .title {
@@ -121,7 +121,7 @@
     .SnippetWithBasket img {
         grid-row: 1 / 3;
         width: 24vh;
-        height: 24vh;   
+        height: 27vh;   
     }
     
     .Snippet img {
@@ -131,7 +131,7 @@
     }
     
     .SnippetLink, .SnippetLinkNoPrice {
-        grid: 8fr 2fr / 3fr 7fr;
+        grid: 1fr / 2.5fr 7.5fr;
     }
     
     .title {
