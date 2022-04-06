@@ -34,16 +34,7 @@ class FrontLandingPage extends Component {
             this.setState({
                 images: prePopulatedImages
             })
-        }).catch(error => {
-            if (error.response) {
-                console.log(error.response);
-                console.log(error.response);
-            } else if (error.request) {
-                console.log(error.request);
-            } else {
-                console.log('Error', error.message);
-            }
-          })
+        })
     }
 
     removeConfirmDeleteHandler = () => {
@@ -69,7 +60,7 @@ class FrontLandingPage extends Component {
         axios.delete(CONST.BASE_URL + '/api/delete-front-page-image/' + this.state.images[this.state.image].id).then(response => {
             let prePopulatedImages = [];
             axios.defaults.withCredentials = true;
-            axios.get(CONST.BASE_URL + '/api/get-front-page-images').then(response => {
+            axios.get(CONST.BASE_URL + '/api/get-all-front-page-images').then(response => {
                 response.data.all_db_images.forEach(db_image => {
                     prePopulatedImages.push({ id: db_image.id, url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
                 });
@@ -96,7 +87,7 @@ class FrontLandingPage extends Component {
         axios.post(CONST.BASE_URL + '/api/add-new-front-page-image', fd).then(response => {
             let prePopulatedImages = [];
             axios.defaults.withCredentials = true;
-            axios.get(CONST.BASE_URL + '/api/get-front-page-images').then(response => {
+            axios.get(CONST.BASE_URL + '/api/get-all-front-page-images').then(response => {
                 response.data.all_db_images.forEach(db_image => {
                     prePopulatedImages.push({ id: db_image.id, url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
                 });

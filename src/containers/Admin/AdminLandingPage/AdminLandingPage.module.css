@@ -72,12 +72,12 @@
     margin-right: 7.5%;
     color: var(--main-txt);
     background: var(--second-bg);
-    height: 4vh;
+    height: 80%;
     width: 65%;
 }
 
-.newService svg {
-    font-size: 2.5rem;
+.newService svg, .newSubService svg {
+    font-size: 200%;
 }
 
 .changePassword {
@@ -97,7 +97,7 @@
     .allStatsContainer {
         grid-column: 1 / 2;
         grid-row: 1 / 2;
-        grid: 20vh / 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid: 25vh / 1fr 1fr 1fr 1fr 1fr 1fr;
     }
 
     .topSellersContainer{
@@ -125,12 +125,13 @@
 
     .newService, .newSubService {
         width: 60%;
-        font-size: 1.25vw;
+        font-size: 1.15vw;
     }
 
     .changePassword {
         height: 6vh;
         box-shadow: none;
+        font-size: 75%;
     }
 }
 
