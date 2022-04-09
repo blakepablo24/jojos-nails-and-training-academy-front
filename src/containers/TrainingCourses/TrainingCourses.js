@@ -6,6 +6,7 @@ import CONST from '../../constants/constants';
 import Aux from '../../hoc/Auxilary/Auxilary';
 import Latest from '../../components/Ui/Navigation/Latest/Latest';
 import GoBack from '../../components/Ui/GoBack/GoBack';
+import SortBy from '../../components/Ui/SortBy/SortBy';
 
 class TrainingCourses extends Component {
 
@@ -21,6 +22,17 @@ class TrainingCourses extends Component {
         })
     };
 
+    changeHandler = (event) => {
+
+        const target = event.target;
+        const name = target.name;
+        const value = target.value;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
     render(){
 
         let trainingCourses = this.state.trainingCourses.sort((a, b) => a.title.localeCompare(b.title));
@@ -30,6 +42,7 @@ class TrainingCourses extends Component {
                 <Latest message="Available Training Courses" />
                 <div className={classes.TrainingCourses}>
                     <GoBack snippet={true} back={() => this.props.history.goBack()} />
+                    <SortBy />
                     {trainingCourses.map(trainingCourse =>
                         <Snippet 
                             title={trainingCourse.title}

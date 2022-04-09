@@ -1,0 +1,12 @@
+.SortBy {
+    grid-column: 1 / -1;
+    place-self: center end;
+    display: grid;
+    grid-auto-flow: column;
+    place-items: center center;
+}
+
+.SortBy select {
+    font-size: 0.75rem;
+    margin: 0;
+}
