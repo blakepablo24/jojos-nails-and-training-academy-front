@@ -100,9 +100,10 @@ class EditTrainingCourse extends Component {
         });
     }
 
-    getData = (val) => {
+    getData = (val, imageError) => {
         this.setState({
-            imageFile: val
+            imageFile: val,
+            imageError: imageError
         })
     }
 
@@ -145,7 +146,7 @@ class EditTrainingCourse extends Component {
             extrasError = <h4 className="error">Please enter only letters and numbers</h4>;
         }
 
-        if(!durationError && !titleError && !teacherStudentRatioError && !priceError && !extrasError){
+        if(!durationError && !titleError && !teacherStudentRatioError && !priceError && !extrasError && !this.state.imageError){
             this.setState({
                 loading: <Loading />
             })
@@ -216,18 +217,18 @@ class EditTrainingCourse extends Component {
         let currentImage = 
             <div className={classes.noImageContainer}>
                 <ImageUpload wording="Add Image?" sendData={this.getData} />
-                {this.state.imageError}
             </div>
 
         if(this.state.image){
             currentImage = 
                 <div className={classes.currentImageContainer}>
-                    <BiXCircle className={"delete selectable " + classes.deleteImageButton}
-                        onClick={this.confirmDeleteHandler}
-                    />
                     <img src={CONST.BASE_URL + "/storage/images/training-course-images/" + this.state.image} alt="" className={classes.currentImage} />
-                    <ImageUpload wording="Update Image?" sendData={this.getData} />
-                    {this.state.imageError}
+                    <div className='image-details-container'>
+                    <ImageUpload wording="Change?" sendData={this.getData} />
+                        <BiXCircle className={"delete selectable " + classes.deleteImageButton}
+                            onClick={this.confirmDeleteHandler}
+                        />
+                    </div>
                 </div>
         }
 

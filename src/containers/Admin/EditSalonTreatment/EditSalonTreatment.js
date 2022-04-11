@@ -105,9 +105,10 @@ class EditSalonTreatment extends Component {
         });
     }
 
-    getData = (val) => {
+    getData = (val, imageError) => {
         this.setState({
-            imageFile: val
+            imageFile: val,
+            imageError: imageError
         })
     }
 
@@ -160,7 +161,7 @@ class EditSalonTreatment extends Component {
             descriptionError = <h4 className="error">Please enter only letters and numbers</h4>;
         }
 
-        if(!categoryError && !titleError && !priceError && !durationError && !descriptionError){
+        if(!categoryError && !titleError && !priceError && !durationError && !descriptionError && !this.state.imageError){
             this.setState({
                 loading: <Loading />
             })
@@ -224,7 +225,6 @@ class EditSalonTreatment extends Component {
         let currentImage = 
             <div className={classes.noImageContainer}>
                 <ImageUpload wording="Add Image?" sendData={this.getData} />
-                {this.state.imageError}
             </div>
 
         if(this.state.image){
@@ -235,7 +235,6 @@ class EditSalonTreatment extends Component {
                     />
                     <img src={CONST.BASE_URL + "/storage/images/salon-treatment-images/single-salon-treatment-images/" + this.state.image} alt="" className={classes.currentImage} />
                     <ImageUpload wording="Update Image?" sendData={this.getData} />
-                    {this.state.imageError}
                 </div>
         }
 

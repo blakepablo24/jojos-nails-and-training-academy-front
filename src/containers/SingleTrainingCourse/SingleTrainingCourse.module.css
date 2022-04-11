@@ -18,7 +18,7 @@
     width: 75%;
     display: grid;
     place-items: center start;
-    grid-template-columns: 3fr 7fr;
+    grid-template-columns: 3.5fr 6.5fr;
 }
 
 .curriculumContainer {

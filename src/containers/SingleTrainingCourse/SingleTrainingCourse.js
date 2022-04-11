@@ -22,6 +22,7 @@ class SingleTrainingCourse extends Component {
         start_time: "",
         end_time: "",
         extras: "",
+        prerequisites: "",
         image: "",
         price: "",
         ratio: "",
@@ -52,6 +53,7 @@ class SingleTrainingCourse extends Component {
                 image: response.data.image,
                 price: response.data.price,
                 ratio: response.data.teacher_student_ratio,
+                prerequisites: response.data.prerequisites,
                 curriculumItems: response.data.course_curriculum,
                 adminButtons: adminButtons
             });
@@ -109,6 +111,8 @@ class SingleTrainingCourse extends Component {
         
         let extras = null;
 
+        let prerequisites = null;
+
         if(this.state.image) {
             courseImage = <img src={CONST.BASE_URL + "/storage/images/training-course-images/" + this.state.image} alt="" className={classes.courseImage} />;
         }
@@ -118,6 +122,13 @@ class SingleTrainingCourse extends Component {
                         <h3>Extras:</h3>
                         <h4>{this.state.extras}</h4>
                     </div>
+        }
+
+        if(this.state.prerequisites) {
+            prerequisites = <div className={classes.stat}>
+                                <h3>Prerequisites:</h3>
+                                <h3>{this.state.prerequisites}</h3>
+                            </div>
         }
 
         if(this.state.curriculumItems.length !== 0 && this.props.auth){
@@ -133,7 +144,7 @@ class SingleTrainingCourse extends Component {
                         />
                     )}
                 </div>
-                {extras}
+                
                 <Link to={"/admin/add-curriculum/" + this.props.match.params.id} className={classes.noCurriculumContainer}>
                     <div><BiFolderPlus /> <h3>Edit Curriculum</h3></div>
                 </Link>
@@ -156,7 +167,6 @@ class SingleTrainingCourse extends Component {
                         />
                     )}
                 </div>
-                {extras}
             </div>
         }
 
@@ -220,6 +230,8 @@ class SingleTrainingCourse extends Component {
                         <h3>£{this.state.price}</h3>
                     </div>
                     {curriculum}
+                    {prerequisites}
+                    {extras}
                     <GuildLogo />
                     {this.state.adminButtons}
                 </div>

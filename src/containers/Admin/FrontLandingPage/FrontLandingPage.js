@@ -21,7 +21,8 @@ class FrontLandingPage extends Component {
         open: false,
         imageChangedMessage: "",
         addedImage: false,
-        loading: ""
+        loading: "",
+        imageError: ""
     }
 
     componentDidMount(){
@@ -77,32 +78,34 @@ class FrontLandingPage extends Component {
     }
 
     addImageHandler = (event) => {
-        event.preventDefault();
-        this.setState({
-            loading: <Loading />
-        })
-        let fd = new FormData();    
-        fd.append('newImage', this.state.imageFile, this.state.imageFile.name);
-        axios.defaults.withCredentials = true;
-        axios.post(CONST.BASE_URL + '/api/add-new-front-page-image', fd).then(response => {
-            let prePopulatedImages = [];
+        if(!this.state.imageError) {
+            event.preventDefault();
+            this.setState({
+                loading: <Loading />
+            })
+            let fd = new FormData();    
+            fd.append('newImage', this.state.imageFile, this.state.imageFile.name);
             axios.defaults.withCredentials = true;
-            axios.get(CONST.BASE_URL + '/api/get-all-front-page-images').then(response => {
-                response.data.all_db_images.forEach(db_image => {
-                    prePopulatedImages.push({ id: db_image.id, url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
-                });
-                this.setState({
-                    loading: "",
-                    images: prePopulatedImages,
-                    confirmDelete: "",
-                    open: false,
-                    imageFile: "",
-                    imageChangedMessage: "Image Successfully Added",
-                    image: prePopulatedImages.length - 1,
-                    addedImage: false
+            axios.post(CONST.BASE_URL + '/api/add-new-front-page-image', fd).then(response => {
+                let prePopulatedImages = [];
+                axios.defaults.withCredentials = true;
+                axios.get(CONST.BASE_URL + '/api/get-all-front-page-images').then(response => {
+                    response.data.all_db_images.forEach(db_image => {
+                        prePopulatedImages.push({ id: db_image.id, url: CONST.BASE_URL + "/storage/images/front-page-images/landing-page-images/" + db_image.image});
+                    });
+                    this.setState({
+                        loading: "",
+                        images: prePopulatedImages,
+                        confirmDelete: "",
+                        open: false,
+                        imageFile: "",
+                        imageChangedMessage: "Image Successfully Added",
+                        image: prePopulatedImages.length - 1,
+                        addedImage: false
+                    })
                 })
             })
-        })
+        }
     }
 
     nextImage = () => {
@@ -130,9 +133,10 @@ class FrontLandingPage extends Component {
         }
     }
 
-    getData = (val) => {
+    getData = (val, imageError) => {
         this.setState({
             imageFile: val,
+            imageError: imageError,
             addedImage: true
         })
     }
@@ -171,11 +175,9 @@ class FrontLandingPage extends Component {
 
     let finishAddingImageButton = "";
 
-    if(this.state.imageFile){
+    if(this.state.imageFile && !this.state.imageError){
         finishAddingImageButton = <button className="customButton" onClick={this.addImageHandler}>Finish</button>
     }
-
-    let imageUploadControl = <ImageUpload wording="Add Image?" sendData={this.getData} flushData={this.state.addedImage}/>
 
     return(
         <Aux>
@@ -185,8 +187,10 @@ class FrontLandingPage extends Component {
             <div className={classes.FrontLandingPage}>
             <GoBack back={() => this.props.history.goBack()} />
                 {imageChangedMessage}
-                <BiXCircle className={"delete selectable " + classes.deleteImageButton} onClick={this.confirmDeleteHandler} />
-                <h2>{this.state.image + 1} of {this.state.images.length}</h2>
+                <div className="image-details-container">
+                    <h2>{this.state.image + 1} of {this.state.images.length}</h2>
+                    <BiXCircle className={"delete selectable " + classes.deleteImageButton} onClick={this.confirmDeleteHandler} />
+                </div>
                 <div className={classes.imageAndControlsContainer}>
                     {leftArrow}
                     <div className={classes.imageContainer}>
@@ -194,7 +198,7 @@ class FrontLandingPage extends Component {
                     </div>
                     {rightArrow}
                 </div>
-                {imageUploadControl}
+                <ImageUpload wording="Add Image?" sendData={this.getData} flushData={this.state.addedImage}/>
                 {finishAddingImageButton}           
             </div>
         </Aux>

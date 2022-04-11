@@ -17,6 +17,7 @@ class NewTrainingCourse extends Component {
         teacherStudentRatio: "",
         price: "",
         extras: "",
+        prerequisites: "",
         duration: "",
         imageFile: "",
         redirectOnSuccess: "",
@@ -26,6 +27,7 @@ class NewTrainingCourse extends Component {
         durationError: "",
         teacherStudentRatioError: "",
         extrasError: "",
+        prerequisitesError: "",
         loading: "",
         showErrorPopup: false,
     }
@@ -42,9 +44,10 @@ class NewTrainingCourse extends Component {
         });
     }
 
-    getData = (val) => {
+    getData = (val, imageError) => {
         this.setState({
-            imageFile: val
+            imageFile: val,
+            imageError: imageError
         })
     }
 
@@ -56,6 +59,7 @@ class NewTrainingCourse extends Component {
         let durationError =  "";
         let teacherStudentRatioError = "";
         let extrasError = "";
+        let prerequisitesError = "";
         
         if(this.state.title === ""){
             titleError = <h4 className="error">Title cannot be empty</h4>;
@@ -87,7 +91,11 @@ class NewTrainingCourse extends Component {
             extrasError = <h4 className="error">Please enter only letters and numbers</h4>;
         }
 
-        if(!durationError && !titleError && !teacherStudentRatioError && !priceError && !extrasError){
+        if (/[^a-zA-Z0-9 -,?!']/.test(this.state.prerequisites)) {
+            prerequisitesError = <h4 className="error">Please enter only letters and numbers</h4>;
+        }
+
+        if(!durationError && !titleError && !teacherStudentRatioError && !priceError && !extrasError && !prerequisitesError && !this.state.imageError){
             this.setState({
                 loading: <Loading />
             })
@@ -97,6 +105,7 @@ class NewTrainingCourse extends Component {
             fd.append('duration', this.state.duration);
             fd.append('teacher_student_ratio', this.state.teacherStudentRatio);
             fd.append('extras', this.state.extras);
+            fd.append('prerequisites', this.state.prerequisites);
 
             if(this.state.imageFile){
                 fd.append('newImage', this.state.imageFile, this.state.imageFile.name);
@@ -111,7 +120,8 @@ class NewTrainingCourse extends Component {
                         }}                  
                     />
                 })
-            }).catch(error => {
+            })
+            .catch(error => {
                 if (error) {
                     this.setState({
                         loading: "",
@@ -125,7 +135,8 @@ class NewTrainingCourse extends Component {
                 priceError: priceError,
                 teacherStudentRatioError: teacherStudentRatioError,
                 extrasError: extrasError,
-                durationError: durationError
+                durationError: durationError,
+                prerequisitesError: prerequisitesError
             })
         }
     }
@@ -157,7 +168,6 @@ class NewTrainingCourse extends Component {
                     />
                     {this.state.titleError}
                     <ImageUpload wording="Add Image?" sendData={this.getData} />
-                    {this.state.imageError}
                     <input
                         type="number"
                         name="price"
@@ -192,6 +202,15 @@ class NewTrainingCourse extends Component {
                         <option value="upto-One-to-Three">upto-One-to-Three</option>
                     </select>
                     {this.state.teacherStudentRatioError}
+                    <input
+                        type="text"
+                        name="prerequisites"
+                        autoComplete="off"
+                        value={this.state.prerequisites}
+                        onChange={this.changeHandler}
+                        placeholder="Prerequisites"
+                    />
+                    {this.state.prerequisitesError}
                     <textarea
                         type="text"
                         name="extras"

@@ -9,10 +9,7 @@
 }
 
 .currentImageContainer {
-    margin-top: 2.5vh;
     width: 80%;
-    position: relative;
-    border: 1px solid var(--main-txt);
 }
 
 .noImageContainer {
@@ -20,14 +17,13 @@
 }
 
 .currentImage {
-    margin: 2.5vh 0;
+    margin: 1.5vh 0;
     max-height: 30vh;
+    max-width: 100%;
     border-radius: 2.5px;
 }
 
 .deleteImageButton {
-    position: absolute;
-    top: 0;
-    right: 0;
     font-size: 2rem;
+    grid-column: auto;
 }

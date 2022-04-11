@@ -53,9 +53,10 @@ class NewSalonTreatment extends Component {
         });
     }
 
-    getData = (val) => {
+    getData = (val, imageError) => {
         this.setState({
-            imageFile: val
+            imageFile: val,
+            imageError: imageError
         })
     }
 
@@ -109,7 +110,7 @@ class NewSalonTreatment extends Component {
             descriptionError = <h4 className="error">Please enter only letters and numbers</h4>;
         }
 
-        if(!categoryError && !titleError && !imageError && !priceError && !durationError && !descriptionError){
+        if(!categoryError && !titleError && !imageError && !priceError && !durationError && !descriptionError && !this.state.imageError){
             this.setState({
                 loading: <Loading />
             })
@@ -189,7 +190,6 @@ class NewSalonTreatment extends Component {
                     />
                     {this.state.titleError}
                     <ImageUpload wording="Add Image?" sendData={this.getData} />
-                    {this.state.imageError}
                     <input
                         type="number"
                         name="price"

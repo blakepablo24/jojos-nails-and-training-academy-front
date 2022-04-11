@@ -12,8 +12,15 @@
 }
 
 .imageAndControlsContainer {
-    height: 60vh;
+    height: 40vh;
     grid-template-columns: 1fr 8fr 1fr;
+}
+
+.imageDetilsContainer {
+    width: 100%;;
+    display: grid;
+    place-items: center center;
+    grid-auto-flow: column;
 }
 
 .imageContainer {
@@ -27,7 +34,7 @@
 }
 
 .landingPageImage {
-    max-height: 60vh;
+    max-height: 40vh;
     max-width: 100%;
 }
 
@@ -37,6 +44,7 @@
 
 .deleteImageButton {
     font-size: 2rem;
+    grid-column: auto;
 }
 
 @media only screen and (min-width: 1024px) {

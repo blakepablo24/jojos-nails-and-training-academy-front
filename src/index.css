@@ -45,8 +45,8 @@ p {
   background: var(--main-txt);
   color: var(--second-bg);
   border: none;
-  width: 75%;
-  padding: 3vh 0;
+  width: 70%;
+  padding: 2vh 0;
   margin: 2vh 0;
   font-size: 1.5rem;
   border-radius: 5px;
@@ -107,6 +107,13 @@ input:focus, textarea:focus, select:focus {
   grid-auto-flow: column;
   width: 100%;
   font-size: 2.5rem;
+}
+
+.image-details-container {
+  width: 100%;
+  display: grid;
+  place-items: center center;
+  grid-auto-flow: column;
 }
 
 .lds-spinner {
