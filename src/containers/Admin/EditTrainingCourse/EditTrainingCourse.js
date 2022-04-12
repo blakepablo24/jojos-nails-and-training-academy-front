@@ -20,6 +20,7 @@ class EditTrainingCourse extends Component {
         teacherStudentRatio: "",
         price: "",
         extras: "",
+        prerequisites: "",
         duration: "",
         imageFile: "",
         redirectOnSuccess: "",
@@ -29,6 +30,7 @@ class EditTrainingCourse extends Component {
         durationError: "",
         teacherStudentRatioError: "",
         extrasError: "",
+        prerequisitesError: "",
         image: "",
         confirmDelete: "",
         open: false,
@@ -46,7 +48,8 @@ class EditTrainingCourse extends Component {
                 duration: response.data.trainingCourse.duration,
                 teacherStudentRatio: response.data.trainingCourse.teacher_student_ratio,
                 image: response.data.trainingCourse.image,
-                extras: response.data.trainingCourse.extras
+                extras: response.data.trainingCourse.extras,
+                prerequisites: response.data.trainingCourse.prerequisites
             })
         })
     }
@@ -81,6 +84,7 @@ class EditTrainingCourse extends Component {
                     teacherStudentRatio: response.data.trainingCourse.teacher_student_ratio,
                     image: response.data.trainingCourse.image,
                     extras: response.data.trainingCourse.extras,
+                    prerequisites: response.data.trainingCourse.prerequisites,
                     imageChangedMessage: "Image Successfully Deleted",
                     loading: ""
                 })
@@ -115,6 +119,7 @@ class EditTrainingCourse extends Component {
         let durationError =  "";
         let teacherStudentRatioError = "";
         let extrasError = "";
+        let prerequisitesError = "";
         
         if(this.state.title === ""){
             titleError = <h4 className="error">Title cannot be empty</h4>;
@@ -146,7 +151,11 @@ class EditTrainingCourse extends Component {
             extrasError = <h4 className="error">Please enter only letters and numbers</h4>;
         }
 
-        if(!durationError && !titleError && !teacherStudentRatioError && !priceError && !extrasError && !this.state.imageError){
+        if (/[^a-zA-Z0-9 -,?!']/.test(this.state.prerequisites)) {
+            prerequisitesError = <h4 className="error">Please enter only letters and numbers</h4>;
+        }
+
+        if(!durationError && !titleError && !teacherStudentRatioError && !priceError && !extrasError && !prerequisitesError && !this.state.imageError){
             this.setState({
                 loading: <Loading />
             })
@@ -157,6 +166,7 @@ class EditTrainingCourse extends Component {
             fd.append('duration', this.state.duration);
             fd.append('teacher_student_ratio', this.state.teacherStudentRatio);
             fd.append('extras', this.state.extras);
+            fd.append('prerequisites', this.state.prerequisites);
 
             if(this.state.imageFile){
                 fd.append('newImage', this.state.imageFile, this.state.imageFile.name);
@@ -170,38 +180,15 @@ class EditTrainingCourse extends Component {
                         }}                  
                     />
                 })
-            }).catch(error => {
-                if (error.response) {
-                    // console.log("Request made and server responded");
-                    // this.setState({
-                    //     loading: "",
-                    //     imageError: <h4 className="error">{error.response.data.errors.newImage}</h4>
-                    // })
-                    console.log(error.response);
-                    console.log(error.response);
-                } else if (error.request) {
-                    // this.setState({
-                    //     loading: "",
-                    //     showErrorPopup: true
-                    // })
-                    console.log("The request was made but no response was received");
-                    console.log(error.request);
-                } else {
-                    // this.setState({
-                    //     loading: "",
-                    //     showErrorPopup: true
-                    // })
-                    // console.log("Something happened in setting up the request that triggered an Error");
-                    console.log('Error', error.message);
-                }
-              })
+            })
         } else {
             this.setState({
                 titleError: titleError,
                 priceError: priceError,
                 teacherStudentRatioError: teacherStudentRatioError,
                 extrasError: extrasError,
-                durationError: durationError
+                durationError: durationError,
+                prerequisitesError: prerequisitesError
             })
         }
     }
@@ -303,6 +290,15 @@ class EditTrainingCourse extends Component {
                         <option value="upto One-to-Three">Upto-One-to-Three</option>
                     </select>
                     {this.state.teacherStudentRatioError}
+                    <input
+                        type="text"
+                        name="prerequisites"
+                        autoComplete="off"
+                        value={this.state.prerequisites}
+                        onChange={this.changeHandler}
+                        placeholder="Prerequisites"
+                    />
+                    {this.state.prerequisitesError}
                     <textarea
                         type="text"
                         name="extras"

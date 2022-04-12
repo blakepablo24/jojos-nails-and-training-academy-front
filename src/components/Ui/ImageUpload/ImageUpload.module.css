@@ -2,6 +2,7 @@
     width: 100%;
     display: grid;
     place-items: center center;
+    margin-top: 10px;
 }
 
 .addImage, .imagePreview {
