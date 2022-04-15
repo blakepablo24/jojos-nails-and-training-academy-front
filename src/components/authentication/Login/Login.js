@@ -6,6 +6,7 @@ import CONST from '../../../constants/constants';
 import FlashMessage from 'react-flash-message';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Latest from '../../Ui/Navigation/Latest/Latest';
+import Loading from '../../Ui/Loading/Loading';
 
 class Login extends Component {
 
@@ -14,18 +15,21 @@ class Login extends Component {
         email: "",
         password: "",
         errorMessage: "",
-        redirectOnSuccess: ""
+        redirectOnSuccess: "",
+        loading: ""
     }
 
     emailChangeHandler = (event) => {
         this.setState({
-            email: event.target.value
+            email: event.target.value,
+            errorMessage: ""
         });
     }
 
     passwordChangeHandler = (event) => {
         this.setState({
-            password: event.target.value
+            password: event.target.value,
+            errorMessage: ""
         });
     }
 
@@ -35,6 +39,9 @@ class Login extends Component {
 
     loginHandler = (event) => {
         event.preventDefault();
+        this.setState({
+            loading: <Loading message="Logging In Please Wait"/>
+        })
         axios.defaults.withCredentials = true;
         axios.get(CONST.BASE_URL + '/sanctum/csrf-cookie').then(response => {
             axios.post(CONST.BASE_URL + '/api/login', {
@@ -45,12 +52,16 @@ class Login extends Component {
                     localStorage.setItem('user', JSON.stringify(response.data.authUser));
                     this.getData("logged_in");
                     this.setState({
+                        loading: "",
                         redirectOnSuccess: <Redirect to={"/admin"} />
                     });
                 }
             }
             , (error) => {
-                this.setState({errorMessage: <h4 className="error">That username and password combination is incorrect. Please try again.</h4>})
+                this.setState({
+                    loading: "",
+                    errorMessage: <h4 className="error">That username and password combination is incorrect. Please try again.</h4>
+                })
             })
         });
     }
@@ -78,6 +89,7 @@ class Login extends Component {
 
         return(
             <Aux>
+                {this.state.loading}
                 <Latest message={"Staff Login"}/>
                 <form className={styles.Login}>
                     {successMsg}

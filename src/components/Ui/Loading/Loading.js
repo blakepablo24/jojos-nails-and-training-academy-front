@@ -14,6 +14,10 @@ const Loading = (props) => {
         standardUsage = classes.componentContainer
     }
 
+    if(props.message){
+        message = <h3>{props.message}</h3>
+    }
+
     return (
         <Aux>
             {backdrop}

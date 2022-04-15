@@ -11,7 +11,14 @@ import SortBy from '../../components/Ui/SortBy/SortBy';
 class TrainingCourses extends Component {
 
     state = {
-        trainingCourses: []
+        trainingCourses: [],
+        sortByOptions: 
+        {
+            name: "name",
+            lowHigh: "low-high",
+            highLow: "high-low"
+        },
+        sortBy: "name"
     }
 
     componentDidMount() {
@@ -36,13 +43,20 @@ class TrainingCourses extends Component {
     render(){
 
         let trainingCourses = this.state.trainingCourses.sort((a, b) => a.title.localeCompare(b.title));
+        if(this.state.sortBy === this.state.sortByOptions.name){
+            trainingCourses = this.state.trainingCourses.sort((a, b) => a.title.localeCompare(b.title));
+        } else if(this.state.sortBy === this.state.sortByOptions.lowHigh) {
+            trainingCourses = this.state.trainingCourses.sort((a, b) => a.price.localeCompare(b.price));
+        } else {
+            trainingCourses = this.state.trainingCourses.sort((a, b) => b.price.localeCompare(a.price));
+        }
 
         return(
             <Aux>
                 <Latest message="Available Training Courses" />
                 <div className={classes.TrainingCourses}>
                     <GoBack snippet={true} back={() => this.props.history.goBack()} />
-                    <SortBy />
+                    <SortBy options={this.state.sortByOptions} changeHandler={this.changeHandler} sortBy={this.state.sortBy} />
                     {trainingCourses.map(trainingCourse =>
                         <Snippet 
                             title={trainingCourse.title}

@@ -4,9 +4,31 @@
     display: grid;
     grid-auto-flow: column;
     place-items: center center;
+    font-size: 0.75rem;
 }
 
 .SortBy select {
-    font-size: 0.75rem;
     margin: 0;
+    font-size: 0.75rem;
+    height: 100%;
+}
+
+@media only screen and (min-width: 1024px) {
+    .SortBy {
+        font-size: 0.5rem;
+    }
+    
+    .SortBy select {
+        font-size: 0.5rem;
+    }
+}
+
+@media only screen and (min-width : 834px) and (max-width : 1024px) and (orientation : portrait) {
+    .SortBy {
+        font-size: 0.5rem;
+    }
+    
+    .SortBy select {
+        font-size: 0.2rem;
+    }
 }

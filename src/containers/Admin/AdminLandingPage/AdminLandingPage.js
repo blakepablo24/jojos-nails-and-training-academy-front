@@ -161,12 +161,12 @@ class AdminLandingPage extends Component {
                     {this.state.redirectOnSuccess}
                     <div className={classes.topSellersContainer}>
                         <div className={classes.topSeller}>
-                            <h4>Current Top Course</h4>
-                            <p>{this.state.mostPopularCourse.title} - {this.state.mostPopularCourse.enquires}</p>
+                            <h4>Top Course</h4>
+                            <h5>{this.state.mostPopularCourse.title} - {this.state.mostPopularCourse.enquires}</h5>
                         </div>
                         <div className={classes.topSeller}>
-                            <h4>Current Top Treatment</h4>
-                            <p>{this.state.mostPopularTreatmentCategory} - {this.state.mostPopularTreatment.title} - {this.state.mostPopularTreatment.enquires}</p>
+                            <h4>Top Treatment</h4>
+                            <h5>{this.state.mostPopularTreatmentCategory} - {this.state.mostPopularTreatment.title} - {this.state.mostPopularTreatment.enquires}</h5>
                         </div>
                     </div>
                     <div className={classes.allStatsContainer}>
