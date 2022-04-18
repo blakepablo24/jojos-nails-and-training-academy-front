@@ -13,7 +13,7 @@
     height: 100%;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) and (orientation: landscape) {
     .SortBy {
         font-size: 0.5rem;
     }

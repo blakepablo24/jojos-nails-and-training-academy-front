@@ -44,7 +44,7 @@
     width: 25%;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) and (orientation: landscape) {
     .confirmDeleteContainer {
         left: 25%;
         width: 50%;

@@ -201,7 +201,7 @@ input:focus, textarea:focus, select:focus {
   }
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) and (orientation: landscape) {
   html {
     font-size: 1.2rem;
   }

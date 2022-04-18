@@ -13,7 +13,7 @@
     height: 12.5vh;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) and (orientation: landscape) {
     .Logo img{
         height: 10vh;
     }

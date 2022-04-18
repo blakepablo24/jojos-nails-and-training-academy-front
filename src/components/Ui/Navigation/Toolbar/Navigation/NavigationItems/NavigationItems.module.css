@@ -24,7 +24,7 @@
     border: solid 1.5px var(--main-txt);
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) and (orientation: landscape) {
     .NavigationItems {
         grid-template-rows: 1fr;
         grid-auto-flow: column;

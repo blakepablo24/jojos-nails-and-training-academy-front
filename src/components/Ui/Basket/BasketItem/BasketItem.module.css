@@ -70,7 +70,7 @@
     grid-column: 3 / 5;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) and (orientation: landscape) {
     .basketItem {
         height: 7.5vh;
         margin-top: 2.5vh;

@@ -76,7 +76,7 @@
     padding-left: 5px;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) and (orientation: landscape) {
 
     .Snippet{
         height: 22vh;
@@ -148,7 +148,7 @@
     }
 }
 
-@media only screen and (min-width : 834px) and (max-width : 1024px) and (orientation : portrait) {
+@media only screen and (min-width : 820px) and (orientation : portrait) {
 
     .Snippet, .SnippetWithBasket {
         height: 36vh;

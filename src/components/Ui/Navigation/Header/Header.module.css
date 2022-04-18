@@ -6,7 +6,7 @@
     height: 15vh;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) and (orientation: landscape) {
     .Header {
         padding: 25px;
         background: var(--main-bg);

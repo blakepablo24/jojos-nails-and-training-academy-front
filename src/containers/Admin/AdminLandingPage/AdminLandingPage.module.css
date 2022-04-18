@@ -14,6 +14,7 @@
 .topSellersContainer {
     width: 100%;
     grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr;
 }
 
 .topSeller {
@@ -89,7 +90,7 @@
     font-size: 1rem;
 }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) and (orientation: landscape) {
     .AdminLandingPage {
         grid-area: header/main;
         grid: 1fr 1fr / 8fr 2fr;
@@ -102,10 +103,8 @@
     }
 
     .topSellersContainer{
-        grid-column: 2 / 3;
         grid-row: 1 / 3;
         height: 100%;
-        grid-auto-flow: row;
     }
     
     .topSeller {
@@ -184,5 +183,16 @@
         place-items: center center;
         grid-template-rows: 3fr 7fr;
         grid-column: span 2;
+    }
+}
+
+@media only screen and (min-width : 1024px) and (orientation : portrait) {
+    .topSellersContainer {
+        width: 75%;
+        padding: 15px 0;
+    }
+
+    .topSeller{
+        padding: 10px;
     }
 }

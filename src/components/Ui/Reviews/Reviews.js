@@ -21,20 +21,20 @@ class Reviews extends Component {
         largeScreenImage: 3
     }
 
-    // componentDidMount = () => {
-    //     axios.defaults.withCredentials = true;
-    //     axios.get(CONST.BASE_URL+"/api/get-fbk").then(response => {
-    //         this.setState({
-    //             facebookInfo: {
-    //                 picture: response.data.picture.data.url,
-    //                 overall_star_rating: response.data.overall_star_rating,
-    //                 rating_count: response.data.rating_count, 
-    //                 ratings: response.data.ratings.data.slice(0, 12)
-    //             },
-    //             loading: ""
-    //         })
-    //     })
-    // }
+    componentDidMount = () => {
+        axios.defaults.withCredentials = true;
+        axios.get(CONST.BASE_URL+"/api/get-fbk").then(response => {
+            this.setState({
+                facebookInfo: {
+                    picture: response.data.picture.data.url,
+                    overall_star_rating: response.data.overall_star_rating,
+                    rating_count: response.data.rating_count, 
+                    ratings: response.data.ratings.data.slice(0, 12)
+                },
+                loading: ""
+            })
+        })
+    }
 
     next = () => {
         this.setState({
