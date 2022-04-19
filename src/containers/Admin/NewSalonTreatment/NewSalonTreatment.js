@@ -162,7 +162,7 @@ class NewSalonTreatment extends Component {
 
         return(
             <Aux>
-                <Latest message={"New Training Course"} />
+                <Latest message={"New Salon Treatment"} />
                 {this.state.loading}
                 {errorPopup}
                 <div className={classes.NewSalonTreatment}>
