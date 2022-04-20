@@ -181,13 +181,18 @@ class EditTrainingCourse extends Component {
                     />
                 })
             }).catch(error => {
-                if(error){
-                    this.setState({
-                        showErrorPopup: true,
-                        loading: ""
-                    })
-                }
-              })
+                    if (error.response) {
+                        console.log(error.response);
+                        this.setState({
+                            showErrorPopup: <ErrorPopup shownErrorToggle={this.errorPopupHandler} message={"Edit Training Course " + this.props.match.params.id + " code: " + error.response.status + " " + error.response.data.errors[Object.keys(error.response.data.errors)[0]]}/>,
+                            loading: ""
+                        })
+                    } else if (error.request) {
+                        console.log(error.request);
+                    } else {
+                        console.log('Error', error.message);
+                    }
+                })
         } else {
             this.setState({
                 titleError: titleError,
@@ -239,15 +244,11 @@ class EditTrainingCourse extends Component {
 
         let errorPopup = "";
 
-        if(this.state.showErrorPopup){
-            errorPopup = <ErrorPopup shownErrorToggle={this.errorPopupHandler} message={"Edit Training Course " + this.props.match.params.id}/>;
-        }
-
         return(
             <Aux>
                 <Latest message="Edit This Training Course" />
                 {this.state.loading}
-                {errorPopup}
+                {this.state.showErrorPopup}
                 {this.state.confirmDelete}
                 <div className={classes.EditTrainingCourse}>
                     {this.state.redirectOnSuccess}
