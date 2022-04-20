@@ -12,6 +12,7 @@ import ConfirmDelete from '../../components/Ui/ConfirmDelete/ConfirmDelete';
 import Aux from '../../hoc/Auxilary/Auxilary';
 import Latest from '../../components/Ui/Navigation/Latest/Latest';
 import { TiShoppingCart } from "react-icons/ti";
+import Loading from '../../components/Ui/Loading/Loading';
 import FUNCTIONS from '../../functions/functions';
 
 class SingleTrainingCourse extends Component {
@@ -23,7 +24,7 @@ class SingleTrainingCourse extends Component {
         end_time: "",
         extras: "",
         prerequisites: "",
-        image: "",
+        image: <Loading componentContained={true} />,
         price: "",
         ratio: "",
         curriculumItems: [],
@@ -50,12 +51,13 @@ class SingleTrainingCourse extends Component {
                 start_time: response.data.start_time,
                 end_time: response.data.end_time,
                 extras: response.data.extras,
-                image: response.data.image,
+                image: <img src={CONST.BASE_URL + "/storage/images/training-course-images/" + response.data.image} alt="" className={classes.courseImage} />,
                 price: response.data.price,
                 ratio: response.data.teacher_student_ratio,
                 prerequisites: response.data.prerequisites,
                 curriculumItems: response.data.course_curriculum,
-                adminButtons: adminButtons
+                adminButtons: adminButtons,
+                loading: ""
             });
         })
     };
@@ -112,10 +114,6 @@ class SingleTrainingCourse extends Component {
         let extras = null;
 
         let prerequisites = null;
-
-        if(this.state.image) {
-            courseImage = <img src={CONST.BASE_URL + "/storage/images/training-course-images/" + this.state.image} alt="" className={classes.courseImage} />;
-        }
 
         if(this.state.extras) {
             extras = <div className={classes.stat}>
@@ -206,12 +204,13 @@ class SingleTrainingCourse extends Component {
         return(
             <Aux>
                 <Latest message={this.state.title}/>
+                {this.state.loading}
                 <div className={classes.SingleTrainingCourse}>
-                    {successMsg}
                     {this.state.confirmDelete}
                     {this.state.redirectOnSuccess}
                     <GoBack back={() => this.props.history.goBack()} />
-                    {courseImage}
+                    {successMsg}
+                    {this.state.image}
                     {shownButton}    
                     <div className={classes.stat}>
                         <h3>Duration:</h3>

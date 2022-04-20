@@ -147,7 +147,7 @@ class EditTrainingCourse extends Component {
             teacherStudentRatioError = <h4 className="error">Please choose a Ratio!</h4>;
         }
 
-        if (/[^a-zA-Z0-9-,?!'. ]/.test(this.state.extras)) {
+        if (/[^a-zA-Z0-9 -,?!':().£&]/.test(this.state.extras)) {
             extrasError = <h4 className="error">Please enter only letters and numbers</h4>;
         }
 
@@ -180,7 +180,14 @@ class EditTrainingCourse extends Component {
                         }}                  
                     />
                 })
-            })
+            }).catch(error => {
+                if(error){
+                    this.setState({
+                        showErrorPopup: true,
+                        loading: ""
+                    })
+                }
+              })
         } else {
             this.setState({
                 titleError: titleError,

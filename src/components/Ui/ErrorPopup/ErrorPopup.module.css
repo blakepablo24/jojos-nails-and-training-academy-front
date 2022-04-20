@@ -27,9 +27,11 @@
 
 @media only screen and (min-width: 1024px) and (orientation: landscape) {
     .ErrorPopup {
+        top: 10%;
+        height: 80%;
         width: 40%;
-        left:30%;
-        font-size: 2rem;
+        left: 30%;
+        font-size: inherit;
     }
 
     .title {

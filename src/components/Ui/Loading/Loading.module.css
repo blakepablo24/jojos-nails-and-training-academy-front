@@ -9,6 +9,11 @@
     place-items: end center;
 }
 
+.componentContained {
+    position: static;
+    z-index: 0;
+}
+
 .loading, .component {
     background: var(--main-bg);
     width: 100%;
