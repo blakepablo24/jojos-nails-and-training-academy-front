@@ -7,6 +7,8 @@
 }
 
 .courseImage {
+    display: grid;
+    place-items: center center;
     width: 40vh;
     height: 40vh;
     margin-bottom: 1vh;

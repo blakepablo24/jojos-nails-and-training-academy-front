@@ -24,7 +24,7 @@ class SingleTrainingCourse extends Component {
         end_time: "",
         extras: "",
         prerequisites: "",
-        image: <Loading componentContained={true} />,
+        image: "",
         price: "",
         ratio: "",
         curriculumItems: [],
@@ -51,7 +51,7 @@ class SingleTrainingCourse extends Component {
                 start_time: response.data.start_time,
                 end_time: response.data.end_time,
                 extras: response.data.extras,
-                image: <img src={CONST.BASE_URL + "/storage/images/training-course-images/" + response.data.image} alt="" className={classes.courseImage} />,
+                image: response.data.image,
                 price: response.data.price,
                 ratio: response.data.teacher_student_ratio,
                 prerequisites: response.data.prerequisites,
@@ -108,7 +108,14 @@ class SingleTrainingCourse extends Component {
 
     render(){
 
-        let courseImage = this.state.image;
+        let image = "";
+
+        if(!this.state.image){
+            image = <div className={classes.courseImage}><Loading componentContained={true}/></div>
+        } else {
+            image = <img src={CONST.BASE_URL + "/storage/images/training-course-images/" + this.state.image} alt="" className={classes.courseImage} />
+        }
+
         let curriculum = "";
         
         let extras = null;
@@ -210,7 +217,7 @@ class SingleTrainingCourse extends Component {
                     {this.state.redirectOnSuccess}
                     <GoBack back={() => this.props.history.goBack()} />
                     {successMsg}
-                    {this.state.image}
+                    {image}
                     {shownButton}    
                     <div className={classes.stat}>
                         <h3>Duration:</h3>

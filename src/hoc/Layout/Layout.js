@@ -310,7 +310,7 @@ class Layout extends Component {
                 trainingCourseStartdate: this.state.trainingCourseStartdate,
                 name: this.state.bookingRequestName,
                 email: this.state.bookingRequestEmail,
-                number: this.state.bookingRequestNumber,
+                number: this.state.replace(/\s+/g, ' ').trim(),
                 time: this.state.bookingRequestTime,
                 TC: this.state.basketItemTC,
                 ST: this.state.basketItemST,
