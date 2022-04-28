@@ -4,11 +4,17 @@
 }
 
 .AdminLandingPage {
-    grid-area: main;
+    grid-area: header/latest/main;
     padding: 1vh 0 2.5vh 0;
     width: 100%;
     background: var(--main-bg);
-    z-index: 2;
+    z-index: 4;
+}
+
+.adminTitle {
+    display: grid;
+    place-items: center center;
+    grid-auto-flow: column;
 }
 
 .topSellersContainer {
@@ -96,6 +102,10 @@
         grid: 1fr 1fr / 8fr 2fr;
     }
 
+    .adminTitle {
+        display: none;
+    }
+
     .allStatsContainer {
         grid-column: 1 / 2;
         grid-row: 1 / 2;
@@ -138,6 +148,15 @@
 }
 
 @media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+
+    .AdminLandingPage {
+        grid-area: main;
+        z-index: 2;
+    }
+
+    .adminTitle {
+        display: none;
+    }
 
     .topSellersContainer{
         width: 50%;

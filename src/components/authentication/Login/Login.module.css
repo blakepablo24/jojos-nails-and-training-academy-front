@@ -1,10 +1,10 @@
 .Login {
-    padding: 15vh 0;
-    grid-area: main;
+    grid-area: header/latest/main;
     height: 100%;
+    padding: 70% 0;
     display: grid;
     place-items: center center;
-    z-index: 2;
+    z-index: 4;
     background: var(--main-bg);
 }
 
@@ -12,6 +12,12 @@
     text-decoration: none;
     color: var(--menu-bg);
     font-weight: bold;
+}
+
+.Login button {
+    padding: 0;
+    width: 50%;
+    height: 45%;
 }
 
 @media only screen and (min-width: 1024px) and (orientation: landscape) {
@@ -33,5 +39,12 @@
     .Login {
         grid-area: main;
         padding: 15vh 20vw;
+        z-index: 2;
+    }
+
+    .Login button {
+        padding: 0;
+        width: 50%;
+        height: 75%;
     }
 }

@@ -9,6 +9,7 @@ import Loading from '../../../components/Ui/Loading/Loading';
 import { Redirect } from 'react-router';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Latest from '../../../components/Ui/Navigation/Latest/Latest';
+import JOJOS from '.././../../components/Ui/Navigation/Header/Logo/Logo';
 
 class AdminLandingPage extends Component {
     
@@ -154,9 +155,13 @@ class AdminLandingPage extends Component {
 
         return(
             <Aux>
-                <Latest message="Admin Dashboard"/>
+                <Latest message="Admin Area"/>
                 {changePassword}
                 <div className={classes.AdminLandingPage + " mainAdminSection"}>
+                    <div className={classes.adminTitle}>
+                        <JOJOS admin={true} />
+                        <h1>Admin Area</h1>
+                    </div>
                     {this.state.loading}
                     {this.state.redirectOnSuccess}
                     <div className={classes.topSellersContainer}>

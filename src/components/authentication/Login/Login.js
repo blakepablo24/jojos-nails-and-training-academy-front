@@ -56,14 +56,22 @@ class Login extends Component {
                         redirectOnSuccess: <Redirect to={"/admin"} />
                     });
                 }
-            }
-            , (error) => {
-                this.setState({
-                    loading: "",
-                    errorMessage: <h4 className="error">That username and password combination is incorrect. Please try again.</h4>
-                })
-            })
-        });
+            }).catch(function (error) {
+                if (error.response) {
+                  // Request made and server responded
+                  console.log(error.response.data);
+                  console.log(error.response.status);
+                  console.log(error.response.headers);
+                } else if (error.request) {
+                  // The request was made but no response was received
+                  console.log(error.request);
+                } else {
+                  // Something happened in setting up the request that triggered an Error
+                  console.log('Error', error.message);
+                }
+            
+              });
+        })
     }
 
     render(){
@@ -92,6 +100,7 @@ class Login extends Component {
                 {this.state.loading}
                 <Latest message={"Staff Login"}/>
                 <form className={styles.Login}>
+                    <h1>Login</h1>
                     {successMsg}
                     {this.state.redirectOnSuccess}
                     <input type="email" name="email" placeholder="Email" onChange={this.emailChangeHandler}/>
