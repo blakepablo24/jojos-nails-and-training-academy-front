@@ -15,6 +15,7 @@
     display: grid;
     place-items: center center;
     grid-auto-flow: column;
+    width: 100%;
 }
 
 .topSellersContainer {
@@ -24,12 +25,21 @@
 }
 
 .topSeller {
+    position: relative;
     border: var(--amber-txt) solid 2px;
     height: 95%;
     width: 95%;
     font-size: 100%;
     border-radius: 2.5px;
     padding: 1.5px;
+}
+
+.topSeller svg{
+    font-size: 2rem;
+    position: absolute;
+    top: -20px;
+    left: -5px;
+    color: goldenrod;
 }
 
 .allStatsContainer {
@@ -71,7 +81,6 @@
     font-size: 1.5rem;
     grid-auto-flow: column;
     margin-top: 2vh;
-    height: 6vh;
 }
 
 .newSubService {
@@ -124,6 +133,11 @@
         border-radius: 2.5px;
     }
 
+    .topSeller svg{
+        top: -15px;
+        left: -28px;
+    }
+
     .singleStatContainer {
         grid-column: span 1;
     }
@@ -140,10 +154,24 @@
         font-size: 1.15vw;
     }
 
+    .newService:hover {
+        background: var(--second-bg);
+        color: var(--main-txt);
+    }
+
+    .newSubService:hover {
+        background: var(--main-txt);
+        color: var(--second-bg);
+    }
+
     .changePassword {
-        height: 6vh;
         box-shadow: none;
         font-size: 75%;
+    }
+
+    .changePassword:hover {
+        background: var(--error-txt);
+        color: var(--main-bg);
     }
 }
 
@@ -165,6 +193,12 @@
     .topSeller {
         padding: 5vh 0;
     }
+
+    .topSeller svg{
+        top: -7.5px;
+        left: 0;
+    }
+
     .changePassword {
         width: 25%;
     }

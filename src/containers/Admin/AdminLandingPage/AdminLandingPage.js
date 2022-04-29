@@ -10,6 +10,7 @@ import { Redirect } from 'react-router';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Latest from '../../../components/Ui/Navigation/Latest/Latest';
 import JOJOS from '.././../../components/Ui/Navigation/Header/Logo/Logo';
+import { ImStarFull } from "react-icons/im";
 
 class AdminLandingPage extends Component {
     
@@ -166,10 +167,12 @@ class AdminLandingPage extends Component {
                     {this.state.redirectOnSuccess}
                     <div className={classes.topSellersContainer}>
                         <div className={classes.topSeller}>
+                            <ImStarFull />
                             <h4>Top Course</h4>
                             <h5>{this.state.mostPopularCourse.title} - {this.state.mostPopularCourse.enquires}</h5>
                         </div>
                         <div className={classes.topSeller}>
+                        <ImStarFull />
                             <h4>Top Treatment</h4>
                             <h5>{this.state.mostPopularTreatmentCategory} - {this.state.mostPopularTreatment.title} - {this.state.mostPopularTreatment.enquires}</h5>
                         </div>

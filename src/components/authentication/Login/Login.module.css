@@ -28,6 +28,13 @@
     .Login {
         grid-area: main;
         padding: 15vh 20vw;
+        z-index: 2;
+    }
+
+    .Login button {
+        padding: 0;
+        width: 50%;
+        height: 75%;
     }
 }
 

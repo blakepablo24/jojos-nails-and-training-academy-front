@@ -5,6 +5,12 @@ import logoImage from './logo.png';
 
 const logo = (props) => {
     
+    let logoClass = classes.Logo
+
+    if(props.admin){
+        logoClass = classes.adminLogo
+    }
+
     let logoType =  <Link onClick={props.clicked} to="/">
                         <img src={logoImage} alt=""/>
                     </Link>
@@ -14,7 +20,7 @@ const logo = (props) => {
     }
 
     return (
-        <div className={classes.Logo}>
+        <div className={logoClass}>
             {logoType}
         </div>
     )
