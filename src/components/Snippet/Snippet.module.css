@@ -39,7 +39,8 @@
 }
 
 .inBasketButtonContainer {
-    background: var(--second-bg);
+    background: var(--main-txt);
+    color: var(--main-bg);
 }
 
 .SnippetLink {

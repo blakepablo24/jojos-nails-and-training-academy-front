@@ -1,11 +1,20 @@
-.Login {
+.loginContainer {
     grid-area: header/latest/main;
     height: 100%;
-    padding: 70% 0;
     display: grid;
     place-items: center center;
     z-index: 4;
     background: var(--main-bg);
+}
+
+.Login {
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 2.5px;
+    display: grid;
+    place-items: center center;
+    height: 50%;
+    width: 90%;
 }
 
 .Login a {
@@ -22,12 +31,12 @@
 
 @media only screen and (min-width: 1024px) and (orientation: landscape) {
     .Login, .Login input {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
     }
 
     .Login {
         grid-area: main;
-        padding: 15vh 20vw;
+        padding: 15vh 30vw;
         z-index: 2;
     }
 
@@ -40,12 +49,12 @@
 
 @media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
     .Login, .Login input {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
     }
 
     .Login {
         grid-area: main;
-        padding: 15vh 20vw;
+        padding: 15vh 25vw;
         z-index: 2;
     }
 

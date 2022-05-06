@@ -1,4 +1,5 @@
 .TrainingCourses {
+    place-self: center start;
     grid-area: main;
     width: 100%;
     height: 100%;

@@ -18,7 +18,7 @@
     grid-template-columns: 7fr 2fr 1fr;
     font-size: 1.5rem;
     height: 7.5vh;
-    margin-top: 2.5vh;
+    margin-top: 1.5vh;
     background: white;
     border-radius: 5px;
 }
@@ -30,7 +30,7 @@
 .addedCurriculumItemContainer input {
     width: 100%;
     box-shadow: none;
-    height: 7.5vh;
+    height: 100%;
 }
 
 .newCurriculumItemContainer {
@@ -38,14 +38,15 @@
 }
 
 .newCurriculumItemContainer img {
-    max-height: 7.5vh;
+    height: 7.5vh;
+    width: 95%;
 }
 
 .newCurriculumItem {
     grid-auto-flow: column;
     width: 60%;
-    font-size: 2rem;
-    margin-top: 50px;
+    font-size: 1.5rem;
+    margin: 15px 0;
 }
 
 .addedCurriculumItemNumber, .addedCurriculumItemRemove {
@@ -73,6 +74,11 @@
 }
 
 @media only screen and (min-width: 1024px) and (orientation: landscape) {
+
+    .AddCurriculum {
+        padding: 2.5vh 10vw;
+    }
+
     .newCurriculumItemContainer {
         grid-column: 1 / 3;
         grid-template-columns: 1fr 1fr;
@@ -85,6 +91,20 @@
 }
 
 @media only screen and (min-width : 321px) and (max-width : 1023px) and (orientation : landscape) {
+
+    .addedCurriculumItemContainer {
+        height: 10vh;
+        margin-top: 5vh;
+    }
+
+    .AddCurriculum {
+        padding: 2.5vh 10vw;
+    }
+
+    .newCurriculumItemContainer img {
+        height: 9.5vh;
+    }
+
     .newCurriculumItemContainer {
         grid-column: 1 / 3;
         grid-template-columns: 1fr 1fr;

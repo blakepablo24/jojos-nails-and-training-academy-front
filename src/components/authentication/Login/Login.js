@@ -7,6 +7,7 @@ import FlashMessage from 'react-flash-message';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Latest from '../../Ui/Navigation/Latest/Latest';
 import Loading from '../../Ui/Loading/Loading';
+import FUNCTIONS from '../../../functions/functions';
 
 class Login extends Component {
 
@@ -17,6 +18,10 @@ class Login extends Component {
         errorMessage: "",
         redirectOnSuccess: "",
         loading: ""
+    }
+
+    componentDidMount(){
+        FUNCTIONS.scrollToTop();
     }
 
     emailChangeHandler = (event) => {
@@ -90,15 +95,17 @@ class Login extends Component {
             <Aux>
                 {this.state.loading}
                 <Latest message={"Staff Login"}/>
-                <form className={styles.Login}>
-                    <h1>Login</h1>
-                    {successMsg}
-                    {this.state.redirectOnSuccess}
-                    <input type="email" name="email" placeholder="Email" onChange={this.emailChangeHandler}/>
-                    <input type="password" name="password" placeholder="Password" onChange={this.passwordChangeHandler} />
-                    {this.state.errorMessage}
-                    <button className="customButton" onClick={this.loginHandler}>Login</button>
-                </form>
+                <div className={styles.loginContainer}>
+                    <form className={styles.Login}>
+                        <h1>Login</h1>
+                        {successMsg}
+                        {this.state.redirectOnSuccess}
+                        <input type="email" name="email" placeholder="Email" onChange={this.emailChangeHandler}/>
+                        <input type="password" name="password" placeholder="Password" onChange={this.passwordChangeHandler} />
+                        {this.state.errorMessage}
+                        <button className="customButton" onClick={this.loginHandler}>Login</button>
+                    </form>
+                </div>
             </Aux>
         )
     }

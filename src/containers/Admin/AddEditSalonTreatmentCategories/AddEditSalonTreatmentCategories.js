@@ -193,9 +193,9 @@ class AddEditSalonTreatmentCategories extends Component {
                     {this.state.updatedMessage}
                     {this.state.loading}
                     {this.createUI()}
-                    <div className={classes.newCurriculumItem + " selectable"} onClick={this.addClick.bind(this)}><BiFolderPlus /> <h3>Add New</h3></div>
                     </div>
-                    <button className={classes.newCurriculumItem + " customButton"} onClick={this.handleSubmit}>Finish</button>
+                    <div className={classes.newCurriculumItem + " selectable"} onClick={this.addClick.bind(this)}><BiFolderPlus /> <h3>Add New</h3></div>
+                    <button className="customButton" onClick={this.handleSubmit}>Finish</button>
                 </div>
             </Aux>
         );

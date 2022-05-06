@@ -49,7 +49,7 @@ class SalonTreatmentsSubCat extends Component {
     render(){
 
         let treatments = this.state.salonTreatmentsSubCat.sort((a, b) => a.title.localeCompare(b.title));
-
+        let sortBy = <SortBy options={this.state.sortByOptions} changeHandler={this.changeHandler} sortBy={this.state.sortBy} />;
         if(this.state.sortBy === this.state.sortByOptions.name){
             treatments = this.state.salonTreatmentsSubCat.sort((a, b) => a.title.localeCompare(b.title));
         } else if(this.state.sortBy === this.state.sortByOptions.lowHigh) {
@@ -57,13 +57,17 @@ class SalonTreatmentsSubCat extends Component {
         } else {
             treatments = this.state.salonTreatmentsSubCat.sort((a, b) => b.price.localeCompare(a.price));
         }
+
+        if(treatments.length < 2){
+            sortBy = "";
+        }
         
         return(
             <Aux>
                 <Latest message={this.state.subCategoryTitle} />
                 <div className={classes.SalonTreatmentsSubCat}>
                 <GoBack snippet={true} back={() => this.props.history.goBack()} />
-                <SortBy options={this.state.sortByOptions} changeHandler={this.changeHandler} sortBy={this.state.sortBy} />
+                    {sortBy}
                     {treatments.map(salonTreatmentSubCat =>
                         <Snippet
                             toggleBasket={this.props.toggleBasket}

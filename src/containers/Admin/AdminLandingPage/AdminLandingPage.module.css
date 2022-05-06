@@ -74,27 +74,26 @@
 }
 
 .newService, .newSubService {
-    width: 85%;
+    width: 75%;
     background: var(--main-txt);
     color: var(--second-bg);
     border-radius: 2.5px;
-    font-size: 1.5rem;
+    font-size: 100%;
     grid-auto-flow: column;
-    margin-top: 2vh;
+    margin-bottom: 2vh;
+    padding: 2.5px 0;
 }
 
-.newSubService {
-    place-self: center end;
-    font-size: 0.75rem;
-    margin-right: 7.5%;
+.newSubService { 
     color: var(--main-txt);
     background: var(--second-bg);
-    height: 80%;
     width: 65%;
+    place-self: center end;
+    margin-right: 12.5%;
 }
 
 .newService svg, .newSubService svg {
-    font-size: 200%;
+    font-size: 175%;
 }
 
 .changePassword {
