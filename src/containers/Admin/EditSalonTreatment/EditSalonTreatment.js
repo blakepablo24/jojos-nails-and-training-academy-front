@@ -12,6 +12,7 @@ import Loading from '../../../components/Ui/Loading/Loading';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import ErrorPopup from '../../../components/Ui/ErrorPopup/ErrorPopup';
 import Latest from '../../../components/Ui/Navigation/Latest/Latest';
+import FUNCTIONS from '../../../functions/functions';
 
 class EditSalonTreatment extends Component {
 
@@ -131,7 +132,7 @@ class EditSalonTreatment extends Component {
             titleError = <h4 className="error">Title must be longer 5 characters</h4>;
         }
 
-        if (/[^a-zA-Z0-9 -,?!']/.test(this.state.title)) {
+        if (/[^a-zA-Z0-9 ,?!'-]/.test(this.state.title)) {
             titleError = <h4 className="error">Please enter only letters and numbers</h4>;
         }
 
@@ -151,17 +152,7 @@ class EditSalonTreatment extends Component {
             durationError = <h4 className="error">Please enter only numbers</h4>;
         }
 
-        if(this.state.description === ""){
-            descriptionError = <h4 className="error">Title cannot be empty</h4>;
-        } else if(this.state.description.length < 5){
-            descriptionError = <h4 className="error">Title must be longer 5 characters</h4>;
-        }
-
-        if (/[^a-zA-Z0-9 -,?!.']/.test(this.state.description)) {
-            descriptionError = <h4 className="error">Please enter only letters and numbers</h4>;
-        }
-
-        if(!categoryError && !titleError && !priceError && !durationError && !descriptionError && !this.state.imageError){
+        if(!categoryError && !titleError && !priceError && !durationError && !FUNCTIONS.checkAllowedInputTextArea(this.state.description) && !this.state.imageError){
             this.setState({
                 loading: <Loading />
             })
@@ -209,7 +200,7 @@ class EditSalonTreatment extends Component {
                 titleError: titleError,
                 priceError: priceError,
                 durationError: durationError,
-                descriptionError: descriptionError
+                descriptionError: FUNCTIONS.checkAllowedInputTextArea(this.state.description)
             })
         }
     }
