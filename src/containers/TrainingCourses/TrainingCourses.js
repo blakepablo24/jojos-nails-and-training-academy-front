@@ -7,6 +7,7 @@ import Aux from '../../hoc/Auxilary/Auxilary';
 import Latest from '../../components/Ui/Navigation/Latest/Latest';
 import GoBack from '../../components/Ui/GoBack/GoBack';
 import SortBy from '../../components/Ui/SortBy/SortBy';
+import logoImage from '../../components/Ui/Navigation/Header/Logo/logo.png';
 
 class TrainingCourses extends Component {
 
@@ -60,7 +61,7 @@ class TrainingCourses extends Component {
                     {trainingCourses.map(trainingCourse =>
                         <Snippet 
                             title={trainingCourse.title}
-                            image={CONST.BASE_URL + "/storage/images/training-course-images/" + "small-" + trainingCourse.image}
+                            image={trainingCourse.image ? CONST.BASE_URL + "/storage/images/training-course-images/" + "small-" + trainingCourse.image : logoImage}
                             id={trainingCourse.id}
                             key={trainingCourse.id}
                             price={trainingCourse.price}

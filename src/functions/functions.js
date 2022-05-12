@@ -1,6 +1,4 @@
-let myFunctionsClass = {}
-
-myFunctionsClass = {
+let myFunctionsClass = {
     checkBasket(data) {
         let alreadyInBasket = false;
         let basketItems = JSON.parse(localStorage.getItem("basketItems"));
@@ -25,15 +23,48 @@ myFunctionsClass = {
     scrollToTop() {
         window.scrollTo(0, 0);
     },
+
+    // Site Form Error checking
     
-    checkAllowedInputTextArea(description){
+    checkAllowedTextInput(input, type){
         let error = "";
-        if(description === ""){
-            error = <h4 className="error">Description cannot be empty</h4>;
-        } else if(description.length < 5){
-            error = <h4 className="error">Title must be longer 5 characters</h4>;
-        } else if (/[^a-zA-Z0-9 ,?!.'-]/.test(description)) {
+        if(type){
+            if(input === ""){
+                error = <h4 className="error">{type} cannot be empty</h4>;
+            } else if (/[^a-zA-Z0-9 ,?!':().£&-]/.test(input)) {
+                error = <h4 className="error">Please enter only letters and numbers</h4>;
+            }
+            return error;
+        } else if (/[^a-zA-Z0-9 ,?!':().£&-]/.test(input)) {
             error = <h4 className="error">Please enter only letters and numbers</h4>;
+        }
+        return error;
+    },
+
+    checkAllowedPriceInput(input){
+        let error = "";
+        if(input === ""){
+            error = <h4 className="error">Price cannot be empty</h4>;
+        } else if (/[^0-9.]/.test(input)) {
+            error = <h4 className="error">Please enter only numbers and decimal point</h4>;
+        }
+        return error;
+    },
+
+    checkAllowedDurationInput(input){
+        let error = "";
+        if(input === ""){
+            error = <h4 className="error">Duration cannot be empty</h4>;
+        } else if (/[^0-9]/.test(input)) {
+            error = <h4 className="error">Please enter only numbers</h4>;
+        }
+        return error;
+    },
+
+    checkAllowedSelectInput(input, type){
+        let error = "";
+        if(input === "select" || input === ""){
+            error = <h4 className="error">Please choose a {type}!</h4>;
         }
         return error;
     }

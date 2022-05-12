@@ -14,6 +14,7 @@ import Latest from '../../components/Ui/Navigation/Latest/Latest';
 import { TiShoppingCart } from "react-icons/ti";
 import Loading from '../../components/Ui/Loading/Loading';
 import FUNCTIONS from '../../functions/functions';
+import logoImage from '../../components/Ui/Navigation/Header/Logo/logo.png';
 
 class SingleTrainingCourse extends Component {
 
@@ -108,13 +109,7 @@ class SingleTrainingCourse extends Component {
 
     render(){
 
-        let image = "";
-
-        if(!this.state.image){
-            image = <div className={classes.courseImage}><Loading componentContained={true}/></div>
-        } else {
-            image = <img src={CONST.BASE_URL + "/storage/images/training-course-images/" + this.state.image} alt="" className={classes.courseImage} />
-        }
+        let image = this.state.image ? CONST.BASE_URL + "/storage/images/training-course-images/" + this.state.image : logoImage;
 
         let curriculum = "";
         
@@ -217,7 +212,7 @@ class SingleTrainingCourse extends Component {
                     {this.state.redirectOnSuccess}
                     <GoBack back={() => this.props.history.goBack()} />
                     {successMsg}
-                    {image}
+                    <img src={image} alt="" className={classes.courseImage} />
                     {shownButton}    
                     <div className={classes.stat}>
                         <h3>Duration:</h3>

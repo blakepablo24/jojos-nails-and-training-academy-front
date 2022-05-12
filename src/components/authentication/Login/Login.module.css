@@ -35,10 +35,10 @@
 
     .loginContainer {
         grid-area: main;
-        height: 60vh;
+        height: 50vh;
         width: 40vw;
         z-index: 0;
-        margin: 10vh 0;
+        margin: 15vh 0;
     }
 
     .Login {
@@ -49,10 +49,14 @@
         font-size: 0.9rem;
     }
 
+    .Login input {
+        width: 50%;
+    }
+
     .Login button {
         padding: 0;
-        width: 50%;
-        height: 75%;
+        width: 30%;
+        height: 30%;
     }
 }
 

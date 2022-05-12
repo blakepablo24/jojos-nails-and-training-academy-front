@@ -276,19 +276,9 @@ class Layout extends Component {
     finishHandler = (event, totalCost) => {
         event.preventDefault();
 
-        let bookingRequestNameError = "";
         let bookingRequestEmailError = "";
         let bookingRequestNumberError = "";
 
-        if(this.state.bookingRequestName === ""){
-            bookingRequestNameError = <h4 className="error">Please Enter your name!</h4>;
-        } else if(this.state.bookingRequestName.length < 5){
-            bookingRequestNameError = <h4 className="error">Name must be longer 5 characters</h4>;
-        }
-
-        if (/[^a-zA-Z -']/.test(this.state.bookingRequestName)) {
-            bookingRequestNameError = <h4 className="error">Please enter a valid name!</h4>;
-        }
         if(!EmailValidator.validate(this.state.bookingRequestEmail)){
             bookingRequestEmailError = <h4 className="error">Please enter a valid email address!</h4>
         }
@@ -299,7 +289,10 @@ class Layout extends Component {
             bookingRequestNumberError = <h4 className="error">Number is not correct length</h4>;
         }
 
-        if(!bookingRequestNameError && !bookingRequestEmailError && !bookingRequestNumberError){
+        if(
+            !FUNCTIONS.checkAllowedTextInput(this.state.bookingRequestName, "Name") 
+            && !bookingRequestEmailError 
+            && !bookingRequestNumberError){
             this.setState({
                 loading: <Loading />
             })
@@ -346,7 +339,7 @@ class Layout extends Component {
               });
         } else {
             this.setState({
-                bookingRequestNameError: bookingRequestNameError,
+                bookingRequestNameError: FUNCTIONS.checkAllowedTextInput(this.state.bookingRequestName, "Name"),
                 bookingRequestEmailError: bookingRequestEmailError,
                 bookingRequestNumberError: bookingRequestNumberError
             })

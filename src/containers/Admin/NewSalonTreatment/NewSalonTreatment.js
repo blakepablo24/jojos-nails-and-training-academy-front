@@ -9,6 +9,7 @@ import Loading from '../../../components/Ui/Loading/Loading';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Latest from '../../../components/Ui/Navigation/Latest/Latest';
 import ErrorPopup from '../../../components/Ui/ErrorPopup/ErrorPopup';
+import FUNCTIONS from '../../../functions/functions';
 
 class NewSalonTreatment extends Component {
 
@@ -63,54 +64,13 @@ class NewSalonTreatment extends Component {
     finishHandler = (event) => {
         event.preventDefault();
 
-        let categoryError = "";
-        let titleError = "";
-        let imageError = "";
-        let priceError = "";
-        let durationError = "";
-        let descriptionError = "";
-        
-        if(this.state.category === "select" || this.state.category === ""){
-            categoryError = <h4 className="error">Please choose a category!</h4>;
-        }
 
-        if(this.state.title === ""){
-            titleError = <h4 className="error">Title cannot be empty</h4>;
-        } else if(this.state.title.length < 5){
-            titleError = <h4 className="error">Title must be longer 5 characters</h4>;
-        }
-
-        if (/[^a-zA-Z0-9 -,?!']/.test(this.state.title)) {
-            titleError = <h4 className="error">Please enter only letters and numbers</h4>;
-        }
-
-        if(this.state.price === ""){
-            priceError = <h4 className="error">Price cannot be empty</h4>;
-        }
-
-        if (/[^0-9.]/.test(this.state.price)) {
-            priceError = <h4 className="error">Please enter only numbers and decimal point</h4>;
-        }
-
-        if(this.state.duration === ""){
-            durationError = <h4 className="error">Duration cannot be empty</h4>;
-        }
-
-        if (/[^0-9]/.test(this.state.duration)) {
-            durationError = <h4 className="error">Please enter only numbers</h4>;
-        }
-
-        if(this.state.description === ""){
-            descriptionError = <h4 className="error">Title cannot be empty</h4>;
-        } else if(this.state.description.length < 5){
-            descriptionError = <h4 className="error">Title must be longer 5 characters</h4>;
-        }
-
-        if (/[^a-zA-Z0-9 -,?!']/.test(this.state.description)) {
-            descriptionError = <h4 className="error">Please enter only letters and numbers</h4>;
-        }
-
-        if(!categoryError && !titleError && !imageError && !priceError && !durationError && !descriptionError && !this.state.imageError){
+        if(!FUNCTIONS.checkAllowedSelectInput(this.state.category, "category")
+            && !FUNCTIONS.checkAllowedTextInput(this.state.title, "Title")
+            && !FUNCTIONS.checkAllowedPriceInput(this.state.price)
+            && !FUNCTIONS.checkAllowedDurationInput(this.state.duration) 
+            && !FUNCTIONS.checkAllowedTextInput(this.state.description, false)
+            && !this.state.imageError){
             this.setState({
                 loading: <Loading />
             })
@@ -143,11 +103,11 @@ class NewSalonTreatment extends Component {
               })
         } else {
             this.setState({
-                categoryError: categoryError,
-                titleError: titleError,
-                priceError: priceError,
-                durationError: durationError,
-                descriptionError: descriptionError
+                categoryError: FUNCTIONS.checkAllowedSelectInput(this.state.category, "category"),
+                titleError: FUNCTIONS.checkAllowedTextInput(this.state.title, "Title"),
+                priceError: FUNCTIONS.checkAllowedPriceInput(this.state.price),
+                durationError: FUNCTIONS.checkAllowedDurationInput(this.state.duration),
+                descriptionError: FUNCTIONS.checkAllowedTextInput(this.state.description, false)
             })
         }
     }

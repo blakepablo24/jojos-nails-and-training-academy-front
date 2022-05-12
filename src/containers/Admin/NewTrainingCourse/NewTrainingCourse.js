@@ -9,6 +9,7 @@ import Loading from '../../../components/Ui/Loading/Loading';
 import Aux from '../../../hoc/Auxilary/Auxilary';
 import Latest from '../../../components/Ui/Navigation/Latest/Latest';
 import ErrorPopup from '../../../components/Ui/ErrorPopup/ErrorPopup';
+import FUNCTIONS from '../../../functions/functions';
 
 class NewTrainingCourse extends Component {
 
@@ -54,48 +55,13 @@ class NewTrainingCourse extends Component {
     finishHandler = (event) => {
         event.preventDefault();
 
-        let titleError = "";
-        let priceError = "";
-        let durationError =  "";
-        let teacherStudentRatioError = "";
-        let extrasError = "";
-        let prerequisitesError = "";
-        
-        if(this.state.title === ""){
-            titleError = <h4 className="error">Title cannot be empty</h4>;
-        } else if(this.state.title.length < 5){
-            titleError = <h4 className="error">Title must be longer 5 characters</h4>;
-        }
-
-        if (/[^a-zA-Z0-9 -,?!']/.test(this.state.title)) {
-            titleError = <h4 className="error">Please enter only letters and numbers</h4>;
-        }
-
-        if(this.state.price === ""){
-            priceError = <h4 className="error">Price cannot be empty</h4>;
-        }
-
-        if (/[^0-9.]/.test(this.state.price)) {
-            priceError = <h4 className="error">Please enter only numbers and decimal point</h4>;
-        }
-
-        if(this.state.duration === "select" || this.state.duration === ""){
-            durationError = <h4 className="error">Please choose a Duration!</h4>;
-        }
-
-        if(this.state.teacherStudentRatio === "select" || this.state.teacherStudentRatio === ""){
-            teacherStudentRatioError = <h4 className="error">Please choose a Ratio!</h4>;
-        }
-
-        if (/[^a-zA-Z0-9 -,?!']/.test(this.state.extras)) {
-            extrasError = <h4 className="error">Please enter only letters and numbers</h4>;
-        }
-
-        if (/[^a-zA-Z0-9 -,?!']/.test(this.state.prerequisites)) {
-            prerequisitesError = <h4 className="error">Please enter only letters and numbers</h4>;
-        }
-
-        if(!durationError && !titleError && !teacherStudentRatioError && !priceError && !extrasError && !prerequisitesError && !this.state.imageError){
+        if(!FUNCTIONS.checkAllowedSelectInput(this.state.duration, "duration") 
+            && !FUNCTIONS.checkAllowedTextInput(this.state.title, "Title") 
+            && !FUNCTIONS.checkAllowedSelectInput(this.state.teacherStudentRatio, "ratio")
+            && !FUNCTIONS.checkAllowedPriceInput(this.state.price) 
+            && !FUNCTIONS.checkAllowedTextInput(this.state.extras, false) 
+            && !FUNCTIONS.checkAllowedTextInput(this.state.prerequisites, false) 
+            && !this.state.imageError){
             this.setState({
                 loading: <Loading />
             })
@@ -131,12 +97,12 @@ class NewTrainingCourse extends Component {
               })
         } else {
             this.setState({
-                titleError: titleError,
-                priceError: priceError,
-                teacherStudentRatioError: teacherStudentRatioError,
-                extrasError: extrasError,
-                durationError: durationError,
-                prerequisitesError: prerequisitesError
+                titleError: FUNCTIONS.checkAllowedTextInput(this.state.title, "Title"),
+                priceError: FUNCTIONS.checkAllowedTextInput(this.state.price),
+                teacherStudentRatioError: FUNCTIONS.checkAllowedSelectInput(this.state.teacherStudentRatio, "ratio"),
+                extrasError: FUNCTIONS.checkAllowedTextInput(this.state.extras, false),
+                durationError: FUNCTIONS.checkAllowedSelectInput(this.state.duration, "duration"),
+                prerequisitesError: FUNCTIONS.checkAllowedTextInput(this.state.prerequisites, false)
             })
         }
     }
