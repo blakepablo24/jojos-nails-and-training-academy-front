@@ -65,10 +65,10 @@ class NewSalonTreatment extends Component {
         event.preventDefault();
 
 
-        if(!FUNCTIONS.checkAllowedSelectInput(this.state.category, "category")
-            && !FUNCTIONS.checkAllowedTextInput(this.state.title, "Title")
+        if(!FUNCTIONS.checkAllowedSelectInput(this.state.category, CONST.category)
+            && !FUNCTIONS.checkAllowedTextInput(this.state.title, CONST.titleUp)
             && !FUNCTIONS.checkAllowedPriceInput(this.state.price)
-            && !FUNCTIONS.checkAllowedDurationInput(this.state.duration) 
+            && !FUNCTIONS.checkAllowedDurationInput(this.state.duration, CONST.durationUp)
             && !FUNCTIONS.checkAllowedTextInput(this.state.description, false)
             && !this.state.imageError){
             this.setState({
@@ -103,10 +103,10 @@ class NewSalonTreatment extends Component {
               })
         } else {
             this.setState({
-                categoryError: FUNCTIONS.checkAllowedSelectInput(this.state.category, "category"),
-                titleError: FUNCTIONS.checkAllowedTextInput(this.state.title, "Title"),
+                categoryError: FUNCTIONS.checkAllowedSelectInput(this.state.category, CONST.category),
+                titleError: FUNCTIONS.checkAllowedTextInput(this.state.title, CONST.titleUp),
                 priceError: FUNCTIONS.checkAllowedPriceInput(this.state.price),
-                durationError: FUNCTIONS.checkAllowedDurationInput(this.state.duration),
+                durationError: FUNCTIONS.checkAllowedDurationInput(this.state.duration, CONST.durationUp),
                 descriptionError: FUNCTIONS.checkAllowedTextInput(this.state.description, false)
             })
         }

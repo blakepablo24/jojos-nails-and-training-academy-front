@@ -55,9 +55,9 @@ class NewTrainingCourse extends Component {
     finishHandler = (event) => {
         event.preventDefault();
 
-        if(!FUNCTIONS.checkAllowedSelectInput(this.state.duration, "duration") 
-            && !FUNCTIONS.checkAllowedTextInput(this.state.title, "Title") 
-            && !FUNCTIONS.checkAllowedSelectInput(this.state.teacherStudentRatio, "ratio")
+        if(!FUNCTIONS.checkAllowedSelectInput(this.state.duration, CONST.duration) 
+            && !FUNCTIONS.checkAllowedTextInput(this.state.title, CONST.titleUp) 
+            && !FUNCTIONS.checkAllowedSelectInput(this.state.teacherStudentRatio, CONST.ratio)
             && !FUNCTIONS.checkAllowedPriceInput(this.state.price) 
             && !FUNCTIONS.checkAllowedTextInput(this.state.extras, false) 
             && !FUNCTIONS.checkAllowedTextInput(this.state.prerequisites, false) 
@@ -97,11 +97,11 @@ class NewTrainingCourse extends Component {
               })
         } else {
             this.setState({
-                titleError: FUNCTIONS.checkAllowedTextInput(this.state.title, "Title"),
+                titleError: FUNCTIONS.checkAllowedTextInput(this.state.title, CONST.titleUp),
                 priceError: FUNCTIONS.checkAllowedTextInput(this.state.price),
-                teacherStudentRatioError: FUNCTIONS.checkAllowedSelectInput(this.state.teacherStudentRatio, "ratio"),
+                teacherStudentRatioError: FUNCTIONS.checkAllowedSelectInput(this.state.teacherStudentRatio, CONST.ratio),
                 extrasError: FUNCTIONS.checkAllowedTextInput(this.state.extras, false),
-                durationError: FUNCTIONS.checkAllowedSelectInput(this.state.duration, "duration"),
+                durationError: FUNCTIONS.checkAllowedSelectInput(this.state.duration, CONST.duration),
                 prerequisitesError: FUNCTIONS.checkAllowedTextInput(this.state.prerequisites, false)
             })
         }

@@ -11,7 +11,14 @@ myConstClass = {
   BASE_URL: BASE_URL,
   ST: "ST",
   TC: "TC",
-  FBR: fbRequest
+  FBR: fbRequest,
+  // Form validation Errors
+  durationUp: "Duration",
+  duration: "duration",
+  category: "category",
+  ratio: "ratio",
+  titleUp: "Title",
+  name: "Name"
 }
  
 export default myConstClass

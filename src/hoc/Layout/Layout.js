@@ -290,7 +290,7 @@ class Layout extends Component {
         }
 
         if(
-            !FUNCTIONS.checkAllowedTextInput(this.state.bookingRequestName, "Name") 
+            !FUNCTIONS.checkAllowedTextInput(this.state.bookingRequestName, CONST.name) 
             && !bookingRequestEmailError 
             && !bookingRequestNumberError){
             this.setState({

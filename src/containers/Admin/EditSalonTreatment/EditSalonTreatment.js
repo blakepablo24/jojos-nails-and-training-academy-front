@@ -116,10 +116,10 @@ class EditSalonTreatment extends Component {
     finishHandler = (event) => {
         event.preventDefault();
 
-        if(!FUNCTIONS.checkAllowedSelectInput(this.state.category, "category")
-            && !FUNCTIONS.checkAllowedTextInput(this.state.title, "Title") 
+        if(!FUNCTIONS.checkAllowedSelectInput(this.state.category, CONST.category)
+            && !FUNCTIONS.checkAllowedTextInput(this.state.title, CONST.titleUp) 
             && !FUNCTIONS.checkAllowedPriceInput(this.state.price)  
-            && !FUNCTIONS.checkAllowedDurationInput(this.state.duration)
+            && !FUNCTIONS.checkAllowedDurationInput(this.state.duration, CONST.Duration)
             && !FUNCTIONS.checkAllowedTextInput(this.state.description, "Description")
             && !this.state.imageError){
             this.setState({
