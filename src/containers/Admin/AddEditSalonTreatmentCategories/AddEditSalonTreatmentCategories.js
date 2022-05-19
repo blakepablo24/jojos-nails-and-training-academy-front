@@ -84,16 +84,7 @@ class AddEditSalonTreatmentCategories extends Component {
         axios.post(CONST.BASE_URL+'/api/update-salon-treatment-category-image', fd).then(response => {
             FUNCTIONS.scrollToTop();
             this.startingValues("Category Image Updated!");
-        }).catch(error => {
-            if (error.response) {
-                console.log(error.response);
-                console.log(error.response);
-            } else if (error.request) {
-                console.log(error.request);
-            } else {
-                console.log('Error', error.message);
-            }
-          })
+        })
     }
 
     createUI(){

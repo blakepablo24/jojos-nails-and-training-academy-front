@@ -68,7 +68,7 @@ class AdminLandingPage extends Component {
             newErrorMessage = <h4 className="error">Passwords do not match</h4>;
         }
 
-        if(!this.state.newError){
+        if(!newErrorMessage){
         this.setState({
             loading: <Loading />
         })

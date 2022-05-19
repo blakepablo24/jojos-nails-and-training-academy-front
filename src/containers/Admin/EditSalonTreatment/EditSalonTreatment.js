@@ -120,7 +120,7 @@ class EditSalonTreatment extends Component {
             && !FUNCTIONS.checkAllowedTextInput(this.state.title, CONST.titleUp) 
             && !FUNCTIONS.checkAllowedPriceInput(this.state.price)  
             && !FUNCTIONS.checkAllowedDurationInput(this.state.duration, CONST.Duration)
-            && !FUNCTIONS.checkAllowedTextInput(this.state.description, "Description")
+            && !FUNCTIONS.checkAllowedTextInput(this.state.description, false)
             && !this.state.imageError){
             this.setState({
                 loading: <Loading />
