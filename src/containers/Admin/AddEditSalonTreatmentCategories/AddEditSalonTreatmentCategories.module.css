@@ -17,7 +17,7 @@
     width: 97.5%;
     grid-template-columns: 7fr 2fr 1fr;
     font-size: 1.5rem;
-    height: 7.5vh;
+    height: minmax(7.5vh, auto);
     margin-top: 1.5vh;
     background: white;
     border-radius: 5px;

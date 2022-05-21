@@ -89,7 +89,8 @@ class AddEditSalonTreatmentCategories extends Component {
 
     createUI(){
        return this.state.values.map((el, i) =>
-           <div className={classes.addedCurriculumItemContainer} key={i}>
+        <div key={i}>
+           <div className={classes.addedCurriculumItemContainer}>
                <input
                     style={{display: 'none'}}
                     type="file"
@@ -120,6 +121,8 @@ class AddEditSalonTreatmentCategories extends Component {
                 )
               }
            </div>          
+           <p>{i}Hello</p>
+           </div>
        )
     }
     
