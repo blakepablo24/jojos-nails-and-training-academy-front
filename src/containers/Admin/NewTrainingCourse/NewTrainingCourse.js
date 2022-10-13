@@ -31,6 +31,7 @@ class NewTrainingCourse extends Component {
         prerequisitesError: "",
         loading: "",
         showErrorPopup: false,
+        errorMessage: ""
     }
 
     changeHandler = (event) => {
@@ -91,7 +92,8 @@ class NewTrainingCourse extends Component {
                 if (error) {
                     this.setState({
                         loading: "",
-                        showErrorPopup: true
+                        showErrorPopup: true,
+                        errorMessage: error.response.data.errors[Object.keys(error.response.data.errors)]
                     })
                 }
               })
@@ -107,12 +109,18 @@ class NewTrainingCourse extends Component {
         }
     }
 
+    errorPopupHandler = () => {
+        this.setState({
+            showErrorPopup: !this.state.showErrorPopup
+        })
+    }
+
     render(){
 
         let errorPopup = "";
 
         if(this.state.showErrorPopup){
-            errorPopup = <ErrorPopup shownErrorToggle={this.errorPopupHandler} message={"Edit Training Course " + this.props.match.params.id}/>;
+            errorPopup = <ErrorPopup shownErrorToggle={this.errorPopupHandler} message={"Error: " + this.state.errorMessage}/>;
         }
 
         return(

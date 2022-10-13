@@ -8,6 +8,7 @@ import Latest from '../../components/Ui/Navigation/Latest/Latest';
 import GoBack from '../../components/Ui/GoBack/GoBack';
 import SortBy from '../../components/Ui/SortBy/SortBy';
 import logoImage from '../../components/Ui/Navigation/Header/Logo/logo.png';
+import FUNCTIONS from '../../functions/functions';
 
 class TrainingCourses extends Component {
 
@@ -26,7 +27,9 @@ class TrainingCourses extends Component {
         Axios.get(CONST.BASE_URL + '/api/all-training-courses').then(response => {
             this.setState({
                 trainingCourses: response.data
-            });
+            }, () => {
+                FUNCTIONS.handleOldScrollPosition();
+              });
         })
     };
 

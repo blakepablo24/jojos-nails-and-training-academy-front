@@ -30,7 +30,8 @@ class NewSalonTreatment extends Component {
         durationError: "",
         descriptionError: "",
         loading: "",
-        showErrorPopup: false
+        showErrorPopup: false,
+        errorMessage: ""
     }
 
     componentDidMount() {
@@ -97,8 +98,10 @@ class NewSalonTreatment extends Component {
                 if (error) {
                     this.setState({
                         loading: "",
-                        showErrorPopup: true
+                        showErrorPopup: true,
+                        errorMessage: error.response.data.errors[Object.keys(error.response.data.errors)]
                     })
+    
                 }
               })
         } else {
@@ -112,12 +115,18 @@ class NewSalonTreatment extends Component {
         }
     }
 
+    errorPopupHandler = () => {
+        this.setState({
+            showErrorPopup: !this.state.showErrorPopup
+        })
+    }
+
     render(){
 
         let errorPopup = "";
 
         if(this.state.showErrorPopup){
-            errorPopup = <ErrorPopup shownErrorToggle={this.errorPopupHandler} message={"Edit Training Course " + this.props.match.params.id}/>;
+            errorPopup = <ErrorPopup shownErrorToggle={this.errorPopupHandler} message={"Error: " + this.state.errorMessage}/>;
         }
 
         return(

@@ -20,8 +20,22 @@ let myFunctionsClass = {
         return alreadyInBasket;
     },
 
+    // Scroll Positions
+
     scrollToTop() {
         window.scrollTo(0, 0);
+    },
+
+    handleOldScrollPosition() {
+        const scrollPosition = localStorage.getItem("scrollPosition");
+        if (scrollPosition) {
+            window.scrollTo(0, parseInt(scrollPosition));
+            localStorage.removeItem("scrollPosition");
+        }
+    },
+
+    handleStoringScrollPosition() {
+    localStorage.setItem("scrollPosition", window.pageYOffset);
     },
 
     // Site Form Error checking
@@ -31,11 +45,11 @@ let myFunctionsClass = {
         if(type){
             if(input === ""){
                 error = <h4 className="error">{type} cannot be empty</h4>;
-            } else if (/[^a-zA-Z0-9 ,?!':().£&-]/.test(input)) {
+            } else if (/[^a-zA-Z0-9 ,?!':().£&-/"]/.test(input)) {
                 error = <h4 className="error">Please enter only letters and numbers</h4>;
             }
             return error;
-        } else if (/[^a-zA-Z0-9 ,?!':().£&-]/.test(input)) {
+        } else if (/[^a-zA-Z0-9 ,?!':().£&-/"]/.test(input)) {
             error = <h4 className="error">Please enter only letters and numbers</h4>;
         }
         return error;

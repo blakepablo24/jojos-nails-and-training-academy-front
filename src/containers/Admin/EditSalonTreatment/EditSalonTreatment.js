@@ -37,7 +37,8 @@ class EditSalonTreatment extends Component {
         open: false,
         imageChangedMessage: "",
         loading: "",
-        showErrorPopup: false
+        showErrorPopup: false,
+        errorMessage: ""
     }
 
     componentDidMount() {
@@ -149,7 +150,9 @@ class EditSalonTreatment extends Component {
                 if (error.response) {
                     this.setState({
                         loading: "",
-                        imageError: <h4 className="error">{error.response.data.errors.newImage}</h4>
+                        imageError: <h4 className="error">{error.response.data.errors.newImage}</h4>,
+                        showErrorPopup: true,
+                        errorMessage: error.response.data.errors[Object.keys(error.response.data.errors)]
                     })
                 } else if (error.request) {
                     this.setState({
@@ -212,7 +215,7 @@ class EditSalonTreatment extends Component {
         let errorPopup = "";
 
         if(this.state.showErrorPopup){
-            errorPopup = <ErrorPopup shownErrorToggle={this.errorPopupHandler} message={"Edit Salon Treatment " + this.props.match.params.id}/>;
+            errorPopup = <ErrorPopup shownErrorToggle={this.errorPopupHandler} message={"Error: " + this.state.errorMessage}/>;
         }
         
         return(

@@ -37,7 +37,8 @@ class EditTrainingCourse extends Component {
         open: false,
         imageChangedMessage: "",
         loading: "",
-        showErrorPopup: false
+        showErrorPopup: false,
+        errorMessage: ""
     }
 
     componentDidMount(){
@@ -149,13 +150,10 @@ class EditTrainingCourse extends Component {
                     if (error.response) {
                         console.log(error.response);
                         this.setState({
-                            showErrorPopup: <ErrorPopup shownErrorToggle={this.errorPopupHandler} message={"Edit Training Course " + this.props.match.params.id + " code: " + error.response.status + " " + error.response.data.errors[Object.keys(error.response.data.errors)[0]]}/>,
-                            loading: ""
+                            loading: "",
+                            showErrorPopup: true,
+                            errorMessage: error.response.data.errors[Object.keys(error.response.data.errors)]
                         })
-                    } else if (error.request) {
-                        console.log(error.request);
-                    } else {
-                        console.log('Error', error.message);
                     }
                 })
         } else {
@@ -209,11 +207,15 @@ class EditTrainingCourse extends Component {
 
         let errorPopup = "";
 
+        if(this.state.showErrorPopup){
+            errorPopup = <ErrorPopup shownErrorToggle={this.errorPopupHandler} message={"Error: " + this.state.errorMessage}/>;
+        }
+
         return(
             <Aux>
                 <Latest message="Edit This Training Course" />
                 {this.state.loading}
-                {this.state.showErrorPopup}
+                {errorPopup}
                 {this.state.confirmDelete}
                 <div className={classes.EditTrainingCourse}>
                     {this.state.redirectOnSuccess}

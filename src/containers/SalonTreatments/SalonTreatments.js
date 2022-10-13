@@ -7,6 +7,7 @@ import Aux from '../../hoc/Auxilary/Auxilary';
 import Latest from '../../components/Ui/Navigation/Latest/Latest';
 import GoBack from '../../components/Ui/GoBack/GoBack';
 import logoImage from '../../components/Ui/Navigation/Header/Logo/logo.png';
+import FUNCTIONS from '../../functions/functions';
 
 class SalonTreatments extends Component {
 
@@ -18,7 +19,9 @@ class SalonTreatments extends Component {
         Axios.get(CONST.BASE_URL + '/api/all-salon-treatments').then(response => {
             this.setState({
                 salonTreatments: response.data
-            });
+            }, () => {
+                FUNCTIONS.handleOldScrollPosition();
+              })
         });
     };
 

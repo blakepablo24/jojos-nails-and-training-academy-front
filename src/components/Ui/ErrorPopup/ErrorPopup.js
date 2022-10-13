@@ -9,7 +9,8 @@ const errorPopup = (props) => (
         <div className={classes.ErrorPopup}>
             <p className={classes.title}>Network Error</p>
             <p>Well This is Embarrasing!</p>
-            <p>Get in contact with JOJO's technical support mention the error came from "{props.message}"</p>
+            <p>"{props.message}"</p>
+            <p>If you require further information please contact Jojos technical support unit</p>
             <button onClick={props.shownErrorToggle} className={classes.closeButton + " customButton"}>Close</button>
         </div>
     </Aux>

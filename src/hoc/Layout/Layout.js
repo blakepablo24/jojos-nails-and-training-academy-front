@@ -75,7 +75,10 @@ class Layout extends Component {
         }
     }
 
-    sideDrawerToggleHandler = () => {
+    sideDrawerToggleHandler = (nav) => {
+        if(nav === "nav"){
+            FUNCTIONS.scrollToTop();
+        }
         this.setState({
             showSideDrawer: !this.state.showSideDrawer,
             menu: !this.state.menu

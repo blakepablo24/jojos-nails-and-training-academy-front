@@ -26,12 +26,13 @@ class SalonTreatmentsSubCat extends Component {
     }
 
     componentDidMount() {
-        FUNCTIONS.scrollToTop();
         Axios.get(CONST.BASE_URL + '/api/salon-treatments-sub-cat/' + this.props.match.params.id).then(response => {
             this.setState({
                 salonTreatmentsSubCat: response.data.single_salon_treatment,
                 subCategoryTitle: response.data.title
-            });
+            }, () => {
+                FUNCTIONS.handleOldScrollPosition();
+              })
         })
     };
 

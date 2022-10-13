@@ -21,7 +21,7 @@ class SideDrawer extends Component {
         <Aux>
             <Backdrop clicked={this.props.clicked} open={this.props.open} />
             <div className={attachedClasses.join(' ')}>
-                <NavigationItems clicked={this.props.clicked} sendData={this.getData}/>
+                <NavigationItems clicked={this.props.clicked.bind(this, "nav")} sendData={this.getData}/>
             </div>
         </Aux>
     )

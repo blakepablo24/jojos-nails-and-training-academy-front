@@ -41,7 +41,7 @@ const snippet = (props) => {
     }
     
     return (
-        <div className={snippetStyle}>
+        <div className={snippetStyle} onClick={FUNCTIONS.handleStoringScrollPosition.bind(this, "nav")}>
             <Link to={snippetLink + props.id} className={snippetLinkStyle}>
                 <img src={props.image} alt="" />
                 <h3 className={classes.title}>{props.title}</h3>
