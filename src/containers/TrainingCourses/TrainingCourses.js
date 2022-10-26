@@ -64,7 +64,7 @@ class TrainingCourses extends Component {
                     {trainingCourses.map(trainingCourse =>
                         <Snippet 
                             title={trainingCourse.title}
-                            image={trainingCourse.image ? CONST.BASE_URL + "/storage/images/training-course-images/" + "small-" + trainingCourse.image : logoImage}
+                            image={trainingCourse.image ? CONST.BASE_URL + "/storage/images/training-course-images/small-" + trainingCourse.image : logoImage}
                             id={trainingCourse.id}
                             key={trainingCourse.id}
                             price={trainingCourse.price}

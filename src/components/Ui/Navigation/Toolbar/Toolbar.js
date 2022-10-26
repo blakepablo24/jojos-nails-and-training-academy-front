@@ -8,16 +8,18 @@ import NavigationItems from '../Toolbar/Navigation/NavigationItems/NavigationIte
 
 const toolbar = (props) => {
 
-    let userIcon = "";
-    let basketIcon = <div className={classes.basketIconContainer+" largeNavItem"} onClick={props.toggleBasket}><TiShoppingCart/><p>({props.numberOfItemsInBasket})</p></div>;
+    let icon = "";
 
-    if(props.showSideDrawer){
-        basketIcon = <div className={classes.basketIconContainer+" largeNavItem"}><TiShoppingCart/><p>({props.numberOfItemsInBasket})</p></div>;
+    if(props.showSideDrawer && props.numberOfItemsInBasket){
+        icon = <p><TiShoppingCart/>({props.numberOfItemsInBasket})</p>;
     }
 
     if(JSON.parse(localStorage.getItem("user"))){
-        userIcon = <Link to="/admin"><BiUser /></Link>;
-        basketIcon = "";
+        icon = <Link to="/admin"><BiUser /></Link>;
+    }
+
+    if(props.numberOfItemsInBasket){
+        icon = <div className={classes.basketIconContainer+" largeNavItem"} onClick={props.toggleBasket}><TiShoppingCart/><p>({props.numberOfItemsInBasket})</p></div>;
     }
 
     return(
@@ -25,8 +27,7 @@ const toolbar = (props) => {
             <div className={classes.largeScreensOnly}>
                 <NavigationItems />
             </div>
-            {basketIcon}
-            {userIcon}
+            <div className={classes.basketIconContainer+" largeNavItem"}>{icon}</div>
             <DrawerToggle menu={props.menu} clicked={props.clicked}/>
         </div>
     )

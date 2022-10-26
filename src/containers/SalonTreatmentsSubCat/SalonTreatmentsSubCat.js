@@ -77,7 +77,7 @@ class SalonTreatmentsSubCat extends Component {
                             title={salonTreatmentSubCat.title}
                             price={salonTreatmentSubCat.price}
                             type={CONST.ST}
-                            image={salonTreatmentSubCat.image ? CONST.BASE_URL + "/storage/images/salon-treatment-images/single-salon-treatment-images/" + "small-" + salonTreatmentSubCat.image : logoImage}
+                            image={salonTreatmentSubCat.image ? CONST.BASE_URL + "/storage/images/salon-treatment-images/single-salon-treatment-images/small-" + salonTreatmentSubCat.image : logoImage}
                             id={salonTreatmentSubCat.id}
                             key={salonTreatmentSubCat.id}
                             addToShoppingBasket={this.props.addToShoppingBasket}

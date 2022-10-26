@@ -1,6 +1,6 @@
 .SortBy {
     grid-column: 1 / -1;
-    place-self: center end;
+    place-self: start end;
     display: grid;
     grid-auto-flow: column;
     place-items: center center;
