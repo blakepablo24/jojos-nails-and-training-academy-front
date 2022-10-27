@@ -14,6 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import addDays from 'date-fns/addDays';
 import getDay from 'date-fns/getDay';
 import FUNCTIONS from '../../../functions/functions';
+import StripePaymentForm from './StripePaymentForm/StripePaymentForm';
 registerLocale('en-gb', enGb);
 
 const Basket = (props) => {
@@ -233,6 +234,7 @@ const Basket = (props) => {
             <div className={attachedClasses.join(' ')}>
                 <BasketHeader title="Your Gift Voucher" />
                 <div className={classes.basketContainer}>
+                <StripePaymentForm />
                     <div className={classes.calanderContainer}>
                         <p>Vouchers are to be paid via bank transfer</p>
                         <p>You will receive account details via email from Jojo's once you have completed your enquiry</p>
