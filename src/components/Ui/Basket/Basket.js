@@ -234,17 +234,12 @@ const Basket = (props) => {
             <div className={attachedClasses.join(' ')}>
                 <BasketHeader title="Your Gift Voucher" />
                 <div className={classes.basketContainer}>
-                <StripePaymentForm />
-                    <div className={classes.calanderContainer}>
-                        <p>Vouchers are to be paid via bank transfer</p>
-                        <p>You will receive account details via email from Jojo's once you have completed your enquiry</p>
-                        <p>You will then receive Your E-Voucher through email</p>
-                    </div>
+                    <StripePaymentForm totalPrice={totalPrice}/>
                 </div>
                 {totalPrice}
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
-                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={checkIfTrainingCoursesInBasket}>Next</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.handleStripePaymentSubmit}>Pay</button>
                 </div>
             </div>
     }

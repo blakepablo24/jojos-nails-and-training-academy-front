@@ -276,6 +276,10 @@ class Layout extends Component {
         });
     }
 
+    handleStripePaymentSubmit = () => {
+        console.log("details received");
+    }
+
     finishHandler = (event, totalCost) => {
         event.preventDefault();
 
@@ -441,6 +445,7 @@ class Layout extends Component {
                     trainingCourseErrorCheckHandler={this.trainingCourseErrorCheckHandler}
                     changeHandler={this.changeHandler}
                     finishHandler={this.finishHandler}
+                    handleStripePaymentSubmit={this.handleStripePaymentSubmit}
                 />        
                 <Header />
                 <Switch>

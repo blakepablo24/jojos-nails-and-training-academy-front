@@ -1,13 +1,16 @@
-import { withRouter } from "react-router-dom";
-import {PaymentElement} from '@stripe/react-stripe-js';
+import { CardElement } from "@stripe/react-stripe-js";
+import classes from "./StripePaymentForm.module.css";
 
-const StripePaymentForm = () => {
-    return(
-        <form>
-            <PaymentElement />
-            <button>Submit</button>
+const CheckoutForm = (props) => {
+
+
+
+    return (
+        <form className={classes.CheckoutForm}>
+            <CardElement />
+            {props.totalPrice}
         </form>
-    )
-}
+    );
+};
 
-export default withRouter(StripePaymentForm);
+export default CheckoutForm
