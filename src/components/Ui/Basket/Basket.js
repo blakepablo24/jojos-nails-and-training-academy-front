@@ -54,7 +54,7 @@ const Basket = (props) => {
             return priceArray
         });
 
-        totalCost = priceArray.reduce(function(pv, cv) { return pv + cv; });
+        totalCost = priceArray.reduce(function(pv, cv) { return pv + cv; }).toFixed(2);
 
         currentBasketItems =
         props.itemsInBasket.map(item =>
@@ -232,14 +232,13 @@ const Basket = (props) => {
     if(props.checkout === "complete-gift-voucher"){
         shownBasketInfo = 
             <div className={attachedClasses.join(' ')}>
-                <BasketHeader title="Your Gift Voucher" />
+                <BasketHeader title="Gift Voucher Payment" />
                 <div className={classes.basketContainer}>
-                    <StripePaymentForm totalPrice={totalPrice}/>
+                    <StripePaymentForm totalCost={totalCost} currentBasketItems={props.itemsInBasket}/>
                 </div>
                 {totalPrice}
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
-                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.handleStripePaymentSubmit}>Pay</button>
                 </div>
             </div>
     }

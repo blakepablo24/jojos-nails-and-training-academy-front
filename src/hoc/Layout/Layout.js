@@ -33,6 +33,7 @@ import GiftVouchersPending from '../../containers/Admin/GiftVouchers/GiftVoucher
 import PrivacyPolicyModal from '../../components/Ui/PrivacyPolicyModal/PrivacyPolicyModal';
 import PrivacyPolicy from '../../containers/PrivacyPolicy/PrivacyPolicy';
 import CookiePolicy from '../../containers/CookiePolicy/CookiePolicy';
+import Axios from 'axios';
 
 let initialBasket = [];
 if(JSON.parse(localStorage.getItem("basketItems"))) {
@@ -276,10 +277,6 @@ class Layout extends Component {
         });
     }
 
-    handleStripePaymentSubmit = () => {
-        console.log("details received");
-    }
-
     finishHandler = (event, totalCost) => {
         event.preventDefault();
 
@@ -445,7 +442,6 @@ class Layout extends Component {
                     trainingCourseErrorCheckHandler={this.trainingCourseErrorCheckHandler}
                     changeHandler={this.changeHandler}
                     finishHandler={this.finishHandler}
-                    handleStripePaymentSubmit={this.handleStripePaymentSubmit}
                 />        
                 <Header />
                 <Switch>

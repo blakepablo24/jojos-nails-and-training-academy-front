@@ -2,6 +2,11 @@
     width: 90%;
 }
 
+.formLabel {
+    margin-bottom: 5vh;
+}
+
 .payButton {
-    width: 50%;
+    margin-top: 5vh;
+    width: 25%;
 }
