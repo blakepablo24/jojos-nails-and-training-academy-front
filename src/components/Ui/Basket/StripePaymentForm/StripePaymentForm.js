@@ -1,65 +1,53 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import React, {useState} from 'react';
+import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import classes from "./StripePaymentForm.module.css";
-import Axios from "axios";
-import CONST from '../../../../constants/constants';
 
-const CheckoutForm = (props) => {
-    const elements = useElements();
+const CheckoutForm = () => {
     const stripe = useStripe();
+    const elements = useElements();
 
-    const cardNumber = elements.getElement('cardNumber');
+    const [errorMessage, setErrorMessage] = useState(null);
 
-    console.log(cardNumber);
+    const handleSubmit = async (event) => {
+        // We don't want to let default form submission happen here,
+        // which would refresh the page.
+        event.preventDefault();
 
-    // Send details from card payment section
-    const handleStripePaymentSubmit = (e) => {
-        e.preventDefault();
-
-        if(!stripe || !elements){
-            return;
+        if (!stripe || !elements) {
+        // Stripe.js has not yet loaded.
+        // Make sure to disable form submission until Stripe.js has loaded.
+        return;
         }
-        const clientSecret = Axios.post(CONST.BASE_URL + '/api/stripe-payment-intent', {
-            paymentMethodType: 'card',
-            currency: 'gbp',
-            'totalCost': props.totalCost,
-            'basketItems': props.currentBasketItems
-        }).then(clientSecret => {
-            handleStripeAwait(clientSecret);
-        }).catch(function (error) {
-            if (error.response) {
-              // Request made and server responded
-              console.log(error.response.data);
-              console.log(error.response.status);
-              console.log(error.response.headers);
-            } else if (error.request) {
-              // The request was made but no response was received
-              console.log(error.request);
-            } else {
-              // Something happened in setting up the request that triggered an Error
-              console.log('Error', error.message);
-            }
-        
-          });
-    }
-    // Await response from Stripe
-    const handleStripeAwait = async (clientSecret)=> {
-        console.log(clientSecret);
-        const {paymentIntent} = await stripe.confirmCardPayment(
-            clientSecret.data, {
-                payment_method: {
-                    card: elements.getElement(CardElement),
-                }
-            }
-        )
-        console.log("payment successful" + paymentIntent.id + paymentIntent.status);
-    }
+
+        const {error} = await stripe.confirmPayment({
+        //`Elements` instance that was used to create the Payment Element
+        elements,
+        confirmParams: {
+            
+            return_url: 'https://example.com/order/123/complete',
+        },
+        });
+
+
+        if (error) {
+        // This point will only be reached if there is an immediate error when
+        // confirming the payment. Show error to your customer (for example, payment
+        // details incomplete)
+        setErrorMessage(error.message);
+        } else {
+        // Your customer will be redirected to your `return_url`. For some payment
+        // methods like iDEAL, your customer will be redirected to an intermediate
+        // site first to authorize the payment, then redirected to the `return_url`.
+        }
+    };
 
     return (
         <div className={classes.CheckoutForm} >
-            <form onSubmit={handleStripePaymentSubmit}>
-                <label className={classes.formLabel} htmlFor="card-element"><h2>Card</h2></label>
-                <CardElement id="card-element"/>
-                <button className={"customButton " + classes.payButton}>Pay</button>
+            <form onSubmit={handleSubmit}>
+                <div className={classes.paymentContainer}>
+                    <PaymentElement />
+                    <button className={"customButton " + classes.payButton} disabled={!stripe}>Pay</button>
+                </div>
             </form>
         </div>
     );

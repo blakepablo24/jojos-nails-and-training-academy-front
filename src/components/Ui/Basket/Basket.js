@@ -14,8 +14,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import addDays from 'date-fns/addDays';
 import getDay from 'date-fns/getDay';
 import FUNCTIONS from '../../../functions/functions';
+import { Elements } from "@stripe/react-stripe-js";
+import {loadStripe} from '@stripe/stripe-js';
 import StripePaymentForm from './StripePaymentForm/StripePaymentForm';
+import Axios from "axios";
 registerLocale('en-gb', enGb);
+
+const stripePromise = loadStripe('pk_test_51KwVSIC7O3LzD5wBnxb3SaYuZYrCQIuiRBBlW1WQ8tsQeU9UMDfyuaEEINx8iLOqOHy7xqrtkHfYxK17aT457Tll00BUdIrkEd');
 
 const Basket = (props) => {
 
@@ -44,6 +49,13 @@ const Basket = (props) => {
     let attachedClasses = [classes.Basket, classes.Hide];
     let totalCost = 0;
     let currentBasketItems = <h2 className={classes.noItemsInBasket}>There are currently no items in your basket</h2>;
+
+    let options = {
+        // passing the client secret obtained in step 3
+        clientSecret: props.sk,
+        // Fully customizable with appearance API.
+        // appearance: {/*...*/},
+      };
 
     if(props.itemsInBasket.length > 0){
         let priceArray = [];
@@ -78,7 +90,7 @@ const Basket = (props) => {
 
     function checkIfGiftVouchersInBasket() {
         FUNCTIONS.checkBasket("gift_voucher")
-            ? props.checkoutView("complete-gift-voucher")
+            ? handleStripePaymentSubmit()
             : checkIfTrainingCoursesInBasket();
     }
 
@@ -92,6 +104,22 @@ const Basket = (props) => {
         FUNCTIONS.checkBasket(CONST.ST)
         ? props.checkoutView("book-salon-treatments")
         : props.checkoutView("customer-details");
+    }
+
+   
+
+    // Send details from card payment section
+    const handleStripePaymentSubmit = async () => {
+        try {const response = await Axios.post(CONST.BASE_URL + '/api/stripe-payment-intent', {
+            currency: 'gbp',
+            'totalCost': totalCost,
+            'basketItems': props.itemsInBasket
+        })
+        options.clientSecret = response.data;
+        props.checkoutView("complete-gift-voucher", response.data)
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     if (props.showBasket) {
@@ -234,7 +262,9 @@ const Basket = (props) => {
             <div className={attachedClasses.join(' ')}>
                 <BasketHeader title="Gift Voucher Payment" />
                 <div className={classes.basketContainer}>
-                    <StripePaymentForm totalCost={totalCost} currentBasketItems={props.itemsInBasket}/>
+                <Elements stripe={stripePromise} options={options}>
+                    <StripePaymentForm statusView={props.statusView}/>
+                </Elements>    
                 </div>
                 {totalPrice}
                 <div className={classes.basketControlsContainer}>
@@ -281,6 +311,16 @@ const Basket = (props) => {
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={(event) => props.finishHandler(event, totalCost)}>Finish</button>
                 </div>
+            </div>
+    }
+
+    if(props.checkout === "payment-status-view"){
+        shownBasketInfo = 
+            <div className={attachedClasses.join(' ')}>
+                <BasketHeader title="Payment Status" />
+                <div className={classes.basketContainer}>
+                    <h1>Payment status</h1>
+                </div>     
             </div>
     }
 
