@@ -263,12 +263,27 @@ const Basket = (props) => {
                 <BasketHeader title="Gift Voucher Payment" />
                 <div className={classes.basketContainer}>
                 <Elements stripe={stripePromise} options={options}>
-                    <StripePaymentForm statusView={props.statusView}/>
+                    <StripePaymentForm statusView={props.statusView} checkoutView={props.checkoutView}/>
                 </Elements>    
                 </div>
                 {totalPrice}
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
+                </div>
+            </div>
+    }
+
+    if(props.checkout === "payment_successful"){
+        shownBasketInfo = 
+            <div className={attachedClasses.join(' ')}>
+                <div className={classes.completed}>
+                    <div className={classes.logo}>
+                        <Logo />
+                    </div>
+                    <h3 className="success">
+                        Your payment was successful Thank you.
+                    </h3>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={enquirySentButton}>Close</button>
                 </div>
             </div>
     }
@@ -314,7 +329,7 @@ const Basket = (props) => {
             </div>
     }
 
-    if(props.checkout === "payment-status-view"){
+    if(props.statusView === "payment-status-view"){
         shownBasketInfo = 
             <div className={attachedClasses.join(' ')}>
                 <BasketHeader title="Payment Status" />

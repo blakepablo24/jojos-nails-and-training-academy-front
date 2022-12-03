@@ -34,13 +34,6 @@ import PrivacyPolicyModal from '../../components/Ui/PrivacyPolicyModal/PrivacyPo
 import PrivacyPolicy from '../../containers/PrivacyPolicy/PrivacyPolicy';
 import CookiePolicy from '../../containers/CookiePolicy/CookiePolicy';
 import Axios from 'axios';
-import {
-    CardNumberElement,
-    CardCvcElement,
-    CardExpiryElement,
-    Elements,
-    ElementsConsumer
-} from '@stripe/react-stripe-js';
 
 let initialBasket = [];
 if(JSON.parse(localStorage.getItem("basketItems"))) {
