@@ -88,25 +88,26 @@ const Basket = (props) => {
         )
     }
 
-    function checkIfGiftVouchersInBasket() {
-        FUNCTIONS.checkBasket("gift_voucher")
-            ? handleStripePaymentSubmit()
-            : checkIfTrainingCoursesInBasket();
-    }
-
+    // Check if there is any traning courses
     function checkIfTrainingCoursesInBasket() {
         FUNCTIONS.checkBasket(CONST.TC)
         ? props.checkoutView("book-training-courses")
         : checkIfSalonTreatmentsInBasket();
     }
 
+    // Check if there are any salon treatments
     function checkIfSalonTreatmentsInBasket() {
         FUNCTIONS.checkBasket(CONST.ST)
         ? props.checkoutView("book-salon-treatments")
         : props.checkoutView("customer-details");
     }
 
-   
+    function checkIfGiftVouchersInBasket() {
+        FUNCTIONS.checkBasket("gift_voucher")
+            ? handleStripePaymentSubmit()
+            : props.finishHandler(totalCost);
+            
+    }
 
     // Send details from card payment section
     const handleStripePaymentSubmit = async () => {
@@ -114,7 +115,21 @@ const Basket = (props) => {
             currency: 'gbp',
             'totalCost': totalCost,
             'basketItems': props.itemsInBasket
-        })
+        }).catch(function (error) {
+            if (error.response) {
+              // Request made and server responded
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            } else if (error.request) {
+              // The request was made but no response was received
+              console.log(error.request);
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log('Error', error.message);
+            }
+        
+          });
         options.clientSecret = response.data;
         props.checkoutView("complete-gift-voucher", response.data)
         } catch (err) {
@@ -139,7 +154,7 @@ const Basket = (props) => {
                 {totalPrice}
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.toggleBasket}>Continue Shopping</button>
-                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={checkIfGiftVouchersInBasket}>Checkout</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={checkIfTrainingCoursesInBasket}>Checkout</button>
                 </div>
             </div>
     
@@ -263,7 +278,7 @@ const Basket = (props) => {
                 <BasketHeader title="Gift Voucher Payment" />
                 <div className={classes.basketContainer}>
                 <Elements stripe={stripePromise} options={options}>
-                    <StripePaymentForm statusView={props.statusView} checkoutView={props.checkoutView}/>
+                    <StripePaymentForm statusView={props.statusView} checkoutView={props.checkoutView} finishHandler={props.finishHandler} totalCost={totalCost}/>
                 </Elements>    
                 </div>
                 {totalPrice}
@@ -280,9 +295,9 @@ const Basket = (props) => {
                     <div className={classes.logo}>
                         <Logo />
                     </div>
-                    <h3 className="success">
-                        Your payment was successful Thank you.
-                    </h3>
+                    <p className="success">
+                        Thank you. Your payment was successful. Your voucher will be emailed to you shortly
+                    </p>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={enquirySentButton}>Close</button>
                 </div>
             </div>
@@ -324,7 +339,7 @@ const Basket = (props) => {
                 {totalPrice}
                 <div className={classes.basketControlsContainer}>
                     <button className={"customButton " + classes.bookTreatmentsButton} onClick={props.checkoutView.bind(this, "main")}>Back to Basket</button>
-                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={(event) => props.finishHandler(event, totalCost)}>Finish</button>
+                    <button className={"customButton " + classes.bookTreatmentsButton} onClick={checkIfGiftVouchersInBasket}>Finish</button>
                 </div>
             </div>
     }

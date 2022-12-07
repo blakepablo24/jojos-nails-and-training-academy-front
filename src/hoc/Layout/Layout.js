@@ -279,8 +279,7 @@ class Layout extends Component {
         });
     }
 
-    finishHandler = (event, totalCost) => {
-        event.preventDefault();
+    finishHandler = (totalCost) => {
 
         let bookingRequestEmailError = "";
         let bookingRequestNumberError = "";
